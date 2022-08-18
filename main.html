@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styling.css">
+        <script type="text/javascript" src="animation.js"></script>
+        <link rel="icon" type="image/png" href="/UI_Libraries/skull_small.png">
+
+        <title>Crypt of the NecroSpriter</title>
+    </head>
+
+    <body>
+
+        <table class="tb1">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
+        <table class="tb2">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
+
+        <container class="tb1">
+            <t>Render View</t>
+            <div id="crop">
+                <render>
+                    <img id="body" src="test_armor_body.png">
+                    <img id="head" src="test_heads.png">
+                </render>
+            </div>
+
+            <cont id="renderSettings" style="top:-12px; position: relative">
+                <options>
+                    <e onclick="danceTog = !danceTog; buttonTog(this); floorTog()" style="top:9px;">Dance Floor</e>
+                    <setin>
+                        Debug : <t id="bpmDebug">N/a</t>:<t id="clothingDebug">N/a</t>/<t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t><br>
+                        Frame : <t id="frame">N/a</t></setin>
+                </options><br>
+                <options>
+                    <e class="clickable" onclick="playTog = false; elapsed--; animationPush()"> Prev </e>
+                    <e onclick="playTog = !playTog; buttonTog(this);" id="play">Play</e>
+                    <e class="clickable" onclick="playTog = false; elapsed++; animationPush()"> Next </e>
+                    <e onclick="framePushType = !framePushType; buttonTog(this); frameTypeToggle()">Frame output</e>
+                </options>
+            </cont>
+        </container>
+
+        <container class="tb2">
+            Main Render Settings
+            <cont>
+                <t>Clothing</t>
+                <options id="clothing"></options>
+
+                Animation Speed (BPM)<br>
+                <options>
+                    <div>
+                        <input type="range" min="115" max="175" step="5" class="slider" id="bpmSlider">
+                        <t>115</t><t style="float:right">175</t><br>
+                        current BPM:<t id="bpm">130bpm</t>
+                    </div>
+
+                    <div>
+                        Compatible Tracks:<br>
+                        <options id="trackContainer"></options>
+                    </div>
+                </options>
+
+                <t style="top:-2px">Background</t><br>
+                <options id="backgrounds"></options>
+
+                Equipment Slots
+                <options id="equipmentSlots">
+                    <e>Head</e>
+                    <e><t>Hands</t></e>
+                    <e><t>Legs</t></e>
+                    <e><t>a</t></e>
+                </options>
+
+            </cont>
+        </container>
+
+        <div class="footer">
+            <t>CRYPT OF THE NECROSPRITER v1.0</t><br>
+            <t>designed by @Theavanherst</t>
+        </div>
+
+    </body>
+</html>

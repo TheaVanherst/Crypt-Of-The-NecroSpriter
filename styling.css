@@ -1,0 +1,109 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+:root{
+    --scaler : 14; --size: 24;
+    --frameDef: 1; --imageRes: 24px;
+
+/* TODO: WINDOW SIZE SETTINGS */
+
+    --windowHeights: 560px;
+    --window1Width: 336px; --window2Width: 282px}
+
+#body, #head {
+    position:absolute; width:calc(100% * var(--scaler))}
+body {
+    background-color: black; color:white;
+    font-family: 'Silkscreen', cursive;
+    letter-spacing: -2px; font-size:14px;}
+
+/* TODO: RENDER CSS & SCALING */
+
+render {
+    position:absolute!important; overflow: hidden; top: 60px;
+    width: calc(var(--window1Width) + (var(--imageRes) * 2));
+    height: calc(var(--window1Width) - (var(--imageRes) * (14 - var(--scaler))));
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated}
+
+#crop { position: relative; overflow: hidden;
+    width: calc(var(--imageRes) * var(--scaler));
+    height: calc((var(--imageRes) + 8px) * var(--scaler));
+    /* the + 1 is just for floor space at the bottom of the image. */
+    border: 2px solid rgba(255,255,255,0.5); background-size: 200%;
+    background-position: calc(-12px * var(--scaler)) -70px;}
+#crop, render{
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated}
+
+render {aspect-ratio: 1 / 1; top: calc(1px * var(--scaler))}
+
+/* TODO: TABLE SIZE SETTINGS */
+
+table { padding:10px }
+table .mid img {width:var(--imageRes); height:var(--windowHeights)} /* table image resolutions */
+table > tr > th {height:var(--imageRes); width:var(--imageRes)}
+
+.tb1 .top img, .tb2 .top img {height:var(--imageRes)}
+.tb1, .tb2 {position:absolute}
+.tb1 .top img {width:var(--window1Width)} /* container width */
+.tb2 {left: calc(var(--window1Width) + (var(--imageRes) * 2.4))} /* set this the same as the thing above + 50*/
+.tb2 .top img, .tb2 {width:var(--window2Width)}
+
+/* TODO: MENU SETTINGS */
+
+cont { padding:10px 0; display: block}
+cont options, options setin {display: inline-table; position: relative}
+cont options { padding:5px 0}
+options > div {padding:0 0 10px 0}
+options > div:last-of-type { padding: 0 0 7px}
+
+/* button over toggle */
+e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
+    color: #fff; border: solid 2px #fff; background-color: #000}
+e.inv, e:active {color: #000; background-color: #fff; border: solid 2px #000}
+e.inv {border: solid 2px #fff} e.inv:active {border: solid 2px #000}
+e:first-of-type {margin: 0 4px 0 0}
+e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
+
+e t {display: flex;justify-content: center; z-index:10;position: relative}
+
+*:not(#renderSettings) > options:not(#equipmentSlots) e {white-space: nowrap; width: 8px}
+#clothing tr e { width: 35px; height:35px}
+
+container {padding:var(--imageRes); width:var(--window1Width)}
+cont th {text-align: left;}
+th, tr img {padding: 0; margin: -4px}
+
+divt {display: block}
+divt:not(:first-of-type), controller div:first-of-type, #crop {margin: 13px 0 0 0}
+
+.slider {width:calc(var(--window2Width) - 3px); height: 3px; background: #fff}
+.slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 8px; height: 24px; border-radius: 0;
+    background: #000; cursor: pointer; border: 2px solid #fff}
+
+#trackContainer { padding:10px; margin:0;
+    width:calc(var(--window2Width) - (12px * 2)); height: 72px;
+    color: #fff; border: solid 2px #fff; background-color: #000}
+
+:root { --backgroundCol : 3; --backgroundColPad : 5px}
+
+#backgrounds e {margin: 0 var(--backgroundColPad); padding:0;
+    height:56px!important;
+    width:calc((var(--window2Width) / var(--backgroundCol)) - 11px /* idk why this is 11px */
+    )!important}
+#backgrounds e:first-of-type {margin: 0 var(--backgroundColPad) 0 0}
+#backgrounds e:last-of-type {margin: 0 0 0 var(--backgroundColPad)}
+#backgrounds e t {position: absolute}
+
+#backgrounds f{width: 100%; position: absolute;
+    height:calc((var(--window2Width) / 5))!important; background-size:200%;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
+#backgrounds t {z-index: 10; padding: 0 7px 2px}
+#backgrounds e.inv t {background-color:#fff}
+#backgrounds e:active t {background-color:#000; color:#fff}
+
+#backgrounds > div {vertical-align: top;
+    position: relative; display: inline-flex}
+
+.footer { left:18px; position:absolute;
+    top:calc(var(--windowHeights) + (var(--size) * 3px))}
