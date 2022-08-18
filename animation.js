@@ -152,7 +152,6 @@ let songList = [
             let br = document.createElement('br')
 
             trackContainer.appendChild(item).appendChild(br)}}
-
 // todo : =========================
 // todo : Floor Updating & Swapping
 // todo : =========================
@@ -160,58 +159,48 @@ let songList = [
 let danceTog = false, floorBool = false, framePushType = true;
 
     frameTypeToggle = () => //this is to push the current frame times
-        animationOffsets = (framePushType ? [1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4] : [1,2,3,4])
+        animationOffsets = (framePushType ? [1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4] : [1,2,3,4]);
 
     floorTog = () => {
-        floorBool = !floorBool
-        $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0)
+        floorBool = !floorBool;
+        $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
         $("#crop").style.backgroundPositionY =
-            -((danceTog ? (floorBool ? 2 : 1) : 0) * (scaleRes * (verticalOffset * 2))) - (scaleRes * 5) + 'px'}
+            -((danceTog ? (floorBool ? 2 : 1) : 0) * (scaleRes * (verticalOffset * 2))) - (scaleRes * 5) + 'px'};
 
-let currentFloor = 0 , floorColoumns = 3, //(floorTileSets.length / 2)
-    floorTileSets = [
-        ["Zone1"], ["zone2"], [true,"zone3_1","zone3_2"],
-        ["zone4"], ["Zone5"], [true,"boss_1","boss_2"]];
+let floorTileSets = [
+    [["Zone1"], ["zone2"], ["zone3_1","zone3_2"]],
+    [["zone4"], ["Zone5"], ["boss_1","boss_2"]]];
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
-    let background = $('#backgrounds'), floor = $('#FloorDebug')
+    let background = $('#backgrounds');
+    //floorTileSets.length / floorColoumns
+    for (let e = 0; e < floorTileSets[0].length / floorTileSets.length; e++) { //generates button rows
+        background.appendChild(createButton("div","","")); //creates the containing box for each row
 
-    for (let e = 0; e < floorTileSets.length / floorColoumns; e++) { //generates button rows
-        background.appendChild(createButton("div","","")) //creates the containing box for each row
-        let parentContainer = background.getElementsByTagName('div')[e] //creates a var to address the containing box
-
-        for (let i = 0; i < floorColoumns; i++) {
-            let cur = (floorColoumns * e) + i,
-                arrayTile = floorTileSets[cur][floorTileSets[cur].length > 1 ? 1 : 0]
-
-            const buttonElem = createButton("e","","floor"+cur)//generates a button
-                buttonElem.appendChild(createButton("t",arrayTile,"")) //generates text data for the button
+        for (let i = 0; i < floorTileSets[0].length; i++) {
+            const buttonElem = createButton("e","","");//generates a button
+                buttonElem.appendChild(createButton("t",floorTileSets[e][i][[0]],"")); //generates text data for the button
                 buttonElem.appendChild(createButton("f","","")) //generates image data for the button
-                    .setAttribute("style", "background-image : url('UI_Libraries/"+arrayTile+"_Floor.png');") //assigns background image for the button
+                    .setAttribute("style", "background-image : url('UI_Libraries/"+floorTileSets[e][i][[0]]+"_Floor.png')"); //assigns background image for the button
 
-            parentContainer.appendChild(buttonElem)
+            background.children[e].appendChild(buttonElem).onclick = function () {   // attach event listener individually
+                if(floorTileSets[e][i].length > 1 && $comp(this.getElementsByTagName('f')[0]).backgroundImage === $('#crop').style.backgroundImage){
+                    floorTileSets[e][i].unshift(floorTileSets[e][i].pop()) //rotates the array clockwise.
+                    this.children[1].setAttribute(
+                        "style", "background-image : url('UI_Libraries/"+floorTileSets[e][i][[0]]+"_Floor.png');")}
 
-            parentContainer.children[i].onclick = function () {   // attach event listener individually
-                if(floorTileSets[cur].length > 1){ //checks if there is two images to switch between
+                $('#crop').style.backgroundImage = $comp(this.getElementsByTagName('f')[0]).backgroundImage; //updates the render image.
+                this.children[0].textContent = $('#FloorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
-                    if (this.id === "floor"+currentFloor) { //checks if the current floor is the same as the one being clicked on
-                        floorTileSets[cur][0] = !floorTileSets[cur][0]} //internal array bool flip, toggles between the floor types
+                $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
+                this.classList.add("inv") //makes the clicked on button active.
+            }}
+    }
 
-                    this.children[1].setAttribute("style", "background-image : url('UI_Libraries/"+floorTileSets[cur][floorTileSets[cur][0] ? 1 : 2]+"_Floor.png');")
-                    this.children[0].textContent = floorTileSets[cur][floorTileSets[cur][0] ? 1 : 2]} //updates the text on the image when clicked on
-
-                $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}) //removes all buttons from being enabled on mouse press
-                this.classList.add("inv")
-
-                currentFloor = cur //updates the current floor for the .FirstChild.id check on function start
-                $('#FloorDebug').textContent = floorTileSets[cur].length > 1 ? floorTileSets[cur][this.getAttribute('backgroundBool')] : arrayTile
-                $('#crop').style.backgroundImage = $comp(this.getElementsByTagName('f')[0]).backgroundImage
-            }
-    }}
-
-    let floorPush = floorTileSets[currentFloor][floorTileSets[currentFloor].length > 1 ? 1 : 0]
-    $('#crop').setAttribute("style", "background-image : url('UI_Libraries/"+floorPush+"_Floor.png');")
-    floor.textContent = floorPush
-
+    $('#crop').setAttribute("style", "background-image : url('UI_Libraries/"+floorTileSets[0][0][0]+"_Floor.png');");
     document.removeEventListener('DOMContentLoaded', () => {}) //cleans up the DOM elements
 })
+
+// todo : ========================
+// todo : Equipment call functions
+// todo : ========================
