@@ -41,7 +41,7 @@ const buttonTog = (e) => {
 // todo : CLOTHING CHANGER
 // todo : ================
 
-let clothingDefault = 0, clothingTypes = 14, clothingColumns = 7; //default clothing variables.
+let clothingCurrent = 0, clothingTypes = 14, clothingColumns = 7; //default clothing variables.
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
     const clothing = $('#clothing'), clothingDebug = $('#clothingDebug');
@@ -59,12 +59,13 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
 
             divS.children[i].onclick = function () {   // attach event listener individually
                 $all('#clothing e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
+                clothingCurrent = cur
                 buttonTog(this); verticalUpdate(cur);
                 clothingDebug.textContent = cur + 1;
             }}} //presses the button that was just pressed.
 
-    $("#clothing"+clothingDefault).classList.add('inv') //enables the button that is the default clothing option
-    clothingDebug.textContent = clothingDefault + 1;
+    $("#clothing"+clothingCurrent).classList.add('inv') //enables the button that is the default clothing option
+    clothingDebug.textContent = clothingCurrent + 1;
 }, false);
 
 // todo : ==================
@@ -85,44 +86,73 @@ const frameTypeToggle = () => { //this is to push the current frame times
         amplifiedMulti = amplifiedBool ? 1 : 0;
         animationUpdate()};
 
+// todo : ==================
+// todo : CHARACTER SETTINGS
+// todo : ==================
+
+const dir = "characters/" //directory where all the character files are saved.
 const characterFrames = [
-        //Name          WID/HIG/ROW/COL
-    [   ["Cadence",     24, 24, 14, 16],
-        ["Melody",      24, 24, 14, 16],
-        ["Aria",        24, 24, 14, 16],
-        ["Dorian",      32, 32, 1 , 9 ],
-        ["Eli",         32, 28, 14, 16],
-        ["Monk",        24, 24, 14, 16],
-        ["Dove",        24, 24, 14, 16],
-        ["Coda",        33, 30, 14, 16],
-        ["Bolt",        24, 24, 14, 16],
-    ],[ ["Nocturna",    25, 27, 15, 15],
-        ["Diamond",     24, 24, 14, 16],
-        ["Mary",        24, 24, 14, 16],
-        ["Tempo",       24, 24, 14, 16]
-    ],[ ["Suzu",        25, 28, 14, 16],
-        ["Chaunter",    27, 26, 14, 16],
-        ["Klarinetta",  26, 30, 1 , 32]]]
+        //Name          WID/HIG/ROW/COL/URL
+    [   ["Base Game"],
+        ["Cadence P1",  24, 24, 14, 16, "player1"],
+        ["Melody",      24, 24, 14, 16, "char1"],
+        ["Aria",        24, 24, 14, 16, "char2"],
+        ["Dorian",      33, 32, 1 , 16, "char3"],
+        ["Eli",         32, 28, 14, 16, "char4"],
+        ["Monk",        24, 24, 14, 16, "char5"],
+        ["Dove",        24, 24, 14, 16, "char6"],
+        ["Coda",        33, 30, 14, 16, "char7"],
+        ["Bolt",        24, 24, 14, 16, "char8"],
+        ["Bard",        24, 24, 14, 16, "char9"]
+    ],[ ["Amplified"],
+        ["Nocturna",    25, 27, 15, 16, "char10"],
+        ["Diamond",     24, 24, 14, 16, "char11"],
+        ["Mary",        24, 24, 14, 16, "char12"],
+        ["Tempo",       24, 24, 14, 16, "char13"]
+    ],[ ["Synchrony"],
+        ["Suzu",        25, 28, 14, 16, "Suzu"],
+        ["Chaunter",    27, 26, 14, 16, "Chaunter"],
+        ["Klarinetta",  26, 30, 1 , 32, "Klarinetta"]]]
 let currentCharacter = "Nocturna"; //default character to select on load.
 
+// todo : CHARACTER LOADING
+
 document.addEventListener('DOMContentLoaded', () => { //function mounting on page load
-    for (let e = 0; e < characterFrames.length; e++) {
-        for(let i = 0; i < characterFrames[e].length; i++) {
+    const parent = $('#characterSelect')
+    for (let e = 0; e < characterFrames.length; e++) { //loops through DLC array types
+
+        parent.appendChild(createButton("options"))
+        let child = parent.getElementsByTagName('options')[e]
+
+        for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
             //this gets the placement of the character in the default array if a name is typed.
             currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) != -1 ? [e,i] : currentCharacter
 
-            $('#characterSelect' + (e + 1)).appendChild(createButton('e',characterFrames[e][i][0])).onclick = function () {
-                currentCharacter = [e,i]; animationFrameSize()
+            child.appendChild(createButton('e',characterFrames[e][i + 1][0])).onclick = function () {
+                currentCharacter = [e,i + 1]; animationFrameSize()
                 $all('container.tb3 options e').forEach(id => {id.classList.remove("inv")})
                 buttonTog(this)}}}
 
-    $('#characterSelect' + (currentCharacter[0]+1)).children[currentCharacter[1]].classList.add("inv")})
+    animationFrameSize()
+    parent.getElementsByTagName('options')[currentCharacter[0]].children[currentCharacter[1] - 1].classList.add("inv")})
 
 const animationFrameSize = () =>  {
-        frameWidth = characterFrames[currentCharacter[0]][currentCharacter[1]][1]
-        frameHeight = characterFrames[currentCharacter[0]][currentCharacter[1]][2]
-        $("#characterDebug").textContent = currentCharacter[0]+""+currentCharacter[1]+":"+
-                           characterFrames[currentCharacter[0]][currentCharacter[1]][0]}
+    let char = characterFrames[currentCharacter[0]]
+    frameWidth = char[currentCharacter[1]][1]
+    frameHeight = char[currentCharacter[1]][2]
+    $("#characterDebug").textContent =
+        currentCharacter[0]+""+currentCharacter[1]+":"+ char[currentCharacter[1]][0]
+
+    let src = "/" + dir + char[currentCharacter[1]][5]
+    $('#head').src = src + (currentCharacter[0] !== 2 ? "_heads.png" : "_head.png")
+    $('#body').src = src + (currentCharacter[0] !== 2 ? "_armor_body.png" : "_body.png")
+
+    $doc.style.setProperty('--imageW',frameWidth+"px")
+    $doc.style.setProperty('--imageH',frameHeight+"px")
+    $doc.style.setProperty('--rows',char[currentCharacter[1]][3])
+    $doc.style.setProperty('--columns',char[currentCharacter[1]][4])
+
+    $('#body').style.marginTop = -((frameHeight * clothingCurrent) * scaleRes) + "px"}
 
 // todo : ==================
 // todo : ANIMATION Rendering
@@ -181,12 +211,12 @@ const songList = [
     ["1-1 // Disco Descent"], //115
     ["BOSS // Deep Blues", "BOSS // King Conga", "BOSS // Golden Lute", "TRAINING // Watch Your Step"], //120
     ["BOSS // Coral Riff"], //125
-    ["LOBBY // Rhythmortis","1-2 // Crypteque","2-1 // Fungal Funk","4-1 // Styx and Stones"], //130
+    ["LOBBY // Rhythmortis","1-2 // Crypteque","2-1 // Fungal Funk","4-1 // Styx and Stones", "5-1 // Voltzwaltz"], //130
     ["3-1 // Stone Cold (cold)"," 3-1 // Igneous Rock (hot)"], //135
-    ["1-3 // Mausoleum Mash","2-2 // Grave Throbbing","BOSS // Necrodancer Phase 1","BOSS // Dead Ringer"], //140
+    ["1-3 // Mausoleum Mash","2-2 // Grave Throbbing","BOSS // Necrodancer Phase 1","BOSS // Dead Ringer","5-2 // Power Cords"], //140
     ["3-2 // Dance of the Decorous (cold)","3-2 March of the Profane (hot)","4-2 // Heart of the Crypt"], //145
     ["2-3 // Portabellohead"], //150
-    ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)"], //155
+    ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)","5-3 // Six Feet Thunder"], //155
     ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
     ["N/a"], //165
     ["N/a"], //170
@@ -216,15 +246,15 @@ const songList = [
 
 let danceTog = false, floorBool = false;
 
-    floorTog = () => {
+const floorTog = () => {
         floorBool = !floorBool;
         $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
-        $("#crop").style.backgroundPositionY =
-            -((danceTog ? (floorBool ? 2 : 1) : 0) * (scaleRes * (frameHeight * 2))) + 'px'},
+        $("#floor").style.top =
+            -((danceTog ? (floorBool ? 2 : 1) : 0) * 72 * 10) - 30 +'px'},
 
     floorTileSets = [
-    [["Zone1"], ["zone2"], ["zone3_1","zone3_2"]],
-    [["zone4"], ["Zone5"], ["boss_1","boss_2"]]];
+        [["Zone1"], ["zone2"], ["zone3_1","zone3_2"]],
+        [["zone4"], ["Zone5"], ["boss_1","boss_2"]]];
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
 
@@ -240,11 +270,11 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             backgroundUpdate(buttonElem,e,i); //assigns background image for the button
 
             $('#backgrounds').children[e].appendChild(buttonElem).onclick = function () {   // attach event listener individually
-                if (floorTileSets[e][i].length > 1 && this.style.backgroundImage === $('#crop').style.backgroundImage){
+                if (floorTileSets[e][i].length > 1 && this.style.backgroundImage === $('#floor').style.backgroundImage){
                     floorTileSets[e][i].unshift(floorTileSets[e][i].pop()) //rotates the array clockwise.
                     backgroundUpdate(this,e,i)}
 
-                $('#crop').style.backgroundImage = this.style.backgroundImage; //updates the render image.
+                $('#floor').style.backgroundImage = this.style.backgroundImage; //updates the render image.
                 this.children[0].textContent = $('#FloorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
                 $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
@@ -253,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
     // ON LAUNCH DEBUG PUSH
     const d = 3; //Default Floor Type
     let c=d-1,v=c>2?1:0,h=c>2?c-(floorTileSets[0].length*(floorTileSets.length*1)):c //figures out which array to use for said floor
-    backgroundUpdate($('#crop'),v,h)
+    backgroundUpdate($('#floor'),v,h)
     $('#backgrounds')?.children[v]?.children[h]?.classList.add("inv")
     $('#FloorDebug').textContent = floorTileSets[v][h][[0]]
     $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);

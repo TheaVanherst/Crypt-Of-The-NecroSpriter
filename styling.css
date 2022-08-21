@@ -3,15 +3,15 @@
 :root{
     --scaler : 14; --size: 24;
     --frameDef: 1;
-    --imageW: 25px; --imageH: 27px; --coloumns:16; --rows:15;
+    --imageW: 24px; --imageH: 24px; --columns:16; --rows:15;
 
 /* TODO: WINDOW SIZE SETTINGS */
 
-    --window1Height: 645px; --window2Height: 645px; --window3Height: 465px;
-    --window1Width: 336px; --window2Width: 282px; --window3Width: 218px}
+    --window1Height: 660px; --window2Height: 660px; --window3Height: 465px;
+    --window1Width: 450px; --window2Width: 282px; --window3Width: 218px}
 
 #head, #body{
-    position:absolute; width:calc((var(--imageW) * var(--coloumns)) * var(--scaler))}
+    position:absolute; width:calc((var(--imageW) * var(--columns)) * var(--scaler))}
 #body{
     height:calc((var(--imageH) * var(--rows)) * var(--scaler))}
 #weapon, #charm{
@@ -19,10 +19,13 @@
     top:0; left:0; z-index:1000;
     position:absolute; width:calc(25% * var(--scaler))}
 #charm {top:calc(1px * var(--scaler))}
-#HeadContainer {
-    height: calc(16px * var(--scaler));
-    float: left; width: 100%;
-    position:absolute; overflow:hidden;}
+
+#headContainer, #bodyContainer {
+    top: calc((var(--window1Width) - (var(--imageH) * 14)) - 20px);
+    left: calc(((var(--window1Width) / 2)) - ((var(--imageW) * var(--scaler)) / 2));
+    height: calc(var(--imageH) * var(--scaler));
+    width: calc(var(--imageW) * var(--scaler));
+    float: left; position:absolute; overflow:hidden}
 
 body {
     background-color: black; color:white;
@@ -31,22 +34,21 @@ body {
 
 /* TODO: RENDER CSS & SCALING */
 
-render {
-    position:absolute!important; overflow: hidden;
-    width: calc(var(--window1Width) + (var(--imageW) * 2));
-    height: calc(var(--window1Width) - (var(--imageH) * (12 - var(--scaler))));
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated}
+render {position:absolute!important; overflow: hidden}
 
 #crop { position: relative; overflow: hidden;
     width: var(--window1Width) ;
-    height: calc(var(--window1Width) * 1.515);
     /* the + 1 is just for floor space at the bottom of the image. */
-    border: 2px solid rgba(255,255,255,0.5); background-size: 200%;
-    background-position: calc(-12px * var(--scaler)) -70px}
+    border: 2px solid rgba(255,255,255,0.5)}
 #crop, render{
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated}
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    width: var(--window1Width); height: 527px}
 
-render {aspect-ratio: 1 / 1; top: calc(4px * var(--scaler))}
+#floor{
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    width: calc(72px * 10); height: calc(216px * 10);
+    left: calc(-72px / 0.53); /*TODO: the multiplier here is dogshit */
+    position:absolute; background-size: 100%;}
 
 /* TODO: TABLE SIZE SETTINGS */
 
@@ -60,11 +62,11 @@ container, table {position:absolute}
 .tb1 .top img {width:var(--window1Width)} /* container width */
 .tb1 .mid img {height:var(--window1Height)}
 
-.tb2 {left: calc(var(--window1Width) + (var(--imageW) * 2) + 10px)} /* set this the same as the thing above + 50*/
+.tb2 {left: calc(var(--window1Width) + 60px)} /* set this the same as the thing above + 50*/
 .tb2 .top img, .tb2 {width:var(--window2Width)}
 .tb2 .mid img {height:var(--window2Height)}
 
-.tb3 {left: calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 10px)} /* set this the same as the thing above + 50*/
+.tb3 {left: calc(var(--window1Width) + var(--window2Width) + 110px)} /* set this the same as the thing above + 50*/
 .tb3 .top img, .tb3 {width:var(--window3Width)}
 .tb3 .mid img {height:var(--window3Height)}
 
@@ -89,7 +91,7 @@ e t {display: flex;justify-content: center; z-index:10;position: relative}
 #clothing e{white-space: nowrap; width: 8px}
 #clothing tr e { width: 35px; height:35px}
 
-container {padding:var(--imageW); width:var(--window1Width)}
+container {padding:24px; width:var(--window1Width)}
 cont th {text-align: left;}
 th, tr img {padding: 0; margin: -4px}
 
@@ -102,7 +104,7 @@ controller div:first-of-type, #crop {margin: 13px 0 13px 0}
     background: #000; cursor: pointer; border: 2px solid #fff}
 
 #trackContainer { padding:10px; margin:0;
-    width:calc(var(--window2Width) - (12px * 2)); height: 72px;
+    width:calc(var(--window2Width) - (12px * 2)); height: 90px;
     color: #fff; border: solid 2px #fff; background-color: #000}
 
 :root { --backgroundCol : 3; --backgroundColPad : 5px}

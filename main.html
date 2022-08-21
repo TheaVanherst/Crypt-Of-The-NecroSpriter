@@ -67,9 +67,9 @@
             <t>Render View</t>
             <div id="crop">
                 <render>
-                    <img id="body" src="/Test_Sprites/body.png">
-                    <div id="HeadContainer">
-                        <img id="head" src="/Test_Sprites/heads.png"></div>
+                    <div id="floor"></div>
+                    <div id="bodyContainer"><img id="body"></div>
+                    <div id="headContainer"><img id="head"></div>
                     <img class="invisible" id="hat" src="/Test_Sprites/hat.png">
                     <img class="invisible" id="weapon" src="/Test_Sprites/weapon.png">
                     <img class="invisible" id="boots" src="/Test_Sprites/boots.png">
@@ -83,7 +83,7 @@
                     <div>
                         <e onclick="danceTog = !danceTog; floorTog(); buttonTog(this); ">Dance Floor</e>
                         <e onclick="amplifiedToggle(); buttonTog(this)">AMPLIFIED</e>
-                        <e>"Bat Mode"</e>
+                        <e onclick="verticalUpdate(14); characterToggle('head',this)">"Bat Mode"</e>
                     </div><div>
                         <e class="clickable" onclick="playTog = false; elapsed--; animationPush()"> Prev </e>
                         <e onclick="playTog = !playTog; buttonTog(this);">Play</e>
@@ -139,14 +139,7 @@
 
         <container class="tb3">
             Characters
-            <cont>
-                Base Game<br>
-                <options id="characterSelect1"></options>
-                Amplified<br>
-                <options id="characterSelect2"></options>
-                Synchrony<br>
-                <options id="characterSelect3"></options>
-            </cont>
+            <cont id="characterSelect"></cont>
         </container>
 
         <div class="footer">
