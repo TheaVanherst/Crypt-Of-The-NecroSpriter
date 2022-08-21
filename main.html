@@ -45,28 +45,51 @@
                 <th><img src="UI_Libraries/border_corner3.png"></th>
             </tr>
         </table>
+        <table class="tb3">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
 
         <container class="tb1">
             <t>Render View</t>
             <div id="crop">
                 <render>
-                    <img id="body" src="test_armor_body.png">
-                    <img id="head" src="test_heads.png">
+                    <img id="body" src="/Test_Sprites/body.png">
+                    <div id="HeadContainer">
+                        <img id="head" src="/Test_Sprites/heads.png"></div>
+                    <img class="invisible" id="hat" src="/Test_Sprites/hat.png">
+                    <img class="invisible" id="weapon" src="/Test_Sprites/weapon.png">
+                    <img class="invisible" id="boots" src="/Test_Sprites/boots.png">
+                    <img class="invisible" id="charm" src="/Test_Sprites/charm.png">
                 </render>
             </div>
 
-            <cont id="renderSettings" style="top:-12px; position: relative">
-                <options>
-                    <e onclick="danceTog = !danceTog; buttonTog(this); floorTog()" style="top:9px;">Dance Floor</e>
-                    <setin>
-                        Debug : <t id="bpmDebug">N/a</t>:<t id="clothingDebug">N/a</t>/<t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t><br>
-                        Frame : <t id="frame">N/a</t></setin>
-                </options><br>
-                <options>
-                    <e class="clickable" onclick="playTog = false; elapsed--; animationPush()"> Prev </e>
-                    <e onclick="playTog = !playTog; buttonTog(this);" id="play">Play</e>
-                    <e class="clickable" onclick="playTog = false; elapsed++; animationPush()"> Next </e>
-                    <e onclick="framePushType = !framePushType; buttonTog(this); frameTypeToggle()">Frame output</e>
+            <cont>
+                Animation settings
+                <options id="renderSettings">
+                    <div>
+                        <e onclick="danceTog = !danceTog; floorTog(); buttonTog(this); ">Dance Floor</e>
+                        <e onclick="amplifiedToggle(); buttonTog(this)">AMPLIFIED</e>
+                        <e>"Bat Mode"</e>
+                    </div><div>
+                        <e class="clickable" onclick="playTog = false; elapsed--; animationPush()"> Prev </e>
+                        <e onclick="playTog = !playTog; buttonTog(this);">Play</e>
+                        <e class="clickable" onclick="playTog = false; elapsed++; animationPush()"> Next </e>
+                        <e onclick="frameTypeToggle(); buttonTog(this);">Frame Output</e>
+                    </div>
                 </options>
             </cont>
         </container>
@@ -74,7 +97,7 @@
         <container class="tb2">
             Main Render Settings
             <cont>
-                <t>Clothing</t>
+                Clothing
                 <options id="clothing"></options>
 
                 Animation Speed (BPM)<br>
@@ -96,18 +119,44 @@
 
                 Equipment Slots
                 <options id="equipmentSlots">
-                    <e>Head</e>
-                    <e><t>Hands</t></e>
-                    <e><t>Legs</t></e>
-                    <e><t>a</t></e>
+                    <div>
+                        <e>Helm</e>
+                        <e onclick="itemToggle('weapon',this)">Hand</e>
+                        <e onclick="itemToggle('ring',this)">Ring</e>
+                        <e>Boots</e>
+                    </div><div>
+                        <e onclick="itemToggle('item',this)">Spell</e>
+                        <e onclick="itemToggle('food',this)">Food</e>
+                        <e onclick="itemToggle('item',this)">Item</e>
+                        <e onclick="itemToggle('charm',this)">Charm</e>
+                    </div><div>
+                        <e>Shovel</e>
+                        <e>Torch</e>
+                </div>
                 </options>
+            </cont>
+        </container>
 
+        <container class="tb3">
+            Characters
+            <cont>
+                Base Game<br>
+                <options id="characterSelect1"></options>
+                Amplified<br>
+                <options id="characterSelect2"></options>
+                Synchrony<br>
+                <options id="characterSelect3"></options>
             </cont>
         </container>
 
         <div class="footer">
             <t>CRYPT OF THE NECROSPRITER v1.0</t><br>
-            <t>designed by @Theavanherst</t>
+            <t>designed by @Theavanherst</t><br><br>
+
+            <setin>
+                <t id="bpmDebug">N/a</t>BPM : <t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t>] <t id="frame">N/a</t><br>
+                <t id="characterDebug">N/a</t> / Clothing : <t id="clothingDebug">N/a</t> / <t id="AmplifiedDebug">N/a</t>
+            </setin>
         </div>
 
     </body>

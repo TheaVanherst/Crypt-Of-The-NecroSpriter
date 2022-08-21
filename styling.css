@@ -2,54 +2,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 :root{
     --scaler : 14; --size: 24;
-    --frameDef: 1; --imageRes: 24px;
+    --frameDef: 1;
+    --imageW: 25px; --imageH: 27px; --coloumns:16; --rows:15;
 
 /* TODO: WINDOW SIZE SETTINGS */
 
-    --windowHeights: 560px;
-    --window1Width: 336px; --window2Width: 282px}
+    --window1Height: 645px; --window2Height: 645px; --window3Height: 465px;
+    --window1Width: 336px; --window2Width: 282px; --window3Width: 218px}
 
-#body, #head {
-    position:absolute; width:calc(100% * var(--scaler))}
+#head, #body{
+    position:absolute; width:calc((var(--imageW) * var(--coloumns)) * var(--scaler))}
+#body{
+    height:calc((var(--imageH) * var(--rows)) * var(--scaler))}
+#weapon, #charm{
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    top:0; left:0; z-index:1000;
+    position:absolute; width:calc(25% * var(--scaler))}
+#charm {top:calc(1px * var(--scaler))}
+#HeadContainer {
+    height: calc(16px * var(--scaler));
+    float: left; width: 100%;
+    position:absolute; overflow:hidden;}
+
 body {
     background-color: black; color:white;
     font-family: 'Silkscreen', cursive;
-    letter-spacing: -2px; font-size:14px;}
+    letter-spacing: -2px; font-size:14px}
 
 /* TODO: RENDER CSS & SCALING */
 
 render {
-    position:absolute!important; overflow: hidden; top: 60px;
-    width: calc(var(--window1Width) + (var(--imageRes) * 2));
-    height: calc(var(--window1Width) - (var(--imageRes) * (14 - var(--scaler))));
+    position:absolute!important; overflow: hidden;
+    width: calc(var(--window1Width) + (var(--imageW) * 2));
+    height: calc(var(--window1Width) - (var(--imageH) * (12 - var(--scaler))));
     image-rendering: -moz-crisp-edges; image-rendering: pixelated}
 
 #crop { position: relative; overflow: hidden;
-    width: calc(var(--imageRes) * var(--scaler));
-    height: calc((var(--imageRes) + 8px) * var(--scaler));
+    width: var(--window1Width) ;
+    height: calc(var(--window1Width) * 1.515);
     /* the + 1 is just for floor space at the bottom of the image. */
     border: 2px solid rgba(255,255,255,0.5); background-size: 200%;
-    background-position: calc(-12px * var(--scaler)) -70px;}
+    background-position: calc(-12px * var(--scaler)) -70px}
 #crop, render{
     image-rendering: -moz-crisp-edges; image-rendering: pixelated}
 
-render {aspect-ratio: 1 / 1; top: calc(1px * var(--scaler))}
+render {aspect-ratio: 1 / 1; top: calc(4px * var(--scaler))}
 
 /* TODO: TABLE SIZE SETTINGS */
 
 table { padding:10px }
-table .mid img {width:var(--imageRes); height:var(--windowHeights)} /* table image resolutions */
-table > tr > th {height:var(--imageRes); width:var(--imageRes)}
+table .mid img {width:24px} /* table image resolutions */
+table > tr > th {height:24px; width:24px}
+table .top img {height:24px}
 
-.tb1 .top img, .tb2 .top img {height:var(--imageRes)}
-.tb1, .tb2 {position:absolute}
+.tb1 .top img, .tb2 .top img, .tb2 .top img {height:24px}
+container, table {position:absolute}
 .tb1 .top img {width:var(--window1Width)} /* container width */
-.tb2 {left: calc(var(--window1Width) + (var(--imageRes) * 2.4))} /* set this the same as the thing above + 50*/
+.tb1 .mid img {height:var(--window1Height)}
+
+.tb2 {left: calc(var(--window1Width) + (var(--imageW) * 2) + 10px)} /* set this the same as the thing above + 50*/
 .tb2 .top img, .tb2 {width:var(--window2Width)}
+.tb2 .mid img {height:var(--window2Height)}
+
+.tb3 {left: calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 10px)} /* set this the same as the thing above + 50*/
+.tb3 .top img, .tb3 {width:var(--window3Width)}
+.tb3 .mid img {height:var(--window3Height)}
 
 /* TODO: MENU SETTINGS */
 
-cont { padding:10px 0; display: block}
+cont { margin:10px 0; display: block}
 cont options, options setin {display: inline-table; position: relative}
 cont options { padding:5px 0}
 options > div {padding:0 0 10px 0}
@@ -65,15 +86,14 @@ e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
 
 e t {display: flex;justify-content: center; z-index:10;position: relative}
 
-*:not(#renderSettings) > options:not(#equipmentSlots) e {white-space: nowrap; width: 8px}
+#clothing e{white-space: nowrap; width: 8px}
 #clothing tr e { width: 35px; height:35px}
 
-container {padding:var(--imageRes); width:var(--window1Width)}
+container {padding:var(--imageW); width:var(--window1Width)}
 cont th {text-align: left;}
 th, tr img {padding: 0; margin: -4px}
 
-divt {display: block}
-divt:not(:first-of-type), controller div:first-of-type, #crop {margin: 13px 0 0 0}
+controller div:first-of-type, #crop {margin: 13px 0 13px 0}
 
 .slider {width:calc(var(--window2Width) - 3px); height: 3px; background: #fff}
 .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
@@ -88,22 +108,26 @@ divt:not(:first-of-type), controller div:first-of-type, #crop {margin: 13px 0 0 
 :root { --backgroundCol : 3; --backgroundColPad : 5px}
 
 #backgrounds e {margin: 0 var(--backgroundColPad); padding:0;
-    height:56px!important;
-    width:calc((var(--window2Width) / var(--backgroundCol)) - 11px /* idk why this is 11px */
-    )!important}
+    width:calc((var(--window2Width) / var(--backgroundCol)) - 11px)!important;
+    background-size:200%; height:56px!important;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
 #backgrounds e:first-of-type {margin: 0 var(--backgroundColPad) 0 0}
 #backgrounds e:last-of-type {margin: 0 0 0 var(--backgroundColPad)}
-#backgrounds e t {position: absolute}
 
-#backgrounds f{width: 100%; position: absolute;
-    height:calc((var(--window2Width) / 5))!important; background-size:200%;
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
 #backgrounds t {z-index: 10; padding: 0 7px 2px}
 #backgrounds e.inv t {background-color:#fff}
 #backgrounds e:active t {background-color:#000; color:#fff}
+#backgrounds e t {position: absolute}
 
 #backgrounds > div {vertical-align: top;
     position: relative; display: inline-flex}
 
-.footer { left:18px; position:absolute;
-    top:calc(var(--windowHeights) + (var(--size) * 3px))}
+.invisible { opacity:0!important}
+
+container.tb3 cont {}
+container.tb3 e {width:80px; margin: 0 10px 10px 0!important; display:inline-table}
+container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
+
+.footer {position:absolute;
+    left:calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 20px);
+    top:calc(var(--window3Height) + (var(--size) * 3px))}
