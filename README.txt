@@ -1,17 +1,15 @@
-        ..|'''.|                             .                .'|.      .   '||              
-      .|'     '  ... ..  .... ... ... ...  .||.       ...   .||.      .||.   || ..     ....  
-      ||          ||' ''  '|.  |   ||'  ||  ||      .|  '|.  ||        ||    ||' ||  .|...|| 
-      '|.      .  ||       '|.|    ||    |  ||      ||   ||  ||        ||    ||  ||  ||      
-       ''|....'  .||.       '|     ||...'   '|.'     '|..|' .||.       '|.' .||. ||.  '|...' 
-                         .. |      ||                                                        
-                          ''      ''''                                                       
-   '|.   '|'                                                          ||    .                   
-    |'|   |    ....    ....  ... ..    ...    ....  ... ...  ... ..  ...  .||.    ....  ... ..  
-    | '|. |  .|...|| .|   ''  ||' '' .|  '|. ||. '   ||'  ||  ||' ''  ||   ||   .|...||  ||' '' 
-    |   |||  ||      ||       ||     ||   || . '|..  ||    |  ||      ||   ||   ||       ||     
-   .|.   '|   '|...'  '|...' .||.     '|..|' |'..|'  ||...'  .||.    .||.  '|.'  '|...' .||.    
-                                                     ||                                         
-                                                    ''''                                        
+            CCCCC                         tt                fff     tt    hh             
+           CC    C rr rr  yy   yy pp pp   tt         oooo  ff       tt    hh        eee  
+           CC      rrr  r yy   yy ppp  pp tttt      oo  oo ffff     tttt  hhhhhh  ee   e 
+           CC    C rr      yyyyyy pppppp  tt        oo  oo ff       tt    hh   hh eeeee  
+            CCCCC  rr          yy pp       tttt      oooo  ff        tttt hh   hh  eeeee 
+                           yyyyy  pp                                                     
+         NN   NN                                                  iii tt                  
+         NNN  NN   eee    cccc rr rr   oooo   sss  pp pp   rr rr      tt      eee  rr rr  
+         NN N NN ee   e cc     rrr  r oo  oo s     ppp  pp rrr  r iii tttt  ee   e rrr  r 
+         NN  NNN eeeee  cc     rr     oo  oo  sss  pppppp  rr     iii tt    eeeee  rr     
+         NN   NN  eeeee  ccccc rr      oooo      s pp      rr     iii  tttt  eeeee rr     
+                                              sss  pp                                     
 
                  A Javascript Crypt Of The Necromancer Spritesheet Renderer
 
