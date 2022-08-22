@@ -1,14 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 :root{
-    --scaler : 14; --size: 24;
-    --frameDef: 1;
-    --imageW: 24px; --imageH: 24px; --columns:16; --rows:15;
+    --scaler : 12; --imageW: 0; --imageH: 0; --columns:0; --rows:0;
 
 /* TODO: WINDOW SIZE SETTINGS */
 
     --window1Height: 660px; --window2Height: 660px; --window3Height: 465px;
-    --window1Width: 450px; --window2Width: 282px; --window3Width: 218px}
+    --window1Width: 450px; --window2Width: 324px; --window3Width: 218px}
 
 #head, #body{
     position:absolute; width:calc((var(--imageW) * var(--columns)) * var(--scaler))}
@@ -21,7 +19,7 @@
 #charm {top:calc(1px * var(--scaler))}
 
 #headContainer, #bodyContainer {
-    top: calc((var(--window1Width) - (var(--imageH) * 14)) - 20px);
+    top: calc((var(--window1Width) - (var(--imageH) * var(--scaler))) - 20px);
     left: calc(((var(--window1Width) / 2)) - ((var(--imageW) * var(--scaler)) / 2));
     height: calc(var(--imageH) * var(--scaler));
     width: calc(var(--imageW) * var(--scaler));
@@ -47,7 +45,8 @@ render {position:absolute!important; overflow: hidden}
 #floor{
     image-rendering: -moz-crisp-edges; image-rendering: pixelated;
     width: calc(72px * 10); height: calc(216px * 10);
-    left: calc(-72px / 0.53); /*TODO: the multiplier here is dogshit */
+    top: -30px;
+    left: calc((var(--window1Width) - (72px * 10)) / 2); /*TODO: the multiplier here is dogshit */
     position:absolute; background-size: 100%;}
 
 /* TODO: TABLE SIZE SETTINGS */
@@ -81,8 +80,11 @@ options > div:last-of-type { padding: 0 0 7px}
 /* button over toggle */
 e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
     color: #fff; border: solid 2px #fff; background-color: #000}
+e:hover {background-color: #696969FF}
 e.inv, e:active {color: #000; background-color: #fff; border: solid 2px #000}
 e.inv {border: solid 2px #fff} e.inv:active {border: solid 2px #000}
+e.deact {border: solid 2px #696969FF!important; color: #696969FF!important;
+    pointer-events: none!important;}
 e:first-of-type {margin: 0 4px 0 0}
 e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
 
@@ -132,4 +134,4 @@ container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
 
 .footer {position:absolute;
     left:calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 20px);
-    top:calc(var(--window3Height) + (var(--size) * 3px))}
+    top:calc(var(--window3Height) + 75px)}

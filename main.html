@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styling.css">
+        <script type="text/javascript" src="startup.js"></script>
         <script type="text/javascript" src="animation.js"></script>
         <link rel="icon" type="image/png" href="/UI_Libraries/skull_small.png">
 
@@ -83,8 +84,12 @@
                     <div>
                         <e onclick="danceTog = !danceTog; floorTog(); buttonTog(this); ">Dance Floor</e>
                         <e onclick="amplifiedToggle(); buttonTog(this)">AMPLIFIED</e>
-                        <e onclick="verticalUpdate(14); characterToggle('head',this)">"Bat Mode"</e>
-                    </div><div>
+                        <setin style="top: -9px; left: 5px">
+                            <t id="bpmDebug">N/a</t>BPM : <t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t>] <t id="frame">N/a</t><br>
+                            <t id="characterDebug">N/a</t> <t id="AmplifiedDebug">N/a</t> / Clothing : <t id="clothingDebug">N/a</t>
+                        </setin>
+                    </div>
+                    <div style="top: -9px; position:relative">
                         <e class="clickable" onclick="playTog = false; elapsed--; animationPush()"> Prev </e>
                         <e onclick="playTog = !playTog; buttonTog(this);">Play</e>
                         <e class="clickable" onclick="playTog = false; elapsed++; animationPush()"> Next </e>
@@ -120,18 +125,19 @@
                 Equipment Slots
                 <options id="equipmentSlots">
                     <div>
-                        <e>Helm</e>
+                        <e>Helmet</e>
                         <e onclick="itemToggle('weapon',this)">Hand</e>
-                        <e onclick="itemToggle('ring',this)">Ring</e>
-                        <e>Boots</e>
+                        <e onclick="itemToggle('ring',this)">wrist</e>
+                        <e>Leggings</e>
                     </div><div>
                         <e onclick="itemToggle('item',this)">Spell</e>
                         <e onclick="itemToggle('food',this)">Food</e>
-                        <e onclick="itemToggle('item',this)">Item</e>
+                        <e onclick="itemToggle('item',this)">equipment</e>
                         <e onclick="itemToggle('charm',this)">Charm</e>
                     </div><div>
                         <e>Shovel</e>
                         <e>Torch</e>
+                        <e>Special</e>
                 </div>
                 </options>
             </cont>
@@ -143,13 +149,8 @@
         </container>
 
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v1.0</t><br>
+            <t>CRYPT OF THE NECROSPRITER v1.8</t><br>
             <t>designed by @Theavanherst</t><br><br>
-
-            <setin>
-                <t id="bpmDebug">N/a</t>BPM : <t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t>] <t id="frame">N/a</t><br>
-                <t id="characterDebug">N/a</t> / Clothing : <t id="clothingDebug">N/a</t> / <t id="AmplifiedDebug">N/a</t>
-            </setin>
         </div>
 
     </body>
