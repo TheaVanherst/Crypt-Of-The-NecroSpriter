@@ -52,8 +52,8 @@ const animationResize = () =>  {
     $("#characterDebug").textContent = currentCharacter[0]+""+currentCharacter[1]+":"+ char[currentCharacter[1]][0];
 
     let src = dir + char[currentCharacter[1]][7];
-    head.style.backgroundImage = "url('" + src + (currentCharacter[0] !== 2 ? "_heads.png" : "_head.png')");
-    body.style.backgroundImage = "url('" + src + (currentCharacter[0] !== 2 ? "_armor_body.png" : "_body.png')");
+    head.src =  src + (currentCharacter[0] !== 2 ? "_heads.png" : "_head.png");
+    body.src =  src + (currentCharacter[0] !== 2 ? "_armor_body.png" : "_body.png");
 
 
     head.classList.remove('invisible');
