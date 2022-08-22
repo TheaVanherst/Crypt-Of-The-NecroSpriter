@@ -1,7 +1,4 @@
-Created by Thea Vanherst
-[@TheaVanherst on Twitter.
-
-to test sprites, open up the 'Main.html' file with any browser.
+To test sprites, open up the 'Main.html' file with any browser.
 For full support, I would highly recommend firefox.
 
 To test your animations, replace the spritesheets in the 'Characters' folder, and refresh the page.
