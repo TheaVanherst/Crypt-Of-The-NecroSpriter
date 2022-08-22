@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
         parent.appendChild(createButton("options")) //container for character DLC types
         let child = parent.getElementsByTagName('options')[e] //shorthand for newly made child.
 
-        for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
+    for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
             //this gets the placement of the character in the default array if a name is typed.
             currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) != -1 ? [e,i] : currentCharacter
 
