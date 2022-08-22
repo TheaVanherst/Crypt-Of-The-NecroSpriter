@@ -1,12 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 :root{
-    --scaler : 12; --imageW: 0; --imageH: 0; --columns:0; --rows:0;
+    --scaler : 10; --imageW: 0; --imageH: 0; --columns:0; --rows:0;
 
 /* TODO: WINDOW SIZE SETTINGS */
 
-    --window1Height: 660px; --window2Height: 660px; --window3Height: 465px;
-    --window1Width: 450px; --window2Width: 324px; --window3Width: 218px}
+    --window1Height: 680px; --window2Height: 680px; --window3Height: 465px; --window4Height: 64px;
+    --window1Width: 400px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
 
 #head, #body{
     position:absolute; width:calc((var(--imageW) * var(--columns)) * var(--scaler))}
@@ -35,17 +35,16 @@ body {
 render {position:absolute!important; overflow: hidden}
 
 #crop { position: relative; overflow: hidden;
-    width: var(--window1Width) ;
+    width: var(--window1Width);
     /* the + 1 is just for floor space at the bottom of the image. */
     border: 2px solid rgba(255,255,255,0.5)}
 #crop, render{
     image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width: var(--window1Width); height: 527px}
+    width: var(--window1Width); height: 543px}
 
 #floor{
     image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width: calc(72px * 10); height: calc(216px * 10);
-    top: -30px;
+    width: calc(72px * 10); height: calc(216px * 10); top: -30px;
     left: calc((var(--window1Width) - (72px * 10)) / 2); /*TODO: the multiplier here is dogshit */
     position:absolute; background-size: 100%;}
 
@@ -69,6 +68,14 @@ container, table {position:absolute}
 .tb3 .top img, .tb3 {width:var(--window3Width)}
 .tb3 .mid img {height:var(--window3Height)}
 
+.tb4 {left: calc(var(--window1Width) + var(--window2Width) + 110px);
+    top: calc(var(--window3Height) + 70px)} /* set this the same as the thing above + 50*/
+.tb4 .top img, .tb4 {width:var(--window3Width)}
+.tb4 .mid img {height:var(--window4Height)}
+
+.tb5 {left: calc(var(--window1Width) + var(--window2Width) + var(--window3Width) + 150px);
+    width:var(--window5Width)}
+
 /* TODO: MENU SETTINGS */
 
 cont { margin:10px 0; display: block}
@@ -79,7 +86,7 @@ options > div:last-of-type { padding: 0 0 7px}
 
 /* button over toggle */
 e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
-    color: #fff; border: solid 2px #fff; background-color: #000}
+    color: #fff; border: solid 2px #fff; background-color: #000;}
 e:hover {background-color: #696969FF}
 e.inv, e:active {color: #000; background-color: #fff; border: solid 2px #000}
 e.inv {border: solid 2px #fff} e.inv:active {border: solid 2px #000}
@@ -99,11 +106,13 @@ th, tr img {padding: 0; margin: -4px}
 
 controller div:first-of-type, #crop {margin: 13px 0 13px 0}
 
-.slider {width:calc(var(--window2Width) - 3px); height: 3px; background: #fff}
+.slider {height: 3px; background: #fff}
 .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
     -webkit-appearance: none; appearance: none;
     width: 8px; height: 24px; border-radius: 0;
     background: #000; cursor: pointer; border: 2px solid #fff}
+#bpmSlider {width:calc(var(--window2Width) - 3px)}
+#scaleSlider {width:calc(var(--window3Width))}
 
 #trackContainer { padding:10px; margin:0;
     width:calc(var(--window2Width) - (12px * 2)); height: 90px;
@@ -134,4 +143,4 @@ container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
 
 .footer {position:absolute;
     left:calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 20px);
-    top:calc(var(--window3Height) + 75px)}
+    top:calc(var(--window3Height) + var(--window4Height) + 135px)}
