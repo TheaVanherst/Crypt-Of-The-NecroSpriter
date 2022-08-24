@@ -123,7 +123,11 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ //nocturna
                     $('#headContainer').classList.remove('invisible')
                     $("#ampButton")?.classList?.remove("deact")
-                    if(i === 6 && e === 1){
+                    if(i === 6 && e === 1){ //checks if clothing set 15
+                        if(ampBool){ //if amp is enabled
+                            $('#ampButton')?.classList?.remove('inv') //makes amp button inactive
+                            amplifiedToggle()} // disable amp
+
                         $('#headContainer').classList.add('invisible')
                         $("#ampButton")?.classList?.add("deact")}} //bat mode
 
