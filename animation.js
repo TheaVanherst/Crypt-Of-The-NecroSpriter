@@ -18,6 +18,7 @@ const buttonTog = (e) => {
         $all(button + " e").forEach(id => {id?.classList?.remove('inv')})
         clothingCurrent = newVal;
         $('#body').style.marginTop = -((frameHeight * newVal) * scaleRes) + "px"
+        $('#headContainer').classList.remove('invisible') //compensates for nocturna
         buttonTog(newButton)};
 
 // todo : ==================
@@ -25,7 +26,7 @@ const buttonTog = (e) => {
 // todo : ==================
 
 /// animation timing setup (this is going to get recoded)
-let aniOffsets, amplifiedMulti = 0, aniArrLength = 0;
+let aniOffsets, ampMulti = 0, aniArrLength = 0;
 
 const frameTypeToggle = () => { //this is to push the current frame times
         framePushType = !framePushType;
@@ -33,9 +34,9 @@ const frameTypeToggle = () => { //this is to push the current frame times
         aniArrLength = aniOffsets.length},
 
     amplifiedToggle = () => {
-        amplifiedBool = !amplifiedBool
-        amplifiedMulti = amplifiedBool ? 1 : 0;
-        $('#AmplifiedDebug').textContent = amplifiedBool ? "AMP" + amplifiedMulti : "DIS"
+        ampBool = !ampBool
+        ampMulti = ampBool ? 1 : 0;
+        $('#amplifiedDebug').textContent = ampBool ? "AMP" + ampMulti : "DIS"
         animationUpdate()};
 
 // todo : ==================
@@ -55,7 +56,6 @@ const animationResize = () =>  {
     head.src =  src + (currentCharacter[0] !== 2 ? "_heads.png" : "_head.png");
     body.src =  src + (currentCharacter[0] !== 2 ? "_armor_body.png" : "_body.png");
 
-
     head.classList.remove('invisible');
     if(currentCharacter[0] === 2){
         if(currentCharacter[1] === 2){
@@ -72,9 +72,8 @@ const animationResize = () =>  {
     $('#headContainer').style.marginTop = "calc((" + (char[currentCharacter[1]][5] - char[currentCharacter[1]][6]) + " * var(--scaler) * -1) * 1px)";
     $('#bodyContainer').style.marginTop = "calc((" + char[currentCharacter[1]][6] + " * var(--scaler)) * 1px)";
 
-    // let body = $('#bodyContainer').offsetLeft            // TODO: FINISH THIS OFF TO LOCK TO PIXELS PROPERLY.
-    // let pixelCorrector = Math.ceil(body/12) * 12
-    // $('#bodyContainer').style.marginLeft = body - pixelCorrector
+    $('#playerModel').style.marginLeft = char[currentCharacter[1]][1] % 2 ? (scaleRes / 2) + "px" : "0px"
+    // this fixes the pixel offset between characters to make them align with pixels properly.
 
     for (let i = clothingCurrent; i < clothingData[0] - 1; i++){ // removes the deactivated tag to any applicable above
         $('#clothing' + i)?.classList?.remove('deact')} // the amount of clothing the current char can have.
@@ -94,46 +93,60 @@ const animationResize = () =>  {
 // todo : ANIMATION Rendering
 // todo : ==================
 
+window.setInterval(() => {
+    if(playTog){
+        elapsed = Math.floor((new Date().getTime() - start) / (60/bpm) / (1000 / aniOffsets.length));
+        animationPush()}}, (60/bpm));
+
 // a bunch of presets to save work
 let scaleRes = getComputedStyle($doc).getPropertyValue('--scaler'),
-    danceTog = false, floorBool = false, playTog = false;
+    danceTog = false, floorBool = false, playTog = false, mul
 let start = new Date().getTime(), elapsed = 0;
 
 const floorFlip = () => {
-    floorBool = !floorBool;
-    $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
-    $("#floor").style.top = -((danceTog ? (floorBool ? 2 : 1) : 0) * 72 * 10) - 30 +'px'};
+    $('#danceFloor').classList.remove('invisible')
+    $('#danceFloor').style.backgroundImage = 'url(UI_Libraries/' + currentFloor + (floorMultiplier ? '_' : '_NoMP_') + 'Floor' + (floorBool ? 2 : 1) + '.png)'
+    $('#danceDebug').textContent = floorBool ? 2 : 1},
 
-    window.setInterval(() => {
-        if(playTog){
-            let time = new Date().getTime() - start;
-            elapsed = Math.floor(time / (60/bpm) / (1000 / aniOffsets.length));
-            animationPush()}
-    }, (60/bpm));
+    floorHide = () => {
+        $('#danceFloor').classList.add('invisible')
+        $('#danceDebug').textContent = "0"},
+
+    multiplierFlip = (e) => {
+        $all("#danceButton, #floorMultiplier").forEach(e => {
+            e.classList.remove("inv")})
+        e.classList.add("inv")
+        floorFlip()}
 
 // todo : Animation Update rendering
 
-const animationPush = () => {
-        $('#AmplifiedDebug').textContent = amplifiedBool ? "AMP" + amplifiedMulti : "DIS"
+    animationPush = () => {
+        $('#amplifiedDebug').textContent = ampBool ? "AMP" + ampMulti : "DIS"
 
-        if (elapsed > aniArrLength - 1) { // if current frame is more than the horizontal displacement array
+        if (elapsed >= aniArrLength) { // if current frame is more than the horizontal displacement array
             elapsed = 0; // resets the elapsed time
             start = new Date().getTime(); // gets new current time
-            floorFlip()} // resets timer every 30 animation frames. [automation]
+            floorBool = !floorBool;
+            if(danceTog || floorMultiplier){floorFlip()}
+                else{floorHide()}
+        } // resets timer every 30 animation frames. [automation]
         else if (elapsed < 0) { // if user has gone to the previous frame, and the new frame is below 0
-            elapsed = aniArrLength - 1; // gets the max value of the array to make it loop around dynamically
-            floorFlip()} // if current frame is less than 0 [manual]
+            elapsed = aniArrLength; // gets the max value of the array to make it loop around dynamically
+            floorBool = !floorBool;
+            if(danceTog || floorMultiplier){floorFlip()}
+                else {floorHide()}
+        } // if current frame is less than 0 [manual]
 
-        amplifiedMulti = amplifiedBool ? Math.round((aniOffsets[elapsed] / 1.35)) * KlarinettaMulti : 0 // this was about 5 lines of dense math FUCK YOU.
+        ampMulti = ampBool ? Math.round((aniOffsets[elapsed] / 1.35)) * KlarinettaMulti : 0 // this was about 5 lines of dense math FUCK YOU.
 
         animationUpdate()
         $("#frame").textContent = (elapsed + 1)},
 
     animationUpdate = () => {
-        $all('#weapon, #charm').forEach(id => { // fixed displacement for equipment
-            id.style.marginLeft = (((aniOffsets[elapsed]) - 1) * frameWidth) * -scaleRes + 'px' })
+        // $all('#weapon, #charm').forEach(id => { // fixed displacement for equipment
+        //     id.style.marginLeft = (((aniOffsets[elapsed]) - 1) * frameWidth) * -scaleRes + 'px' })
         $all('#body, #head').forEach(id => { // specific displacement for the character
-            id.style.marginLeft = (((aniOffsets[elapsed]) + (amplifiedMulti * 4) - 1) * frameWidth) * -scaleRes + 'px' })}
+            id.style.marginLeft = (((aniOffsets[elapsed]) + (ampMulti * 4) - 1) * frameWidth) * -scaleRes + 'px' })}
 
 // todo : BPM divisional
 
@@ -142,15 +155,17 @@ const animationPush = () => {
         let trackContainer = $('#trackContainer') // shorthand
         trackContainer.innerHTML = '' // empties the current compatible tracks
         $('#bpmDebug').textContent = bpm; // sets the bpm from the slider value
+        $('#bpm').textContent = bpm;
 
-        let step = ((bpm - 110) / 5) - 1; // uses the step to calculate the array placement
+        let step = ((bpm - (100 - 5)) / 5) - 1; // uses the step to calculate the array placement
         for (let i = 0; i < songList[step].length; i++){ // grabs the songs in the array from the step calc
 
             let item = document.createElement('t'); // creates a new text element
             item.textContent = songList[step][i]; // sets text for each string in the array from @dataStorage
             let br = document.createElement('br'); // makes a break for the next entry in the for loop
 
-            trackContainer.appendChild(item).appendChild(br)}} // appends to parent
+            trackContainer.appendChild(item).appendChild(br)}
+        } // appends to parent
 
 // todo : ==================
 // todo : Equipment Dealing
@@ -159,6 +174,8 @@ const animationPush = () => {
 const itemToggle = (item, e) => {
     buttonTog(e)
     $("#" + item)?.classList?.toggle("invisible")};
+
+// todo: this resets the play button when changing frame.
 
 const playReset = () => { // this deals with resetting the play button
     playTog = false; // forces animation to pause
@@ -178,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => { // this just sets the boxe
     bpmUpdate() // pushes the current slider status to the debug menu
 
     animationResize()
-    $('#AmplifiedDebug').textContent = amplifiedBool ? "AMP" + amplifiedMulti : "DIS" // posts debug for the current amplifier multiplier
+    $('#amplifiedDebug').textContent = ampBool ? "AMP" + ampMulti : "DIS" // posts debug for the current amplifier multiplier
     $("#clothing"+clothingCurrent)?.classList?.add('inv') // enables the button that is the default clothing option
     $('#clothingDebug').textContent = clothingCurrent + 1; // sets debug ID for the clothing
 

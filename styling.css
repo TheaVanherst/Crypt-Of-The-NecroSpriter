@@ -5,8 +5,103 @@
 
 /* TODO: WINDOW SIZE SETTINGS */
 
+    --tablePadding: 15px;
     --window1Height: 680px; --window2Height: 680px; --window3Height: 465px; --window4Height: 64px;
-    --window1Width: 400px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
+    --window1Width: 390px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
+
+body { margin: 0; padding: 0 }
+
+body {
+    background-color: black; color:white;
+    font-family: 'Silkscreen', cursive;
+    letter-spacing: -2px; font-size:14px}
+
+/* TODO: TABLE SIZE SETTINGS */
+
+table { padding:var(--tablePadding)}
+table .mid img {width:24px} /* table image resolutions */
+table > tr > th {height:24px; width:24px}
+table .top img {height:24px}
+
+container {padding:var(--tablePadding) var(--tablePadding); width:var(--window1Width);
+    margin: var(--tablePadding) 0 0 calc(2px + var(--tablePadding))}
+controller div:first-of-type {margin: 13px 0 13px 0}
+
+.tb1 .top img, .tb2 .top img, .tb2 .top img {height:24px}
+container, table {position:absolute}
+.tb1 .top img {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2))} /* container width */
+.tb1 .mid img {height:var(--window1Height)}
+container.tb1 options { width:var(--window1Width) }
+
+.tb2 {left: calc(var(--window1Width) + (var(--tablePadding) * 3))} /* set this the same as the thing above + 50*/
+.tb2 .top img, .tb2 {width:calc(var(--window2Width) - 40px + (var(--tablePadding) * 2))}
+.tb2 .mid img {height:var(--window2Height)}
+container.tb2, container.tb2 options { width:var(--window2Width) }
+
+.tb3 {left: calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 6))} /* set this the same as the thing above + 50*/
+.tb3 .top img, .tb3 {width:calc(var(--window3Width) - 40px + (var(--tablePadding) * 2))}
+.tb3 .mid img {height:var(--window3Height)}
+container.tb3, container.tb3 options { width:var(--window3Width) }
+
+.tb4 {left: calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 6));
+    top: calc(var(--window3Height) + (var(--tablePadding) * 4))} /* set this the same as the thing above + 50*/
+.tb4 .top img, .tb4 {width:calc(var(--window3Width) - 40px + (var(--tablePadding) * 2))}
+.tb4 .mid img {height:var(--window4Height)}
+container.tb4, container.tb4 options {width:var(--window4Width)}
+
+container.tb3 e {width:80px; margin: 0 10px 10px 0!important; display:inline-table}
+container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
+
+.footer {position:absolute;
+    left:calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 7));
+    top:calc(var(--window3Height) + var(--window4Height) + 135px)}
+
+.tb5 {left: calc(var(--window1Width) + var(--window2Width) + var(--window3Width) + (var(--tablePadding) * 8));
+    width:calc(var(--window5Width) - 40px + (var(--tablePadding) * 2))}
+
+/* TODO: MENU SETTINGS */
+
+cont { margin:10px 0; display: block}
+cont options, options setin {display: inline-table; position: relative}
+cont options { padding:5px 0}
+options > div {padding:0 0 10px 0}
+options > div:last-of-type { padding: 0 0 7px}
+
+/* button over toggle */
+e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
+    color: #fff; border: solid 2px #fff; background-color: #000;}
+e:hover { background-color: #696969FF}
+e.inv, e:active { color: #000; background-color: #fff; border: solid 2px #000}
+e.inv { border: solid 2px #fff} e.inv:active {border: solid 2px #000}
+e.deact { border: solid 2px #696969FF!important; color: #696969FF!important;
+    pointer-events: none!important;}
+e:first-of-type {margin: 0 4px 0 0}
+e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
+
+e t { display: flex; justify-content: center; z-index:10; position: relative}
+
+cont th {text-align: left;}
+th, tr img {padding: 0; margin: -4px -2px}
+
+/* TODO: RENDER CSS & SCALING */
+
+render {position:absolute!important; overflow: hidden}
+
+#crop { position: relative; overflow: hidden; margin: 13px 0 13px 0;
+    margin-left: -2px; border: 2px solid rgba(255,255,255,0.5); width: var(--window1Width); }
+#crop, render{
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    width: var(--window1Width); height: 543px}
+
+:root { --floorTile: 24px }
+
+#floor, #danceFloor {
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    width: calc(72px * 10); height: calc(72px * 10); top: calc(var(--scaler) * -6 * 1px);
+    left: calc((var(--window1Width) - (72px * 10)) / 2); /*TODO: the multiplier here is dogshit */
+    position:absolute; background-size: calc((var(--floorTile) * 2) * var(--scaler))}
+
+#playerModel {position: absolute}
 
 #head, #body{
     position:absolute; width:calc((var(--imageW) * var(--columns)) * var(--scaler))}
@@ -25,86 +120,11 @@
     width: calc(var(--imageW) * var(--scaler));
     float: left; position:absolute; overflow:hidden}
 
-body {
-    background-color: black; color:white;
-    font-family: 'Silkscreen', cursive;
-    letter-spacing: -2px; font-size:14px}
-
-/* TODO: RENDER CSS & SCALING */
-
-render {position:absolute!important; overflow: hidden}
-
-#crop { position: relative; overflow: hidden;
-    width: var(--window1Width);
-    /* the + 1 is just for floor space at the bottom of the image. */
-    border: 2px solid rgba(255,255,255,0.5)}
-#crop, render{
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width: var(--window1Width); height: 543px}
-
-#floor{
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width: calc(72px * 10); height: calc(216px * 10); top: -30px;
-    left: calc((var(--window1Width) - (72px * 10)) / 2); /*TODO: the multiplier here is dogshit */
-    position:absolute; background-size: 100%;}
-
-/* TODO: TABLE SIZE SETTINGS */
-
-table { padding:10px }
-table .mid img {width:24px} /* table image resolutions */
-table > tr > th {height:24px; width:24px}
-table .top img {height:24px}
-
-.tb1 .top img, .tb2 .top img, .tb2 .top img {height:24px}
-container, table {position:absolute}
-.tb1 .top img {width:var(--window1Width)} /* container width */
-.tb1 .mid img {height:var(--window1Height)}
-
-.tb2 {left: calc(var(--window1Width) + 60px)} /* set this the same as the thing above + 50*/
-.tb2 .top img, .tb2 {width:var(--window2Width)}
-.tb2 .mid img {height:var(--window2Height)}
-
-.tb3 {left: calc(var(--window1Width) + var(--window2Width) + 110px)} /* set this the same as the thing above + 50*/
-.tb3 .top img, .tb3 {width:var(--window3Width)}
-.tb3 .mid img {height:var(--window3Height)}
-
-.tb4 {left: calc(var(--window1Width) + var(--window2Width) + 110px);
-    top: calc(var(--window3Height) + 70px)} /* set this the same as the thing above + 50*/
-.tb4 .top img, .tb4 {width:var(--window3Width)}
-.tb4 .mid img {height:var(--window4Height)}
-
-.tb5 {left: calc(var(--window1Width) + var(--window2Width) + var(--window3Width) + 150px);
-    width:var(--window5Width)}
-
-/* TODO: MENU SETTINGS */
-
-cont { margin:10px 0; display: block}
-cont options, options setin {display: inline-table; position: relative}
-cont options { padding:5px 0}
-options > div {padding:0 0 10px 0}
-options > div:last-of-type { padding: 0 0 7px}
-
-/* button over toggle */
-e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
-    color: #fff; border: solid 2px #fff; background-color: #000;}
-e:hover {background-color: #696969FF}
-e.inv, e:active {color: #000; background-color: #fff; border: solid 2px #000}
-e.inv {border: solid 2px #fff} e.inv:active {border: solid 2px #000}
-e.deact {border: solid 2px #696969FF!important; color: #696969FF!important;
-    pointer-events: none!important;}
-e:first-of-type {margin: 0 4px 0 0}
-e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
-
-e t {display: flex;justify-content: center; z-index:10;position: relative}
-
-#clothing e{white-space: nowrap; width: 8px}
+#width {width: var(--window2Width)}
+#clothing e { white-space: nowrap; width: 8px}
 #clothing tr e { width: 35px; height:35px}
 
-container {padding:24px; width:var(--window1Width)}
-cont th {text-align: left;}
-th, tr img {padding: 0; margin: -4px}
-
-controller div:first-of-type, #crop {margin: 13px 0 13px 0}
+/* TODO: UI CONTAINERS */
 
 .slider {height: 3px; background: #fff}
 .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
@@ -136,11 +156,3 @@ controller div:first-of-type, #crop {margin: 13px 0 13px 0}
     position: relative; display: inline-flex}
 
 .invisible { opacity:0!important}
-
-container.tb3 cont {}
-container.tb3 e {width:80px; margin: 0 10px 10px 0!important; display:inline-table}
-container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
-
-.footer {position:absolute;
-    left:calc(var(--window1Width) + var(--window2Width) + (var(--imageW) * 4) + 20px);
-    top:calc(var(--window3Height) + var(--window4Height) + 135px)}

@@ -35,20 +35,32 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                     floorTileSets[e][i].unshift(floorTileSets[e][i].pop()) //rotates the array clockwise.
                     backgroundUpdate(this,e,i)}
 
+                currentFloor = floorTileSets[e][i][0]
+                if(danceTog || floorMultiplier){floorFlip()}
+
+                if(e === 0 && i === 1){ //checks if on zone 2
+                    if(danceTog === true){ //checks if the Dance Floor button is active
+                        floorMultiplier = true; danceTog = false; //forces the dance floor to switch to the multiplier
+                        multiplierFlip($('#floorMultiplier'))} //flips
+                    $("#danceButton")?.classList?.add("deact") } //disables the dance floor button.
+                else {
+                    $("#danceButton")?.classList?.remove("deact")}
+                // this disables the default dance floor without the multiplier.
+
                 $('#floor').style.backgroundImage = this.style.backgroundImage; //updates the render image.
-                this.children[0].textContent = $('#FloorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
+                this.children[0].textContent = $('#floorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
                 $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
                 this?.classList?.add('inv')}}}
 
     // ON LAUNCH DEBUG PUSH
-    const d = 3, //Default Floor Type
-        c=d-1,v=c>2?1:0,h=c>2?c-(floorTileSets[0].length*(floorTileSets.length*1)):c //figures out which array to use for said floor
+    const c=currentFloor-1,v=c>2?1:0,h=c>2?c-(floorTileSets[0].length*(floorTileSets.length*1)):c //figures out which array to use for said floor
+    currentFloor = floorTileSets[v][h][0]
     backgroundUpdate($('#floor'),v,h)
 
     parent?.children[v]?.children[h].classList?.add('inv')
-    $('#FloorDebug').textContent = floorTileSets[v][h][[0]]
-    $('#DanceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
+    $('#floorDebug').textContent = floorTileSets[v][h][[0]]
+    $('#danceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
 })
 
 // todo : =================
@@ -66,17 +78,17 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
 
     for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
             //this gets the placement of the character in the default array if a name is typed.
-            currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) != -1 ? [e,i] : currentCharacter
+            currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) !== -1 ? [e,i] : currentCharacter
 
             child.appendChild(createButton('e',characterFrames[e][i + 1][0])).onclick = function () {
                 currentCharacter = [e,i + 1];
                 KlarinettaMulti = currentCharacter[0] == 2 ? currentCharacter[1] == 3 ? 2 : 1 : 1
-                if(currentCharacter[0] === 2 && currentCharacter[1] === 2){
-                    amplifiedBool = true; //this has to be the opposite, just so I can call the function and it do the work for me.
+                if(currentCharacter[0] === 2 && currentCharacter[1] === 2){ //CHAUNTER
+                    ampBool = true; //this has to be the opposite, just so I can call the function and it do the work for me.
                     amplifiedToggle();
                     $("#ampButton")?.classList?.remove('inv')
-                    $("#ampButton")?.classList?.add("deact")
-                } else {
+                    $("#ampButton")?.classList?.add("deact")}
+                else {
                     $("#ampButton")?.classList?.remove("deact")}
 
                 animationResize()
@@ -85,8 +97,7 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
                     item?.classList?.remove('inv')})
                 buttonTog(this)}}}
 
-    parent.getElementsByTagName('options')[currentCharacter[0]].children[currentCharacter[1] - 1].classList?.add('inv')
-})
+    parent.getElementsByTagName('options')[currentCharacter[0]].children[currentCharacter[1] - 1].classList?.add('inv')})
 
 // todo : ================
 // todo : CLOTHING CHANGER
@@ -108,5 +119,11 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
 
             divS.children[i].onclick = function () {   // attach event listener individually
                 buttonAdjustment("#clothing", cur, this)
-                clothingDebug.textContent = cur + 1}}}
+
+                if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ //nocturna
+                    $('#headContainer').classList.remove('invisible')
+                    if(i === 6 && e === 1){$('#headContainer').classList.add('invisible')}} //bat mode
+
+                clothingDebug.textContent = cur + 1}
+        }}
 }, false);

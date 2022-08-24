@@ -87,12 +87,15 @@
             <div id="crop">
                 <render>
                     <div id="floor"></div>
-                    <div id="bodyContainer"><img id="body"></div>
-                    <div id="headContainer"><img id="head"></div>
-                    <img class="invisible" id="hat">
-                    <img class="invisible" id="weapon">
-                    <img class="invisible" id="boots">
-                    <img class="invisible" id="charm">
+                    <div id="danceFloor"></div>
+                    <div id="playerModel">
+                        <div id="bodyContainer"><img id="body"></div>
+                        <div id="headContainer"><img id="head"></div>
+                        <img class="invisible" id="hat">
+                        <img class="invisible" id="weapon">
+                        <img class="invisible" id="boots">
+                        <img class="invisible" id="charm">
+                    </div>
                 </render>
             </div>
 
@@ -100,14 +103,11 @@
                 Animation settings
                 <options id="renderSettings">
                     <div>
-                        <e onclick="danceTog = !danceTog; floorFlip(); buttonTog(this); ">Dance Floor</e>
+                        <e id="danceButton" onclick="danceTog = !danceTog; floorMultiplier = false; multiplierFlip(this)">Dance Floor</e>
+                        <e id="floorMultiplier" onclick="floorMultiplier = !floorMultiplier; danceTog = false; multiplierFlip(this)">Multiplier</e>
                         <e id="ampButton" onclick="amplifiedToggle(); buttonTog(this)">AMPLIFIED</e>
-                        <setin style="top: -9px; left: 5px">
-                            <t id="bpmDebug">N/a</t>BPM/<t id="FloorDebug">N/a</t>:<t id="DanceDebug">N/a</t>:<t id="frame">N/a</t><br>
-                            <t id="characterDebug">N/a</t>x<t id="AmplifiedDebug">N/a</t>/C:<t id="clothingDebug">N/a</t>
-                        </setin>
                     </div>
-                    <div style="top: -9px; position:relative">
+                    <div>
                         <e class="clickable" onclick="elapsed--; playReset()"> Prev </e>
                         <e id="play" onclick="playTog = !playTog; buttonTog(this);">Play</e>
                         <e class="clickable" onclick="elapsed++; playReset()"> Next </e>
@@ -126,9 +126,9 @@
                 Animation Speed (BPM)<br>
                 <options>
                     <div>
-                        <input type="range" min="115" max="175" step="5" class="slider" id="bpmSlider">
-                        <t>115</t><t style="float:right">175</t><br>
-                        current BPM:<t id="bpm">130bpm</t></div>
+                        <input type="range" min="100" max="175" step="5" class="slider" id="bpmSlider">
+                        <t>100</t><t style="float:right">175</t><br>
+                        current BPM:<t id="bpm"></t></div>
 
                     <div>Compatible Tracks:<br>
                         <options id="trackContainer"></options></div>
@@ -168,28 +168,33 @@
                 <input type="range" min="4" max="12" step="1" class="slider" id="scaleSlider"><br>
                 <t>4</t><t style="float:right">12</t><br>
                 <div>current scale:<t id="scale">12</t></div></div>
+
         </container>
 
         <container class="tb5">
             Future Feature List:<br><br>
             Current WIP:<br>
             - Working Scaling feature<br>
-            - Split the floor textures to individual images<br>
             - Working Armour & Weapon slots<br>
             - Working Tool slots<br><br>
 
             Future Projects<br>
-            - Redesigned background mapping<br>
             - Add a foreground to the render preview<br>
             - switch to Zone 5 on the "Amplified" button click.<br>
             - Amplified ground cable with accompanying sprite animation<br>
-            - A smaller preview window to accurately depict what the sprite looks like in game<br>
-            - Fix the pixel offset between the player model and the ground texture<br><br>
+            - A smaller preview window to accurately depict what the sprite looks like in game<br><br>
+
+            <t>CRYPT OF THE NECROSPRITER v0.81</t><br>
+            <t>designed by @Theavanherst</t><br><br>
+
         </container>
 
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v1.8</t><br>
-            <t>designed by @Theavanherst</t><br><br>
+            <t>Debug:</t><br>
+            <t id="bpmDebug">N/a</t>BPM/<t id="floorDebug">N/a</t>:<t id="danceDebug">N/a</t>:<t id="frame">N/a</t><br>
+            <t id="characterDebug">N/a</t>x<t id="amplifiedDebug">N/a</t>/C:<t id="clothingDebug">N/a</t>
+
+
         </div>
     </body>
 </html>
