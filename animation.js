@@ -100,7 +100,7 @@ window.setInterval(() => {
 
 // a bunch of presets to save work
 let scaleRes = getComputedStyle($doc).getPropertyValue('--scaler'),
-    danceTog = false, floorBool = false, playTog = false, mul
+    danceTog = false, floorBool = false, playTog = false;
 let start = new Date().getTime(), elapsed = 0;
 
 const floorFlip = () => {
@@ -112,11 +112,15 @@ const floorFlip = () => {
         $('#danceFloor').classList.add('invisible')
         $('#danceDebug').textContent = "0"},
 
-    multiplierFlip = (e) => {
-        $all("#danceButton, #floorMultiplier").forEach(e => {
-            e.classList.remove("inv")})
-        e.classList.add("inv")
-        floorFlip()}
+    multiplierFlip = () => {
+        $all("#danceButton, #floorMultiplier").forEach(i => {
+            i.classList.remove("inv")})
+
+        if(danceTog){$('#danceButton').classList.add("inv")}
+        else if(floorMultiplier){$('#floorMultiplier').classList.add("inv") }
+
+        if(danceTog || floorMultiplier){floorFlip()}
+        else {floorHide()}}
 
 // todo : Animation Update rendering
 
@@ -127,14 +131,18 @@ const floorFlip = () => {
             elapsed = 0; // resets the elapsed time
             start = new Date().getTime(); // gets new current time
             floorBool = !floorBool;
-            if(danceTog || floorMultiplier){floorFlip()}
-                else{floorHide()}
+            if(danceTog || floorMultiplier){
+                floorFlip()}
+            else{
+                floorHide()}
         } // resets timer every 30 animation frames. [automation]
         else if (elapsed < 0) { // if user has gone to the previous frame, and the new frame is below 0
             elapsed = aniArrLength; // gets the max value of the array to make it loop around dynamically
             floorBool = !floorBool;
-            if(danceTog || floorMultiplier){floorFlip()}
-                else {floorHide()}
+            if(danceTog || floorMultiplier){
+                floorFlip()}
+            else {
+                floorHide()}
         } // if current frame is less than 0 [manual]
 
         ampMulti = ampBool ? Math.round((aniOffsets[elapsed] / 1.35)) * KlarinettaMulti : 0 // this was about 5 lines of dense math FUCK YOU.

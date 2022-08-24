@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 this.children[0].textContent = $('#floorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
                 $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
-                this?.classList?.add('inv')}}}
+                this?.classList?.add('inv')}
+        }}
 
     // ON LAUNCH DEBUG PUSH
     const c=currentFloor-1,v=c>2?1:0,h=c>2?c-(floorTileSets[0].length*(floorTileSets.length*1)):c //figures out which array to use for said floor
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
         parent.appendChild(createButton("options")) //container for character DLC types
         let child = parent.getElementsByTagName('options')[e] //shorthand for newly made child.
 
-    for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
+        for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
             //this gets the placement of the character in the default array if a name is typed.
             currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) !== -1 ? [e,i] : currentCharacter
 
@@ -95,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
 
                 $all('container.tb3 options e').forEach(item => {
                     item?.classList?.remove('inv')})
-                buttonTog(this)}}}
-
+                buttonTog(this)}
+        }}
     parent.getElementsByTagName('options')[currentCharacter[0]].children[currentCharacter[1] - 1].classList?.add('inv')})
 
 // todo : ================
@@ -120,16 +121,17 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             divS.children[i].onclick = function () {   // attach event listener individually
                 buttonAdjustment("#clothing", cur, this)
 
-                if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ //nocturna
-                    $('#headContainer').classList.remove('invisible')
-                    $("#ampButton")?.classList?.remove("deact")
+                if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ // Nocturna
+                    $('#headContainer').classList.remove('invisible') // resets the head to be visible
+                    $("#ampButton")?.classList?.remove("deact") // resets the amp button if the current character is Nocturna
+
                     if(i === 6 && e === 1){ //checks if clothing set 15
                         if(ampBool){ //if amp is enabled
-                            $('#ampButton')?.classList?.remove('inv') //makes amp button inactive
+                            $('#ampButton')?.classList?.remove('inv') // makes amp button inactive
                             amplifiedToggle()} // disable amp
 
                         $('#headContainer').classList.add('invisible')
-                        $("#ampButton")?.classList?.add("deact")}} //bat mode
+                        $("#ampButton")?.classList?.add("deact")}} // bat mode
 
                 clothingDebug.textContent = cur + 1}
         }}
