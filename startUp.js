@@ -122,7 +122,10 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
 
                 if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ //nocturna
                     $('#headContainer').classList.remove('invisible')
-                    if(i === 6 && e === 1){$('#headContainer').classList.add('invisible')}} //bat mode
+                    $("#ampButton")?.classList?.remove("deact")
+                    if(i === 6 && e === 1){
+                        $('#headContainer').classList.add('invisible')
+                        $("#ampButton")?.classList?.add("deact")}} //bat mode
 
                 clothingDebug.textContent = cur + 1}
         }}
