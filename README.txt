@@ -38,10 +38,7 @@ recommendations for the sprite renderer, contact me on Twitter or my discord The
 - A Working Scaling feature, with a slider to change the resolution size of the left hand side preview.
 - Adding a working Armour, Weapon and tool slots to be togglable for the left hand side preview.
     # A weapon complete weapon, food and scroll selector in a new UI menu.
-- A complete redesign and rehaul of how background mapping is applied.
-    - Split the floor textures to individual images, to make them tileable.
 - Add a foreground to the render preview, to show a closer resemblance to how sprites are rendered ingame.
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
 # A smaller preview window to accurately depict what the sprite looks like in game.
-- Fix the pixel offset between the player model and the ground texture to be flush and aligned correctly.
