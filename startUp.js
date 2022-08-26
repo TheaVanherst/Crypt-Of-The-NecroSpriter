@@ -10,6 +10,7 @@ const $doc = document.documentElement,
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
     $("#ani, #frame").value = frameDef;
     $("#bpmSlider").oninput = () => bpmUpdate();
+    $("#scaleSlider").oninput = () => scaleUpdate();
     //$all('body e').forEach(id => {id.onclick = () => buttonTog(id)})
 }, false)
 
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
         parent = $('#backgrounds')
 
     for (let e = 0; e < floorTileSets.length; e++){
-        parent.appendChild(createButton("div")); //creates the containing box for each row
+        $('#backgrounds').appendChild(createButton("div")); //creates the containing box for each row
 
         for (let i = 0; i < floorTileSets[0].length; i++) {
             let child = createButton("e");//generates a button
@@ -33,22 +34,25 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             $('#backgrounds').children[e].appendChild(child).onclick = function () {   // attach event listener individually
                 if (floorTileSets[e][i].length > 1 && this.style.backgroundImage === $('#floor').style.backgroundImage){
                     floorTileSets[e][i].unshift(floorTileSets[e][i].pop()) //rotates the array clockwise.
+                    overlayTileSets[e][i].unshift(overlayTileSets[e][i].pop()) //rotates the array clockwise.
                     backgroundUpdate(this,e,i)}
 
+                $('#foreground').src = "UI_Libraries/" + overlayTileSets[e][i][0] + "_Overlay.png"
+
                 currentFloor = floorTileSets[e][i][0]
-                if(danceTog || floorMultiplier){floorFlip()}
+                if(danceFloorBool || floorMultiBool){floorFlip()}
 
                 if(e === 0 && i === 1){ //checks if on zone 2
-                    if(danceTog === true){ //checks if the Dance Floor button is active
-                        floorMultiplier = true; danceTog = false; //forces the dance floor to switch to the multiplier
-                        multiplierFlip($('#floorMultiplier'))} //flips
+                    if(danceFloorBool === true){ //checks if the Dance Floor button is active
+                        floorMultiBool = true; danceFloorBool = false; //forces the dance floor to switch to the multiplier
+                        multiplierFlip($('#floorMultiBool'))} //flips
                     $("#danceButton")?.classList?.add("deact") } //disables the dance floor button.
                 else {
                     $("#danceButton")?.classList?.remove("deact")}
                 // this disables the default dance floor without the multiplier.
 
                 $('#floor').style.backgroundImage = this.style.backgroundImage; //updates the render image.
-                this.children[0].textContent = $('#floorDebug').textContent = floorTileSets[e][i][[0]]; //updates the text on the image when clicked on
+                this.children[0].textContent = $('#floorDebug').textContent = overlayTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
                 $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
                 this?.classList?.add('inv')}
@@ -58,10 +62,11 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
     const c=currentFloor-1,v=c>2?1:0,h=c>2?c-(floorTileSets[0].length*(floorTileSets.length*1)):c //figures out which array to use for said floor
     currentFloor = floorTileSets[v][h][0]
     backgroundUpdate($('#floor'),v,h)
+    $('#foreground').src = "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png"
 
     parent?.children[v]?.children[h].classList?.add('inv')
     $('#floorDebug').textContent = floorTileSets[v][h][[0]]
-    $('#danceDebug').textContent = (danceTog ? (floorBool ? 2 : 1) : 0);
+    $('#danceDebug').textContent = (danceFloorBool ? (floorID ? 2 : 1) : 0);
 })
 
 // todo : =================

@@ -7,7 +7,7 @@
 
     --tablePadding: 15px;
     --window1Height: 680px; --window2Height: 680px; --window3Height: 465px; --window4Height: 64px;
-    --window1Width: 390px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
+    --window1Width: 580px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
 
 body { margin: 0; padding: 0 }
 
@@ -67,6 +67,8 @@ cont options { padding:5px 0}
 options > div {padding:0 0 10px 0}
 options > div:last-of-type { padding: 0 0 7px}
 
+debug {position: absolute; display: inline; margin: -2px 0 0 10px}
+
 /* button over toggle */
 e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
     color: #fff; border: solid 2px #fff; background-color: #000;}
@@ -93,34 +95,30 @@ render {position:absolute!important; overflow: hidden}
     image-rendering: -moz-crisp-edges; image-rendering: pixelated;
     width: var(--window1Width); height: 543px}
 
-:root { --floorTile: 24px }
+#transform { position:relative; top: 370px;}
 
 #floor, #danceFloor {
     image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width: calc(72px * 10); height: calc(72px * 10); top: calc(var(--scaler) * -6 * 1px);
-    left: calc((var(--window1Width) - (72px * 10)) / 2); /*TODO: the multiplier here is dogshit */
-    position:absolute; background-size: calc((var(--floorTile) * 2) * var(--scaler))}
+    background-position: top left; left: 14.5px; top: -350px;
+    width: calc(72px * 10); height: calc(72px * 10); position:absolute; }
+#foreground {
+    position:absolute; width:216px; margin: -5px 0 0 182.5px; }
 
-#playerModel {position: absolute}
+/* TODO: Character css */
 
-#head, #body{
-    position:absolute; width:calc((var(--imageW) * var(--columns)) * var(--scaler))}
-#body{
-    height:calc((var(--imageH) * var(--rows)) * var(--scaler))}
-#weapon, #charm{
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    top:0; left:0; z-index:1000;
-    position:absolute; width:calc(25% * var(--scaler))}
-#charm {top:calc(1px * var(--scaler))}
+#playerModel {position: absolute; left: 278.5px; top:77px; width: 24px; height: 30px; }
 
 #headContainer, #bodyContainer {
-    top: calc((var(--window1Width) - (var(--imageH) * var(--scaler))) - 20px);
-    left: calc(((var(--window1Width) / 2)) - ((var(--imageW) * var(--scaler)) / 2));
-    height: calc(var(--imageH) * var(--scaler));
-    width: calc(var(--imageW) * var(--scaler));
+    height: var(--imageH); width: var(--imageW);
     float: left; position:absolute; overflow:hidden}
+#head, #body{position:absolute; width:calc(var(--imageW) * var(--columns))}
+#body{height:calc(var(--imageH) * var(--rows))}
 
-#width {width: var(--window2Width)}
+#weapon, #charm{
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated
+    top:0; left:0; z-index:1000; position:absolute; width:calc(25% * var(--scaler))}
+#charm {top:calc(1px)}
+
 #clothing e { white-space: nowrap; width: 8px}
 #clothing tr e { width: 35px; height:35px}
 
