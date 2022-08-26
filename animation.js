@@ -43,7 +43,7 @@ const frameTypeToggle = () => { //this is to push the current frame times
     foregroundToggle = () => {
         foregroundBool = !foregroundBool
         $('#foreground').style.display = foregroundBool ? "none" : "block"
-        $('#foregroundDebug').textContent = ampBool ? "AMP" + ampMultiplier : "DIS"
+        $('#foregroundDebug').textContent = foregroundBool
         buttonTog($('#foregroundButton'))}
 
 // todo : ==================
@@ -157,7 +157,6 @@ const floorFlip = () => {
         $("#frame").textContent = (elapsed + 1)},
 
     animationUpdate = () => {
-        console.log(aniOffsets[0])
         $all('#body, #head').forEach(id => { // specific displacement for the character
             id.style.marginLeft = (((aniOffsets[0][elapsed]) + (ampMultiplier * 4) - 1) * -frameWidth) + 'px' })};
 
