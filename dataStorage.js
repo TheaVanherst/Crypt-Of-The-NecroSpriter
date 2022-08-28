@@ -8,10 +8,12 @@
 
 let framePushType = false, // How the debug menu outputs by default. 0-30 / 1-4
     ampBool = false, // Amplified default setting. On/off
-    floorMultiBool = false, // enable this if you want the floor multiplier to be enabled by default.
+    danceMode = [false, true],
+
+    floorMultiBool = true, // enable this if you want the floor multiplier to be enabled by default.
     foregroundBool = true, // displays the foreground environment
     danceFloorBool = false, // displays the dance floor by default
-    playTog = false; // enables the animation by default.
+    playTog = false; // enables the animation by default
 
 // TODO: CLOTHING // CHARACTERS
 
@@ -19,34 +21,46 @@ let clothingData = [16,8];
 // amount of clothing / how many on each column. This is just a hardcoded setting for changing the amount
 // of columns and rows I want to impliment in the UI. I would avoid touching this unless you want to add extra sets of clothing.
 
-const dir = "characters/", //directory where all the character files are saved.
+let calls = [["hat", false],["weapon", false],["wrist", false],["boots", false],["charm", false],["shovel", false],["torch", false],["hip", false],["special", false]];
+// these store the names to be called when updating url data, and refer to the table below in the order displayed below.
+// These all co-align with the buttons on the UI, it's just the fact I can't be bothered to write code to autogen.
+
+// anyway, just change the boolean to false or true depending on if you want it displayed on page load.
+
+const dir = "characters/",  //directory where all the character files are saved.
     characterFrames = [
-    //       Name          WID/HIG/ROW/COL/HDP/BDP/File ID
-        [   ["Base Game"],
-            ["Cadence P1",  24, 24, 14, 16, 0, 0, "player1"],
-            ["Melody",      24, 24, 14, 16, 0, 0, "char1"],
-            ["Aria",        24, 24, 14, 16, 0, 0, "char2"],
-            ["Dorian",      33, 32, 1 , 16, 1, 4, "char3"],
-            ["Eli",         32, 28, 14, 16, -0.3, 0, "char4"], // TODO: FIX THIS
-            ["Monk",        24, 24, 14, 16, 0, 0, "char5"],
-            ["Dove",        24, 24, 14, 16, 4, 0, "char6"],
-            ["Coda",        33, 30, 14, 16, 0, 0, "char7"],
-            ["Bolt",        24, 24, 14, 16, 0, 0, "char8"],
-            ["Bard",        24, 24, 14, 16, 0, 0, "char9"]
+//           Name         //RESOLUTION       DISPLACEMENT              HAT                           WEAPON         RING           BOOTS          CHARM                         SHOVEL         TORCH                                HIP            SPECIAL
+        [   ["Base Game"],//WID HIG   ROW COl   HDP BDP  File ID       BOOL   V  H  OFFSET           BOOL   V  H    BOOL   V  H    BOOL   V  H    BOOL   V  H  OFFSET           BOOL   V  H    BOOL   V  H   OFFSET        FLIP     BOOL   V  H    BOOL   V  H
+            ["Cadence P1",  [24, 24], [14, 16], [0, 0], "player1",    [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 1], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Melody",      [24, 24], [14, 16], [0, 0], "char1",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [false, 0, 0], [true , 0, 4], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 3, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Aria",        [24, 24], [14, 16], [0, 0], "char2",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Dorian",      [33, 32], [1 , 16], [1, 4], "char3",      [true , 0, 4, [0 ,0 ,0 ,0 ]], [true , 0, 0], [true , 3, 4], [true , 4, 4], [true , 1, 4, [2 ,1 ,1 ,1 ]], [true , 2, 3], [true , 4, 3, [2 ,3 ,4 ,1 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Eli",         [33, 28], [14, 16], [0, 0], "char4",      [false, 0, 3, [1 ,2 ,3 ,4 ]], [false, 0, 0], [true , 3, 4], [true , 4, 4], [true , 0, 0, [1 ,2 ,3 ,2 ]], [false, 0, 0], [true , 3, 3, [1 ,2 ,3 ,4 ], true ], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Monk",        [24, 24], [14, 16], [0, 0], "char5",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Dove",        [24, 24], [14, 16], [4, 0], "char6",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Coda",        [33, 30], [14, 16], [0, 0], "char7",      [false, 0, 0, [1 ,2 ,3 ,4 ]], [false, 0, 0], [true , 4, 4], [true , 6, 4], [true , 2, 4, [2 ,0 ,-2,-1]], [true , 4, 4], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]], // todo: CUSTOM CHARM OFFSET
+            ["Bolt",        [24, 24], [14, 16], [0, 0], "char8",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Bard",        [24, 24], [14, 16], [0, 0], "char9",      [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]]
         ],[ ["Amplified"],
-            ["Nocturna",    25, 27, 15, 16, 0, 0, "char10"],
-            ["Diamond",     24, 24, 14, 16, 1, 0, "char11"],
-            ["Mary",        24, 24, 14, 16, 0, 0, "char12"],
-            ["Tempo",       24, 24, 14, 16, 1, 0, "char13"]
+            ["Nocturna",    [25, 27], [15, 16], [0, 0], "char10",     [true , 2, 2, [1 ,2 ,3 ,4 ]], [true , 3, 3], [true , 2, 2], [true , 3, 1], [true , 2, 2, [1 ,2 ,3 ,2 ]], [true , 3, 1], [true , 3, 2, [1 ,2 ,3 ,4 ], false], [true , 2, 2], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Diamond",     [24, 24], [14, 16], [1, 0], "char11",     [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [false, 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Mary",        [24, 24], [14, 16], [0, 0], "char12",     [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Tempo",       [24, 24], [14, 16], [1, 0], "char13",     [true , 0, 0, [1 ,2 ,3 ,4 ]], [true , 0, 0], [true , 0, 0], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 0], [false, 0, 1, [1 ,2 ,3 ,4 ]]]
         ],[ ["Synchrony"],
-            ["Suzu",        25, 28, 14, 16, 0, 0, "Suzu"],
-            ["Chaunter",    27, 26, 1 , 9 , 0, 0, "Chaunter"],
-            ["Klarinetta",  26, 30, 1 , 32, 0, 1, "Klarinetta"]]]
+            ["Suzu",        [25, 28], [14, 16], [0, 0], "Suzu",       [true , 2, 2, [1 ,2 ,3 ,4 ]], [false, 3, 3], [true , 2, 2], [true , 4, 1], [true , 3, 2, [1 ,2 ,3 ,2 ]], [true , 3, 1], [true , 4, 2, [1 ,2 ,3 ,4 ], false], [true , 2, 2], [true , 0, 1, [1 ,2 ,3 ,4 ]]], // todo: CUSTOM CHARM OFFSET
+            ["Chaunter",    [27, 26], [1 , 9 ], [0, 0], "Chaunter",   [false, 0, 0, [1 ,2 ,3 ,4 ]], [false, 0, 0], [false, 0, 0], [false, 0, 0], [false, 0, 0, [1 ,2 ,3 ,2 ]], [false, 0, 0], [false, 0, 0, [1 ,2 ,3 ,4 ], false], [false, 0, 1], [true , 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["Klarinetta",  [26, 30], [1 , 32], [0, 1], "Klarinetta", [true , 1, 1, [1 ,2 ,3 ,4 ]], [false, 0, 0], [true , 3, 2], [true , 5, 1], [true , 2, 1, [1 ,1 ,2 ,2 ]], [true , 3, 1], [true , 8, 4, [1 ,4 ,3 ,2 ], false], [false, 0, 0], [true , 0, 1, [1 ,2 ,3 ,4 ]]],
+            ["CUSTOM",      [0 , 0 ], [0 , 0 ], [0, 0], "Custom",     [true , 0, 0, [1 ,2 ,3 ,4 ]], [false, 0, 0], [true , 0, 4], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,2 ]], [true , 0, 0], [true , 0, 0, [1 ,2 ,3 ,4 ], false], [true , 0, 1], [false, 0, 1, [1 ,2 ,3 ,4 ]]]
+        ]]
 
 // The data above is fully editable if you want to use custom sprites.
+
 // WID is the sprite width, HIG is the sprite height. Change this to your sprite resolution.
 // COL is the amount of columns your sprite sheet has, and ROW is the amount of rows your spritesheet has. Pretty self explanitory,
-// HDP: head displacement, BPD: body displacement, adjust these to compensate for vertical height offsets your spritesheet may have.
+
+// HDP: head displacement,
+// BPD: body displacement, adjust these to compensate for vertical height offsets your spritesheet may have.
+
 // File ID: this is the file name, all of these work as expected for the base game and 1st DLC, just change the name to *insert name here*_armor.png
 //      Chaunter and Klarinetta I would highly advise to avoid modding too much if you then want to use it here.
 //      Nocturna has a 15th article of clothing which disables her head, so keep that in mind whene designing sprites.
@@ -55,6 +69,8 @@ const dir = "characters/", //directory where all the character files are saved.
 
 let currentCharacter = "Nocturna", //default character to select on load.
     clothingCurrent = 0; //default clothing active on startup
+
+let KlarinettaMulti = 1; // please don't change this, it's a horizontal offset for karinetta to be added and used with the multiplier.
 
 // TODO: FLOOR TYPES
 
@@ -73,13 +89,16 @@ const floorTileSets = [ //these store the type of floor tiles needed to be displ
 // for each floorTileSet you use, you'll need a overlayTileSet to work alongside it, otherwise the carousel will go out
 // of sync of one another, unless you want that. Upto you.
 
-let currentFloor = 3; // The default floor you want to be active, you can't select a subfloor, it only selects the button you want, aka. the first of each type.
+let currentFloor = 5; // The default floor you want to be active, you can't select a subfloor, it only selects the button you want, aka. the first of each type.
 
 // TODO: ANIMATION DATA
 
-const aniOffsets = [[1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],[1,2,3,4]]
+const aniOffsets = [[1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4],[1,2,3,4]],
+    shovelOffsets = [-1,0,1,0]
 // this is the array that stores horiztonal displayment multipliers for the animation to take place on which frame.
 //      this is toggled by the [ANIMATION TYPE] button in the render UI, and switches between the ingame animation, and regular linear animation.
+
+let activeRows, framesize; //these are just here to setup arrays to store data for character selection
 
 // TODO: MUSIC
 
@@ -104,7 +123,3 @@ const songList = [
 // keep the amount of songs per array to 5, as that's the max the UI is designed for.
 
 let bpm = 130; //default BPM setting for the BPM slider.
-
-
-
-

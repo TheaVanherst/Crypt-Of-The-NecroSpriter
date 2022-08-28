@@ -6,7 +6,7 @@
 /* TODO: WINDOW SIZE SETTINGS */
 
     --tablePadding: 15px;
-    --window1Height: 680px; --window2Height: 680px; --window3Height: 465px; --window4Height: 64px;
+    --window1Height: 680px; --window2Height: 680px; --window3Height: 465px; --window4Height: 64px; --window6Height: 64px;
     --window1Width: 580px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px;}
 
 body { margin: 0; padding: 0 }
@@ -52,6 +52,11 @@ container.tb4, container.tb4 options {width:var(--window4Width)}
 container.tb3 e {width:80px; margin: 0 10px 10px 0!important; display:inline-table}
 container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
 
+.tb6 {left: calc(var(--window1Width) + (var(--tablePadding) * 3));
+       top: calc(var(--window2Height) + (var(--tablePadding) * 4))}
+.tb6 .top img, .tb6 {width:calc(var(--window2Width) - 40px + (var(--tablePadding) * 2))}
+.tb6 .mid img {height:var(--window6Height)}
+
 .footer {position:absolute;
     left:calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 7));
     top:calc(var(--window3Height) + var(--window4Height) + 135px)}
@@ -62,7 +67,7 @@ container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
 /* TODO: MENU SETTINGS */
 
 cont { margin:10px 0; display: block}
-cont options, options setin {display: inline-table; position: relative}
+cont options, options setin {display: inline-table}
 cont options { padding:5px 0}
 options > div {padding:0 0 10px 0}
 options > div:last-of-type { padding: 0 0 7px}
@@ -70,7 +75,7 @@ options > div:last-of-type { padding: 0 0 7px}
 debug {position: absolute; display: inline; margin: -2px 0 0 10px}
 
 /* button over toggle */
-e { padding:5px 10px; margin:0 5px; display: inline-block; position: relative;
+e { padding:5px 10px; margin:0 5px; display: inline-block;
     color: #fff; border: solid 2px #fff; background-color: #000;}
 e:hover { background-color: #696969FF}
 e.inv, e:active { color: #000; background-color: #fff; border: solid 2px #000}
@@ -80,7 +85,7 @@ e.deact { border: solid 2px #696969FF!important; color: #696969FF!important;
 e:first-of-type {margin: 0 4px 0 0}
 e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
 
-e t { display: flex; justify-content: center; z-index:10; position: relative}
+e t { display: flex; justify-content: center}
 
 cont th {text-align: left;}
 th, tr img {padding: 0; margin: -4px -2px}
@@ -114,13 +119,28 @@ render {position:absolute!important; overflow: hidden}
 #head, #body{position:absolute; width:calc(var(--imageW) * var(--columns))}
 #body{height:calc(var(--imageH) * var(--rows))}
 
-#weapon, #charm{
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated
-    top:0; left:0; z-index:1000; position:absolute; width:calc(25% * var(--scaler))}
+#hat {background-image: url("items/hat.png")}
+#boots {background-image: url("items/boots.png")}
+#charm {background-image: url("items/charm.png")}
+#wrist {background-image: url("items/ring.png")}
+#hip {background-image: url("items/hip.png")}
+#hat, #boots, #charm, #wrist, #hip{ width: 24px; height: 24px;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated; position:absolute}
+
+#weapon {background-image: url("items/weapon.png")}
+#shovel {background-image: url("items/shovel.png")}
+#torch {background-image: url("items/torch.png")}
+#weapon, #shovel, #torch { width: 24px; height: 24px;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated; position:absolute}
+#weapon, #charm{top:0; left:0; z-index:1000; position:absolute; width:24px}
 #charm {top:calc(1px)}
 
-#clothing e { white-space: nowrap; width: 8px}
-#clothing tr e { width: 35px; height:35px}
+#spell {background-image: url("items/hat.png")}
+#equipment {background-image: url("items/hat.png")}
+#food {background-image: url("items/hat.png")}
+#spell, #equipment, #food {
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated; position:absolute}
+
 
 /* TODO: UI CONTAINERS */
 
@@ -137,6 +157,9 @@ render {position:absolute!important; overflow: hidden}
     color: #fff; border: solid 2px #fff; background-color: #000}
 
 :root { --backgroundCol : 3; --backgroundColPad : 5px}
+
+#clothing e { width: 8px }
+#clothing tr e { width: 35px; height:35px}
 
 #backgrounds e {margin: 0 var(--backgroundColPad); padding:0;
     width:calc((var(--window2Width) / var(--backgroundCol)) - 11px)!important;

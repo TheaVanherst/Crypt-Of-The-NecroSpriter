@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styling.css">
         <script type="text/javascript" src="dataStorage.js"></script>
-        <script type="text/javascript" src="startUp.js"></script>
-        <script type="text/javascript" src="animation.js"></script>
+        <script type="text/javascript" src="generalFunctions.js"></script>
+        <script type="text/javascript" src="animationCalls.js"></script>
+        <script type="text/javascript" src="bindingFunctions.js"></script>
         <link rel="icon" type="image/png" href="/UI_Libraries/skull_small.png">
 
         <title>Crypt of the NecroSpriter</title>
@@ -81,6 +82,23 @@
                 <th><img src="UI_Libraries/border_corner3.png"></th>
             </tr>
         </table>
+        <table class="tb6">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
 
         <container class="tb1">
             <t>Render View</t>
@@ -91,12 +109,22 @@
                         <div id="danceFloor"></div>
                         <img id="foreground">
                         <div id="playerModel">
+                            <img id="spell">
+                            <img id="food">
+                            <img id="equipment">
+
+                            <div id="shovel"></div>
                             <div id="bodyContainer"><img id="body"></div>
                             <div id="headContainer"><img id="head"></div>
-                            <img class="invisible" id="hat">
-                            <img class="invisible" id="weapon">
-                            <img class="invisible" id="boots">
-                            <img class="invisible" id="charm">
+                            <div id="hat"></div>
+                            <div id="hip"></div>
+
+                            <div id="weapon"></div>
+                            <div id="special"></div>
+                            <div id="torch"></div>
+                            <div id="boots"></div>
+                            <div id="charm"></div>
+                            <div id="wrist"></div>
                     </div></div>
                 </render>
             </div>
@@ -105,8 +133,8 @@
                 Animation settings
                 <options id="renderSettings">
                     <div>
-                        <e id="danceButton" onclick="danceFloorBool = !danceFloorBool; floorMultiBool = false; multiplierFlip()">Dance Floor</e>
-                        <e id="multiplierButton" onclick="floorMultiBool = !floorMultiBool; danceFloorBool = false; multiplierFlip()">Dance Multiplier</e>
+                        <e id="danceButton" onclick="danceFloorBool = !danceFloorBool; floorMultiBool = false; multiplierFlip(this,0)">Dance Floor</e>
+                        <e id="multiplierButton" onclick="floorMultiBool = !floorMultiBool; danceFloorBool = false; multiplierFlip(this,1)">Dance Multiplier</e>
                         <e id="amplifiedButton" onclick="amplifiedToggle();">AMPLIFIED</e>
                         <e id="foregroundButton" onclick="foregroundToggle();">Foreground</e>
                     </div>
@@ -146,22 +174,28 @@
                 Armour / Weapon Slots
                 <options id="equipmentSlots">
                     <div>
-                        <e>Helmet</e>
-                        <e onclick="itemToggle('weapon',this)">Hand</e>
-                        <e onclick="itemToggle('ring',this)">wrist</e>
-                        <e>Leggings</e>
+                        <e onclick="itemToggle('hat', this)" id="hatButton">Helmet</e>
+                        <e onclick="itemToggle('weapon',this)" id="weaponButton">Weapon</e>
+                        <e onclick="itemToggle('wrist',this)" id="wristButton">wrist</e>
+                        <e onclick="itemToggle('boots',this)" id="bootsButton">Boots</e>
                     </div><div>
                         <e onclick="itemToggle('item',this)">Spell</e>
                         <e onclick="itemToggle('food',this)">Food</e>
                         <e onclick="itemToggle('item',this)">equipment</e>
-                        <e onclick="itemToggle('charm',this)">Charm</e>
+                        <e onclick="itemToggle('charm',this)" id="charmButton">Charm</e>
                     </div><t style="top:-5px; position:relative">Tools & Misc</t><div>
-                        <e>Shovel</e>
-                        <e>Torch</e>
-                        <e>Special</e>
+                        <e onclick="itemToggle('shovel',this)" id="shovelButton">Shovel</e>
+                        <e onclick="itemToggle('torch',this)" id="torchButton">Torch</e>
+                        <e onclick="itemToggle('hip',this)" id="hipButton">Hip</e>
+                        <e onclick="itemToggle('special',this)" id="specialButton">Special</e>
                 </div>
                 </options>
             </cont>
+        </container>
+
+        <container class="tb6">
+            Shield Controller
+            <cont></cont>
         </container>
 
         <container class="tb3">
@@ -197,7 +231,7 @@
         </container>
 
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v0.86</t><br>
+            <t>CRYPT OF THE NECROSPRITER v0.93</t><br>
             <t>designed by @Theavanherst</t><br><br>
         </div>
     </body>
