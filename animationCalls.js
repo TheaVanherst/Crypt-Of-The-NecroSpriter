@@ -1,10 +1,4 @@
 
-// todo : HTML button gen
-
-// todo : ==================
-// todo : ANIMATION SETTINGS
-// todo : ==================
-
 /// animation timing setup (this is going to get recoded)
 let ampMultiplier = 0, aniArrLength = 0;
 
@@ -18,7 +12,10 @@ const frameTypeToggle = () => { //this is to push the current frame times
         ampMultiplier = ampBool ? 1 : 0;
         $('#amplifiedDebug').textContent = ampBool ? "AMP" + ampMultiplier : "DIS"
         buttonTog($('#amplifiedButton'))
-        animationUpdate()},
+
+        $all('#body, #head').forEach(id => { // specific displacement for the character
+            id.style.marginLeft = (((aniOffsets[0][elapsed]) + (ampMultiplier * 4) - 1) * -framesize[1]) + 'px' })
+    },
 
     foregroundToggle = () => {
         foregroundBool = !foregroundBool
@@ -35,7 +32,7 @@ const frameTypeToggle = () => { //this is to push the current frame times
 // todo : ==========================
 
 // a bunch of presets to save work
-let start = new Date().getTime(), elapsed, floorID;
+let start = new Date().getTime(), elapsed = 0, floorID;
 
 const playReset = () => { // this deals with resetting the play button
         playTog = false; // forces animation to pause
@@ -66,22 +63,22 @@ const playReset = () => { // this deals with resetting the play button
         ampMultiplier = ampBool ? Math.round((aniOffsets[0][elapsed] / 1.35)) * KlarinettaMulti : 0 // this was about 5 lines of dense math FUCK YOU.
 
         animationUpdate()
-        $("#frame").textContent = (elapsed + 1)};
+        $("#frame").textContent = (elapsed + 1)},
 
-animationUpdate = () => {
-    $all('#hat, #boots, #wrist, #shovel, #weapon, #hip').forEach(id => {
-        id.style.backgroundPositionX = ((aniOffsets[0][elapsed] + 3) * -24) + 'px'})
+    animationUpdate = () => {
+        $all('#hat, #boots, #wrist, #shovel, #weapon, #hip').forEach(id => {
+            id.style.backgroundPositionX = ((aniOffsets[0][elapsed] + 3) * -24) + 'px'})
 
-    $('#shovel').style.top = -shovelOffsets[aniOffsets[0][elapsed] - 1] + 'px'
-    $('#torch').style.backgroundPositionX = ((characterFrames[currentCharacter[0]][currentCharacter[1]][11][3][elapsed] - 1) * -24) + 'px'
-    $('#charm').style.top = -(characterFrames[currentCharacter[0]][currentCharacter[1]][9][3][elapsed] - 2) + 'px'
+        $('#shovel').style.top = -shovelOffsets[aniOffsets[0][elapsed] - 1] + 'px'
+        $('#torch').style.backgroundPositionX = ((characterFrames[currentCharacter[0]][currentCharacter[1]][11][3][elapsed] - 1) * -24) + 'px'
+        $('#charm').style.top = -(characterFrames[currentCharacter[0]][currentCharacter[1]][9][3][elapsed] - 2) + 'px'
 
-    $all('#body, #head').forEach(id => { // specific displacement for the character
-        id.style.marginLeft = (((aniOffsets[0][elapsed]) + (ampMultiplier * 4) - 1) * -framesize[1]) + 'px' })};
+        $all('#body, #head').forEach(id => { // specific displacement for the character
+            id.style.marginLeft = (((aniOffsets[0][elapsed]) + (ampMultiplier * 4) - 1) * -framesize[1]) + 'px' })};
 
-// todo : ===============
-// todo : Floor Rendering
-// todo : ===============
+// todo : ================
+// todo : Render Functions
+// todo : ================
 
 const floorFlip = () => {
         $('#danceFloor').classList.remove('invisible')
@@ -103,16 +100,15 @@ const floorFlip = () => {
                 $("#"+danceButtons[i]).classList.remove("inv")}}
 
         if(danceMode[id]){floorFlip()}
-        else {floorHide()}}
-
-// todo : BPM divisional
+        else {floorHide()}},
 
     bpmUpdate = () => {
         bpm = document.getElementById("bpmSlider").value; // gets the bpm for the slider
-        let trackContainer = $('#trackContainer') // shorthand
-        trackContainer.innerHTML = '' // empties the current compatible tracks
         $('#bpmDebug').textContent = bpm; // sets the bpm from the slider value
         $('#bpm').textContent = bpm;
+
+        let trackContainer = $('#trackContainer') // shorthand
+        trackContainer.innerHTML = '' // empties the current compatible tracks
 
         let step = ((bpm - (100 - 5)) / 5) - 1; // uses the step to calculate the array placement
         for (let i = 0; i < songList[step].length; i++){ // grabs the songs in the array from the step calc
@@ -121,73 +117,62 @@ const floorFlip = () => {
             item.textContent = songList[step][i]; // sets text for each string in the array from @dataStorage
             let br = document.createElement('br'); // makes a break for the next entry in the for loop
 
-            trackContainer.appendChild(item).appendChild(br)}
-    } // appends to parent
+            trackContainer.appendChild(item).appendChild(br)}} // appends to parent
 
 // todo : ==================
-// todo : CHARACTER SETTINGS
+// todo : CHARACTER UPDATING
 // todo : ==================
 
-const animationResize = () =>  {
+const characterChange = () =>  { //simplification of the character change calling
     const player = $('#playerModel'), head = $('#head'), body = $('#body');
     let char = characterFrames[currentCharacter[0]];
-    framesize = [char[currentCharacter[1]][1][1], char[currentCharacter[1]][1][0]];
-    $("#characterDebug").textContent = currentCharacter[0]+""+currentCharacter[1]+":"+ char[currentCharacter[1]][0];
 
-    let src = dir + char[currentCharacter[1]][4];
-    head.src =  src + (currentCharacter[0] !== 2 ? "_heads.png" : "_head.png") + "?" + new Date().getTime();
-    body.src =  src + (currentCharacter[0] !== 2 ? "_armor_body.png" : "_body.png") + "?" + new Date().getTime();
-
-    $doc.style.setProperty('--imageW',framesize[1]+"px"); // todo: spritesheet settings
-    $doc.style.setProperty('--imageH',framesize[0]+"px");  // sets frame resolution
-    $doc.style.setProperty('--rows',char[currentCharacter[1]][2][0]); // sets spritesheet rows & coloumns for resize
-    $doc.style.setProperty('--columns',char[currentCharacter[1]][2][1]);
-
-    body.style.marginTop = -(framesize[0] * clothingCurrent) + "px";
-    activeRows = char[currentCharacter[1]][3];
-
-    $('#headContainer').style.marginTop = -char[currentCharacter[1]][3][0] + "px"; // corrects head vertically
-    player.style.marginTop = (24 + char[currentCharacter[1]][3][1]) - char[currentCharacter[1]][1][1] + "px"; // fixes vertical placement so they're all aligned
-    player.style.marginLeft = Math.floor((24 - char[currentCharacter[1]][1][0]) / 2) + "px"; // compensates for leg position
-
-    // TODO: CHARACTER DETAIL HANDLING
-
+    playerUpdate(player, head, body, char)
+    clothingUpdate(player, head, char);
     for (let i = 0; i < calls.length; i++){equipmentCall(i)}
-    if(char[currentCharacter[1]][11][4]){
-        $("#shovel").style.transform = "scale(1,-1)";
-    } else {$("#shovel").style.transform = "scaleX(1,1)"}
 
-    // TODO: CLOTHING HANDLING
-
-    head.classList.remove('invisible');
-    if(currentCharacter[0] === 2){
-        if(currentCharacter[1] === 2){
-            $('#head').classList.add('invisible')}}
-
-    for (let i = clothingCurrent; i < clothingData[0] - 1; i++){ // removes the deactivated tag to any applicable above // todo: handles clothing buttons
-        $('#clothing' + i)?.classList?.remove('deact')} // the amount of clothing the current char can have.
-    activeRows = characterFrames[currentCharacter[0]][currentCharacter[1]][2][0]; // current amount of clothing this character can have.
-
-    for (let i = activeRows; i < clothingData[0]; i++){ // removes clickability for layers of clothing not applicable to said character.
-        $('#clothing' + i)?.classList?.add('deact')}
-
-    if(clothingCurrent + 1 > activeRows){ //checks if the current clothing active is not applicable to the new character.
-        buttonAdjustment("#clothing",0, $('#clothing0'))
-        $('#clothingDebug').textContent = clothingCurrent}
-
-    $('#headContainer,#bodyContainer')?.classList?.remove('invisible') // todo: resets from nocturna batmode.
     animationUpdate()};
 
-    // TODO: EQUIPMENT HANDLING
+    playerUpdate = (p,h,b,c) => {
+        framesize = [c[currentCharacter[1]][1][1], c[currentCharacter[1]][1][0]];
+        $("#characterDebug").textContent = currentCharacter[0] + "" + currentCharacter[1] + ":" + c[currentCharacter[1]][0];
 
-const equipmentCall = (i) => {
-    let char = characterFrames[currentCharacter[0]],
-        id = 5 + i, idHash = '#'+calls[i][0];
+        // updates image sources on character change
+        let srcLink = currentCharacter[0] !== 2 ? ["_heads.png", "_armor_body.png"] : ["_head.png", "_body.png"],
+            src = dir + c[currentCharacter[1]][4];
+        srcLink = srcLink.map(i => i + "?" + new Date().getTime());
+        h.src = src + srcLink[0]; b.src = src + srcLink[1];
 
-    if(char[currentCharacter[1]][id][0]){ // checks hatbool from #datastorage
-        $(idHash+'Button')?.classList?.remove("deact")
-        $(idHash).style.margin = char[currentCharacter[1]][id][1] + 'px 0 0 ' + char[currentCharacter[1]][id][2] + 'px';}
-    else {
-        $(idHash+'Button')?.classList?.remove("inv") // disables button
-        $(idHash+'Button')?.classList?.add("deact")
-        $(idHash).classList.add("invisible")}} // makes hat invisible
+        //updates background image resolution setting calcs
+        $doc.style.setProperty('--imageW', framesize[1] + "px"); // todo: spritesheet settings
+        $doc.style.setProperty('--imageH', framesize[0] + "px");  // sets frame resolution
+        $doc.style.setProperty('--rows', c[currentCharacter[1]][2][0]); // sets spritesheet rows & coloumns for resize
+        $doc.style.setProperty('--columns', c[currentCharacter[1]][2][1]);
+
+        b.style.marginTop = -(framesize[0] * clothingCurrent) + "px";
+        h.parentNode.style.marginTop = -c[currentCharacter[1]][3][0] + "px"; // corrects head vertically
+        p.style.margin = ((24 + c[currentCharacter[1]][3][1]) - c[currentCharacter[1]][1][1] + "px") + " 0 0 " +
+            Math.floor((24 - c[currentCharacter[1]][1][0]) / 2) + "px";}, // fixes vertical placement so they're all aligned
+
+    clothingUpdate = (p,h,c) => {
+        activeRows = characterFrames[currentCharacter[0]][currentCharacter[1]][2][0]; // current amount of clothing this character can have.
+        for (let i = 0; i < clothingData[0]; i++){
+            $('#clothing' + i).setAttribute('class', i < activeRows ? '' : 'deact')} //disables buttons higher than the number of compatible rows
+
+        if(clothingCurrent + 1 > activeRows){ //checks if the current clothing active is not applicable to the new character.
+            buttonAdjustment("#clothing",0, $('#clothing0'))
+            $('#clothingDebug').textContent = clothingCurrent}
+
+        if(c[currentCharacter[1]][11][4]){
+            $("#torch").classList.toggle("flip")}}, // checks if torch needs to be flipped
+
+    equipmentCall = (i) => {
+        let char = characterFrames[currentCharacter[0]],
+            id = 5 + i, idHash = '#'+calls[i][0];
+
+        if(char[currentCharacter[1]][id][0]){ // checks hatbool from #datastorage
+            $(idHash+'Button')?.classList?.remove("deact")
+            $(idHash).style.margin = char[currentCharacter[1]][id][1] + 'px 0 0 ' + char[currentCharacter[1]][id][2] + 'px';}
+        else {
+            $(idHash+'Button').setAttribute('class', 'deact')
+            $(idHash).classList.add("invisible")}} // makes hat invisible
