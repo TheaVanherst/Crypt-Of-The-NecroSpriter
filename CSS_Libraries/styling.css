@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+:root{
+    --scaler : 10; --imageW: 0; --imageH: 0; --columns:0; --rows:0}
+
+/* TODO: WINDOW SIZE SETTINGS */
+
+body { margin: 0; padding: 0;
+    background-color: black; color:white;
+    font-family: 'Silkscreen', cursive;
+    letter-spacing: -2px; font-size:14px}
+
+#refreshButton > * {
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
+    width:14px; height: 14px; top:2px; position:relative }
+#refreshButton:active > * {
+    filter: invert(1);}
+#refreshButton { float: right }
+
+debug { position: absolute; display: inline; margin: -2px 0 0 10px; }
+
+/* button over toggle */
+e { padding:5px 10px; margin:0 5px; display: inline-block;
+    color: #fff; border: solid 2px #fff; background-color: #000; }
+e:hover { background-color: #696969FF}
+e.inv, e:active { color: #000; background-color: #fff; border: solid 2px #000}
+e.inv { border: solid 2px #fff} e.inv:active {border: solid 2px #000}
+e.deact { border: solid 2px #696969FF!important; color: #696969FF!important;
+    pointer-events: none!important;}
+e:first-of-type {margin: 0 4px 0 0}
+e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
+
+e t { display: flex; justify-content: center}
+
+/* TODO: UI CONTAINERS */
+
+.slider {height: 3px; background: #fff}
+.slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 8px; height: 24px; border-radius: 0;
+    background: #000; cursor: pointer; border: 2px solid #fff}
+#bpmSlider {width:calc(var(--window2Width) - 3px)}
+#scaleSlider {width:calc(var(--window3Width))}
+
+#trackContainer { padding:10px; margin:5px 0;
+    width:calc(var(--window2Width) - (12px * 2)); height: 90px;
+    color: #fff; border: solid 2px #fff; background-color: #000}
+
+:root { --backgroundCol : 3; --backgroundColPad : 5px}
+
+#shieldButton {top: 315px; }
+#shieldButton e:not(:first-of-type) { width: 52px; }
+
+#clothing e { width: 8px }
+#clothing tr e { width: 35px; height:35px}
+
+#backgrounds e {margin: 0 var(--backgroundColPad); padding:0;
+    width:calc((var(--window2Width) / var(--backgroundCol)) - 11px)!important;
+    background-size:200%; height:56px!important;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
+#backgrounds e:first-of-type {margin: 0 var(--backgroundColPad) 0 0}
+#backgrounds e:last-of-type {margin: 0 0 0 var(--backgroundColPad)}
+
+#backgrounds t {z-index: 10; padding: 0 7px 2px}
+#backgrounds e.inv t {background-color:#fff}
+#backgrounds e:active t {background-color:#000; color:#fff}
+#backgrounds e t {position: absolute}
+
+#backgrounds > div {vertical-align: top;
+    position: relative; display: inline-flex}
+
+.invisible { opacity:0!important}

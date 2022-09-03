@@ -1,0 +1,55 @@
+
+#logo { position: absolute; top: var(--tablePadding);
+    left: calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 9));}
+
+/* TODO: RENDER CSS & SCALING */
+
+#floor, #danceFloor, #foreground { position:absolute;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
+
+#floor, #danceFloor {
+    background-position: top left; left: 14.5px; top: -350px;
+    width: calc(72px * 10); height: calc(72px * 10); }
+#foreground { width:216px; margin: -5px 0 0 182.5px; }
+
+/* TODO: Character css */
+
+#headContainer, #bodyContainer, #playerModel,
+#head, #body, #hat, #boots, #charm, #wrist, #hip, #weapon, #shovel, #torch,
+#spell, #equipment, #item, #consumables, #shield { position:absolute;
+    image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
+
+#playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
+
+#bodyContainer {height: calc(var(--imageH) + 2px); width: calc(var(--imageW))}
+#headContainer {height: var(--imageH); width: var(--imageW)}
+#headContainer, #bodyContainer { float: left; overflow:hidden }
+
+#head, #body{width:calc(var(--imageW) * var(--columns))}
+#body{height:calc(var(--imageH) * var(--rows))}
+
+#hat {background-image: url("items/hat.png")}
+#boots {background-image: url("items/boots.png")}
+#charm {background-image: url("items/charm.png")}
+#wrist {background-image: url("items/ring.png")}
+#hip {background-image: url("items/hip.png")}
+#hat, #boots, #charm, #wrist, #hip{ width: 24px; height: 24px; }
+
+#weapon {background-image: url("items/weapon.png")}
+#shovel {background-image: url("items/shovel.png")}
+#torch {background-image: url("items/torch.png")}
+#weapon, #shovel, #torch { width: 24px; height: 24px; }
+#weapon, #charm{top:0; left:0; width:24px}
+#charm {top:calc(1px)}
+
+#consumables { top: 6px }
+#spell { left: 22px }
+#equipment { margin-top: -6px; left: 7px }
+#item { left: -7px }
+
+#shield { width: 24px; height: 24px; top: 4px;
+    position: absolute;
+    background-image: url("items/shield.png")}
+#special {z-index: 100;position:absolute}
+
+.flip { transform: scaleX(-1); background-position-x: 0.5px; }
