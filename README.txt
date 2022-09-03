@@ -40,8 +40,7 @@ if you want any assistance in using the tool, designing sprites or have any
 recommendations for the sprite renderer, contact me on Twitter or my discord TheaVanherst#1953.
 
                                                UPCOMING:
-
-- A sheild preview UI, and render preview
+                                               
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
 # A smaller preview window to accurately depict what the sprite looks like in game.
