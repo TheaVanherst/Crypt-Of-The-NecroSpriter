@@ -43,4 +43,3 @@ recommendations for the sprite renderer, contact me on Twitter or my discord The
                                                
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
-# A smaller preview window to accurately depict what the sprite looks like in game.
