@@ -16,7 +16,6 @@ const itemArrayXYSize = () => {
         $("#" + item)?.classList?.toggle("invisible")
 
         $("#consumables").style.margin = $('#boots').style.margin
-        console.log($('#boots').style.marginLeft)
         for (let i = 0; i < miscCalls.length; i++){
             if (miscCalls[i].indexOf(item) >= 0) {
                 $('#' + item).style.top = itemYIndividualPos(item)
@@ -43,3 +42,34 @@ const itemArrayXYSize = () => {
                 $(idHash+'Button').setAttribute('class', 'deact')
                 $(idHash).classList.add("invisible");}}} // makes hat invisible
 
+document.addEventListener('DOMContentLoaded', () => {
+    $all("#urlData input").forEach(function(e) { //assigned on page load to text boxes
+        backgroundUrlUpdate(e) //pushes for new background url based on cache data
+        e.onkeydown = function () { search(this) };})}); // assigns functions to keydown, so I don't have to in the html
+
+const search = (e) => {
+        if(event.key === 'Enter') { //assigned to text boxes
+            backgroundUrlUpdate(e)}}, //push for the new url
+
+    backgroundUrlUpdate = (e) => {
+        let image = new Image(); // generates a new test image
+        image.src = e.value + ".png"; //assigns url to test image
+
+        image.onload = function () { // on test image load
+            let idStrip = (e.id).replace("Url",""); //strip down "hat" from the button ID
+
+            if(e.value !== undefined) {
+                let forms1 = document.querySelectorAll("#playerModel div");
+                [].forEach.call(forms1, i => {
+                    if (idStrip === i.id) {
+                        $('#' + idStrip).style.backgroundImage = "url('" + e.value + ".png')";}
+                    return false})
+
+                let forms2 = document.querySelectorAll("#playerModel img");
+                [].forEach.call(forms2, i => {
+                    if (idStrip === i.id) {
+                        $('#' + idStrip).src = e.value + ".png";}
+                    return false});
+            }
+        }
+}

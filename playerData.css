@@ -1,6 +1,8 @@
 
+body {cursor: url('UI_Libraries/weaponglow_dagger.png'), auto}
+
 #logo { position: absolute; top: var(--tablePadding);
-    left: calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 9));}
+    left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}
 
 /* TODO: RENDER CSS & SCALING */
 
@@ -28,16 +30,8 @@
 #head, #body{width:calc(var(--imageW) * var(--columns))}
 #body{height:calc(var(--imageH) * var(--rows))}
 
-#hat {background-image: url("items/hat.png")}
-#boots {background-image: url("items/boots.png")}
-#charm {background-image: url("items/charm.png")}
-#wrist {background-image: url("items/ring.png")}
-#hip {background-image: url("items/hip.png")}
 #hat, #boots, #charm, #wrist, #hip{ width: 24px; height: 24px; }
 
-#weapon {background-image: url("items/weapon.png")}
-#shovel {background-image: url("items/shovel.png")}
-#torch {background-image: url("items/torch.png")}
 #weapon, #shovel, #torch { width: 24px; height: 24px; }
 #weapon, #charm{top:0; left:0; width:24px}
 #charm {top:calc(1px)}
@@ -46,6 +40,7 @@
 #spell { left: 22px }
 #equipment { margin-top: -6px; left: 7px }
 #item { left: -7px }
+#spell, #equipment, #item {background-repeat: no-repeat}
 
 #shield { width: 24px; height: 24px; top: 4px;
     position: absolute;

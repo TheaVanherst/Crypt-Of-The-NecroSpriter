@@ -108,6 +108,23 @@
                 <th><img src="UI_Libraries/border_corner3.png"></th>
             </tr>
         </table>
+        <table class="tb7">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
 
         <container class="tb1">
             <t>Render View</t>
@@ -121,15 +138,19 @@
                             <div id="shield"></div>
 
                             <div id="consumables">
-                                <img id="item" src="items/item.png">
-                                <img id="equipment" src="items/equipment.png">
-                                <img id="spell" src="items/spell.png"></div>
+                                <img id="item">
+                                <img id="equipment">
+                                <img id="spell"></div>
 
                             <div id="shovel"></div>
                             <div id="boots"></div>
-                            <div id="bodyContainer"><img id="body"></div>
+
+                            <div id="bodyContainer">
+                                <img id="body"></div>
                             <div id="charm"></div>
-                            <div id="headContainer"><img id="head"></div>
+                            <div id="headContainer">
+                                <img id="head"></div>
+
                             <div id="hat"></div>
                             <div id="hip"></div>
 
@@ -144,7 +165,7 @@
 
             <cont>
                 Animation settings
-                <options id="renderSettings">
+                <options>
                     <div>
                         <e id="danceButton" onclick="multiplierFlip(this,0)">Dance Floor</e>
                         <e id="multiplierButton" onclick="multiplierFlip(this,1)">Multiplier</e>
@@ -164,7 +185,6 @@
                 </options>
             </cont>
         </container>
-
         <container class="tb2">
             Main Render Settings
             <cont>
@@ -197,16 +217,16 @@
                         <e onclick="itemToggle('ring',this)" id="ringButton">Ring</e>
                         <e onclick="itemToggle('boots',this)" id="bootsButton">Boots</e>
                     </div><div>
-                    <e onclick="itemToggle('spell',this)">Spell</e>
-                    <e onclick="itemToggle('item',this)">Item</e>
-                    <e onclick="itemToggle('equipment',this)">equipment</e>
-                    <e onclick="itemToggle('charm',this)" id="charmButton">Charm</e>
-                </div><t style="top:-5px; position:relative">Tools & Misc</t><div>
-                    <e onclick="itemToggle('shovel',this)" id="shovelButton">Shovel</e>
-                    <e onclick="itemToggle('torch',this)" id="torchButton">Torch</e>
-                    <e onclick="itemToggle('hip',this)" id="hipButton">Hip</e>
-                    <e onclick="itemToggle('special',this)" id="specialButton">Special</e>
-                </div>
+                        <e onclick="itemToggle('spell',this)">Spell</e>
+                        <e onclick="itemToggle('item',this)">Item</e>
+                        <e onclick="itemToggle('equipment',this)">equipment</e>
+                        <e onclick="itemToggle('charm',this)" id="charmButton">Charm</e>
+                    </div><t style="top:-5px; position:relative">Tools & Misc</t><div>
+                        <e onclick="itemToggle('shovel',this)" id="shovelButton">Shovel</e>
+                        <e onclick="itemToggle('torch',this)" id="torchButton">Torch</e>
+                        <e onclick="itemToggle('hip',this)" id="hipButton">Hip</e>
+                        <e onclick="itemToggle('special',this)" id="specialButton">Special</e>
+                    </div>
                 </options>
 
                 Shield Controller
@@ -232,8 +252,49 @@
                 <div>current scale: <t id="scale">N/a</t></div></div>
         </container>
 
+        <container class="tb7" id="urlData">
+            URL Directory Data
+            <cont>
+                <div>Helmet<br>
+                    <input type="text" id="hatUrl" placeholder="items/hat" value="items/hat"></div>
+            </cont><cont>
+                <div>Weapon<br>
+                    <input type="text" id="weaponUrl" placeholder="items/weapon" value="items/weapon"></div>
+            </cont><cont>
+                <div>Ring<br>
+                    <input type="text" id="ringUrl" placeholder="items/ring" value="items/ring"></div>
+            </cont><cont>
+                <div>Boots<br>
+                    <input type="text" id="bootsUrl" placeholder="items/boots" value="items/boots"></div>
+            </cont><cont>
+                <div>Spell<br>
+                    <input type="text" id="spellUrl" placeholder="items/spell" value="items/spell"></div>
+            </cont><cont>
+                <div>Item<br>
+                    <input type="text" id="itemUrl" placeholder="items/item" value="items/item"></div>
+            </cont><cont>
+                <div>Equipment<br>
+                    <input type="text" id="equipmentUrl" placeholder="items/equipment" value="items/equipment"></div>
+            </cont><cont>
+                <div>Charm<br>
+                    <input type="text" id="charmUrl" placeholder="items/charm" value="items/charm"></div>
+            </cont><cont>
+                <div>Shovel<br>
+                    <input type="text" id="shovelUrl" placeholder="items/shovel" value="items/shovel"></div>
+            </cont><cont>
+                <div>Torch<br>
+                    <input type="text" id="torchUrl" placeholder="items/torch" value="items/torch"></div>
+            </cont><cont>
+                <div>Hip<br>
+                    <input type="text" id="hipUrl" placeholder="items/hip" value="items/hip"></div>
+            </cont><cont>
+                <div>Shield<br>
+                    <input type="text" id="shieldUrl" placeholder="items/shield" value="items/shield"></div>
+            </cont>
+        </container>
+
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v0.97</t><br>
+            <t>CRYPT OF THE NECROSPRITER v0.98</t><br>
             <t>designed by @Theavanherst</t><br><br>
             <t id="bpmDebug">N/a</t>BPM/<t id="floorDebug">N/a</t>:<t id="danceDebug">N/a</t>:<t id="frame">N/a</t><br>
             <t id="characterDebug">N/a</t>x<t id="amplifiedDebug">N/a</t>/C:<t id="clothingDebug">N/a</t>/F:<t id="foregroundDebug">N/a</t>
