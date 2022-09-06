@@ -25,7 +25,10 @@ let clothingData = [16,8];
 let calls = [["hat", false],["weapon", false],["ring", false],["boots", false],["charm", false],["shovel", false],["torch", false],["hip", false],["special", false]],
     miscCalls = [["spell", false],["equipment", false],["item", false]]
 // these store the names to be called when updating url data, and refer to the table below in the order displayed below.
-// These all co-align with the buttons on the UI, it's just the fact I can't be bothered to write code to autogen.
+
+let callsUrl = ["hat","weapon","ring","boots","charm","shovel","torch","hip","special"],
+    miscCallsUrl = ["spell","equipment","item"]
+// these store the default URLS on page load, change these and these will load based on directory.
 
 // anyway, just change the boolean to false or true depending on if you want it displayed on page load.
 

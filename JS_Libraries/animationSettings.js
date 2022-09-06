@@ -42,11 +42,12 @@ const frameTypeToggle = () => { //this is to push the current frame times
         else {floorHide()}};
 
 const urlUpdate = () => {
+    bodyUrlUpdate($('#head'),$('#body'))
     for (let i = 0; i < calls.length; i++) {
         if(calls[i][0] !== "special") {
-            $('#' + calls[i][0]).style.backgroundImage = "url('items/" + calls[i][0] + ".png?" + Date.now() + "')"; }}
+            $('#' + calls[i][0]).style.backgroundImage = "url('items/" + callsUrl[i] + ".png?" + Date.now() + "')"; }}
     for (let i = 0; i < miscCalls.length; i++) {
-        $('#' + miscCalls[i][0]).style.backgroundImage = "url('items/" + miscCalls[i][0] + ".png?" + Date.now() + "')"; }};
+        $('#' + miscCalls[i][0]).style.backgroundImage = "url('items/" + miscCallsUrl[i] + ".png?" + Date.now() + "')"; }};
 
 // todo: SCROLL FUNCTIONALITY
 

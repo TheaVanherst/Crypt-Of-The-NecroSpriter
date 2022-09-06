@@ -62,14 +62,25 @@ const search = (e) => {
                 let forms1 = document.querySelectorAll("#playerModel div");
                 [].forEach.call(forms1, i => {
                     if (idStrip === i.id) {
-                        $('#' + idStrip).style.backgroundImage = "url('" + e.value + ".png')";}
+                        $('#' + idStrip).style.backgroundImage = "url('" + e.value + ".png?" + Date.now() + "')";}
                     return false})
 
                 let forms2 = document.querySelectorAll("#playerModel img");
                 [].forEach.call(forms2, i => {
                     if (idStrip === i.id) {
-                        $('#' + idStrip).src = e.value + ".png";}
+                        $('#' + idStrip).src = e.value + ".png?" + Date.now();}
                     return false});
             }
-        }
-}
+        }},
+
+    bodyUrlUpdate = (h,b) => {
+        let cd = characterFrames[currentCharacter[0]][currentCharacter[1]],
+            srcLink = currentCharacter[0] !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"],
+            src = dir + cd[4];
+        srcLink = srcLink.map(i => i + ".png?" + new Date().getTime());
+
+        if(!cd[14]){ampBool = false
+            $("#amplifiedButton").setAttribute('class', 'deact')}
+        h.src = src + (cd[14] ? srcLink[0] : srcLink[1])
+        b.src = src + srcLink[1]
+    }

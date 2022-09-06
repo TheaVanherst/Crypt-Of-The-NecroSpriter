@@ -109,15 +109,7 @@ const characterChange = () =>  { //simplification of the character change callin
     playerUpdate = (p,h,b,c,cd,s) => {
         framesize = [cd[1][1], cd[1][0]];
         // updates image sources on character change
-        let srcLink = currentCharacter[0] !== 2 ? ["_heads.png", "_armor_body.png"] : ["_head.png", "_body.png"],
-            src = dir + cd[4];
-        srcLink = srcLink.map(i => i + "?" + new Date().getTime());
-
-        if(!cd[14]){ampBool = false
-            $("#amplifiedButton").setAttribute('class', 'deact')}
-        h.src = src + (cd[14] ? srcLink[0] : srcLink[1])
-        b.src = src + srcLink[1];
-
+        bodyUrlUpdate(h,b)
         //updates background image resolution setting calcs
         $doc.style.setProperty('--imageW', framesize[1] + "px"); // todo: spritesheet settings
         $doc.style.setProperty('--imageH', framesize[0] + "px");  // sets frame resolution
