@@ -16,12 +16,16 @@ body {cursor: url('UI_Libraries/weaponglow_dagger.png'), auto}
 
 /* TODO: Character css */
 
-#headContainer, #bodyContainer, #playerModel,
-#head, #body, #hat, #boots, #charm, #wrist, #hip, #weapon, #shovel, #torch,
+#headContainer, #bodyContainer, #playerModel, #shadow,
+#head, #body, #hat, #boots, #charm, #ring, #hip, #weapon, #shovel, #torch,
 #spell, #equipment, #item, #consumables, #shield { position:absolute;
     image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
 
 #playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
+#shadow {
+    left:277.5px; top:73px;
+    width: 24px; height: 27px;
+}
 
 #bodyContainer {height: calc(var(--imageH) + 2px); width: calc(var(--imageW))}
 #headContainer {height: var(--imageH); width: var(--imageW)}
@@ -30,7 +34,7 @@ body {cursor: url('UI_Libraries/weaponglow_dagger.png'), auto}
 #head, #body{width:calc(var(--imageW) * var(--columns))}
 #body{height:calc(var(--imageH) * var(--rows))}
 
-#hat, #boots, #charm, #wrist, #hip{ width: 24px; height: 24px; }
+#hat, #boots, #charm, #ring, #hip{ width: 24px; height: 24px; }
 
 #weapon, #shovel, #torch { width: 24px; height: 24px; }
 #weapon, #charm{top:0; left:0; width:24px}

@@ -1,86 +1,67 @@
 
-// todo : ================
-// todo : ITEM POSITIONING
-// todo : ================
+const itemToggle = (e) => {
+        let id = e.id
+        buttonTog($("#"+id));
+        id = id.replace("Button","");
 
-const itemArrayXYSize = () => {
-    for (let i = 0; i < miscCalls.length; i++){
-        let item = $("#" + miscCalls[i][0])
-        item.style.width = item.naturalWidth
-        item.style.height = item.naturalHeight}},
+        $("#" + id).src = $("#" + id).src + "?" + new Date().getTime();
+        $("#" + id)?.classList?.toggle("invisible");
 
-    itemToggle = (item, e) => {
-        buttonTog(e)
-
-        $("#" + item).src = $("#" + item).src + "?" + new Date().getTime()
-        $("#" + item)?.classList?.toggle("invisible")
-
-        $("#consumables").style.margin = $('#boots').style.margin
-        for (let i = 0; i < miscCalls.length; i++){
-            if (miscCalls[i].indexOf(item) >= 0) {
-                $('#' + item).style.top = itemYIndividualPos(item)
-                return}}
-    },
+        $("#consumables").style.margin = $('#boots').style.margin;
+        itemYPos()},
 
     itemYPos = () => {
-        $('#spell').style.top = -($("#spell").naturalHeight) - equipmentOffsets[0][floatInt] + 'px'
-        $('#item').style.top = -($("#item").naturalHeight) - equipmentOffsets[1][floatInt] + 'px'
-        $('#equipment').style.top = -($("#equipment").naturalHeight) - equipmentOffsets[2][floatInt] + 'px'},
+        $('#spell').style.top = -($("#spell").naturalHeight) - equipmentOffsets[0][equipmentFloatInt] + 'px';
+        $('#item').style.top = -($("#item").naturalHeight) - equipmentOffsets[1][equipmentFloatInt] + 'px';
+        $('#equipment').style.top = -($("#equipment").naturalHeight) - equipmentOffsets[2][equipmentFloatInt] + 'px';},
 
-    itemYIndividualPos = (i) => {
-        let t = i === "spell" ? 0 : i === "item" ? 1 : i === "equipment" ? 2 : undefined
-        return -($('#'+i).naturalHeight) - equipmentOffsets[t][floatInt] + 'px'},
-
-    equipmentCall = (c) => {
-        for (let i = 0; i < calls.length; i++){
-            let id = 5 + i, idHash = '#'+calls[i][0];
-
-            if(c[currentCharacter[1]][id][0]){ // checks hatbool from #datastorage
-                $(idHash+'Button')?.classList?.remove("deact")
-                $(idHash).style.margin = c[currentCharacter[1]][id][1] + 'px 0 0 ' + c[currentCharacter[1]][id][2] + 'px';}
-            else {
-                $(idHash+'Button').setAttribute('class', 'deact')
-                $(idHash).classList.add("invisible");}}} // makes hat invisible
+    equipmentCall = () => {
+        for (let key in itemData){
+            let item = itemData[key].name;
+            if(currentObject[item] !== undefined){
+                if(currentObject[item].bool){ // checks hatbool from #datastorage
+                    $('#'+item+'Button')?.classList?.remove("deact");
+                    $('#'+item).style.margin = currentObject[item].offset.top + 'px 0 0 ' + currentObject[item].offset.left + 'px';}
+                else {
+                    $('#'+item+'Button').setAttribute('class', 'deact');
+                    $('#'+item).classList.add("invisible");}}
+        }} // makes hat invisible
 
 document.addEventListener('DOMContentLoaded', () => {
-    $all("#urlData input").forEach(function(e) { //assigned on page load to text boxes
-        backgroundUrlUpdate(e) //pushes for new background url based on cache data
-        e.onkeydown = function () { search(this) };})}); // assigns functions to keydown, so I don't have to in the html
+    $all("#urlData input").forEach((e) => { //assigned on page load to text boxes
+        e.onkeydown = (a) => { search(a) };})}); // assigns functions to keydown, so I don't have to in the html
 
 const search = (e) => {
-        if(event.key === 'Enter') { //assigned to text boxes
-            backgroundUrlUpdate(e)}}, //push for the new url
+        if(e.key === 'Enter') { //assigned to text boxes
+            let image = new Image(), // generates a new test image
+                item = e.target;
 
-    backgroundUrlUpdate = (e) => {
-        let image = new Image(); // generates a new test image
-        image.src = e.value + ".png"; //assigns url to test image
+            image.src = item.value + ".png";
+            image.onload = () => { // on test image load
+                let idStrip = (item.id).replace("Url",""); //strip down "hat" from the button ID
 
-        image.onload = function () { // on test image load
-            let idStrip = (e.id).replace("Url",""); //strip down "hat" from the button ID
+                if(item.value !== undefined) {
+                    let forms1 = document.querySelectorAll("#playerModel div");
+                    [].forEach.call(forms1, i => {
+                        if (idStrip === i.id) {
+                            $('#' + idStrip).style.backgroundImage = "url('" + item.value + ".png?" + Date.now() + "')";}
+                        return false;})
 
-            if(e.value !== undefined) {
-                let forms1 = document.querySelectorAll("#playerModel div");
-                [].forEach.call(forms1, i => {
-                    if (idStrip === i.id) {
-                        $('#' + idStrip).style.backgroundImage = "url('" + e.value + ".png?" + Date.now() + "')";}
-                    return false})
-
-                let forms2 = document.querySelectorAll("#playerModel img");
-                [].forEach.call(forms2, i => {
-                    if (idStrip === i.id) {
-                        $('#' + idStrip).src = e.value + ".png?" + Date.now();}
-                    return false});
-            }
-        }},
+                    let forms2 = document.querySelectorAll("#playerModel img");
+                    [].forEach.call(forms2, i => {
+                        if (idStrip === i.id) {
+                            $('#' + idStrip).src = item.value + ".png?" + Date.now();}
+                        return false});}}}},
 
     bodyUrlUpdate = (h,b) => {
-        let cd = characterFrames[currentCharacter[0]][currentCharacter[1]],
-            srcLink = currentCharacter[0] !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"],
-            src = dir + cd[4];
+        let srcLink = currentObject.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"],
+            srcPush = dir + currentObject.settings.fileUrl;
         srcLink = srcLink.map(i => i + ".png?" + new Date().getTime());
 
-        if(!cd[14]){ampBool = false
-            $("#amplifiedButton").setAttribute('class', 'deact')}
-        h.src = src + (cd[14] ? srcLink[0] : srcLink[1])
-        b.src = src + srcLink[1]
+        if(currentObject.settings.head){ampBool = false
+            $("#amplifiedButton").setAttribute('class', 'deact');
+            h.src = srcPush + srcLink[0];}
+        else {
+            h.src = srcPush + srcLink[1];}
+        b.src = srcPush + srcLink[1];
     }

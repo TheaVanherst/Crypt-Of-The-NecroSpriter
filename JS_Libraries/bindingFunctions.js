@@ -1,6 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
-    $("#ani, #frame").value = frameDef;
     $("#bpmSlider").oninput = () => bpmUpdate();
     $("#scaleSlider").oninput = () => scaleUpdate();
     //$all('body e').forEach(id => {id.onclick = () => buttonTog(id)})
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 // this disables the default dance floor without the multiplier.
 
                 $('#floor').style.backgroundImage = this.style.backgroundImage; //updates the render image.
-                this.children[0].textContent = $('#floorDebug').textContent = overlayTileSets[e][i][[0]]; //updates the text on the image when clicked on
+                this.children[0].textContent = overlayTileSets[e][i][[0]]; //updates the text on the image when clicked on
 
                 $all('#backgrounds e').forEach(id => {id.classList.remove("inv")}); //removes all buttons from being enabled on mouse press
                 this?.classList?.add('inv')}
@@ -55,41 +54,39 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
 // todo : CHARACTER CHANGER
 // todo : =================
 
+let currentObject = {};
+
 document.addEventListener('DOMContentLoaded', () => { //function mounting on page load
-    const parent = $('#characterSelect')
-    for (let e = 0; e < characterFrames.length; e++) { //loops through DLC array types
-        parent.appendChild(createButton("t",characterFrames[e][0][0])) //prints what the character is from
-        parent.appendChild(createButton("options")) //container for character DLC types
-        let child = parent.getElementsByTagName('options')[e] //shorthand for newly made child.
+    const parent = $('#characterSelect'),
+        dlcCount = mapItem("dlc",true,characterData),
+        characterList = mapItem("name",false,characterData);
 
-        for(let i = 0; i < (characterFrames[e].length) - 1; i++) {
-            //this gets the placement of the character in the default array if a name is typed.
-            currentCharacter = currentCharacter.indexOf(characterFrames[e][i][0]) !== -1 ? [e,i] : currentCharacter
+    for(let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++){
+        parent.appendChild(createButton("t",dlcTypes[i])) //prints what the character is from
+        parent.appendChild(createButton("options"))} //container for character DLC types
 
-            child.appendChild(createButton('e',characterFrames[e][i + 1][0])).onclick = function () {
-                currentCharacter = [e,i + 1];
-                KlarinettaMulti = currentCharacter[0] == 2 ? currentCharacter[1] == 3 ? 2 : 1 : 1
+    for (let key in characterData) {
+        let currentCharacter = characterList[key];
 
-                if(currentCharacter[0] === 2 && currentCharacter[1] === 2){ //CHAUNTER
-                    ampBool = true; amplifiedToggle(); //this has to be the opposite, just so I can call the function and it do the work for me.
-                    $("#amplifiedButton").setAttribute('class', 'deact')}
-                else {$("#amplifiedButton")?.classList?.remove("deact")}
+        parent.getElementsByTagName('options')[dlcCount[key]]
+            .appendChild(createButton('e', currentCharacter, currentCharacter)).onclick = function () {
 
-                characterChange();
-                itemYPos(); // this is needed as the positioning is based on information relative to the character.
+            currentObject = {}
+            currentObject = _.merge({}, defaultData, getUser(currentCharacter,characterData))
+            characterChange(); itemYPos(); // this is needed as the positioning is based on information relative to the character.
 
-                $('container.tb3 options e.inv')?.classList?.remove('inv') //deactivates current buttons
-                $('#clothing' + clothingCurrent).classList.add("inv")
-                buttonTog(this)}
-        }}
-    parent.getElementsByTagName('options')[currentCharacter[0]].children[currentCharacter[1] - 1].classList?.add('inv')})
+            if(currentObject.name === "Chaunter"){chaunterMode()}
+
+            $('container.tb3 options e.inv')?.classList?.remove('inv') //deactivates current buttons
+            buttonTog($("#clothing" + clothingCurrent))
+            buttonTog(this)}}})
 
 // todo : ================
 // todo : CLOTHING CHANGER
 // todo : ================
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
-    const clothing = $('#clothing'), clothingDebug = $('#clothingDebug');
+    const clothing = $('#clothing');
 
     for (let e = 0; e < Math.ceil(clothingData[0] / clothingData[1]); e++){ //generates button rows
         clothing.appendChild(createButton("div")); //creates the containing box for each row
@@ -105,60 +102,46 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             divS.children[i].onclick = function () {   // attach event listener individually
                 buttonAdjustment("#clothing", cur, this)
 
-                if(currentCharacter[0] === 1 && currentCharacter[1] === 1){ // Nocturna
-                    if(i === 6 && e === 1){ //checks if clothing set 15 // bat mode
-                        if(ampBool){amplifiedToggle()} // disable amp
-                        $('#headContainer').classList.add('invisible')
-                        $("#amplifiedButton").setAttribute('class', 'deact')
-                        for (let e = 0; e < calls.length; e++) {
-                            $("#"+calls[e][0]+"Button").setAttribute('class', 'deact')}}
-                    else {
-                        for (let e = 0; e < calls.length; e++) {
-                            $("#"+calls[e][0]+"Button").classList.remove('deact')}}
-
-                    for (let i = 0; i < calls.length; i++) {
-                        $("#"+calls[i][0]+"Button").style.backgroundPositionX = ((aniOffsets[0][elapsed] + 3) *
-                            (calls[i][0] === "special" ? -27 : -24) ) + 'px'}
-                } // makes amp button inactive
-                else {
-                    $("#amplifiedButton")?.classList?.remove("deact")} // resets the amp button if the current character is Nocturna
-
-                clothingDebug.textContent = cur + 1}
+                if(currentObject.name === "Nocturna"){batMode()} // makes amp button inactive
+                else {$("#amplifiedButton")?.classList?.remove("deact")}
+            } // resets the amp button if the current character is Nocturna
         }}
 }, false);
 
-
+let shieldPos = 2
 document.addEventListener('DOMContentLoaded', () => {
-    const parent = $('#shieldSettings'), shield = $('#shield'),
-        directions = [["Up","Down","Right"],[2,4,1]],
-        dimensions = [[-9,0,0],[9,0,10],[0,16,10]],
-        cur = directions[0]
+
+    const shieldUpdate = () => {
+        style("#shield") //sets the default shield position
+            .backgroundPositionX(24 * (directions[1][shieldPos] - 1) + "px")
+            .margin(dimensions[shieldPos][0] + "px 0 0 " + dimensions[shieldPos][1] + "px")
+            .zIndex(dimensions[shieldPos][2])}
+
+    const parent = $('#shieldSettings'),
+        directions = [["Up","Down","Right"],[2,4,1]], //position title, offset for the spritesheet.
+        dimensions = [[-9,0,0],[9,0,10],[0,16,10]]; //offsets for the shield placement (Y,X,Z-index)
 
     for (let i = 0; i < directions[0].length; i++) {
-        parent.appendChild(createButton("e",cur[i],"shield"+cur[i]))
+        parent.appendChild(createButton("e",directions[0][i],"shield"+directions[0][i]))
         parent.children[i + 1].onclick = function() {
-
-            for (let i = 0; i < cur.length; i++) {
-                $("#shield" + cur[i]).classList.remove("inv"); }
+            $("#shield" + directions[0][shieldPos]).classList.remove("inv");
+            shieldPos = directions[0].indexOf(this.id.replace("shield",""));
             buttonTog(this)
 
             if(this.className.indexOf("inv") > -1){
                 $("#shield")?.classList?.remove("invisible");
                 $("#shieldButton")?.classList?.add("inv");}
 
-            shield.style.display = "block"
-            shield.style.backgroundPositionX = 24 * (directions[1][i] - 1) + "px";
-            shield.style.margin = dimensions[i][0] + "px 0 0 " + dimensions[i][1] + "px";
-            shield.style.zIndex = dimensions[i][2]
-        }
-    }
+            shieldUpdate()}}
 
-    $("#shieldButton").onclick = function() {
+    $("#shieldButton").onclick = function () {
+        $("#shield"+directions[0][shieldPos])?.classList?.add("inv");
         if(this.className.indexOf("inv") > -1){
-            $("#shield").style.display = "none"
-            for (let i = 0; i < cur.length; i++) {
-                $("#shield" + cur[i]).classList.remove("inv"); }}
+            $("#shield")?.classList?.add("invisible");
+            for (let i = 0; i < directions[0].length; i++) {
+                $("#shield" + directions[0][i]).classList.remove("inv"); }}
         else {
-            $("#shield").style.display = "block"}
-        buttonTog(this);}
-});
+            $("#shield")?.classList?.remove("invisible");}
+        buttonTog(this);
+    }
+})

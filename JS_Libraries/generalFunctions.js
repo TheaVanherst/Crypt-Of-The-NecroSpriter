@@ -2,31 +2,35 @@
 // just some presets to save my tiny ape brain some time later
 const $doc = document.documentElement,
     $ = document.querySelector.bind(document),
-    $all = document.querySelectorAll.bind(document),
-    frameDef = getComputedStyle($doc).getPropertyValue('--frameDef');
-
-// todo : ====================
-// todo : BUTTON FUNCTIONALITY
-// todo : ====================
+    $all = document.querySelectorAll.bind(document);
 
 const createButton = (css,text,id) => {
-        let item = (document.createElement(css))
-        if(text !== "" && text !== undefined){item.textContent = text}
-        if(id !== "" && id !== undefined){item.id = id}
+        let item = (document.createElement(css));
+        if(text !== "" && text !== undefined){item.textContent = text;}
+        if(id !== "" && id !== undefined){item.id = id;}
     return item },
 
     buttonAdjustment = (button, newVal, newButton) => {
-        $all(button + " e").forEach(id => {id?.classList?.remove('inv')})
+        $all(button + " e").forEach(id => {id?.classList?.remove('inv')});
         clothingCurrent = newVal;
-        $('#body').style.marginTop = -(framesize[0] * newVal) + "px"
-        $('#headContainer').classList.remove('invisible') //compensates for nocturna
-        buttonTog(newButton)},
+        $('#body').style.marginTop = -(currentObject.settings.resolution.height * newVal) + "px";
+        $('#headContainer').classList.remove('invisible'); //compensates for nocturna
+        buttonTog(newButton);},
 
     buttonTog = (e) => {
     e?.classList?.toggle('inv')},
 
     arrayShift = (e) => {
-        e.unshift(e.pop())}
+        e.unshift(e.pop());},
+
+    getUser = (id,data) => {
+        return data.find(d => d.name === id);},
+
+    mapItem = (id,bool,data) => {
+        return Object.keys(data).map((k) => {
+            if(bool){return parseInt(data[k][id]);}
+            else {return data[k][id];}
+        })};
 
 let styleProxy = {
     get: (object, property) => {

@@ -74,6 +74,10 @@ container.tb6, container.tb6 options { width:var(--window2Width) }
 .tb7 .top img, .tb7 {width:calc(var(--window7Width) - 40px + (var(--tablePadding) * 2))}
 container.tb7, container.tb7 options { width:var(--window7Width) }
 
+.tb7#urlData > div {
+    padding: 0 0 10px 0
+}
+
 .footer {position:absolute;
     left:calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 10));
     top:calc(var(--window3Height) + var(--window4Height) + 130px + var(--logoDesign))}

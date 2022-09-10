@@ -10,44 +10,40 @@ const frameTypeToggle = () => { //this is to push the current frame times
     amplifiedToggle = () => {
         ampBool = !ampBool
         ampMultiplier = ampBool ? 1 : 0;
-        $('#amplifiedDebug').textContent = ampBool ? "AMP" + ampMultiplier : "DIS"
         buttonTog($('#amplifiedButton'))
 
         $all('#body, #head').forEach(id => { // specific displacement for the character
-            id.style.marginLeft = (((aniOffsets[0][elapsed]) + (ampMultiplier * 4) - 1) * -framesize[1]) + 'px' })},
+            id.style.marginLeft = ((frame + (ampMultiplier * 4) - 1) * -currentObject.settings.resolution.width) + 'px' })},
 
     foregroundToggle = () => {
-        foregroundBool = !foregroundBool
-
         $('#foreground').setAttribute('class', foregroundBool ? "invisible" : "")
-        $('#foregroundDebug').textContent = foregroundBool
+        foregroundBool = !foregroundBool
         buttonTog($('#foregroundButton'))},
 
     floorFlip = () => {
         $('#danceFloor').classList.remove('invisible')
-        $('#danceFloor').style.backgroundImage = 'url(UI_Libraries/' + currentFloor + (danceMode[1][1] ? '_' : '_NoMP_') + 'Floor' + (floorID ? 2 : 1) + '.png)'
-        $('#danceDebug').textContent = floorID ? 2 : 1},
+        $('#danceFloor').style.backgroundImage = 'url(UI_Libraries/' + currentFloor + (danceMode[1][1] ? '_' : '_NoMP_') + 'Floor' + (floorFlipper ? 2 : 1) + '.png)'},
 
     floorHide = () => {
-        $('#danceFloor').classList.add('invisible')
-        $('#danceDebug').textContent = "0"},
+        $('#danceFloor').classList.add('invisible')},
 
     multiplierFlip = (item, id) => {
         for (let i = 0; i < danceMode.length; i++){
+            let t = $("#"+danceMode[i][0])
             danceMode[i][1] = i === id ? danceMode[id][1] = !danceMode[id][1] : false
-            if(!$("#"+danceMode[i][0]).classList.contains("deact")){
-                $("#"+danceMode[i][0]).setAttribute('class', danceMode[i][1] ? "inv" : "")}}
+            if(!t.classList.contains("deact")){
+                t.setAttribute('class', danceMode[i][1] ? "inv" : "")}}
 
         if(danceMode[id]){floorFlip()}
-        else {floorHide()}};
+        else {floorHide()}},
 
-const urlUpdate = () => {
-    bodyUrlUpdate($('#head'),$('#body'))
-    for (let i = 0; i < calls.length; i++) {
-        if(calls[i][0] !== "special") {
-            $('#' + calls[i][0]).style.backgroundImage = "url('items/" + callsUrl[i] + ".png?" + Date.now() + "')"; }}
-    for (let i = 0; i < miscCalls.length; i++) {
-        $('#' + miscCalls[i][0]).style.backgroundImage = "url('items/" + miscCallsUrl[i] + ".png?" + Date.now() + "')"; }};
+    urlUpdate = (i) => {
+        const itemName = "#" + itemData[i].name
+        if(itemData[i].url !== undefined){
+            if(itemData[i].type === "bgi"){
+                $(itemName).style.backgroundImage = "url('"+ itemData[i].url + ".png?" + Date.now() + "')"}
+            else {
+                $(itemName).src = itemData[i].url + ".png?" + Date.now()}}};
 
 // todo: SCROLL FUNCTIONALITY
 
@@ -62,10 +58,9 @@ onwheel = (e) => { //scroll wheel functionality
 
 const zoomEvent = () => {
         $doc.style.setProperty('--scaler',scaleRes);
-        let transform = $("#transform");
-
-        transform.style.transform = "scale("+scaleRes+")";
-        transform.style.marginTop = -(scaleRes * 86)+ "px"; // the number is the vertical pixel offset, higher it is, lower the camera on zoom.
+        style("#transform")
+            .transform("scale("+scaleRes+")")
+            .marginTop(-(scaleRes * 86)+ "px"); // the number is the vertical pixel offset, higher it is, lower the camera on zoom.
         $('#scale').textContent = "1:" + scaleRes;}, // sets the bpm from the slider value
 
     scaleUpdate = () => {
