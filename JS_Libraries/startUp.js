@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => { // this just sets the boxe
 
     playerUpdate();
     clothingUpdate();
-    bodyUrlUpdate($('#head'),$('#body'))
+    bodyUrlUpdate()
     equipmentCall();
 
     $("#"+defaultCharacter).classList.add("inv")

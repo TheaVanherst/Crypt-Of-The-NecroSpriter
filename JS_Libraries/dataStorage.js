@@ -21,7 +21,9 @@ let clothingData = [16,8], //max amount of clothing / how many clothing articles
 // amount of clothing / how many on each column. This is just a hardcoded setting for changing the amount
 // of columns and rows I want to impliment in the UI. I would avoid touching this unless you want to add extra sets of clothing.
 
-const dir = "characters/";  //directory where all the character files are saved.
+const aniOffsets = [[1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4],[1,2,3,4]];
+
+const characterDirectory = "characters/";  //directory where all the character files are saved.
 
 // TODO: FLOOR TYPES
 
@@ -41,15 +43,6 @@ const floorTileSets = [ //these store the type of floor tiles needed to be displ
 // of sync of one another, unless you want that. Upto you.
 
 let currentFloor = 5; // The default floor you want to be active, you can't select a subfloor, it only selects the button you want, aka. the first of each type.
-
-// TODO: ANIMATION DATA
-
-const aniOffsets = [[1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4],[1,2,3,4]],
-    shovelOffsets = [-1,0,1,0],
-    equipmentOffsets = [[0,1,1,2,1,1], [1,2,2,1,0,1], [1,0,1,2,2,1]];
-
-// this is the array that stores horiztonal displayment multipliers for the animation to take place on which frame.
-//      this is toggled by the [ANIMATION TYPE] button in the render UI, and switches between the ingame animation, and regular linear animation.
 
 // TODO: MUSIC
 

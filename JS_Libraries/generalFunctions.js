@@ -32,18 +32,6 @@ const createButton = (css,text,id) => {
             else {return data[k][id];}
         })};
 
-    overflowCheck = (max,min,val,bool) => {
-        if(val >= max){return min}else{return val + 1}
-        if(val < min){return max}else{return val - 1}
-
-        equipmentFloatInt =
-            equipmentFloatInt >= equipmentOffsets[0].length ? 0
-                : (equipmentFloatInt + 1)
-        equipmentFloatInt =
-            equipmentFloatInt < 0 ? equipmentOffsets[0].length
-                : (equipmentFloatInt - 1)
-    }
-
 let styleProxy = {
     get: (object, property) => {
         return (value) => {

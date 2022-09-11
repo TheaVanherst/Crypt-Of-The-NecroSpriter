@@ -13,7 +13,7 @@ const frameTypeToggle = () => { //this is to push the current frame times
         buttonTog($('#amplifiedButton'))
 
         $all('#body, #head').forEach(id => { // specific displacement for the character
-            id.style.marginLeft = ((frame + (ampMultiplier * 4) - 1) * -currentObject.settings.resolution.width) + 'px' })},
+            id.style.marginLeft = ((frame + (ampMultiplier * 4)) * -currentObject.settings.resolution.width) + 'px' })},
 
     foregroundToggle = () => {
         $('#foreground').setAttribute('class', foregroundBool ? "invisible" : "")

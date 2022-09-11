@@ -53,15 +53,15 @@ const search = (e) => {
                             $('#' + idStrip).src = item.value + ".png?" + Date.now();}
                         return false});}}}},
 
-    bodyUrlUpdate = (h,b) => {
+    bodyUrlUpdate = () => {
         let srcLink = currentObject.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"],
-            srcPush = dir + currentObject.settings.fileUrl;
+            srcPush = characterDirectory + currentObject.settings.fileUrl;
         srcLink = srcLink.map(i => i + ".png?" + new Date().getTime());
 
         if(currentObject.settings.head){ampBool = false
             $("#amplifiedButton").setAttribute('class', 'deact');
-            h.src = srcPush + srcLink[0];}
+            $('#head').src = srcPush + srcLink[0];}
         else {
-            h.src = srcPush + srcLink[1];}
-        b.src = srcPush + srcLink[1];
+            $('#body').src = srcPush + srcLink[1];}
+        $('#body').src = srcPush + srcLink[1];
     }

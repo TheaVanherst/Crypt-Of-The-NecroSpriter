@@ -5,7 +5,7 @@ let frame = 1,
     equipmentFloatInt = 0; //equipment float pattern counter
 
 window.setInterval(() => {
-    frame = aniOffsets[0][elapsed]
+    frame = (aniOffsets[0][elapsed]) - 1
     if(playTog){
         elapsed = Math.floor((new Date().getTime() - start) / (60/bpm) / (1000 / aniOffsets[0].length));
         animationPush()}
@@ -45,20 +45,18 @@ const playReset = () => { // this deals with resetting the play button
         ampMultiplier = ampBool ? Math.round(frame / 1.35) * currentObject.settings.ampMultiplier : 0 // this was about 5 lines of dense math FUCK YOU.
         animationUpdate()};
 
-let specialWidth = [0, 0];
-
 const animationUpdate = () => {
         $all('#hat, #boots, #ring, #shovel, #weapon, #hip').forEach(id => {
             id.style.backgroundPositionX = ((aniOffsets[0][elapsed] + 3) * -24) + 'px'})
         $all('#body, #head').forEach(id => { // specific displacement for the character
-            id.style.marginLeft = ((frame + (ampMultiplier * 4) - 1) * -currentObject.settings.resolution.width) + 'px' })
+            id.style.marginLeft = ((frame + (ampMultiplier * 4)) * -currentObject.settings.resolution.width) + 'px' })
 
         if(currentObject.special.bool){
-            $('#special').style.backgroundPositionX = (specialWidth[1][frame] * specialWidth[0]) + "px"
+            $('#special').style.backgroundPositionX = (currentObject.special.offset.sequence[frame] * currentObject.special.resolution.width) + "px";
             $('#special').style.top = -(currentObject.special.offset.top[frame]) + "px"}
 
         $('#shovel').style.top = -shovelOffsets[frame] + 'px'
-        $('#torch').style.backgroundPositionX = ((specialWidth[1][frame] - 1) * -24) + 'px'
+        $('#torch').style.backgroundPositionX = ((currentObject.special.resolution.width - 1) * -24) + 'px'
         $('#charm').style.top = -(currentObject.charm.offset.sequence[frame] - 2) + 'px'
 
         //$('#boots').style.margin = -(currentObject.boots.offset.top) + "px 0 0" + -(currentObject.boots.offset.left + "px")
@@ -101,8 +99,6 @@ const playerUpdate = () => {
 
         if(currentObject.special.bool === true){
             $("#specialButton").classList.remove("deact")
-            specialWidth[0] = currentObject.special.resolution.width
-            specialWidth[1] = currentObject.special.offset.sequence
 
             style("#special")
                 .backgroundImage("url('items/" + currentObject.special.fileUrl + ".png')")

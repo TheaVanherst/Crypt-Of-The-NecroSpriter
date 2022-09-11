@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
 
             playerUpdate();
             clothingUpdate();
-            bodyUrlUpdate($('#head'),$('#body'))
+            bodyUrlUpdate();
             equipmentCall();
             itemYPos(); // this is needed as the positioning is based on information relative to the character.
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .margin(dimensions[shieldPos][0] + "px 0 0 " + dimensions[shieldPos][1] + "px")
             .zIndex(dimensions[shieldPos][2])}
 
-    const parent = $('#shieldSettings'),
+    const parent = $('#shieldSettings'), //TODO: ADD THIS TO THE OBJECT DATA SHEET
         directions = [["Up","Down","Right"],[2,4,1]], //position title, offset for the spritesheet.
         dimensions = [[-9,0,0],[9,0,10],[0,16,10]]; //offsets for the shield placement (Y,X,Z-index)
 
