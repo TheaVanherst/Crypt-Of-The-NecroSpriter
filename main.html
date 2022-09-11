@@ -6,8 +6,6 @@
         <link rel="stylesheet" href="CSS_Libraries/tableData.css">
         <link rel="stylesheet" href="playerData.css">
 
-        <script type="text/javascript" src="JS_Libraries/lodash.js"></script>
-
         <script type="text/javascript" src="JS_Libraries/dataStorage.js"></script>
         <script type="text/javascript" src="JS_Libraries/characterData.js"></script>
         <script type="text/javascript" src="JS_Libraries/itemData.js"></script>
@@ -28,7 +26,6 @@
     </head>
 
     <body>
-
         <table class="tb1">
             <tr>
                 <th><img src="UI_Libraries/border_corner1.png"></th>
@@ -115,6 +112,23 @@
             </tr>
         </table>
         <table class="tb7">
+            <tr>
+                <th><img src="UI_Libraries/border_corner1.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side1.png"></th>
+                <th><img src="UI_Libraries/border_corner2.png"></th>
+            </tr>
+            <tr class="mid">
+                <th><img src="UI_Libraries/border_side4.png"></th>
+                <th class="mid"></th>
+                <th><img src="UI_Libraries/border_side2.png"></th>
+            </tr>
+            <tr>
+                <th><img src="UI_Libraries/border_corner4.png"></th>
+                <th class="top"><img src="UI_Libraries/border_side3.png"></th>
+                <th><img src="UI_Libraries/border_corner3.png"></th>
+            </tr>
+        </table>
+        <table class="tb8">
             <tr>
                 <th><img src="UI_Libraries/border_corner1.png"></th>
                 <th class="top"><img src="UI_Libraries/border_side1.png"></th>
@@ -242,7 +256,6 @@
                         <e id="shieldButton">Shield</e>
                     </div>
                 </options>
-
             </cont>
         </container>
 
@@ -259,7 +272,7 @@
                 <div>current scale: <t id="scale">N/a</t></div></div>
         </container>
 
-        <container class="tb7" id="urlData"> <!-- TODO: AUTOMATE THIS -->
+        <container class="tb7" id="urlData">
             URL Directory Data
             <div>Helmet<br><input type="text" id="hatUrl"></div>
             <div>Weapon<br><input type="text" id="weaponUrl"></div>
@@ -275,8 +288,13 @@
             <div>Shield<br><input type="text" id="shieldUrl"></div>
         </container>
 
+        <container class="tb8">
+            Debug
+            <cont></cont>
+        </container>
+
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v1.0_1</t><br>
+            <t>CRYPT OF THE NECROSPRITER v0.99</t><br>
             <t>designed by @Theavanherst</t><br><br></div>
     </body>
 </html>

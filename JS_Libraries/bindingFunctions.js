@@ -72,10 +72,13 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
             .appendChild(createButton('e', currentCharacter, currentCharacter)).onclick = function () {
 
             currentObject = {}
-            currentObject = _.merge({}, defaultData, getUser(currentCharacter,characterData))
-            characterChange(); itemYPos(); // this is needed as the positioning is based on information relative to the character.
+            currentObject = mergeDeep({}, defaultData, getUser(currentCharacter,characterData))
 
-            if(currentObject.name === "Chaunter"){chaunterMode()}
+            playerUpdate();
+            clothingUpdate();
+            bodyUrlUpdate($('#head'),$('#body'))
+            equipmentCall();
+            itemYPos(); // this is needed as the positioning is based on information relative to the character.
 
             $('container.tb3 options e.inv')?.classList?.remove('inv') //deactivates current buttons
             buttonTog($("#clothing" + clothingCurrent))

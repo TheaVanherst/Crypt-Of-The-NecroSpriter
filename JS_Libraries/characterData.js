@@ -2,79 +2,59 @@ const defaultData = {
         settings: {
             resolution: {
                 width: 24, height: 24,
-                rows: 14, columns: 16
-            },
+                rows: 14, columns: 16},
             offset: {
-                head: 0, body: 0
-            },
+                head: 0, body: 0},
             ampMultiplier: 1,
             fileUrl: "",
-            head: true
-        },
+            head: true},
         hat: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            },
-            sequence: [1, 2, 3, 4]
-        },
+                top: 0, left: 0},
+            sequence: [1, 2, 3, 4]},
         weapon: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            },
-            sequence: [1, 2, 3, 4]
-        },
+                top: 0, left: 0},
+            sequence: [1, 2, 3, 4]},
         ring: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            },
-            sequence: [1, 2, 3, 4]
-        },
+                top: 0, left: 0},
+            sequence: [1, 2, 3, 4]},
         boots: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            },
-            sequence: [1, 2, 3, 4]
-        },
+                top: 0, left: 0},
+            sequence: [1, 2, 3, 4]},
         charm: {
             bool: true,
             offset: {
                 top: 0, left: 0,
-                sequence: [1, 2, 3, 2]
-            }
-        },
+                sequence: [1, 2, 3, 2]}},
         shovel: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            }
-        },
+                top: 0, left: 0}},
         torch: {
             bool: true,
             offset: {
-                top: 0, left: 0
-            },
+                top: 0, left: 0},
             sequence: [1, 2, 3, 4],
-            flip: false
-        },
+            flip: false},
         hip: {
             bool: true,
             offset: {
                 top: 0, left: 0
             },
-            sequence: [1, 2, 3, 4]
-        },
+            sequence: [1, 2, 3, 4]},
         special: {
             bool: false,
             resolution: {
-                height: 0, width: 0
-            },
+                height: 0, width: 0},
             displacement: {
-                top: 0, left: 0
-            },
+                top: 0, left: 0},
             offset: {
                 top: [0, 0, 0, 0],
                 sequence: [0, 0, 0, 0],
@@ -343,53 +323,39 @@ const defaultData = {
                     rows: 1, columns: 32
                 },
                 ampMultiplier: 1,
-                fileUrl: "Klarinetta"
-            },
+                fileUrl: "Klarinetta"},
             hat: {
                 offset: {
-                    top: 1, left: 1
-                }
-            },
+                    top: 1, left: 1}},
+            weapon: {
+                bool: false},
             ring: {
                 offset: {
-                    top: 3, left: 2
-                }
-            },
+                    top: 3, left: 2}},
             boots: {
                 offset: {
-                    top: 5, left: 1
-                }
-            },
+                    top: 5, left: 1}},
             charm: {
                 offset: {
                     top: 2, left: 1,
-                    sequence: [1, 1, 2, 2]
-                }
-            },
+                    sequence: [1, 1, 2, 2]}},
             shovel: {
                 offset: {
-                    top: 3, left: 1
-                }
-            },
+                    top: 3, left: 1}},
             torch: {
                 offset: {
-                    top: 8, left: 4
-                },
-                sequence: [1, 4, 3, 2]
-            },
+                    top: 8, left: 4},
+                sequence: [1, 4, 3, 2]},
             special: {
                 bool: true,
                 resolution: {
-                    height: 28, width: 28
-                },
+                    height: 28, width: 28},
                 displacement: {
-                    top: 19, left: 13
-                },
+                    top: 19, left: 13},
                 offset: {
                     top: [1, 1, 1, 2],
                     sequence: [1, 1, 1, 1],
-                    rotation: 180
-                },
+                    rotation: 180},
                 fileUrl: "weapon_greatsword"
             },
         }

@@ -1,15 +1,15 @@
 
-let frame = 0,
+let frame = 1,
     start = new Date().getTime(), //gets the reference point for the elapsed to work to.
     elapsed = 0, //counter for the bpm loop
     equipmentFloatInt = 0; //equipment float pattern counter
 
 window.setInterval(() => {
+    frame = aniOffsets[0][elapsed]
     if(playTog){
         elapsed = Math.floor((new Date().getTime() - start) / (60/bpm) / (1000 / aniOffsets[0].length));
-        frame = aniOffsets[0][elapsed - 1]
-
-        animationPush()}}, (60/bpm));
+        animationPush()}
+}, (60/bpm));
 
 // a bunch of presets to save work
 let floorFlipper; //flips every bar (music)
@@ -26,22 +26,21 @@ const playReset = () => { // this deals with resetting the play button
         else {floorHide();}}
 
     animationPush = () => {
-        if (elapsed >= aniArrLength) { // if current frame is more than the horizontal displacement array
-            elapsed = 0; // resets the elapsed time
-            start = new Date().getTime(); // gets new current time
+        if (elapsed > aniArrLength) { // if current frame is more than the horizontal displacement array
+            elapsed = 0; start = new Date().getTime(); // gets new current time
             danceFlip()
-            equipmentFloatInt = equipmentFloatInt >= equipmentOffsets[0].length ? 0 : equipmentFloatInt++
+            equipmentFloatInt = equipmentFloatInt >= equipmentOffsets[0].length ? 0 : (equipmentFloatInt + 1)
 
             if(equipmentFloatInt === 0 && forceRefresh){
                 bodyUrlUpdate($('#head'),$('#body'))
                 for (let key in itemData) {
-                    urlUpdate(key)}
-            } //requires to be as soon as it resets to prevent console spam
+                    urlUpdate(key)}}
         } // resets timer every 30 animation frames. [automation]
         else if (elapsed < 0) { // if user has gone to the previous frame, and the new frame is below 0
-            elapsed = aniArrLength; // gets the max value of the array to make it loop around dynamically
+            elapsed = aniArrLength - 1; // gets the max value of the array to make it loop around dynamically
             danceFlip()
-            equipmentFloatInt = equipmentFloatInt < 0 ? equipmentOffsets[0].length : equipmentFloatInt--} // if current frame is less than 0 [manual]
+            equipmentFloatInt = equipmentFloatInt < 0 ? equipmentOffsets[0].length : (equipmentFloatInt - 1)
+        } // if current frame is less than 0 [manual]
 
         ampMultiplier = ampBool ? Math.round(frame / 1.35) * currentObject.settings.ampMultiplier : 0 // this was about 5 lines of dense math FUCK YOU.
         animationUpdate()};
@@ -90,15 +89,9 @@ const bpmUpdate = () => {
 // todo : CHARACTER UPDATING
 // todo : ==================
 
-const characterChange = () =>  { //simplification of the character change calling
-        const player = $('#playerModel'), head = $('#head'), body = $('#body'); //precalls
+const playerUpdate = () => {
 
-        playerUpdate(player, head, body)
-        clothingUpdate();
-        bodyUrlUpdate(head,body)
-        equipmentCall()},
-
-    playerUpdate = (p,h,b) => {
+        if(currentObject.name === "Chaunter"){chaunterMode()}
         // updates image sources on character change
         //updates background image resolution setting calcs
         $doc.style.setProperty('--imageW', currentObject.settings.resolution.width + "px"); // todo: spritesheet settings
@@ -116,14 +109,14 @@ const characterChange = () =>  { //simplification of the character change callin
                 .margin(currentObject.special.displacement.top + "px 0 0 " + currentObject.special.displacement.left + "px")
                 .transform("rotate("+currentObject.special.offset.rotation+"deg)")
                 .width(currentObject.special.resolution.width + 0.5 + "px")
+                .left("0.5px")
                 .height(currentObject.special.resolution.height + "px")}
         else {
-            $("#specialButton").setAttribute('class','deact')
-        }
+            $("#specialButton").setAttribute('class','deact')}
 
-        b.style.marginTop = -(currentObject.settings.resolution.height * clothingCurrent) + "px";
-        h.parentNode.style.marginTop = -currentObject.settings.offset.head + "px"; // corrects head vertically
-        p.style.margin = ((defaultData.settings.resolution.height + currentObject.settings.offset.body) - currentObject.settings.resolution.height + "px") +
+        $('#body').style.marginTop = -(currentObject.settings.resolution.height * clothingCurrent) + "px";
+        $('#head').parentNode.style.marginTop = -currentObject.settings.offset.head + "px"; // corrects head vertically
+        $('#playerModel').style.margin = ((defaultData.settings.resolution.height + currentObject.settings.offset.body) - currentObject.settings.resolution.height + "px") +
             " 0 0 " + Math.floor((defaultData.settings.resolution.width - currentObject.settings.resolution.width) / 2) + "px";
     }, // fixes vertical placement so they're all aligned
 

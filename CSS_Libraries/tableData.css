@@ -33,10 +33,9 @@ table .top img {height:24px}
 container {padding:var(--tablePadding) var(--tablePadding);
     margin: var(--tablePadding) 0 0 calc(2px + var(--tablePadding))}
 controller div:first-of-type {margin: 13px 0 13px 0}
-
-.tb1 .top img, .tb2 .top img, .tb2 .top img {height:24px}
 container, table {position:absolute}
-.tb1 .top img {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2))} /* container width */
+
+.tb1 .top img, .tb1 {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2))} /* container width */
 .tb1 .mid img {height:var(--window1Height)}
 container.tb1 options, container.tb1 cont { width:var(--window1Width) }
 
@@ -73,6 +72,11 @@ container.tb6, container.tb6 options { width:var(--window2Width) }
 .tb7 .mid img {height:794px}
 .tb7 .top img, .tb7 {width:calc(var(--window7Width) - 40px + (var(--tablePadding) * 2))}
 container.tb7, container.tb7 options { width:var(--window7Width) }
+
+.tb8 .top img, .tb8 {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2));
+    top: calc(var(--window1Height) + (var(--tablePadding) * 4))} /* container width */
+.tb8 .mid img {height:calc(var(--window2Height) + var(--window6Height) - var(--window1Height))}
+container.tb8 options, container.tb8 cont { width:var(--window1Width) }
 
 .tb7#urlData > div {
     padding: 0 0 10px 0

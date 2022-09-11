@@ -1,5 +1,8 @@
 
-body {cursor: url('UI_Libraries/weaponglow_dagger.png'), auto}
+body {cursor: url('UI_Libraries/default_cursor.png'), auto}
+input[type=text]{cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
+.slider, .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
+e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 
 #logo { position: absolute; top: var(--tablePadding);
     left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}

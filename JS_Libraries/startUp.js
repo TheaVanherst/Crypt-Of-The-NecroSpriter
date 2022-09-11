@@ -18,17 +18,17 @@ document.addEventListener('DOMContentLoaded', () => { // this just sets the boxe
     const c=currentFloor-1,v=c>2?1:0,h=c>2?c-3:c; //figures out which array to use for said floor
     currentFloor = floorTileSets[v][h][0]; //sets current floor automatically
     backgroundUpdate($('#floor'),v,h);
-    $('#foreground').src =
-        "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png"; //sets foreground url to suit current floor
-
+    $('#foreground').src = "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png"; //sets foreground url to suit current floor
     $('#backgrounds').children[v].children[h].classList.add('inv') //toggles current floor button to be active
 
     playTog = danceMode[0] || danceMode[1] //enables play toggle if dance floor bools are enabled.
+    currentObject = mergeDeep({}, defaultData, getUser(defaultCharacter,characterData))
 
-    // todo: character equipment startup
+    playerUpdate();
+    clothingUpdate();
+    bodyUrlUpdate($('#head'),$('#body'))
+    equipmentCall();
 
-    currentObject = _.merge({}, defaultData, getUser(defaultCharacter,characterData))
-    characterChange() //updates default character sizes
     $("#"+defaultCharacter).classList.add("inv")
 
     for (let key in itemData) { // prebaked data url

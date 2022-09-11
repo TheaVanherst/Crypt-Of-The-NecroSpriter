@@ -32,6 +32,18 @@ const createButton = (css,text,id) => {
             else {return data[k][id];}
         })};
 
+    overflowCheck = (max,min,val,bool) => {
+        if(val >= max){return min}else{return val + 1}
+        if(val < min){return max}else{return val - 1}
+
+        equipmentFloatInt =
+            equipmentFloatInt >= equipmentOffsets[0].length ? 0
+                : (equipmentFloatInt + 1)
+        equipmentFloatInt =
+            equipmentFloatInt < 0 ? equipmentOffsets[0].length
+                : (equipmentFloatInt - 1)
+    }
+
 let styleProxy = {
     get: (object, property) => {
         return (value) => {
@@ -43,3 +55,21 @@ let styleProxy = {
 let style = (selector) => {
     let element = document.querySelector(selector);
     return new Proxy(element.style, styleProxy);}
+
+function isObject(item) {
+    return (item && typeof item === 'object' && !Array.isArray(item));}
+
+function mergeDeep(target, ...sources) {
+    if (!sources.length) return target;
+    const source = sources.shift();
+
+    if (isObject(target) && isObject(source)) {
+        for (const key in source) {
+            if (isObject(source[key])) {
+                if (!target[key]) Object.assign(target, { [key]: {} });
+                mergeDeep(target[key], source[key]);}
+            else {
+                Object.assign(target, { [key]: source[key] });}}}
+
+    return mergeDeep(target, ...sources);
+}
