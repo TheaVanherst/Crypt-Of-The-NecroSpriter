@@ -29,6 +29,7 @@
 - Render speed slider based on beats per minute, based on tracks featured in that game.
     - A list of tracks featured in the game at each BPM step of 5, including bosses.
 - Scaling feature, with a slider to change the resolution size of the left hand side preview.
+- Two different render modes, linear and the more accurate in-game beat driven render.
 
                                              INSTRUCTIONS:
 
