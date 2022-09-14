@@ -10,7 +10,7 @@ const frameTypeToggle = () => { //this is to push the current frame times
     amplifiedToggle = () => {
         ampBool = !ampBool;
         ampMultiplier = ampBool ? 1 : 0;
-        $('#amplifiedButton').setAttribute('class', ampBool ? "" : "deact");
+        $('#amplifiedButton').setAttribute('class', ampBool ? "inv": "");
 
         $all(bodyParts).forEach(id => { // specific displacement for the character
             id.style.marginLeft =

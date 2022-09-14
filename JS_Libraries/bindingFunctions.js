@@ -107,19 +107,19 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             //usually you wouldn't need this but because the box is so small, it overflows and causes issues.
 
             divS.children[i].onclick = function () {   // attach event listener individually
+                const Uniqueclothing = currentObject.clothingData
                 buttonAdjustment("#clothing", cur, this);
                 clothingDebug.textContent = cur + 1;
 
-                if(currentObject.clothingData.bool &&
-                    currentObject.clothingData.clothing - 1 === cur &&
-                        !currentObject.clothingData.head){
-                    $("#amplifiedButton").classList.add("deact")}
+                if(Uniqueclothing.bool && Uniqueclothing.clothing - 1 === cur && !Uniqueclothing.head){
+                    ampBool = false;
+                    $("#amplifiedButton").setAttribute("class","deact");}
                 else {
-                    $("#amplifiedButton").classList.remove("deact")}
+                    $("#amplifiedButton").classList.remove("deact");}
 
-                if(currentObject.clothingData.bool){
-                    currentObject.clothingData.disable();
-                    if(currentObject.clothingData.clothing - 1 === cur){
+                if(Uniqueclothing.bool){
+                    Uniqueclothing.disable();
+                    if(Uniqueclothing.clothing - 1 === cur){
                         head.classList.add("invisible");}
                     else {
                         playerModel.style.marginTop =
@@ -129,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 else {
                     head.classList.remove("invisible");}
 
-                if(currentObject.clothingData.bool === true){
-                    if(currentObject.clothingData.clothing - 1 === cur){
-                        currentObject.clothingData.enable();}}
+                if(Uniqueclothing.bool === true){
+                    if(Uniqueclothing.clothing - 1 === cur){
+                        Uniqueclothing.enable();}}
             }
         }}
 }, false);

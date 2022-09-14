@@ -139,7 +139,8 @@ const playerUpdate = () => {
                 .height(currentObject.special.resolution.height + "px");}
         else {
             $("#specialButton").setAttribute('class',"deact");}
-        $('#amplifiedButton').setAttribute('class', ampBool ? "" : "deact");
+
+        $('#amplifiedButton').setAttribute('class', ampBool ? "inv": "");
 
         body.style.marginTop = -(currentObject.settings.resolution.height * currentClothing) + "px";
         headContainer.style.marginTop = -currentObject.settings.offset.head + "px"; // corrects head vertically
