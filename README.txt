@@ -19,13 +19,18 @@
 - Character selection from the base game, Amplified DLC and the Synchrony DLC.
 - Dynamic clothing selection, based on the character selected.
     - 'Amplification mode' toggle and preview from the Amplified DLC.
-- Equipment animation preview with character specific offsets & settings
-    - Helmet, Weapon, Wrist and Boot equipables
-    - Charm, Shovel, Torch and Hip equipables
+- Equipment animation preview with character specific offsets & settings.
+    - Helmet, Weapon, Wrist and Boot equipables.
+    - Charm, Shovel, Torch and Hip equipables.
+    - Special and Shield toggles equipables.
+- Allows directory changes between individual items.
+
 - Background image selection and toggle with the character preview.
     - 8 different floor types, including a dance floor mode and a multiplier mode.
 - Foreground render preview, to show a closer resemblance to how sprites are rendered ingame.
-    - 10 total foregrounds included by default with additional expandability
+    - 10 total foregrounds included by default with additional expandability.
+
+- Individual frame selecting, alongside render previewing based on BPM.
 - Render speed slider based on beats per minute, based on tracks featured in that game.
     - A list of tracks featured in the game at each BPM step of 5, including bosses.
 - Scaling feature, with a slider to change the resolution size of the left hand side preview.
@@ -44,3 +49,5 @@ recommendations for the sprite renderer, contact me on Twitter or my discord The
                                                
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
+- Add a URL changer for individual characters.
+- Rework the Unique Equipables
