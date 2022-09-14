@@ -1,3 +1,18 @@
+const aniOffsets = [
+    [1,1,1,2, 2,2,2,2, 2,2,2,2,
+     3,3,3,3, 3,3,3,3, 3,3,4,4,
+     4,4,4,4, 4,4], [1,2,3,4]],
+    playerFloatOffsets = [0,1,2,2,1,0];
+
+const
+    head = $('#head'),
+    headContainer = $('#headContainer'),
+    body = $('#body'),
+    playerModel = $('#playerModel');
+
+const bodyParts = [
+    '#body, #head'];
+
 const defaultData = {
         settings: {
             resolution: {
@@ -6,8 +21,10 @@ const defaultData = {
             offset: {
                 head: 0, body: 0},
             ampMultiplier: 1,
+            floatSequence: undefined,
             fileUrl: "",
-            head: true},
+            head: true,
+            amp: true},
         hat: {
             bool: true,
             offset: {
@@ -48,7 +65,7 @@ const defaultData = {
             offset: {
                 top: 0, left: 0
             },
-            sequence: [1, 2, 3, 4]},
+            sequence: [4, 3, 2, 1]},
         special: {
             bool: false,
             resolution: {
@@ -61,8 +78,9 @@ const defaultData = {
                 rotation: 0,
                 flip: false
             },
-            fileUrl: ""
-        }
+            fileUrl: ""},
+        clothingData: {
+            bool: false}
     },
 
     dlcTypes = ["Base Game", "Amplified", "Synchrony"],
@@ -71,7 +89,7 @@ const defaultData = {
             name: "cadence",
             dlc: 0,
             settings: {
-                fileUrl: "player1"},
+                fileUrl: "characters/player1"},
             shovel: {
                 offset: {
                     top: 1}}
@@ -79,7 +97,7 @@ const defaultData = {
             name: "Melody",
             dlc: 0,
             settings: {
-                fileUrl: "char1"},
+                fileUrl: "characters/char1"},
             weapon: {
                 bool: false},
             ring: {
@@ -89,7 +107,7 @@ const defaultData = {
             name: "Aria",
             dlc: 0,
             settings: {
-                fileUrl: "char2"}
+                fileUrl: "characters/char2"}
         },{
             name: "Dorian",
             dlc: 0,
@@ -99,7 +117,7 @@ const defaultData = {
                     rows: 1},
                 offset: {
                     head: 1, body: 4},
-                fileUrl: "char3"},
+                fileUrl: "characters/char3"},
             hat: {
                 offset: {
                     left: 4},
@@ -120,14 +138,17 @@ const defaultData = {
             torch: {
                 offset: {
                     top: 4, left: 3},
-                sequence: [2, 3, 4, 1]}
+                sequence: [2, 3, 4, 1]},
+            hip: {
+                offset: {
+                    top: 2, left: 3}}
         },{
             name: "Eli",
             dlc: 0,
             settings: {
                 resolution: {
                     width: 33, height: 28},
-                fileUrl: "char4"},
+                fileUrl: "characters/char4"},
             hat: {
                 bool: false},
             weapon: {
@@ -143,26 +164,30 @@ const defaultData = {
             torch: {
                 offset: {
                     top: 2, left: 6},
-                flip: true}
+                flip: true},
+            hip: {
+                offset: {
+                    top: 0, left: 3},
+                sequence: [1,2,3,4]},
         },{
             name: "Monk",
             dlc: 0,
             settings: {
-                fileUrl: "char5"}
+                fileUrl: "characters/char5"}
         },{
             name: "Dove",
             dlc: 0,
             settings: {
                 offset: {
                     head: 4},
-                fileUrl: "char6"}
+                fileUrl: "characters/char6"}
         },{
             name: "Coda",
             dlc: 0,
             settings: {
                 resolution: {
                     width: 33, height: 30},
-                fileUrl : "char7"},
+                fileUrl : "characters/char7"},
             hat: {
                 bool: false},
             weapon: {
@@ -185,12 +210,12 @@ const defaultData = {
             name: "Bolt",
             dlc: 0,
             settings: {
-                fileUrl: "char8"}
+                fileUrl: "characters/char8"}
         },{
             name: "Bard",
             dlc: 0,
             settings: {
-                fileUrl: "char9"}
+                fileUrl: "characters/char9"}
         },{
             name: "Nocturna",
             dlc: 1,
@@ -198,7 +223,7 @@ const defaultData = {
                 resolution: {
                     width: 25, height: 27,
                     rows: 15},
-                fileUrl : "char10"},
+                fileUrl: "characters/char10"},
             hat: {
                 offset: {
                     top: 2, left: 2}},
@@ -224,34 +249,58 @@ const defaultData = {
             hip: {
                 offset: {
                     top: 2, left: 2}},
+            clothingData: {
+                bool: true,
+                clothing: 15,
+                head: false,
+                enable: itemDisable,
+                disable: itemEnable,
+                settings: {
+                    hat: {
+                        bool: false},
+                    weapon: {
+                        bool: false},
+                    ring: {
+                        bool: false},
+                    boots: {
+                        bool: false},
+                    charm: {
+                        bool: false},
+                    shovel: {
+                        bool: false},
+                    torch: {
+                        bool: false},
+                    hip: {
+                        bool: false}},
+                floatSequence: true},
         },{
             name: "Diamond",
             dlc: 1,
             settings: {
                 headOffset: {
                     top: 1},
-                fileUrl : "char11"},
+                fileUrl : "characters/char11"},
             hip: {
                 bool: false}
         },{
             name: "Mary",
             dlc: 1,
             settings: {
-                fileUrl : "char12"}
+                fileUrl : "characters/char12"}
         },{
             name: "Tempo",
             dlc: 1,
             settings: {
                 headOffset: {
                     top: 1},
-                fileUrl : "char12"}
+                fileUrl : "characters/char12"}
         },{
             name: "Suzu",
             dlc: 2,
             settings: {
                 resolution: {
                     width: 25, height: 28},
-                fileUrl : "Suzu"},
+                fileUrl : "characters/Suzu"},
             hat: {
                 offset: {
                     top: 2, left: 2}},
@@ -291,8 +340,9 @@ const defaultData = {
                 resolution: {
                     width: 27, height: 26,
                     rows: 1, columns: 9},
-                fileUrl : "Chaunter",
-                head: false},
+                fileUrl : "characters/Chaunter",
+                head: false,
+                amp: false},
             hat: {
                 bool: false},
             weapon: {
@@ -313,8 +363,17 @@ const defaultData = {
                 bool: true,
                 resolution: {
                     height: 27, width: 26},
-                fileUrl : "chaunter_lantern"}
-        }, {
+                displacement: {
+                    top: -1, left: 4},
+                offset: {
+                    sequence: [6, 5, 4, 3]},
+                fileUrl : "chaunter_lantern"},
+            clothingData: {
+                bool: true,
+                clothing: 1,
+                head: false,
+                floatSequence: true}
+        },{
             name: "Klarinetta",
             dlc: 2,
             settings: {
@@ -323,7 +382,7 @@ const defaultData = {
                     rows: 1, columns: 32
                 },
                 ampMultiplier: 1,
-                fileUrl: "Klarinetta"},
+                fileUrl: "characters/Klarinetta"},
             hat: {
                 offset: {
                     top: 1, left: 1}},
@@ -346,6 +405,9 @@ const defaultData = {
                 offset: {
                     top: 8, left: 4},
                 sequence: [1, 4, 3, 2]},
+            hip: {
+                offset: {
+                    top: 2, left: 1}},
             special: {
                 bool: true,
                 resolution: {
@@ -360,5 +422,3 @@ const defaultData = {
             },
         }
     ]
-
-

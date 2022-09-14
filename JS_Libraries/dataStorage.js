@@ -1,4 +1,8 @@
 
+const $doc = document.documentElement,
+    $ = document.querySelector.bind(document),
+    $all = document.querySelectorAll.bind(document);
+
 // .dP"Y8 888888 888888 888888 88 88b 88  dP""b8 .dP"Y8        dP      dP"Yb  88""Yb 888888 88  dP"Yb  88b 88 .dP"Y8
 // `Ybo." 88__     88     88   88 88Yb88 dP   `" `Ybo."       dP      dP   Yb 88__dP   88   88 dP   Yb 88Yb88 `Ybo."
 // o.`Y8b 88""     88     88   88 88 Y88 Yb  "88 o.`Y8b      dP       Yb   dP 88"""    88   88 Yb   dP 88 Y88 o.`Y8b
@@ -15,15 +19,12 @@ let framePushType = false, // How the debug menu outputs by default. 0-30 / 1-4
 
 // TODO: CLOTHING // CHARACTERS
 
-let clothingData = [16,8], //max amount of clothing / how many clothing articles per row
-    defaultCharacter = "Nocturna", //default character to select on load.
-    clothingCurrent = 4; //default clothing active on startup
+const clothingData = [16,8], //max amount of clothing / how many clothing articles per row
+    defaultCharacter = "Nocturna"; //default character to select on load.
+let currentClothing = 4; //default clothing active on startup
 // amount of clothing / how many on each column. This is just a hardcoded setting for changing the amount
 // of columns and rows I want to impliment in the UI. I would avoid touching this unless you want to add extra sets of clothing.
-
-const aniOffsets = [[1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4],[1,2,3,4]];
-
-const characterDirectory = "characters/";  //directory where all the character files are saved.
+let shieldPos = 2;
 
 // TODO: FLOOR TYPES
 
@@ -62,7 +63,10 @@ const songList = [
     ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
     ["N/a"], //165
     ["N/a"], //170
-    ["BOSS // Death Metal"]]; //175
+    ["BOSS // Death Metal"], //175
+    ["N/a"], //180
+    ["N/a"], //185
+    ["N/a"],]; //190
 // These will be displayed as compatible tracks, not much need to edit them, but if you do want to edit them-
 // keep the amount of songs per array to 5, as that's the max the UI is designed for.
 

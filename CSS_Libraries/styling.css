@@ -17,8 +17,6 @@ body { margin: 0; padding: 0;
     filter: invert(1);}
 #refreshButton { float: right }
 
-debug { position: absolute; display: inline; margin: -2px 0 0 10px; }
-
 /* button over toggle */
 e { padding:5px 10px; margin:0 5px; display: inline-block;
     color: #fff; border: solid 2px #fff; background-color: #000; }
@@ -84,3 +82,26 @@ input[type=text]:focus {
     position: relative; display: inline-flex}
 
 .invisible { opacity:0!important}
+
+/* TODO: DEBUG SIZE SETTINGS */
+
+#bpmCounter {width:calc((48px + 10px) * 6 + 15px); display: inline-block;}
+.bpm {image-rendering: -moz-crisp-edges; image-rendering: pixelated}
+.bpm {position:relative; display: inline-table; margin: 0 0 0 5px;
+    width: 48px; height: 44px }
+.bpm > img {position:absolute; width: inherit; height: inherit}
+
+.beat {transform: scale(1.5);
+    -webkit-animation:scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
+    animation:scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both}
+
+@-webkit-keyframes scale-up-center{
+    0%{-webkit-transform:scale(1.5);transform:scale(1.5)}
+    100%{-webkit-transform:scale(1);transform:scale(1)}}
+@keyframes scale-up-center{
+    0%{-webkit-transform:scale(1.5);transform:scale(1.5)}
+    100%{-webkit-transform:scale(1);transform:scale(1)}}
+
+#debug { display: inline-block; position:absolute; }
+#debug > t {top: -5px; position: relative;
+}

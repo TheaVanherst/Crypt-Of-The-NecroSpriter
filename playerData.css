@@ -1,4 +1,6 @@
 
+/* URL garbage I have to shove in the source directory */
+
 body {cursor: url('UI_Libraries/default_cursor.png'), auto}
 input[type=text]{cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
 .slider, .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
@@ -25,33 +27,33 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
     image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
 
 #playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
-#shadow {
-    left:277.5px; top:73px;
-    width: 24px; height: 27px;
-}
+#shadow {left:277.5px; top:73px; width: 24px; height: 27px;}
 
-#bodyContainer {height: calc(var(--imageH) + 2px); width: calc(var(--imageW))}
-#headContainer {height: var(--imageH); width: var(--imageW)}
-#headContainer, #bodyContainer { float: left; overflow:hidden }
+#bodyContainer { height: calc(var(--imageH) + 2px); width: calc(var(--imageW)); }
+#headContainer { height: var(--imageH); width: var(--imageW); }
+#headContainer, #bodyContainer { float: left; overflow:hidden; }
 
-#head, #body{width:calc(var(--imageW) * var(--columns))}
-#body{height:calc(var(--imageH) * var(--rows))}
+#head, #body { width:calc(var(--imageW) * var(--columns)); }
+#body { height:calc(var(--imageH) * var(--rows)); }
 
 #hat, #boots, #charm, #ring, #hip{ width: 24px; height: 24px; }
 
 #weapon, #shovel, #torch { width: 24px; height: 24px; }
-#weapon, #charm{top:0; left:0; width:24px}
-#charm {top:calc(1px)}
+#weapon, #charm{ top:0; left:0; width:24px; }
+#charm {top:calc(1px); }
 
-#consumables { top: 6px }
-#spell { left: 22px }
-#equipment { margin-top: -6px; left: 7px }
-#item { left: -7px }
-#spell, #equipment, #item {background-repeat: no-repeat}
+#consumables { top: 6px; }
+#spell { left: 22px; }
+#equipment { margin-top: -6px; left: 7px; }
+#item { left: -7px; }
+#spell, #equipment, #item { background-repeat: no-repeat; }
 
 #shield { width: 24px; height: 24px; top: 4px;
-    position: absolute;
-    background-image: url("items/shield.png")}
+    position: absolute; background-image: url("items/shield.png"); }
+#shield.up {margin:-9px 0 0 0; z-index: 0; background-position-x: 24px;}
+#shield.right { margin:-2px 0 0 16px; z-index: 10; background-position-x: 0; }
+#shield.down {margin:9px 0 0 0; z-index: 10; background-position-x: 72px;}
+
 #special {z-index: 100;position:absolute}
 
 .flip { transform: scaleX(-1); background-position-x: 0.5px; }

@@ -9,16 +9,19 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
 // todo : Floor Swapping
 // todo : =========================
 
+const characterDebug = $("#characterDebug"),
+    clothingDebug = $("#clothingDebug")
+
 const backgroundUpdate = (obj,e,i) => obj?.setAttribute(
     "style", "background-image : url('UI_Libraries/"+floorTileSets[e][i][0]+"_Floor.png')");
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
-    let backgrounds = $('#backgrounds'), danceButton = $("#danceButton")
+    const danceButton = $("#danceButton")
     for (let e = 0; e < floorTileSets.length; e++){
         backgrounds.appendChild(createButton("div")); //creates the containing box for each row
 
         for (let i = 0; i < floorTileSets[0].length; i++) {
-            let child = createButton("e");//generates a button
+            const child = createButton("e");//generates a button
             child.appendChild(createButton("t",floorTileSets[e][i][[0]])); //generates text data for the button
             backgroundUpdate(child,e,i); //assigns background image for the button
 
@@ -28,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                     arrayShift(overlayTileSets[e][i]) //rotates the array clockwise.
                     backgroundUpdate(this,e,i)}
 
-                $('#foreground').src = "UI_Libraries/" + overlayTileSets[e][i][0] + "_Overlay.png"
+                foreground.src = "UI_Libraries/" + overlayTileSets[e][i][0] + "_Overlay.png"
 
                 currentFloor = floorTileSets[e][i][0]
                 if(danceMode[0][1] || danceMode[1][1]){floorFlip()}
@@ -62,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
         characterList = mapItem("name",false,characterData);
 
     for(let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++){
-        parent.appendChild(createButton("t",dlcTypes[i])) //prints what the character is from
-        parent.appendChild(createButton("options"))} //container for character DLC types
+        parent.appendChild(createButton("t",dlcTypes[i])); //prints what the character is from
+        parent.appendChild(createButton("options"));} //container for character DLC types
 
     for (let key in characterData) {
         let currentCharacter = characterList[key];
@@ -71,18 +74,19 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
         parent.getElementsByTagName('options')[dlcCount[key]]
             .appendChild(createButton('e', currentCharacter, currentCharacter)).onclick = function () {
 
-            currentObject = {}
-            currentObject = mergeDeep({}, defaultData, getUser(currentCharacter,characterData))
+            currentObject = {};
+            currentObject = mergeDeep({}, defaultData, getUser(currentCharacter,characterData));
+            characterDebug.textContent = currentObject.name
 
             playerUpdate();
             clothingUpdate();
             bodyUrlUpdate();
             equipmentCall();
-            itemYPos(); // this is needed as the positioning is based on information relative to the character.
+            animationUpdate(); // this is needed as the positioning is based on information relative to the character.
 
-            $('container.tb3 options e.inv')?.classList?.remove('inv') //deactivates current buttons
-            buttonTog($("#clothing" + clothingCurrent))
-            buttonTog(this)}}})
+
+            $('container.tb3 options e.inv')?.classList?.remove('inv'); //deactivates current buttons
+            buttonTog(this);}}});
 
 // todo : ================
 // todo : CLOTHING CHANGER
@@ -103,48 +107,62 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
             //usually you wouldn't need this but because the box is so small, it overflows and causes issues.
 
             divS.children[i].onclick = function () {   // attach event listener individually
-                buttonAdjustment("#clothing", cur, this)
+                buttonAdjustment("#clothing", cur, this);
+                clothingDebug.textContent = cur + 1;
 
-                if(currentObject.name === "Nocturna"){batMode()} // makes amp button inactive
-                else {$("#amplifiedButton")?.classList?.remove("deact")}
-            } // resets the amp button if the current character is Nocturna
+                if(currentObject.clothingData.bool &&
+                    currentObject.clothingData.clothing - 1 === cur &&
+                        !currentObject.clothingData.head){
+                    $("#amplifiedButton").classList.add("deact")}
+                else {
+                    $("#amplifiedButton").classList.remove("deact")}
+
+                if(currentObject.clothingData.bool){
+                    currentObject.clothingData.disable();
+                    if(currentObject.clothingData.clothing - 1 === cur){
+                        head.classList.add("invisible");}
+                    else {
+                        playerModel.style.marginTop =
+                            ((defaultData.settings.resolution.height + currentObject.settings.offset.body) -
+                                currentObject.settings.resolution.height + "px");
+                        head.classList.remove("invisible");}}
+                else {
+                    head.classList.remove("invisible");}
+
+                if(currentObject.clothingData.bool === true){
+                    if(currentObject.clothingData.clothing - 1 === cur){
+                        currentObject.clothingData.enable();}}
+            }
         }}
 }, false);
 
-let shieldPos = 2
+// todo : ================
+// todo : SHIELD CHANGER
+// todo : ================
+
 document.addEventListener('DOMContentLoaded', () => {
+    const children = ["up","down","right"];
 
-    const shieldUpdate = () => {
-        style("#shield") //sets the default shield position
-            .backgroundPositionX(24 * (directions[1][shieldPos] - 1) + "px")
-            .margin(dimensions[shieldPos][0] + "px 0 0 " + dimensions[shieldPos][1] + "px")
-            .zIndex(dimensions[shieldPos][2])}
+    children.forEach(i => {
+        const shieldDir = "#shield" + i;
+        $('#shieldSettings').appendChild(createButton("e",i,"shield" + i))
+            .onclick = () => {
+            $all("#shieldSettings > e.inv").forEach(e => {e.classList.remove("inv")});
+            shield.setAttribute("class",i);
+            buttonTog($(shieldDir));
 
-    const parent = $('#shieldSettings'), //TODO: ADD THIS TO THE OBJECT DATA SHEET
-        directions = [["Up","Down","Right"],[2,4,1]], //position title, offset for the spritesheet.
-        dimensions = [[-9,0,0],[9,0,10],[0,16,10]]; //offsets for the shield placement (Y,X,Z-index)
-
-    for (let i = 0; i < directions[0].length; i++) {
-        parent.appendChild(createButton("e",directions[0][i],"shield"+directions[0][i]))
-        parent.children[i + 1].onclick = function() {
-            $("#shield" + directions[0][shieldPos]).classList.remove("inv");
-            shieldPos = directions[0].indexOf(this.id.replace("shield",""));
-            buttonTog(this)
-
-            if(this.className.indexOf("inv") > -1){
-                $("#shield")?.classList?.remove("invisible");
-                $("#shieldButton")?.classList?.add("inv");}
-
-            shieldUpdate()}}
+            if($(shieldDir).className.indexOf("inv") > -1){
+                shield?.classList?.remove("invisible");        //TODO: Fix this please
+                $("#shieldButton")?.classList?.add("inv");}}})
 
     $("#shieldButton").onclick = function () {
-        $("#shield"+directions[0][shieldPos])?.classList?.add("inv");
+        $("#shield" + children[shieldPos])?.classList?.add("inv");
         if(this.className.indexOf("inv") > -1){
-            $("#shield")?.classList?.add("invisible");
-            for (let i = 0; i < directions[0].length; i++) {
-                $("#shield" + directions[0][i]).classList.remove("inv"); }}
+            shield?.classList?.add("invisible");
+            for (let i = 0; i < children.length; i++) {
+                $("#shield" + children[i]).classList.remove("inv");}}
         else {
-            $("#shield")?.classList?.remove("invisible");}
+            shield?.classList?.remove("invisible");}
         buttonTog(this);
     }
 })

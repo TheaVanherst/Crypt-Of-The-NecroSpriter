@@ -6,21 +6,6 @@
         <link rel="stylesheet" href="CSS_Libraries/tableData.css">
         <link rel="stylesheet" href="playerData.css">
 
-        <script type="text/javascript" src="JS_Libraries/dataStorage.js"></script>
-        <script type="text/javascript" src="JS_Libraries/characterData.js"></script>
-        <script type="text/javascript" src="JS_Libraries/itemData.js"></script>
-
-        <script type="text/javascript" src="JS_Libraries/generalFunctions.js"></script>
-
-        <script type="text/javascript" src="JS_Libraries/itemHandling.js"></script>
-        <script type="text/javascript" src="JS_Libraries/animationSettings.js"></script>
-
-        <script type="text/javascript" src="JS_Libraries/animationCalls.js"></script>
-        <script type="text/javascript" src="JS_Libraries/bindingFunctions.js"></script>
-        <script type="text/javascript" src="JS_Libraries/charFunctions.js"></script>
-
-        <script type="text/javascript" src="JS_Libraries/startUp.js"></script>
-
         <link rel="icon" type="image/png" href="/UI_Libraries/skull_small.png">
         <title>Crypt of the NecroSpriter</title>
     </head>
@@ -157,6 +142,7 @@
                         <img id="foreground">
                         <div id="playerModel">
                             <div id="shield"></div>
+                            <div id="special"></div>
 
                             <div id="consumables">
                                 <img id="item">
@@ -176,7 +162,6 @@
                             <div id="hip"></div>
 
                             <div id="weapon"></div>
-                            <div id="special"></div>
 
                             <div id="torch"></div>
                             <div id="ring"></div>
@@ -212,8 +197,8 @@
                 Animation Speed (BPM)<br>
                 <options>
                     <div>
-                        <input type="range" min="100" max="175" step="5" class="slider" id="bpmSlider">
-                        <t>100</t><t style="float:right">175</t><br>
+                        <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
+                        <t>100</t><t style="float:right">190</t><br>
                         current BPM:<t id="bpm"></t></div>
                 </options>
                 Compatible Tracks:<br>
@@ -289,14 +274,38 @@
         </container>
 
         <container class="tb8">
-            Debug
             <cont>
-                test<br>test
+                <div id="bpmCounter">
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
+                    <div class="bpm"><img src="UI_Libraries/heart.png"></div></div>
+                <div id="debug">
+                    <t>Beat : </t><t id="beatDebug"></t><t> Bar : </t><t id="barDebug"></t><t> Frame : </t><t id="elapsedDebug"></t><br>
+                    <t>Character : </t><t id="characterDebug"></t><t> : </t><t id="clothingDebug"></t><br>
+                    <t> FloorMode : </t><t id="floorDebug"></t><t id="flipDebug"></t>
+                </div>
             </cont>
         </container>
 
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v0.99_1</t><br>
+            <t>CRYPT OF THE NECROSPRITER v1.0.0</t><br>
             <t>designed by @Theavanherst</t><br><br></div>
     </body>
+
+    <script type="text/javascript" src="JS_Libraries/dataStorage.js"></script>
+    <script type="text/javascript" src="JS_Libraries/itemData.js"></script>
+    <script type="text/javascript" src="JS_Libraries/generalFunctions.js"></script>
+
+    <script type="text/javascript" src="JS_Libraries/characterData.js"></script>
+
+    <script type="text/javascript" src="JS_Libraries/itemHandling.js"></script>
+    <script type="text/javascript" src="JS_Libraries/animationSettings.js"></script>
+
+    <script type="text/javascript" src="JS_Libraries/animationCalls.js"></script>
+    <script type="text/javascript" src="JS_Libraries/bindingFunctions.js"></script>
+
+    <script type="text/javascript" src="JS_Libraries/startUp.js"></script>
 </html>

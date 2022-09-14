@@ -1,24 +1,18 @@
 
-// just some presets to save my tiny ape brain some time later
-const $doc = document.documentElement,
-    $ = document.querySelector.bind(document),
-    $all = document.querySelectorAll.bind(document);
-
 const createButton = (css,text,id) => {
         let item = (document.createElement(css));
         if(text !== "" && text !== undefined){item.textContent = text;}
         if(id !== "" && id !== undefined){item.id = id;}
-    return item },
+    return item;},
 
     buttonAdjustment = (button, newVal, newButton) => {
         $all(button + " e").forEach(id => {id?.classList?.remove('inv')});
-        clothingCurrent = newVal;
-        $('#body').style.marginTop = -(currentObject.settings.resolution.height * newVal) + "px";
-        $('#headContainer').classList.remove('invisible'); //compensates for nocturna
-        buttonTog(newButton);},
+        currentClothing = newVal;
+        body.style.marginTop = -(currentObject.settings.resolution.height * newVal) + "px";
+        newButton.classList.add('inv')},
 
     buttonTog = (e) => {
-    e?.classList?.toggle('inv')},
+        e.classList.toggle('inv');},
 
     arrayShift = (e) => {
         e.unshift(e.pop());},
@@ -30,7 +24,26 @@ const createButton = (css,text,id) => {
         return Object.keys(data).map((k) => {
             if(bool){return parseInt(data[k][id]);}
             else {return data[k][id];}
-        })};
+        })},
+
+    itemDisable = () => {
+        for (let key in itemData) {
+            if(currentObject.clothingData.settings[itemData[key].name] !== undefined &&
+                currentObject.clothingData.settings[itemData[key].name].bool === false){
+                $("#" + itemData[key].name + "Button").setAttribute('class', 'deact');
+                $("#" + itemData[key].name)?.classList?.add("invisible");}}},
+
+    itemEnable = () => {
+        for (let key in itemData) {
+            $("#" + itemData[key].name + "Button")?.classList?.remove("deact");}},
+
+    urlUpdate = (i) => {
+        const item = itemData[i]
+        if(item.url !== undefined){
+            if(item.type === "bgi"){
+                $("#" + item.name).style.backgroundImage = "url('"+ item.url + ".png?" + Date.now() + "')";}
+            else {
+                $("#" + item.name).src = item.url + ".png?" + Date.now();}}};
 
 let styleProxy = {
     get: (object, property) => {
@@ -59,5 +72,4 @@ function mergeDeep(target, ...sources) {
             else {
                 Object.assign(target, { [key]: source[key] });}}}
 
-    return mergeDeep(target, ...sources);
-}
+    return mergeDeep(target, ...sources);}

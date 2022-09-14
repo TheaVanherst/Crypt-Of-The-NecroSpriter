@@ -1,7 +1,31 @@
 const shovelOffsets = [-1,0,1,0],
-    equipmentOffsets = [[0,1,1,2,1,1], [1,2,2,1,0,1], [1,0,1,2,2,1]];
+    equipmentOffsets = [[0,1,1,2,1,1],
+                        [1,2,2,1,0,1],
+                        [1,0,1,2,2,1]];
 
-let itemData = [
+const equipmentAll = [ //assets that rely on background pos
+    "#hat", "#weapon", "#ring", "#torch",
+    "#boots", "#shovel"];
+
+const
+    hat = $('#hat'),
+    weapon = $('#weapon'),
+    ring = $('#ring'),
+    boots = $('#boots'),
+    charm = $('#charm'),
+    shovel = $('#shovel'),
+    torch = $('#torch'),
+    hip = $('#hip'),
+    special = $('#special'),
+
+    shield = $('#shield'),
+
+    spell = $('#spell'),
+    equipment = $('#equipment'),
+    item = $('#item'),
+    consumables = $("#consumables");
+
+const itemData = [
     {
         name : "hat",
         altName : "helmet",
