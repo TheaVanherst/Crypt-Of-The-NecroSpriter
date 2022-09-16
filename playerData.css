@@ -21,13 +21,15 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 
 /* TODO: Character css */
 
+#characterUrl {width: calc(var(--window3Width) - (25px))}
+
 #headContainer, #bodyContainer, #playerModel, #shadow,
 #head, #body, #hat, #boots, #charm, #ring, #hip, #weapon, #shovel, #torch,
 #spell, #equipment, #item, #consumables, #shield { position:absolute;
     image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
 
 #playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
-#shadow {left:277.5px; top:73px; width: 24px; height: 27px;}
+#shadow {left:277.5px; top:73px; width: 24px; height: 27px; }
 
 #bodyContainer { height: calc(var(--imageH) + 2px); width: calc(var(--imageW)); }
 #headContainer { height: var(--imageH); width: var(--imageW); }
@@ -48,12 +50,12 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 #item { left: -7px; }
 #spell, #equipment, #item { background-repeat: no-repeat; }
 
+#special { position:absolute; background-repeat: no-repeat; z-index: 10}
+
 #shield { width: 24px; height: 24px; top: 4px;
     position: absolute; background-image: url("items/shield.png"); }
-#shield.up {margin:-9px 0 0 0; z-index: 0; background-position-x: 24px;}
+#shield.up {margin:-9px 0 0 0; z-index: 0; background-position-x: 24px; }
 #shield.right { margin:-2px 0 0 16px; z-index: 10; background-position-x: 0; }
-#shield.down {margin:9px 0 0 0; z-index: 10; background-position-x: 72px;}
-
-#special {z-index: 100;position:absolute}
+#shield.down {margin:9px 0 0 0; z-index: 20; background-position-x: 72px; }
 
 .flip { transform: scaleX(-1); background-position-x: 0.5px; }

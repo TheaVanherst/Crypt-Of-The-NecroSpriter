@@ -5,14 +5,11 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
     //$all('body e').forEach(id => {id.onclick = () => buttonTog(id)})
 }, false)
 
-// todo : =========================
-// todo : Floor Swapping
-// todo : =========================
-
-const characterDebug = $("#characterDebug"),
+const
+    characterDebug = $("#characterDebug"),
     clothingDebug = $("#clothingDebug")
-
-const backgroundUpdate = (obj,e,i) => obj?.setAttribute(
+const
+    backgroundUpdate = (obj,e,i) => obj?.setAttribute(
     "style", "background-image : url('UI_Libraries/"+floorTileSets[e][i][0]+"_Floor.png')");
 
 document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes back to default settings
@@ -84,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => { //function mounting on pag
             equipmentCall();
             animationUpdate(); // this is needed as the positioning is based on information relative to the character.
 
-
             $('container.tb3 options e.inv')?.classList?.remove('inv'); //deactivates current buttons
             buttonTog(this);}}});
 
@@ -111,14 +107,15 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 buttonAdjustment("#clothing", cur, this);
                 clothingDebug.textContent = cur + 1;
 
-                if(Uniqueclothing.bool && Uniqueclothing.clothing - 1 === cur && !Uniqueclothing.head){
-                    ampBool = false;
-                    $("#amplifiedButton").setAttribute("class","deact");}
+                if(Uniqueclothing !== undefined && Uniqueclothing.clothing - 1 === cur){
+                    if(Uniqueclothing.head){
+                        ampBool = false;
+                        $("#amplifiedButton").setAttribute("class","deact");}}
                 else {
                     $("#amplifiedButton").classList.remove("deact");}
 
-                if(Uniqueclothing.bool){
-                    Uniqueclothing.disable();
+                if(Uniqueclothing !== undefined){
+                    Uniqueclothing.enable();
                     if(Uniqueclothing.clothing - 1 === cur){
                         head.classList.add("invisible");}
                     else {
@@ -129,9 +126,9 @@ document.addEventListener('DOMContentLoaded', () => { //this just sets the boxes
                 else {
                     head.classList.remove("invisible");}
 
-                if(Uniqueclothing.bool === true){
+                if(Uniqueclothing.bool){
                     if(Uniqueclothing.clothing - 1 === cur){
-                        Uniqueclothing.enable();}}
+                        Uniqueclothing.disable();}}
             }
         }}
 }, false);
@@ -152,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             buttonTog($(shieldDir));
 
             if($(shieldDir).className.indexOf("inv") > -1){
-                shield?.classList?.remove("invisible");        //TODO: Fix this please
+                shield?.classList?.remove("invisible");
                 $("#shieldButton")?.classList?.add("inv");}}})
 
     $("#shieldButton").onclick = function () {
@@ -166,3 +163,27 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonTog(this);
     }
 })
+
+// todo : ====================
+// todo : SCROLL FUNCTIONALITY
+// todo : ====================
+
+let scaleRes = getComputedStyle($doc).getPropertyValue('--scaler');
+
+onwheel = (e) => { //scroll wheel functionality
+    scaleRes = parseInt((e.deltaY || e.deltaY*-1) > 0 ? -1 : 1) + parseInt(scaleRes);
+    scaleRes = scaleRes > 12 ? 12 : scaleRes < 4 ? 4 : scaleRes;
+
+    $("#scaleSlider").value = scaleRes; // gets the bpm for the slider
+    zoomEvent();};
+
+const zoomEvent = () => {
+        $doc.style.setProperty('--scaler',scaleRes);
+        transform.style.transform = "scale("+scaleRes+")";
+        transform.style.marginTop = -(scaleRes * 86)+ "px"; // the number is the vertical pixel offset, higher it is, lower the camera on zoom.
+        $('#scale').textContent = "1:" + scaleRes;}, // sets the bpm from the slider value
+
+    scaleUpdate = () => {
+        scaleRes = document.getElementById("scaleSlider").value; // gets the bpm for the slider
+        zoomEvent(); };
+

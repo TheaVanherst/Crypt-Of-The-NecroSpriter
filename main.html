@@ -141,8 +141,8 @@
                         <img id="shadow" src="UI_Libraries/shadow.png">
                         <img id="foreground">
                         <div id="playerModel">
-                            <div id="shield"></div>
                             <div id="special"></div>
+                            <div id="shield"></div>
 
                             <div id="consumables">
                                 <img id="item">
@@ -181,7 +181,7 @@
                         <e class="clickable" onclick="elapsed--; playReset()"> Prev </e>
                         <e id="play" onclick="playTog = !playTog; buttonTog(this);">Play</e>
                         <e class="clickable" onclick="elapsed++; playReset()"> Next </e>
-                        <e onclick="frameTypeToggle(); buttonTog(this);">Animation Type</e>
+                        <e id="aniType" onclick="frameTypeToggle(this)">Animation Type</e>
 
                         <div style="float: right">
                             <e id="forceRefresh" onclick="forceRefresh = !forceRefresh; buttonTog(this)">Force Refresh</e>
@@ -246,7 +246,10 @@
 
         <container class="tb3">
             Characters
-            <cont id="characterSelect"></cont>
+            <cont id="characterSelect">
+
+                <div>Character URL<br><input type="text" id="characterUrl"></div><br>
+            </cont>
         </container>
 
         <container class="tb4">
@@ -291,7 +294,7 @@
         </container>
 
         <div class="footer">
-            <t>CRYPT OF THE NECROSPRITER v1.0.0</t><br>
+            <t>CRYPT OF THE NECROSPRITER v1.0_4</t><br>
             <t>designed by @Theavanherst</t><br><br></div>
     </body>
 

@@ -1,19 +1,26 @@
-const aniOffsets = [
-    [1,1,1,2, 2,2,2,2, 2,2,2,2,
-     3,3,3,3, 3,3,3,3, 3,3,4,4,
-     4,4,4,4, 4,4], [1,2,3,4]],
+const
+    aniOffsets = [
+        [1,1,1,2, 2,2,2,2, 2,2,2,2,
+         3,3,3,3, 3,3,3,3, 3,3,4,4,
+         4,4,4,4, 4,4], [1,2,3,4]],
     playerFloatOffsets = [0,1,2,2,1,0];
 
 const
+    transform = $('#transform'),
+    amplifiedButton = $('#amplifiedButton'),
+
     head = $('#head'),
     headContainer = $('#headContainer'),
     body = $('#body'),
-    playerModel = $('#playerModel');
+    playerModel = $('#playerModel'),
+    characterUrl = $("#characterUrl");
 
-const bodyParts = [
+const
+    bodyParts = [
     '#body, #head'];
 
-const defaultData = {
+const
+    defaultData = {
         settings: {
             resolution: {
                 width: 24, height: 24,
@@ -66,21 +73,26 @@ const defaultData = {
                 top: 0, left: 0
             },
             sequence: [4, 3, 2, 1]},
-        special: {
-            bool: false,
-            resolution: {
-                height: 0, width: 0},
-            displacement: {
-                top: 0, left: 0},
-            offset: {
-                top: [0, 0, 0, 0],
-                sequence: [0, 0, 0, 0],
-                rotation: 0,
-                flip: false
-            },
-            fileUrl: ""},
-        clothingData: {
-            bool: false}
+        // special: {
+        //     bool: false,
+        //     zIndex: 10,
+        //     resolution: {
+        //         height: 0, width: 0},
+        //     displacement: {
+        //         top: 0, left: 0},
+        //     offset: {
+        //         top: [0, 0, 0, 0],
+        //         sequence: [0, 0, 0, 0],
+        //         rotation: 0,
+        //         flip: false
+        //     },
+        //     fileUrl: ""},
+
+        // clothingData: {
+        //         bool: true,
+        //         clothing: 1,
+        //         head: false,
+        //         floatSequence: true}
     },
 
     dlcTypes = ["Base Game", "Amplified", "Synchrony"],
@@ -253,8 +265,8 @@ const defaultData = {
                 bool: true,
                 clothing: 15,
                 head: false,
-                enable: itemDisable,
-                disable: itemEnable,
+                enable: itemEnable,
+                disable: itemDisable,
                 settings: {
                     hat: {
                         bool: false},
@@ -353,20 +365,19 @@ const defaultData = {
                 bool: false},
             charm: {
                 bool: false},
-            shovel: {
-                bool: false},
             torch: {
                 bool: false},
             hip: {
                 bool: false},
             special: {
                 bool: true,
+                zIndex: 0,
                 resolution: {
-                    height: 27, width: 26},
+                    height: 27, width: 27},
                 displacement: {
-                    top: -1, left: 4},
+                    top: 0, left: 0},
                 offset: {
-                    sequence: [6, 5, 4, 3]},
+                    sequence: [1, 2, 3, 4]},
                 fileUrl : "chaunter_lantern"},
             clothingData: {
                 bool: true,

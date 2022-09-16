@@ -67,7 +67,25 @@ const search = (e) => {
 
         if(currentObject.settings.head){
             head.src = srcPush + srcLink[0];}
-        else {
-            body.src = srcPush + srcLink[1];}
         body.src = srcPush + srcLink[1];
-    }
+    };
+
+document.addEventListener('DOMContentLoaded', () => {
+    $all("#characterUrl").forEach((e) => { //assigned on page load to text boxes
+        e.onkeydown = (a) => { bodyUrlSearch(a); };});}); // assigns functions to keydown, so I don't have to in the html
+
+const
+    bodyUrlSearch = (e) => {
+        if(e.key === 'Enter') {
+            console.log("yes")
+            const image = new Image(), // generates a new test image
+                item = e.target.value;
+
+            let srcLink = (currentObject.dlc !== 2 ? "_armor_body.png" : "_body.png"),
+                pushUrlbody = item + srcLink;
+
+            image.src = pushUrlbody
+            image.onload = () => { // on test image load
+                defaultData.settings.fileUrl = item;
+                currentObject.settings.fileUrl = item;
+                bodyUrlUpdate()}}}

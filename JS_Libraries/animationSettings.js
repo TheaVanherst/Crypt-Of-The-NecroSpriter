@@ -1,8 +1,9 @@
 
 /// animation timing setup (this is going to get recoded)
 let ampMultiplier = 0, aniArrLength = 0;
-
-const frameTypeToggle = () => { //this is to push the current frame times
+const
+    frameTypeToggle = (e) => { //this is to push the current frame times
+        buttonTog(e)
         framePushType = !framePushType;
         aniOffsets.unshift(aniOffsets.pop()); //rotates the array clockwise.
         aniArrLength = aniOffsets[0].length;},
@@ -10,7 +11,7 @@ const frameTypeToggle = () => { //this is to push the current frame times
     amplifiedToggle = () => {
         ampBool = !ampBool;
         ampMultiplier = ampBool ? 1 : 0;
-        $('#amplifiedButton').setAttribute('class', ampBool ? "inv": "");
+        amplifiedButton.setAttribute('class', ampBool ? "inv": "");
 
         $all(bodyParts).forEach(id => { // specific displacement for the character
             id.style.marginLeft =
@@ -38,26 +39,27 @@ const frameTypeToggle = () => { //this is to push the current frame times
                 t.setAttribute('class', danceMode[i][1] ? "inv" : "");}}
 
         if(danceMode[id]){floorFlip()}
-        else {floorHide();}};
+        else {floorHide();}},
 
-// todo: SCROLL FUNCTIONALITY
+    danceFlip = () => { //checks if the floor should flip (every 1 bar)
+        if(danceMode[0][1] || danceMode[1][1]){
+            floorFlipper = !floorFlipper; //flips the floor
+            flipDebug.textContent = floorFlipper ? 1 : 2
+            floorFlip();}
+        else {floorHide();}},
 
-let scaleRes = getComputedStyle($doc).getPropertyValue('--scaler');
+    bpmUpdate = () => {
+        bpm = document.getElementById("bpmSlider").value; // gets the bpm for the slider
+        $('#bpm').textContent = bpm; // sets the bpm from the slider value
 
-onwheel = (e) => { //scroll wheel functionality
-    scaleRes = parseInt((e.deltaY || e.deltaY*-1) > 0 ? -1 : 1) + parseInt(scaleRes);
-    scaleRes = scaleRes > 12 ? 12 : scaleRes < 4 ? 4 : scaleRes;
+        let trackContainer = $('#trackContainer'); // shorthand
+        trackContainer.innerHTML = ''; // empties the current compatible tracks
 
-    $("#scaleSlider").value = scaleRes; // gets the bpm for the slider
-    zoomEvent();};
+        let step = ((bpm - (100 - 5)) / 5) - 1; // uses the step to calculate the array placement
+        for (let i = 0; i < songList[step].length; i++){ // grabs the songs in the array from the step calc
 
-const zoomEvent = () => {
-        $doc.style.setProperty('--scaler',scaleRes);
-        style("#transform")
-            .transform("scale("+scaleRes+")")
-            .marginTop(-(scaleRes * 86)+ "px"); // the number is the vertical pixel offset, higher it is, lower the camera on zoom.
-        $('#scale').textContent = "1:" + scaleRes;}, // sets the bpm from the slider value
+            let item = document.createElement('t'); // creates a new text element
+            item.textContent = songList[step][i]; // sets text for each string in the array from @dataStorage
+            let br = document.createElement('br'); // makes a break for the next entry in the for loop
 
-    scaleUpdate = () => {
-        scaleRes = document.getElementById("scaleSlider").value; // gets the bpm for the slider
-        zoomEvent(); };
+            trackContainer.appendChild(item).appendChild(br);}}; // appends to parent

@@ -1,5 +1,5 @@
-
-const $doc = document.documentElement,
+const
+    $doc = document.documentElement,
     $ = document.querySelector.bind(document),
     $all = document.querySelectorAll.bind(document);
 
@@ -15,11 +15,13 @@ let framePushType = false, // How the debug menu outputs by default. 0-30 / 1-4
     danceMode = [["danceButton", false],["multiplierButton", true]], //types of dance floors, name and bool assignment.
     forceRefresh = false, // This forces a URL refresh every few seconds with a live timestamp
     foregroundBool = true, // displays the foreground environment
+    animationType = 0,
     playTog = true; // enables the animation by default
 
 // TODO: CLOTHING // CHARACTERS
 
-const clothingData = [16,8], //max amount of clothing / how many clothing articles per row
+const
+    clothingData = [16,8], //max amount of clothing / how many clothing articles per row
     defaultCharacter = "Nocturna"; //default character to select on load.
 let currentClothing = 4; //default clothing active on startup
 // amount of clothing / how many on each column. This is just a hardcoded setting for changing the amount
@@ -28,7 +30,8 @@ let shieldPos = 2;
 
 // TODO: FLOOR TYPES
 
-const floorTileSets = [ //these store the type of floor tiles needed to be displayed
+const
+    floorTileSets = [ //these store the type of floor tiles needed to be displayed
         [["zone1","zone1"], ["zone2","zone2"], ["zone3_1","zone3_2"]],
         [["zone4"], ["zone5"], ["boss_1","boss_2","boss_1"]]],
     // if you want extra backgrounds which will be toggled between, change and add to these.
@@ -47,26 +50,27 @@ let currentFloor = 5; // The default floor you want to be active, you can't sele
 
 // TODO: MUSIC
 
-const songList = [
-    ["Tombtorial"], //100
-    ["N/a"], //105
-    ["N/a"], //110
-    ["1-1 // Disco Descent"], //115
-    ["BOSS // Deep Blues [123]", "BOSS // King Conga", "BOSS // Golden Lute", "TRAINING // Watch Your Step"], //120
-    ["BOSS // Coral Riff [126]", "BOSS // Frankensteinway"], //125
-    ["LOBBY // Rhythmortis","1-2 // Crypteque","2-1 // Fungal Funk","4-1 // Styx and Stones", "5-1 // Voltzwaltz"], //130
-    ["3-1 // Stone Cold (cold)"," 3-1 // Igneous Rock (hot)"], //135
-    ["1-3 // Mausoleum Mash","2-2 // Grave Throbbing","BOSS // Necrodancer Phase 1","BOSS // Dead Ringer","5-2 // Power Cords"], //140
-    ["3-2 // Dance of the Decorous (cold)","3-2 March of the Profane (hot)","4-2 // Heart of the Crypt", "BOSS // Conductor"], //145
-    ["2-3 // Portabellohead", "BOSS // FortissiMole"], //150
-    ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)","5-3 // Six Feet Thunder"], //155
-    ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
-    ["N/a"], //165
-    ["N/a"], //170
-    ["BOSS // Death Metal"], //175
-    ["N/a"], //180
-    ["N/a"], //185
-    ["N/a"],]; //190
+const
+    songList = [
+        ["Tombtorial"], //100
+        ["N/a"], //105
+        ["N/a"], //110
+        ["1-1 // Disco Descent"], //115
+        ["BOSS // Deep Blues [123]", "BOSS // King Conga", "BOSS // Golden Lute", "TRAINING // Watch Your Step"], //120
+        ["BOSS // Coral Riff [126]", "BOSS // Frankensteinway"], //125
+        ["LOBBY // Rhythmortis","1-2 // Crypteque","2-1 // Fungal Funk","4-1 // Styx and Stones", "5-1 // Voltzwaltz"], //130
+        ["3-1 // Stone Cold (cold)"," 3-1 // Igneous Rock (hot)"], //135
+        ["1-3 // Mausoleum Mash","2-2 // Grave Throbbing","BOSS // Necrodancer Phase 1","BOSS // Dead Ringer","5-2 // Power Cords"], //140
+        ["3-2 // Dance of the Decorous (cold)","3-2 March of the Profane (hot)","4-2 // Heart of the Crypt", "BOSS // Conductor"], //145
+        ["2-3 // Portabellohead", "BOSS // FortissiMole"], //150
+        ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)","5-3 // Six Feet Thunder"], //155
+        ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
+        ["N/a"], //165
+        ["N/a"], //170
+        ["BOSS // Death Metal"], //175
+        ["N/a"], //180
+        ["N/a"], //185
+        ["N/a"],]; //190
 // These will be displayed as compatible tracks, not much need to edit them, but if you do want to edit them-
 // keep the amount of songs per array to 5, as that's the max the UI is designed for.
 

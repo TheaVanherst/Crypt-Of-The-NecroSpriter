@@ -1,7 +1,7 @@
 
 :root{
     --tablePadding: 15px; --logoDesign: 75px;
-    --window1Height: 680px; --window2Height: 396px; --window3Height: 465px; --window4Height: 64px; --window6Height: 338px;
+    --window1Height: 680px; --window2Height: 396px; --window3Height: 545px; --window4Height: 64px; --window6Height: 338px;
     --window1Width: 580px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px; --window7Width: 190px;}
 
 #crop, render{ width: var(--window1Width); height: 543px;
