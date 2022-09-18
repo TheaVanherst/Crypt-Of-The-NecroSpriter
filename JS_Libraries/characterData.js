@@ -343,7 +343,7 @@ const
                 displacement: {
                     top: 2, left: 2},
                 offset: {
-                    sequence: [4, 3, 2, 1]},
+                    sequence: [1, 2, 3, 4]},
                 fileUrl : "weapon_lance"}
         },{
             name: "chaunter",
@@ -377,6 +377,7 @@ const
                 displacement: {
                     top: 0, left: 0},
                 offset: {
+                    top: [1, 1, 1, 1],
                     sequence: [1, 2, 3, 4]},
                 fileUrl : "chaunter_lantern"},
             clothingData: {
@@ -421,6 +422,7 @@ const
                     top: 2, left: 1}},
             special: {
                 bool: true,
+                zIndex: 10,
                 resolution: {
                     height: 28, width: 28},
                 displacement: {
@@ -430,6 +432,9 @@ const
                     sequence: [1, 1, 1, 1],
                     rotation: 180},
                 fileUrl: "weapon_greatsword"
-            },
+            }
+        },{
+            name: "custom",
+            dlc: 2,
         }
     ]

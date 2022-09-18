@@ -22,7 +22,6 @@ const
     equipment = $('#equipment'),
     item = $('#item'),
     special = $('#special'),
-
     specialButton = $("#specialButton");
 
 const

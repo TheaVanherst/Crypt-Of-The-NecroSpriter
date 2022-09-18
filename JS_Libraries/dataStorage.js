@@ -1,4 +1,4 @@
-const
+const // ignore this, it's general purpose shortcuts to save time addressing items.
     $doc = document.documentElement,
     $ = document.querySelector.bind(document),
     $all = document.querySelectorAll.bind(document);
@@ -14,8 +14,12 @@ let framePushType = false, // How the debug menu outputs by default. 0-30 / 1-4
     ampBool = false, // Amplified default setting. On/off
     danceMode = [["danceButton", false],["multiplierButton", true]], //types of dance floors, name and bool assignment.
     forceRefresh = false, // This forces a URL refresh every few seconds with a live timestamp
+
     foregroundBool = true, // displays the foreground environment
-    animationType = 0,
+    backgroundBool = true, // displays the floor tiles by default
+    floorColour = "darkslategray", //name or HEX code of the colour which the background will be set to in the render preview
+
+    animationType = 1, // render type, 0 being Non-linear In-game rendering, 1 being linear 1-2-3-4 pacing.
     playTog = true; // enables the animation by default
 
 // TODO: CLOTHING // CHARACTERS
@@ -25,8 +29,8 @@ const
     defaultCharacter = "Nocturna"; //default character to select on load.
 let currentClothing = 4; //default clothing active on startup
 // amount of clothing / how many on each column. This is just a hardcoded setting for changing the amount
-// of columns and rows I want to impliment in the UI. I would avoid touching this unless you want to add extra sets of clothing.
-let shieldPos = 2;
+// of columns and rows I want to implement in the UI. I would avoid touching this unless you want to add extra sets of clothing.
+let shieldPos = 2; //default shield positioning on startup. 0: "up", 1:"down", 2:"right"
 
 // TODO: FLOOR TYPES
 
@@ -35,23 +39,24 @@ const
         [["zone1","zone1"], ["zone2","zone2"], ["zone3_1","zone3_2"]],
         [["zone4"], ["zone5"], ["boss_1","boss_2","boss_1"]]],
     // if you want extra backgrounds which will be toggled between, change and add to these.
-    // and once the subcatagory is selected, just click again to cycle around the array.
+    // and once the subcategory is selected, just click again to cycle around the array.
 
     overlayTileSets = [ //these store the names for the individual overlays
         [["zone1","zone1_shop"], ["zone2","zone2_Alt"], ["zone3_Cold","zone3_Hot"]],
         [["zone4"], ["zone5"], ["boss_1","boss_2","boss_3"]]];
-    // this works similar to how the floorTileSets works, but these display the forgrounds.
+    // this works similar to how the floorTileSets works, but these display the foregrounds.
     // just change the name of the foreground you want here.
 
 // for each floorTileSet you use, you'll need a overlayTileSet to work alongside it, otherwise the carousel will go out
 // of sync of one another, unless you want that. Upto you.
 
-let currentFloor = 5; // The default floor you want to be active, you can't select a subfloor, it only selects the button you want, aka. the first of each type.
+let currentFloor = 5; // The default floor you want to be active, you can't select a subfloor,
+// it only selects the button you want, aka. the first of each type.
 
 // TODO: MUSIC
 
 const
-    songList = [
+    songList = [ //these are lists of songs that are displayed in the track preview which shows examples of tracks based on BPM
         ["Tombtorial"], //100
         ["N/a"], //105
         ["N/a"], //110

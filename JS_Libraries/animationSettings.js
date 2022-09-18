@@ -3,7 +3,7 @@
 let ampMultiplier = 0, aniArrLength = 0;
 const
     frameTypeToggle = (e) => { //this is to push the current frame times
-        buttonTog(e)
+        buttonTog(e);
         framePushType = !framePushType;
         aniOffsets.unshift(aniOffsets.pop()); //rotates the array clockwise.
         aniArrLength = aniOffsets[0].length;},
@@ -15,12 +15,26 @@ const
 
         $all(bodyParts).forEach(id => { // specific displacement for the character
             id.style.marginLeft =
-                ((frame + (ampMultiplier * 4)) * -currentObject.settings.resolution.width) + 'px';})},
+                ((frame + (ampMultiplier * 4)) * -currentObject.settings.resolution.width) + 'px';});},
 
     foregroundToggle = () => {
-        foreground.setAttribute('class', foregroundBool ? "invisible" : "");
         foregroundBool = !foregroundBool;
+        foreground.setAttribute('class', foregroundBool ? "" : "invisible");
         buttonTog($('#foregroundButton'));},
+
+    backgroundToggle = () => {
+        backgroundBool = !backgroundBool;
+        $all("#floor, #danceFloor").forEach(e => {
+            e.setAttribute('class', backgroundBool ? "" : "invisible");})
+        $all("#danceButton, #multiplierButton").forEach(e => {
+            e.setAttribute('class', backgroundBool ? "" : "deact");})
+
+        if (backgroundBool) {
+            for (let i = 0; i < danceMode.length; i++) {
+                danceMode[i][1] = false;}}
+
+        danceFloor.classList.add('invisible');
+        buttonTog($('#backgroundButton'));},
 
     floorFlip = () => {
         danceFloor.classList.remove('invisible');
@@ -31,20 +45,20 @@ const
         danceFloor.classList.add('invisible');},
 
     multiplierFlip = (item, id) => {
-        for (let i = 0; i < danceMode.length; i++){
+        for (let i = 0; i < danceMode.length; i++) {
             let t = $("#"+danceMode[i][0]);
             danceMode[i][1] = i === id ? danceMode[id][1] = !danceMode[id][1] : false;
-            floorDebug.textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : "
-            if(!t.classList.contains("deact")){
+            floorDebug.textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : ";
+            if (!t.classList.contains("deact")) {
                 t.setAttribute('class', danceMode[i][1] ? "inv" : "");}}
 
-        if(danceMode[id]){floorFlip()}
+        if (danceMode[id]) {floorFlip();}
         else {floorHide();}},
 
     danceFlip = () => { //checks if the floor should flip (every 1 bar)
-        if(danceMode[0][1] || danceMode[1][1]){
+        if (danceMode[0][1] || danceMode[1][1]) {
             floorFlipper = !floorFlipper; //flips the floor
-            flipDebug.textContent = floorFlipper ? 1 : 2
+            flipDebug.textContent = floorFlipper ? 1 : 2;
             floorFlip();}
         else {floorHide();}},
 

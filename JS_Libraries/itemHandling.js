@@ -1,8 +1,4 @@
 
-const foreground = $("#foreground"),
-    danceFloor = $("#danceFloor"),
-    backgrounds = $('#backgrounds');
-
 const itemToggle = (e) => {
         let id = e.id;
         buttonTog($("#"+id));

@@ -10,13 +10,27 @@ document.addEventListener('DOMContentLoaded', () => { // this just sets the boxe
 
     // todo: RENDER SETTINGS
 
-    playTog = danceMode[0] || danceMode[1] //enables play toggle if dance floor bools are enabled.
-    buttonTog($("#play"))
-    multiplierFlip(danceMode[0][0],danceMode[0][1])
-    multiplierFlip(danceMode[1][0],danceMode[1][1])
-    if(animationType === 1){frameTypeToggle($("#aniType"))}
-    if(foregroundBool){buttonTog($('#foregroundButton'));}
-    else {$('#foreground').classList.add("invisible");}
+    //playTog = danceMode[0] || danceMode[1] //enables play toggle if dance floor bools are enabled.
+    if (playTog) {buttonTog($("#play"));}
+    multiplierFlip(danceMode[0][0],danceMode[0][1]);
+    multiplierFlip(danceMode[1][0],danceMode[1][1]);
+    if (animationType === 1) {frameTypeToggle($("#aniType"));}
+
+    foreground.setAttribute('class', foregroundBool ? "" : "invisible");
+    if (foregroundBool) {buttonTog($('#foregroundButton'));}
+
+    $all("#floor, #danceFloor").forEach(e => {
+        e.setAttribute('class', backgroundBool ? "" : "invisible");})
+    $all("#danceButton, #multiplierButton").forEach(e => {
+        e.setAttribute('class', backgroundBool ? "" : "deact");})
+
+    if (backgroundBool) {
+        buttonTog($('#backgroundButton'));
+        for (let i = 0; i < danceMode.length; i++) {
+            danceMode[i][1] = false;}}
+    else {
+        danceFloor.classList.add('invisible');}
+    $("render").style.backgroundColor = floorColour;
 
     const c=currentFloor-1,v=c>2?1:0,h=c>2?c-3:c; //figures out which array to use for said floor
     currentFloor = floorTileSets[v][h][0]; //sets current floor automatically

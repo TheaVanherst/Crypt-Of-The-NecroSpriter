@@ -17,6 +17,11 @@ const
     heartBeat = $("#bpmCounter").children,
     elapsedDebug = $("#elapsedDebug"),
 
+    foreground = $("#foreground"),
+    backgrounds = $('#backgrounds'),
+
+    danceFloor = $("#danceFloor"),
+    floor = $("#floor"),
     flipDebug = $("#flipDebug"),
     floorDebug = $("#floorDebug");
 let floorFlipper; //flips every bar (music)
@@ -71,7 +76,8 @@ const
 
         if (currentObject?.special) {
             special.style.backgroundPositionX = -((currentObject.special.offset.sequence[frame - 1] - 1) * currentObject.special.resolution.width) + 'px';
-            special.style.top = -(currentObject?.special?.offset?.top[frame-1]) + "px";}
+            if (currentObject?.special?.offset?.top) {
+                special.style.top = -(currentObject?.special?.offset?.top[frame-1]) + "px";}}
 
         torch.style.backgroundPositionX = ((currentObject.torch.sequence[frame - 1] - 1) * -24) + 'px';
         hip.style.backgroundPositionX = -((currentObject.hip.sequence[frame]) * -24) + 'px';
@@ -98,14 +104,16 @@ const
             special.style.backgroundImage = "url('items/" + currentObject.special.fileUrl + ".png')";
             console.log("url('items/" + currentObject.special.fileUrl + ".png')")
 
-            if(currentObject.special.offset.rotation > 0){
+            if(currentObject?.special?.offset?.rotation > 0){
                 special.style.transform = "rotate("+currentObject.special.offset.rotation+"deg)"
                 special.style.left = "0.5px"
                 special.style.width = currentObject.special.resolution.width + 0.5 + "px"}
-            else if (currentObject.special.flip){
+            else if (currentObject?.special?.flip){
                 special.style.left = "0.5px"
                 special.style.width = currentObject.special.resolution.width + 0.5 + "px"}
             else {
+                special.style.transform = ""
+                special.style.left = ""
                 special.style.width = currentObject.special.resolution.width + "px";}
 
             special.style.margin = currentObject.special.displacement.top + "px 0 0 " + currentObject.special.displacement.left + "px";
