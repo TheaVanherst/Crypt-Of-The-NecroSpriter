@@ -37,11 +37,8 @@ let characterRefactor = class currentCharacter {
 
             $('#characterSelect').getElementsByTagName('options')[dlcCount[key]]
                 .appendChild(createButton('e', currentCharacter, currentCharacter)).onclick = function () {
-
                 characterClass.update(key, frame)
-                specialItem.characterChange(key)
-                $('container.tb3 options e.inv')?.classList?.remove('inv');
-                buttonTog(this);}}
+                specialItem.characterChange(key)}}
 
         $all("#characterUrl").forEach((e) => {
             e.onkeydown = (a) => {
@@ -64,15 +61,18 @@ let characterRefactor = class currentCharacter {
     height; width; head;
 
     update(character,frame) {
-        this.dlc =  characterData[character].dlc;
+        $("#" + this.name)?.classList.remove("inv");
+
         this.id = character;
+        this.name = characterData[character].name
+        this.dlc =  characterData[character].dlc;
 
         this.width =    merge(24,    characterData[character]?.settings?.resolution?.width);
         this.height =   merge(24,   characterData[character]?.settings?.resolution?.height);
         this.#bodyOffsets(character);
 
         characterData[character]?.settings?.floatSequence === true ?
-            this.#floatChecks(character, frame): this.#floatDisable(character, frame);
+            this.#floatChecks(frame): this.#floatDisable(character, frame);
 
         this.headElement.style.height = this.height + "px";
         this.bodyElement.style.height = this.height + "px";
@@ -87,19 +87,17 @@ let characterRefactor = class currentCharacter {
 
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
+        for(let key in itemArray){itemArray[key].characterChange(character);}
 
-        for(let key in itemArray){
-            itemArray[key].characterChange(character);}
-
-        $("#" + characterData[character].name).classList.add("inv")
-        $("#characterDebug").textContent = characterData[character].name + " ";
+        $("#" + this.name).classList.add("inv");
+        $("#characterDebug").textContent = this.name + " ";
         $("#clothingDebug").textContent = this.clothingSet + 1;
 
         this.animate(frame);};
 
-    #floatChecks(character, frame) {
+    #floatChecks(frame) {
         this.floatOffsets = [0,0,0,0,0,0];
-        let bodyOffset = merge(0, characterData[character]?.settings?.offset?.body);
+        let bodyOffset = merge(0, characterData[this.name]?.settings?.offset?.body);
 
         let random = Math.floor(Math.random() * 3);
         this.floatOffsets = this.playerFloatOffsets.map((x) => x);
@@ -157,7 +155,7 @@ let characterRefactor = class currentCharacter {
         buttonTog($('#clothing' + this.clothingSet));
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
-            characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(this.id, frame) : null
+            characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null
 
             this.headElement.classList.add("invisible")}
         else {

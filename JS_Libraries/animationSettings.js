@@ -48,9 +48,9 @@ const
         $("#danceFloor").classList.add('invisible');},
 
     animationFlip = () => {
-        let bool = $("#playerModel").classList.contains('mirror')
+        let bool = $("#playerModel").classList.contains('mirror');
         $("#playerModel").setAttribute("class", bool ? "" : "mirror");
-        characterClass.flip(bool)},
+        characterClass.flip(bool);},
 
     multiplierFlip = (item, id) => {
         for (let i = 0; i < danceMode.length; i++) {

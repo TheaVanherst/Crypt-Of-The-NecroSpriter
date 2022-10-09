@@ -8,8 +8,7 @@ window.setInterval(() => {
     frame = aniOffsets[0][elapsed] - 1;
     if(playTog){
         elapsed = Math.floor((new Date().getTime() - start) / (60/bpm) / (1000 / aniOffsets[0].length));
-        animationPush();}
-}, (60/bpm));
+        animationPush();}}, (60/bpm));
 
 const heartBeat = $("#bpmCounter").children,
 
@@ -25,7 +24,6 @@ const heartBeat = $("#bpmCounter").children,
         if (elapsed > aniArrLength - 1) {
             start = new Date().getTime();
             elapsed = 0;
-
             danceFlip();
 
             floatInt = floatInt > 4 ? 0 : floatInt + 1;
@@ -47,7 +45,6 @@ const heartBeat = $("#bpmCounter").children,
                 Math.floor((24 - characterClass.width) / 2) + "px";
 
         heartBeat[floatInt].classList.add("beat");
-
         frame = aniOffsets[0][elapsed] - 1;
         $("#beatDebug").textContent = frame;
         $("#barDebug").textContent = floatInt + 1;
@@ -58,8 +55,7 @@ const heartBeat = $("#bpmCounter").children,
         characterClass.animate(frame)
         specialItem.animate(frame)
         for (let key in itemArray) {
-            itemArray[key].animate(frame)}
-    },
+            itemArray[key].animate(frame)}},
 
     danceFlip = () => { //checks if the floor should flip (every 1 bar)
         if (danceMode[0][1] || danceMode[1][1]) {
