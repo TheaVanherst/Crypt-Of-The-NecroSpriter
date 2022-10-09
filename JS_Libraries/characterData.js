@@ -2,103 +2,17 @@ const
     aniOffsets = [
         [1,1,1,2, 2,2,2,2, 2,2,2,2,
          3,3,3,3, 3,3,3,3, 3,3,4,4,
-         4,4,4,4, 4,4], [1,2,3,4]],
-    playerFloatOffsets = [0,1,2,2,1,0];
+         4,4,4,4, 4,4], [1,2,3,4]];
 
 const
     transform = $('#transform'),
-    amplifiedButton = $('#amplifiedButton'),
-
-    head = $('#head'),
-    headContainer = $('#headContainer'),
-    body = $('#body'),
-    playerModel = $('#playerModel'),
-    characterUrl = $("#characterUrl");
+    amplifiedButton = $('#amplifiedButton');
 
 const
-    bodyParts = [
-    '#body, #head'];
-
-const
-    defaultData = {
-        settings: {
-            resolution: {
-                width: 24, height: 24,
-                rows: 14, columns: 16},
-            offset: {
-                head: 0, body: 0},
-            ampMultiplier: 1,
-            floatSequence: undefined,
-            fileUrl: "",
-            head: true,
-            amp: true},
-        hat: {
-            bool: true,
-            offset: {
-                top: 0, left: 0},
-            sequence: [1, 2, 3, 4]},
-        weapon: {
-            bool: true,
-            offset: {
-                top: 0, left: 0},
-            sequence: [1, 2, 3, 4]},
-        ring: {
-            bool: true,
-            offset: {
-                top: 0, left: 0},
-            sequence: [1, 2, 3, 4]},
-        boots: {
-            bool: true,
-            offset: {
-                top: 0, left: 0},
-            sequence: [1, 2, 3, 4]},
-        charm: {
-            bool: true,
-            offset: {
-                top: 0, left: 0,
-                sequence: [1, 2, 3, 2]}},
-        shovel: {
-            bool: true,
-            offset: {
-                top: 0, left: 0}},
-        torch: {
-            bool: true,
-            offset: {
-                top: 0, left: 0},
-            sequence: [1, 2, 3, 4],
-            flip: false},
-        hip: {
-            bool: true,
-            offset: {
-                top: 0, left: 0
-            },
-            sequence: [4, 3, 2, 1]},
-        // special: {
-        //     bool: false,
-        //     zIndex: 10,
-        //     resolution: {
-        //         height: 0, width: 0},
-        //     displacement: {
-        //         top: 0, left: 0},
-        //     offset: {
-        //         top: [0, 0, 0, 0],
-        //         sequence: [0, 0, 0, 0],
-        //         rotation: 0,
-        //         flip: false
-        //     },
-        //     fileUrl: ""},
-
-        // clothingData: {
-        //         bool: true,
-        //         clothing: 1,
-        //         head: false,
-        //         floatSequence: true}
-    },
-
     dlcTypes = ["Base Game", "Amplified", "Synchrony"],
     characterData = [
         {
-            name: "cadence",
+            name: "Cadence",
             dlc: 0,
             settings: {
                 fileUrl: "characters/player1"},
@@ -133,7 +47,10 @@ const
             hat: {
                 offset: {
                     left: 4},
-                sequence: [0, 0, 0, 0]},
+                sequence: [2, 1, 1, 1]},
+            weapon: {
+                offset: {
+                    top: 3, left: 9}},
             ring: {
                 offset: {
                     top: 3, left: 4}},
@@ -142,8 +59,8 @@ const
                     top: 4, left: 4}},
             charm: {
                 offset: {
-                    top: 1, left: 4,
-                    sequence: [2, 1, 1, 1]}},
+                    top: 1, left: 4},
+                sequence: [2, 1, 1, 1]},
             shovel: {
                 offset: {
                     top: 2, left: 3}},
@@ -171,6 +88,10 @@ const
             boots: {
                 offset: {
                     top: 4, left: 4}},
+            charm: {
+                offset: {
+                    left: 4},
+                sequence: [2, 1, 1, 1]},
             shovel: {
                 bool: false},
             torch: {
@@ -214,7 +135,7 @@ const
                 bool: true,
                 offset: {
                     top: 2, left: 4,
-                    sequence: [2, 0, -2, -1]}},
+                    sequence: [3, 2, 1, 2]},},
             shovel: {
                 offset: {
                     top: 4, left: 4}}
@@ -247,11 +168,10 @@ const
                     top: 2, left: 2}},
             boots: {
                 offset: {
-                    top: 3, left: 1}},
+                    top: 4, left: 1}},
             charm: {
                 offset: {
-                    top: 2, left: 2,
-                    sequence: [1, 2, 3, 2]}},
+                    top: 2, left: 2}},
             shovel: {
                 offset: {
                     top: 3, left: 1}},
@@ -262,11 +182,10 @@ const
                 offset: {
                     top: 2, left: 2}},
             clothingData: {
-                bool: true,
                 clothing: 15,
                 head: false,
-                enable: itemEnable,
-                disable: itemDisable,
+                // enable: itemEnable,
+                // disable: itemDisable,
                 settings: {
                     hat: {
                         bool: false},
@@ -305,7 +224,7 @@ const
             settings: {
                 headOffset: {
                     top: 1},
-                fileUrl : "characters/char12"}
+                fileUrl : "characters/char13"}
         },{
             name: "Suzu",
             dlc: 2,
@@ -341,18 +260,20 @@ const
                 resolution: {
                     height: 24, width: 24},
                 displacement: {
-                    top: 2, left: 2},
+                    top: 4, left: 2,
+                    sequence: [1, 1, 1, 2]},
                 offset: {
                     sequence: [1, 2, 3, 4]},
-                fileUrl : "weapon_lance"}
+                fileUrl : "items/weapon_lance"}
         },{
-            name: "chaunter",
+            name: "Chaunter",
             dlc: 2,
             settings: {
                 resolution: {
                     width: 27, height: 26,
                     rows: 1, columns: 9},
                 fileUrl : "characters/Chaunter",
+                floatSequence : true,
                 head: false,
                 amp: false},
             hat: {
@@ -377,14 +298,8 @@ const
                 displacement: {
                     top: 0, left: 0},
                 offset: {
-                    top: [1, 1, 1, 1],
                     sequence: [1, 2, 3, 4]},
-                fileUrl : "chaunter_lantern"},
-            clothingData: {
-                bool: true,
-                clothing: 1,
-                head: false,
-                floatSequence: true}
+                fileUrl : "items/chaunter_lantern"},
         },{
             name: "Klarinetta",
             dlc: 2,
@@ -393,11 +308,13 @@ const
                     width: 26, height: 30,
                     rows: 1, columns: 32
                 },
+                offset: {
+                    body: 1},
                 ampMultiplier: 1,
                 fileUrl: "characters/Klarinetta"},
             hat: {
                 offset: {
-                    top: 1, left: 1}},
+                    top: 1, left: 1,}},
             weapon: {
                 bool: false},
             ring: {
@@ -426,12 +343,13 @@ const
                 resolution: {
                     height: 28, width: 28},
                 displacement: {
-                    top: 19, left: 13},
-                offset: {
-                    top: [1, 1, 1, 2],
-                    sequence: [1, 1, 1, 1],
-                    rotation: 180},
-                fileUrl: "weapon_greatsword"
+                    top: 19, left: 13,
+                    sequence: [1, 1, 1, 2]},
+                sequence: [1, 1, 1, 1],
+                transform: {
+                    scaleX: -1,
+                    scaleY: -1},
+                fileUrl: "items/weapon_greatsword"
             }
         },{
             name: "custom",

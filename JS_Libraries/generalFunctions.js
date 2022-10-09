@@ -7,45 +7,79 @@ const
         return item;},
 
     buttonAdjustment = (button, newVal, newButton) => {
-        $all(button + " e").forEach(id => {id?.classList?.remove('inv')});
-        currentClothing = newVal;
-        body.style.marginTop = -(currentObject.settings.resolution.height * newVal) + "px";
-        newButton.classList.add('inv')},
+        $all(button + " e").classList?.remove('inv');
+        newButton.classList.add('inv');},
 
     buttonTog = (e) => {
         e.classList.toggle('inv');},
 
+    itemToggle = (e) => {
+        let id = e.id;
+        buttonTog($("#"+id));
+        id = id.replace("Button","");
+
+        $("#" + id).src = $("#" + id).src + "?" + new Date().getTime();
+        $("#" + id)?.classList?.toggle("invisible");},
+
+    timeUpdate = () => {
+        let date = new Date().getTime();
+        for (let key in itemArray) {
+            itemArray[key].urlUpdate(undefined,date)}
+
+        characterClass.urlUpdate()},
+
+    bodyUrlSearch = (e) => {
+        if(e.key === 'Enter') {
+            const
+                image = new Image(),
+                item = e.target.value;
+            image.src = item + (characterClass.dlc !== 2 ? "_armor_body.png" : "_body.png");
+            image.onload = () => {
+                characterClass.urlUpdate(item);
+                return;}
+
+            targetTimeout(e)}},
+
+    search = (e) => {
+        if(e.key === 'Enter') {
+            const image = new Image();
+
+            let url = e.target.value,
+                idStrip = (e.target.id).replace("Url","");
+            image.src = url + ".png";
+            image.onload = () => {
+                let date = new Date().getTime();
+
+                for (let i = 0; i < itemArray.length; i++) {
+                    if(itemArray[i].name === idStrip){
+                        itemArray[i].urlUpdate(url);
+                        return;}}
+
+                for (let i = 0; i < consumableItems.length; i++) {
+                    if(consumableItems[i].name === idStrip){
+                        consumableItems[i].urlUpdate(url);
+                        return;}}
+
+                if(idStrip === "special"){
+                    specialItem.urlUpdate(url);
+                    return;}
+
+                if(idStrip === "shield"){
+                    shieldData.urlUpdate(url);
+                    return;}};
+
+            targetTimeout(e)}},
+
+    targetTimeout = (e) => {
+        let placeholder = e.target.placeholder;
+        e.target.value = "";
+        e.target.placeholder = "Not a valid directory";
+
+        setTimeout(function () {
+            e.target.placeholder = placeholder;}, 1953);},
+
     arrayShift = (e) => {
         e.unshift(e.pop());},
-
-    getUser = (id,data) => {
-        return data.find(d => d.name === id);},
-
-    mapItem = (id,bool,data) => {
-        return Object.keys(data).map((k) => {
-            if(bool){return parseInt(data[k][id]);}
-            else {return data[k][id];}
-        })},
-
-    itemDisable = () => {
-        for (let key in itemData) {
-            if(!currentObject.clothingData?.settings[itemData[key]?.name].bool){
-                $("#" + itemData[key].name + "Button").setAttribute('class', 'deact');
-                $("#" + itemData[key].name)?.classList?.add("invisible");}}},
-
-    itemEnable = () => {
-        for (let key in itemData) {
-            if(currentObject[itemData[key]?.name]?.bool){
-                $("#" + itemData[key].name + "Button")?.classList?.remove("deact")}}},
-
-    urlUpdate = () => {
-        for (let key in itemData) {
-            const item = itemData[key]
-            if(item?.url){
-                if(item.type === "bgi"){
-                    $("#" + item.name).style.backgroundImage = "url('"+ item.url + ".png?" + Date.now() + "')";}
-                else {
-                    $("#" + item.name).src = item.url + ".png?" + Date.now();}}}},
 
     styleProxy = {
         get: (object, property) => {
@@ -53,25 +87,11 @@ const
                 if (value) {
                     object[property] = value;
                     return new Proxy(object, styleProxy);}
-                return object[property];}}},
+                return object[property];};}},
 
     style = (selector) => {
-        let element = document.querySelector(selector);
-        return new Proxy(element.style, styleProxy);},
+        return new Proxy(selector.style, styleProxy);},
 
-    isObject = (item) => {
-        return (item && typeof item === 'object' && !Array.isArray(item));},
-
-    mergeDeep = (target, ...sources) => {
-        if (!sources.length) return target;
-        const source = sources.shift();
-
-        if (isObject(target) && isObject(source)) {
-            for (const key in source) {
-                if (isObject(source[key])) {
-                    if (!target[key]) Object.assign(target, { [key]: {} });
-                    mergeDeep(target[key], source[key]);}
-                else {
-                    Object.assign(target, { [key]: source[key] });}}}
-
-        return mergeDeep(target, ...sources);}
+    merge = (defaultData, newData, fallback) => {
+        return newData !== undefined ? newData.valueOf() :
+            defaultData !== undefined ? defaultData.valueOf() : fallback;};

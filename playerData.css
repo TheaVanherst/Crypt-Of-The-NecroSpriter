@@ -23,39 +23,30 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 
 #characterUrl {width: calc(var(--window3Width) - (25px))}
 
-#headContainer, #bodyContainer, #playerModel, #shadow,
-#head, #body, #hat, #boots, #charm, #ring, #hip, #weapon, #shovel, #torch,
-#spell, #equipment, #item, #consumables, #shield { position:absolute;
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
+#playerModel { image-rendering: -moz-crisp-edges; image-rendering: pixelated;  }
+#playerModel, #playerModel > *, #playerModel > * > *, #shadow {position:absolute}
 
 #playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
 #shadow {left:277.5px; top:73px; width: 24px; height: 27px; }
 
-#bodyContainer { height: calc(var(--imageH) + 2px); width: calc(var(--imageW)); }
-#headContainer { height: var(--imageH); width: var(--imageW); }
-#headContainer, #bodyContainer { float: left; overflow:hidden; }
+#head, #body { position:absolute; object-fit: none;}
 
-#head, #body { width:calc(var(--imageW) * var(--columns)); }
-#body { height:calc(var(--imageH) * var(--rows)); }
+#hat, #boots, #ring, #weapon, #torch, #charm,  #hip, #shovel {
+    width: 24px; height: 24px; object-fit: none}
 
-#hat, #boots, #charm, #ring, #hip{ width: 24px; height: 24px; }
-
-#weapon, #shovel, #torch { width: 24px; height: 24px; }
-#weapon, #charm{ top:0; left:0; width:24px; }
-#charm {top:calc(1px); }
-
+#shovel {left: 1px; }
 #consumables { top: 6px; }
 #spell { left: 22px; }
 #equipment { margin-top: -6px; left: 7px; }
 #item { left: -7px; }
-#spell, #equipment, #item { background-repeat: no-repeat; }
 
-#special { position:absolute; background-repeat: no-repeat; z-index: 10}
+#special { position:absolute; object-fit: none; z-index: 10; object-position: 0px 0px;}
 
-#shield { width: 24px; height: 24px; top: 4px;
-    position: absolute; background-image: url("items/shield.png"); }
-#shield.up {margin:-9px 0 0 0; z-index: 0; background-position-x: 24px; }
-#shield.right { margin:-2px 0 0 16px; z-index: 10; background-position-x: 0; }
-#shield.down {margin:9px 0 0 0; z-index: 20; background-position-x: 72px; }
+#shield { width: 24px; height: 24px; top: 4px; object-fit: none; position: absolute;}
+#shield.up {margin:-9px 0 0 0; z-index: 0; object-position: -72px 0; }
+#shield.right { margin:-2px 0 0 16px; z-index: 10; object-position: 0 0; }
+#shield.down {margin:9px 0 0 0; z-index: 20; object-position: -24px 0; }
 
-.flip { transform: scaleX(-1); background-position-x: 0.5px; }
+.flip { transform: scaleX(-1); object-position-x: 0.5px; }
+.mirror { transform: scaleX(-1); translate: 0.5px 0;}
+

@@ -1,104 +1,70 @@
-const
-    shovelOffsets = [-1,0,1,0],
-    equipmentOffsets = [[0,1,1,2,1,1],
-                        [1,2,2,1,0,1],
-                        [1,0,1,2,2,1]];
-const
-    equipmentAll = [ //assets that rely on background pos
-    "#hat", "#weapon", "#ring", "#torch",
-    "#boots", "#shovel"];
-const
-    consumables = $('#consumables'),
 
-    charm = $('#charm'),
-    shovel = $('#shovel'),
-    torch = $('#torch'),
-    hip = $('#hip'),
-    boots = $('#boots'),
+let consumableList = [];
 
-    shield = $('#shield'),
-
-    spell = $('#spell'),
-    equipment = $('#equipment'),
-    item = $('#item'),
-    special = $('#special'),
-    specialButton = $("#specialButton");
-
-const
+let
     itemData = [
-    {
-        name : "hat",
-        altName : "helmet",
-        bool : false,
-        url : "items/hat",
-        type : "bgi",
-        batMode : false,
-    },{
-        name : "weapon",
-        bool : false,
-        url : "items/weapon",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "ring",
-        bool : false,
-        url : "items/ring",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "boots",
-        bool : false,
-        url : "items/boots",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "charm",
-        bool : false,
-        url : "items/charm",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "shovel",
-        bool : false,
-        url : "items/shovel",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "torch",
-        bool : false,
-        url : "items/torch",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "hip",
-        bool : false,
-        url : "items/hip",
-        type : "bgi",
-        batMode : false
-    },{
-        name : "special",
-        bool : false,
-        type : "bgi",
-        batMode : false
-    },{
-        name : "spell",
-        bool : false,
-        url : "items/spell",
-        type : "img"
-    },{
-        name : "equipment",
-        bool : false,
-        url : "items/equipment",
-        type : "img"
-    },{
-        name : "item",
-        bool : false,
-        url : "items/item",
-        type : "img"
-    },{
-        name : "shield",
-        bool : false,
-        url : "items/shield",
-        type : "bgi"
-    }
-]
+        {
+            name : "hat",
+            altName : "helmet",
+            bool : false,
+            url : "items/hat",
+            consumable : false
+        },{
+            name : "weapon",
+            bool : false,
+            url : "items/weapon",
+            consumable : false
+        },{
+            name : "ring",
+            bool : false,
+            url : "items/ring",
+            consumable : false
+        },{
+            name : "boots",
+            bool : false,
+            url : "items/boots",
+            consumable : false
+        },{
+            name : "charm",
+            bool : false,
+            url : "items/charm",
+            consumable : false
+        },{
+            name : "shovel",
+            bool : false,
+            url : "items/shovel",
+            consumable : false
+        },{
+            name : "torch",
+            bool : false,
+            url : "items/torch",
+            consumable : false
+        },{
+            name : "hip",
+            bool : false,
+            url : "items/hip",
+            consumable : false
+        },{
+            name : "special",
+            bool : false,
+        },{
+            name : "spell",
+            bool : false,
+            url : "items/spell",
+            consumable : true
+        },{
+            name : "equipment",
+            bool : false,
+            url : "items/equipment",
+            consumable : true
+        },{
+            name : "item",
+            bool : false,
+            url : "items/item",
+            consumable : true
+        },{
+            name : "shield",
+            bool : false,
+            url : "items/shield",
+        }
+    ]

@@ -1,83 +1,49 @@
 
-document.addEventListener('DOMContentLoaded', () => { // this just sets the boxes back to default settings
-    aniArrLength = aniOffsets[0].length; // Updates the frame array to the default settings
+document.addEventListener('DOMContentLoaded', () => {
+    aniArrLength = aniOffsets[0].length;
 
-    bpmUpdate(); // pushes the current slider status to the debug menu
-    scaleUpdate(); // gets the scale for the slider ratio
-    multiplierFlip();
-
-    if(forceRefresh) {buttonTog($('#forceRefresh'));} //checks if force refresh is active by default
-
-    // todo: RENDER SETTINGS
-
-    //playTog = danceMode[0] || danceMode[1] //enables play toggle if dance floor bools are enabled.
-    if (playTog) {buttonTog($("#play"));}
+    bpmUpdate(); scaleUpdate();
+    playTog ? buttonTog($("#play")) : null;
     multiplierFlip(danceMode[0][0],danceMode[0][1]);
     multiplierFlip(danceMode[1][0],danceMode[1][1]);
-    if (animationType === 1) {frameTypeToggle($("#aniType"));}
 
-    foreground.setAttribute('class', foregroundBool ? "" : "invisible");
-    if (foregroundBool) {buttonTog($('#foregroundButton'));}
+    $("#bpmSlider").oninput = () => bpmUpdate();
+    $("#scaleSlider").oninput = () => scaleUpdate();
+    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => { search(a,e); };});
 
-    $all("#floor, #danceFloor").forEach(e => {
-        e.setAttribute('class', backgroundBool ? "" : "invisible");})
-    $all("#danceButton, #multiplierButton").forEach(e => {
-        e.setAttribute('class', backgroundBool ? "" : "deact");})
-
-    if (backgroundBool) {
-        buttonTog($('#backgroundButton'));
-        for (let i = 0; i < danceMode.length; i++) {
-            danceMode[i][1] = false;}}
-    else {
-        danceFloor.classList.add('invisible');}
-    $("render").style.backgroundColor = floorColour;
-
-    const c=currentFloor-1,v=c>2?1:0,h=c>2?c-3:c; //figures out which array to use for said floor
+    const c = currentFloor - 1,
+        v = c > 2 ? 1 : 0,
+        h = c > 2 ? c - 3 : c; //figures out which array to use for said floor
     currentFloor = floorTileSets[v][h][0]; //sets current floor automatically
-    floorDebug.textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : "
-    flipDebug.textContent = floorFlipper ? 1 : 2
-
     backgroundUpdate($('#floor'),v,h);
-    foreground.src = "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png";
-    backgrounds.children[v].children[h].classList.add('inv');
+    $("#foreground").src = "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png";
 
-    // todo: CHARACTER ? EQUIPMENT SETTINGS
-
-    currentObject = mergeDeep({}, defaultData, getUser(defaultCharacter,characterData));
-
-    playerUpdate();
-    $("#"+defaultCharacter).classList.add("inv")
-    characterDebug.textContent = currentObject.name + " "
-
-    clothingUpdate();
-    $("#clothing"+currentClothing)?.classList?.add('inv');
-    clothingDebug.textContent = currentClothing + 1
-
-    bodyUrlUpdate();
+    $('#' + overlayTileSets[v][h][0]).classList.add('inv');
+    $("#floorDebug").textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : ";
+    $("#flipDebug").textContent = floorFlipper ? 1 : 2;
 
     // todo: EQUIPMENT SETTINGS
 
     for (let key in itemData) {
         const itemName = "#" + itemData[key].name;
 
-        if(itemData[key].url !== undefined){
-            $(itemName + "Url").value = "";
-            $(itemName + "Url").placeholder = itemData[key].url + ".png";}
+        !itemData[key].bool ?
+            $(itemName).classList.add("invisible") :
+            itemToggle($(itemName + "Button"));
+        $(itemName + "Button").onclick = () => {
+            itemToggle($(itemName + "Button"));}
 
-        $(itemName+"Button").onclick = () => itemToggle($(itemName+"Button"));
+        if (itemData[key].url !== undefined) {
+            if (!itemData[key].consumable && itemData[key].name !== "shield") {
+                itemArray[key] = new itemRefactor(key, defaultCharacter, frame)}
+            else if (itemData[key].consumable) {
+                consumableList.push(key)}}
+        else {
+            $(itemName + "Url").placeholder = "No Startup URL"}}
 
-        if(!itemData[key].bool) {$("#"+itemData[key].name).classList.add("invisible");}
-        else {buttonTog($("#"+itemData[key].name + "Button"));}}
+    for (let key in consumableList) {
+        consumableItems[key] = new consumableRefactor(consumableList[key], floatInt)}
 
-    item.style.top = (-(item.naturalHeight / 2) + 16) + "px";
-    spell.style.top = (-(spell.naturalHeight / 2) + 16) + "px";
-    equipment.style.top = (-(equipment.naturalHeight) + 14) + "px";
-    shield.classList.add("right")
-
-    equipmentCall();
-    animationUpdate();
-
-    urlUpdate() //urls don't get pushed to the css unless you actively use this at the start on client load.
-
-    document.removeEventListener('DOMContentLoaded', () => {}) //cleans up the DOM elements
-}, false)
+    itemData = [];
+    document.removeEventListener('DOMContentLoaded', () => {});
+}, false);

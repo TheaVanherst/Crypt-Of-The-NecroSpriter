@@ -1,65 +1,66 @@
 
 /// animation timing setup (this is going to get recoded)
-let ampMultiplier = 0, aniArrLength = 0;
+let aniArrLength, scaleRes,
+    foregroundBool, backgroundBool;
+
 const
     frameTypeToggle = (e) => { //this is to push the current frame times
-        buttonTog(e);
-        framePushType = !framePushType;
+        if (e) {
+            framePushType = !framePushType;
+            buttonTog($("#aniType"));}
         aniOffsets.unshift(aniOffsets.pop()); //rotates the array clockwise.
         aniArrLength = aniOffsets[0].length;},
 
-    amplifiedToggle = () => {
-        ampBool = !ampBool;
-        ampMultiplier = ampBool ? 1 : 0;
-        amplifiedButton.setAttribute('class', ampBool ? "inv": "");
+    foregroundToggle = (e) => {
+        if (e) {
+            foregroundBool = !foregroundBool;
+            buttonTog($('#foregroundButton'));}
+        $("#foreground").setAttribute('class', foregroundBool ? "" : "invisible");},
 
-        $all(bodyParts).forEach(id => { // specific displacement for the character
-            id.style.marginLeft =
-                ((frame + (ampMultiplier * 4)) * -currentObject.settings.resolution.width) + 'px';});},
+    backgroundToggle = (e) => {
+        if (e) {
+            backgroundBool = !backgroundBool;
+            buttonTog($('#backgroundButton'));}
 
-    foregroundToggle = () => {
-        foregroundBool = !foregroundBool;
-        foreground.setAttribute('class', foregroundBool ? "" : "invisible");
-        buttonTog($('#foregroundButton'));},
-
-    backgroundToggle = () => {
-        backgroundBool = !backgroundBool;
-        $all("#floor, #danceFloor").forEach(e => {
-            e.setAttribute('class', backgroundBool ? "" : "invisible");})
-        $all("#danceButton, #multiplierButton").forEach(e => {
-            e.setAttribute('class', backgroundBool ? "" : "deact");})
-
-        if (backgroundBool) {
+        if(backgroundBool){
             for (let i = 0; i < danceMode.length; i++) {
-                danceMode[i][1] = false;}}
+                danceMode[i][1] = false;}
 
-        danceFloor.classList.add('invisible');
-        buttonTog($('#backgroundButton'));},
+            $all("#floor, #danceFloor").forEach(e => {
+                e.setAttribute('class', "");});
+            $all("#danceButton, #multiplierButton").forEach(e => {
+                e.setAttribute('class', "");});}
+        else {
+            $all("#floor, #danceFloor").forEach(e => {
+                e.setAttribute('class', "invisible");});
+            $all("#danceButton, #multiplierButton").forEach(e => {
+                e.setAttribute('class', "deact");});}
+
+        $("#danceFloor").classList.add('invisible');},
 
     floorFlip = () => {
-        danceFloor.classList.remove('invisible');
-        danceFloor.style.backgroundImage =
-            'url(UI_Libraries/' + currentFloor + (danceMode[1][1] ? '_' : '_NoMP_') + 'Floor' + (floorFlipper ? 2 : 1) + '.png)';},
+        $("#danceFloor").classList.remove('invisible');
+        $("#danceFloor").style.backgroundImage =
+            'url(UI_Libraries/' + currentFloor + (danceMode[1][1] ? '_' :
+                '_NoMP_') + 'Floor' + (floorFlipper ? 2 : 1) + '.png)';},
 
     floorHide = () => {
-        danceFloor.classList.add('invisible');},
+        $("#danceFloor").classList.add('invisible');},
+
+    animationFlip = () => {
+        let bool = $("#playerModel").classList.contains('mirror')
+        $("#playerModel").setAttribute("class", bool ? "" : "mirror");
+        characterClass.flip(bool)},
 
     multiplierFlip = (item, id) => {
         for (let i = 0; i < danceMode.length; i++) {
             let t = $("#"+danceMode[i][0]);
             danceMode[i][1] = i === id ? danceMode[id][1] = !danceMode[id][1] : false;
-            floorDebug.textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : ";
+            $("#floorDebug").textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : ";
             if (!t.classList.contains("deact")) {
                 t.setAttribute('class', danceMode[i][1] ? "inv" : "");}}
 
         if (danceMode[id]) {floorFlip();}
-        else {floorHide();}},
-
-    danceFlip = () => { //checks if the floor should flip (every 1 bar)
-        if (danceMode[0][1] || danceMode[1][1]) {
-            floorFlipper = !floorFlipper; //flips the floor
-            flipDebug.textContent = floorFlipper ? 1 : 2;
-            floorFlip();}
         else {floorHide();}},
 
     bpmUpdate = () => {
@@ -77,3 +78,20 @@ const
             let br = document.createElement('br'); // makes a break for the next entry in the for loop
 
             trackContainer.appendChild(item).appendChild(br);}}; // appends to parent
+
+onwheel = (e) => {
+    scaleRes = parseInt((e.deltaY || e.deltaY*-1) > 0 ? -1 : 1) + parseInt(scaleRes);
+    scaleRes = scaleRes > 12 ? 12 : scaleRes < 4 ? 4 : scaleRes;
+
+    $("#scaleSlider").value = scaleRes;
+    zoomEvent();};
+
+const zoomEvent = () => {
+        $doc.style.setProperty('--scaler',scaleRes);
+        transform.style.transform = "scale("+scaleRes+")";
+        transform.style.marginTop = -(scaleRes * 86)+ "px";
+        $('#scale').textContent = "1:" + scaleRes;},
+
+    scaleUpdate = () => {
+        scaleRes = document.getElementById("scaleSlider").value;
+        zoomEvent(); };
