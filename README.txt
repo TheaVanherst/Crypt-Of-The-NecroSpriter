@@ -38,7 +38,7 @@
 
 
 
-INSTRUCTIONS:
+                                            INSTRUCTIONS:
 
 To test your animations, replace the spritesheets in the 'Characters' folder, and click the refresh icon under the render preview.
 Refreshing the page will do the same thing, although may reset custom directory enteries you may have inserted for that character
@@ -51,7 +51,7 @@ You can also change them using the URL directory by just typing the directory it
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example.
 Eg; "file root"/"imagename"."format".
 
-NOTES:
+                                               NOTES:
 
 Each spritesheet is individually programmable per character based on the directory.
 So if you wish to change the spritesheet directory for a specific character, select the character you wish to change, 
@@ -65,7 +65,7 @@ Different characters have different file formatting, so be aware of the file nam
 Directories on launch are determined by the data that is in 'JS_Libraries/characterData.js'.
 Change the url directory and save, on page refresh it will then default to the new directory you inserted.
 
-UPCOMING:
+                                              UPCOMING:
                                                
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
