@@ -41,26 +41,20 @@
                                             INSTRUCTIONS:
 
 To test your animations, replace the spritesheets in the 'Characters' folder, and click the refresh icon under the render preview.
-Refreshing the page will do the same thing, although may reset custom directory enteries you may have inserted for that character
-  as no cookie system is currently present in the current version of the software.
+Refreshing the page will do the same thing, although may reset custom directory enteries you may have inserted for that character as no cookie system is currently present in the current version of the software.
 
-Feel free to insert new character sheets or items into the folder you want to assosiate the directory to.
-If you're using already existing spritesheets in the folder, you can just use the character selector to change to the assosiated spritesheet.
+Feel free to insert new character sheets or items into the folder you want to assosiate the directory to. If you're using already existing spritesheets in the folder, you can just use the character selector to change to the assosiated spritesheet.
 
 You can also change them using the URL directory by just typing the directory it's in and the file name + format.
-Examples of how to specify the directory are displayed in the text-boxes beforehand as an example.
-Eg; "file root"/"imagename"."format".
+Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; "file root"/"imagename"."format".
 
                                                NOTES:
 
 Each spritesheet is individually programmable per character based on the directory.
-So if you wish to change the spritesheet directory for a specific character, select the character you wish to change, 
-  and type it in the assosiated field, you then can change character to whomever you want and the directory data will be locally stored. 
+So if you wish to change the spritesheet directory for a specific character, select the character you wish to change, and type it in the assosiated field, you then can change character to whomever you want and the directory data will be locally stored. 
 If you wish to reset the custom enteries, simply refresh the page and everything will be set back to the default directories.
 
-Different characters have different file formatting, so be aware of the file naming convetions Crypt of the Necrodancer has, 
-  as a lot of these adjustments are pre-baked into the code to try and compensate for such. 
-  So I would just recommend to not try to change the naming convention too much.
+Different characters have different file formatting, so be aware of the file naming convetions Crypt of the Necrodancer has, as a lot of these adjustments are pre-baked into the code to try and compensate for such. So I would just recommend to not try to change the naming convention too much.
 
 Directories on launch are determined by the data that is in 'JS_Libraries/characterData.js'.
 Change the url directory and save, on page refresh it will then default to the new directory you inserted.
