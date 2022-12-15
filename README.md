@@ -49,7 +49,7 @@ Feel free to insert new character sheets or items into the folder you want to as
 You can also change them using the URL directory by just typing the directory it's in and the file name + format.
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
-<h4 align="center">NOTES:</h4>
+<pre>NOTES:</pre>
 
 Each spritesheet is individually programmable per character based on the directory.
 So if you wish to change the spritesheet directory for a specific character, select the character you wish to change, and type it in the assosiated field, you then can change character to whomever you want and the directory data will be locally stored. 
@@ -60,7 +60,7 @@ Different characters have different file formatting, so be aware of the file nam
 Directories on launch are determined by the data that is in `'JS_Libraries/characterData.js'`.
 Change the url directory and save, on page refresh it will then default to the new directory you inserted.
 
-<h4 align="center">UPCOMING:</h4>
+<pre>UPCOMING:</pre>
                                                
 - Selecting the "Amplified" mode will automatically toggle to Zone 5.
     - Amplified ground cable with accompanying sprite animation.
