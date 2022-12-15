@@ -49,6 +49,15 @@ Feel free to insert new character sheets or items into the folder you want to as
 You can also change them using the URL directory by just typing the directory it's in and the file name + format.
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
+<picture>
+  <img alt="Animated sample of the visual apperance and possibility of the software." src="https://cdn.discordapp.com/attachments/630047188520665121/1046348474330918932/Armour_Sets.gif">
+</picture>
+
+A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
+This site was built using Crypt of the Necrospriter, and available on the [Steam Workshop][1].
+
+[1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
+
 <pre>NOTES:</pre>
 
 Each spritesheet is individually programmable per character based on the directory.
