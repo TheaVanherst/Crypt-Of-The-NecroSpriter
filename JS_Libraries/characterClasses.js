@@ -9,7 +9,7 @@ const clothingData = [16,8], characterArray = [],
     dlcCount = mapItem("dlc",true, characterData),
     characterList = mapItem("name",false, characterData);
 
-let characterRefactor = class currentCharacter {
+let characterRefactor = class setup {
     headElement = document.querySelector("#head");
     bodyElement = document.querySelector("#body");
     playerElement = document.querySelector("#playerModel");
@@ -17,42 +17,36 @@ let characterRefactor = class currentCharacter {
     constructor(amp, clothing, character) {
         for (let e = 0; e < Math.ceil(clothingData[0] / clothingData[1]); e++) {
             $('#clothing').appendChild(createButton("div"));
-            let divS = $('#clothing').getElementsByTagName('div')[e];
+            let divS = $('#clothing').children[e];
 
             for (let i = 0; i < clothingData[1]; i++) {
                 let cur = (clothingData[1] * e) + i;
 
                 divS.appendChild(createButton("e", "", "clothing" + cur))
                     .appendChild(createButton("t", cur + 1));
-                divS.children[i].onclick = function () {
-                    characterClass.clothingUpdate(cur);}}}
+                divS.children[i].onclick = () => {
+                    this.clothingUpdate(cur);}}}
 
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
-            $('#characterSelect').appendChild(createButton("t", dlcTypes[i])); //prints what the character is from
-            $('#characterSelect').appendChild(createButton("options"));
-        } //container for character DLC types
+            ($('#characterSelect').appendChild(createButton("t", dlcTypes[i]))) //prints what the character is from
+                .appendChild(createButton("options"));} //container for character DLC types
 
         for (let key in characterData) {
-            let currentCharacter = characterList[key];
+            let char = characterList[key];
 
             $('#characterSelect').getElementsByTagName('options')[dlcCount[key]]
-                .appendChild(createButton('e', currentCharacter, currentCharacter)).onclick = function () {
-                characterClass.update(key, frame)
-                specialItem.characterChange(key)}}
+                .appendChild(createButton('e', char, char)).onclick = () => {
+                this.update(key);
+                specialData.characterChange(key);}}
 
         $all("#characterUrl").forEach((e) => {
             e.onkeydown = (a) => {
                 bodyUrlSearch(a);};});
 
         this.clothingSet = clothing;
+        this.ampBool = amp;
 
-        frame = 0;
-        $("#beatDebug").textContent = 0;
-        $("#barDebug").textContent = 1;
-        $("#elapsedDebug").textContent = 0;
-
-        this.update(character);
-        this.amp(amp);
+        this.update(character, amp);
         this.animate(0);}
 
     frameArray = [];
@@ -60,15 +54,15 @@ let characterRefactor = class currentCharacter {
     playerFloatOffsets = [8,9,10,11,10,9];
     height; width; head;
 
-    update(character,frame) {
+    update(character) {
         $("#" + this.name)?.classList.remove("inv");
 
         this.id = character;
-        this.name = characterData[character].name
+        this.name = characterData[character].name;
         this.dlc =  characterData[character].dlc;
 
-        this.width =    merge(24,    characterData[character]?.settings?.resolution?.width);
-        this.height =   merge(24,   characterData[character]?.settings?.resolution?.height);
+        this.width =  merge(24, characterData[character]?.settings?.resolution?.width);
+        this.height = merge(24, characterData[character]?.settings?.resolution?.height);
         this.#bodyOffsets(character);
 
         characterData[character]?.settings?.floatSequence === true ?
@@ -83,7 +77,9 @@ let characterRefactor = class currentCharacter {
             .marginTop(Math.floor((24 - this.height) / 2) - 5 + "px")
             .marginLeft(Math.ceil(-(24 - this.width) / 2) + "px");
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
-        this.amp(this.ampBool);
+
+        this.characterAmp = merge(true, characterData[this.id]?.settings?.amp)
+        this.ampFrameUpdate();
 
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
@@ -101,7 +97,7 @@ let characterRefactor = class currentCharacter {
 
         let random = Math.floor(Math.random() * 3);
         this.floatOffsets = this.playerFloatOffsets.map((x) => x);
-        for (let key in this.floatOffsets){
+        for (let key in this.floatOffsets) {
             this.floatOffsets[key] =
                 -(this.floatOffsets[key] + ((24 + bodyOffset) - this.height)) + "px 0 0 " +
                 Math.floor((24 - this.width) / 2) + "px";}
@@ -120,9 +116,16 @@ let characterRefactor = class currentCharacter {
                 Math.floor((24 - this.width) / 2) + "px";}
         this.floatCycle(frame);};
 
-    flip(bool) {
-        this.playerElement.style.translate =
-            bool ? "0 0" : -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}
+    flipped = false;
+
+    flip() {
+        if(this.flipped){
+            this.playerElement.setAttribute("class", "");
+            this.playerElement.style.translate = "0 0";}
+        else {
+            this.playerElement.setAttribute("class", "mirror");
+            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}
+        this.flipped = !this.flipped};
     //this is dumb and lazy as shit but it's either this or fucking around with the entire animation offset loop.
 
     #bodyOffsets(character) {
@@ -155,12 +158,12 @@ let characterRefactor = class currentCharacter {
         buttonTog($('#clothing' + this.clothingSet));
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
-            characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null
+            characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
 
-            this.headElement.classList.add("invisible")}
+            this.headElement.classList.add("invisible");}
         else {
-            this.#floatDisable(this.id, frame)
-            this.headElement.classList.remove("invisible")}
+            this.#floatDisable(this.id, frame);
+            this.headElement.classList.remove("invisible");}
 
         $("#clothingDebug").textContent = clothing;
         this.animate(frame);};
@@ -185,21 +188,20 @@ let characterRefactor = class currentCharacter {
         $("#characterUrl").placeholder = url;
         $("#characterUrl").value = "";};
 
-    amp(bool) {
-        let multiplierGrab = [],
-            arrayReader;
-
-        if(characterData[this.id]?.settings?.amp === false){
+    ampToggle() {
+        if (this.characterAmp === false) {
             this.ampBool = false;
             amplifiedButton.setAttribute('class', "deact");}
         else {
-            this.ampBool = bool;
-            amplifiedButton.setAttribute('class', this.ampBool ? "inv": "");}
+            this.ampBool = !this.ampBool;
+            amplifiedButton.setAttribute('class', this.ampBool ? "inv" : "");}
+        this.ampFrameUpdate()}
 
-        arrayReader = this.ampBool ? 1 : 0;
-
+    ampFrameUpdate() {
+        let multiplierGrab = [];
         for (let i = 0; i < 16; i++) {
             multiplierGrab[i] = -(this.width * i) + 'px ';}
         for(let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[this.ampArr[arrayReader][i] - 1];}};
+            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];}
+        this.animate(frame);};
 }

@@ -169,17 +169,17 @@
                 Animation settings
                 <options>
                     <div>
-                        <e id="danceButton" onclick="multiplierFlip(this,0)">Dance Floor</e>
-                        <e id="multiplierButton" onclick="multiplierFlip(this,1)">Multiplier</e>
-                        <e id="amplifiedButton" onclick="characterClass.amp(!characterClass.ampBool)">AMPLIFIED</e>
-                        <e id="backgroundButton" onclick="backgroundToggle(true);">background</e>
-                        <e id="foregroundButton" onclick="foregroundToggle(true);">Foreground</e>
+                        <e id="danceButton" onclick="floorData.danceSwitcher(0,1);">Dance Floor</e>
+                        <e id="multiplierButton" onclick="floorData.danceSwitcher(1,0);">Multiplier</e>
+                        <e id="amplifiedButton" onclick="currentCharacter.ampToggle();">AMPLIFIED</e>
+                        <e id="backgroundButton" onclick="floorData.floorToggle();">background</e>
+                        <e id="foregroundButton" onclick="floorData.foregroundToggle();">Foreground</e>
                     </div><div>
-                        <e class="clickable" onclick="elapsed--; playReset()"> Prev </e>
+                        <e class="clickable" onclick="elapsed--; playReset(); animationPush();">Prev</e>
                         <e id="play" onclick="playTog = !playTog; buttonTog(this);">Play</e>
-                        <e class="clickable" onclick="elapsed++; playReset()"> Next </e>
-                        <e id="aniType" onclick="frameTypeToggle(true)">Animation Type</e>
-                        <e id="flipTog" onclick="animationFlip(); buttonTog(this)">Mirror</e>
+                        <e class="clickable" onclick="elapsed++; playReset(); animationPush();">Next</e>
+                        <e id="aniType" onclick="frameTypeToggle(true);">Animation Type</e>
+                        <e id="flipTog" onclick="currentCharacter.flip(); buttonTog(this)">Mirror</e>
 
                         <div style="float: right">
                             <e id="refreshButton" onclick="timeUpdate()">
@@ -256,7 +256,7 @@
         </container>
 
         <container class="tb7" id="urlData">
-            URL Directory Data
+            <div>URL Directory Data</div>
             <div>Helmet<br><input type="text" id="hatUrl"></div>
             <div>Weapon<br><input type="text" id="weaponUrl"></div>
             <div>Ring<br><input type="text" id="ringUrl"></div>
@@ -275,16 +275,16 @@
         <container class="tb8">
             <cont>
                 <div id="bpmCounter">
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div>
-                    <div class="bpm"><img src="UI_Libraries/heart.png"></div></div>
+                    <img class="bpm" src="UI_Libraries/heart.png">
+                    <img class="bpm" src="UI_Libraries/heart.png">
+                    <img class="bpm" src="UI_Libraries/heart.png">
+                    <img class="bpm" src="UI_Libraries/heart.png">
+                    <img class="bpm" src="UI_Libraries/heart.png">
+                    <img class="bpm" src="UI_Libraries/heart.png"></div>
                 <div id="debug">
                     <t>Beat : </t><t id="beatDebug"></t><t> Bar : </t><t id="barDebug"></t><t> Frame : </t><t id="elapsedDebug"></t><br>
                     <t>Character : </t><t id="characterDebug"></t><t> : </t><t id="clothingDebug"></t><br>
-                    <t> FloorMode : </t><t id="floorDebug"></t><t id="flipDebug"></t>
+                    <t>FloorMode : </t><t id="floorDebug"></t><t id="flipDebug"></t>
                 </div>
             </cont>
         </container>
@@ -304,15 +304,13 @@
     <script type="text/javascript" src="JS_Libraries/characterData.js"></script>
     <script type="text/javascript" src="JS_Libraries/itemData.js"></script>
 
+    <script type="text/javascript" src="JS_Libraries/generalFunctions.js"></script>
+
     <script type="text/javascript" src="JS_Libraries/characterClasses.js"></script>
     <script type="text/javascript" src="JS_Libraries/itemClasses.js"></script>
-
-    <script type="text/javascript" src="JS_Libraries/generalFunctions.js"></script>
-    <script type="text/javascript" src="JS_Libraries/animationSettings.js"></script>
-    <script type="text/javascript" src="JS_Libraries/bindingFunctions.js"></script>
+    <script type="text/javascript" src="JS_Libraries/floorClasses.js"></script>
 
     <script type="text/javascript" src="JS_Libraries/startUp.js"></script>
     <script type="text/javascript" src="JS_Libraries/dataStorage.js"></script>
     <script type="text/javascript" src="JS_Libraries/animationCalls.js"></script>
-
 </html>

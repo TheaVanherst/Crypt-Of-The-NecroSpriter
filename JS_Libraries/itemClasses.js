@@ -11,7 +11,7 @@ const itemRefactor = class items {
     width = 24;
     height = 24;
 
-    constructor(item, character, frame) {
+    constructor(item, character, f) {
         this.name = itemData[item].name;
         this.src = itemData[item].url;
         this.id = item;
@@ -27,10 +27,9 @@ const itemRefactor = class items {
             itemToggle($('#' + this.name + "Button"));}
 
         this.urlUpdate(itemData[item].url);
-        this.characterChange(character, frame);
-        this.animate(frame);}
+        this.characterChange(character, f);}
 
-    characterChange(character, frame) {
+    characterChange(character, f) {
         if(characterData[character][this.name]?.bool === false) {
             this.element.classList.add("invisible");
             $('#' + this.name + "Button").setAttribute("class","deact");}
@@ -68,10 +67,10 @@ const itemRefactor = class items {
             characterData[character]?.[this.name]?.offset?.left ?
                 characterData[character][this.name].offset.left + "px" : 0;
 
-        this.animate(frame);};
+        this.animate(f);};
 
-    animate(frame) {
-        this.element.style.objectPosition = -this.multiplier[frame] + "px " + this.verticalSequence[frame] + "px"};
+    animate(f) {
+        this.element.style.objectPosition = -this.multiplier[f] + "px " + this.verticalSequence[f] + "px"};
 
     urlUpdate(url, date) {
         if(url !== undefined) {
@@ -88,14 +87,14 @@ const itemRefactor = class items {
             $("#" + this.name + "Url").value = "";}};
 };
 
-let consumableItems = [];
+let consumableData = [];
 const equipmentOffsets = [
     [0,1,1,2,2,1],
     [0,1,2,2,1,1],
     [0,1,1,2,1,0]];
 
 const consumableRefactor = class items {
-    constructor(item, frame) {
+    constructor(item, f) {
         let src = itemData[item].url;
         this.name = itemData[item].name;
         this.id = item;
@@ -111,11 +110,11 @@ const consumableRefactor = class items {
         this.button.onclick = () => {itemToggle(this.button);}
 
         this.#offsetAdjustment()
-        this.urlUpdate(src, frame)
-        this.animate(frame);};
+        this.urlUpdate(src, f)
+        this.animate(f);};
 
-    animate(frame) {
-        this.element.style.top = this.floatOffsets[frame];};
+    animate(f) {
+        this.element.style.top = this.floatOffsets[f];};
 
     #offsetAdjustment() {
         this.height = this.element.naturalHeight;
@@ -149,7 +148,7 @@ const consumableRefactor = class items {
 const specialRefactor = class items {
     name = "special";
 
-    constructor(character, frame) {
+    constructor(character, f) {
         let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]?.[character]);
         urlArray[character] = [this.name,[]]
         urlArray[character][1][this.id] = src;
@@ -167,9 +166,9 @@ const specialRefactor = class items {
         itemData[character].bool ? itemToggle(this.button) :
             $("#" + this.name).classList.add("invisible");
 
-        this.characterChange(character, frame);}
+        this.characterChange(character, f);}
 
-    characterChange(character, frame) {
+    characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
 
         if (!this.disabled) {
@@ -205,29 +204,30 @@ const specialRefactor = class items {
             this.verticalSequence = this.verticalSequence.map((x) => x)
             for (let key in this.verticalSequence){this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
 
-            this.animate(frame);
+            this.animate(f);
             this.button.classList.remove("deact");}
 
         this.urlUpdate(character);}
 
-    animate(frame) {
-        this.element.style.objectPosition = this.multiplier[frame];
-        this.element.style.top = this.verticalSequence[frame];}
+    animate(f) {
+        this.element.style.objectPosition = this.multiplier[f];
+        this.element.style.top = this.verticalSequence[f];}
 
     urlUpdate(character) {
-        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]?.[character]);
+        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]);
 
-        if (src !== undefined) {
-            urlArray[8][1][character] = src;
+        if (this.element.src) {
+            urlArray[8] = ["special", src];
 
             $("#" + this.name + "Url").classList.remove("deact");
             $("#" + this.name + "Url").placeholder = src;
             $("#" + this.name + "Url").value = "";
             this.element.src = src + ".png?" + new Date().getTime(); }
         else {
+            urlArray[8] = ["special",""];
             $("#" + this.name + "Url").placeholder = "Not Applicable";
             $("#" + this.name + "Url").classList.add("deact");
-            this.element.src = "";}};};
+            this.element.removeAttribute('src')}};};
 
 const shieldRefactor = class items {
     currentPos; id;
@@ -277,5 +277,4 @@ const shieldRefactor = class items {
         $("#shieldUrl").value = "";
         $("#shield").src = url + ".png?" + new Date().getTime();
 
-        this.src = url + ".png";};
-};
+        this.src = url + ".png";};};
