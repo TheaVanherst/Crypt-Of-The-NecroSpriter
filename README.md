@@ -50,8 +50,7 @@ You can also change them using the URL directory by just typing the directory it
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
 <picture>
-  <img alt="Animated sample of the visual apperance and possibility of the software." src="https://steamuserimages-a.akamaihd.net/ugc/1947272866714939327/D8A72D8F5C5851CED8AEF5A82DCE76739AE16CC2/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false">
-</picture>
+ <img alt="Animated sample of the visual apperance and possibility of the software." src="https://steamuserimages-a.akamaihd.net/ugc/1947272866714939327/D8A72D8F5C5851CED8AEF5A82DCE76739AE16CC2/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false"></picture>
 
 A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
 This site was built using Crypt of the Necrospriter, and available on the [Steam Workshop][1].
