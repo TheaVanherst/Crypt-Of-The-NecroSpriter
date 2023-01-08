@@ -159,15 +159,16 @@ const
             special: {
                 bool: true,
                 resolution: {
-                    height: 23, width: 17
-                },
+                    height: 23, width: 17},
                 displacement: {
-                    top: 2, left: -21
-                },
+                    top: 1, left: -21,
+                    float: true,
+                    fixed: true},
                 offset: {
-                    sequence: [0, 1, 2, 3],
-                    flip: true
-                },
+                    sequence: [0, 1, 2, 3],},
+                transform: {
+                    scaleX: 1,
+                    scaleY: -1},
                 fileUrl: "items/familiar_soul"
             }
         }, {

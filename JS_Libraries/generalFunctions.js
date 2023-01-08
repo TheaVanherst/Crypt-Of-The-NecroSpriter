@@ -13,34 +13,6 @@ const
     buttonTog = (e) => {
         e.classList.toggle('inv');},
 
-    itemToggle = (e) => {
-        let id = e.id;
-        buttonTog($("#"+id));
-        id = id.replace("Button","");
-        console.log(id)
-        $("#" + id).src = consumableData[e] + "?" + new Date().getTime();
-    },
-
-    timeUpdate = () => {
-        let date = new Date().getTime();
-        for (let key in itemArray) {
-            itemArray[key].urlUpdate(undefined,date)}
-        currentCharacter.urlUpdate()},
-
-    bodyUrlSearch = (e) => {
-        if(e.key === 'Enter') {
-            const
-                image = new Image(),
-                item = e.target.value;
-            image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
-            image.onload = () => {
-                currentCharacter.urlUpdate(item);
-                return;}
-
-            targetTimeout(e)}},
-
-
-
     bpmUpdate = () => {
         bpm = document.getElementById("bpmSlider").value; // gets the bpm for the slider
         $('#bpm').textContent = bpm; // sets the bpm from the slider value
@@ -58,18 +30,6 @@ const
             trackContainer.appendChild(item).appendChild(br);}
         bpm = 60 / bpm;
         arrayDivisional = 1000 / aniOffsets[0].length;}, // appends to parent
-
-    zoomEvent = () => {
-        $doc.style.setProperty('--scaler',scaleRes);
-        transform.style.transform = "scale("+scaleRes+")";
-        transform.style.marginTop = -(scaleRes * 86)+ "px";
-        $('#scale').textContent = "1:" + scaleRes;},
-
-    scaleUpdate = () => {
-        scaleRes = document.getElementById("scaleSlider").value;
-        zoomEvent(); },
-
-
 
     search = (e) => {
         if(e.key === 'Enter') {

@@ -62,11 +62,13 @@ const defaultData = {
         },
         displacement: {
             top: 0, left: 0,
-            sequence: [1, 1, 1, 1]},
+            sequence: [1, 1, 1, 1],
+            float: false,
+            fixed: false},
         sequence: [1, 2, 3, 4],
         transform: {
-            scaleX: 0,
-            scaleY: 0},
+            scaleX: 1,
+            scaleY: 1},
         fileUrl: ""
     },
 

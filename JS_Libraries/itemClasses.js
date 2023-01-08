@@ -181,8 +181,19 @@ const specialRefactor = class items {
 
         this.characterChange(character, f);}
 
+    floatOffsets = [];
+
     characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
+        let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float)
+        let margintop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
+
+        if(floatBool){
+            let random = Math.floor(Math.random() * 3);
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + margintop + "px");
+        } else {
+            for (let i = 0; i < 6; i++){
+                this.floatOffsets[i] = margintop + "px"}}
 
         if (!this.disabled) {
             this.multiplier = [0,0,0,0];
@@ -206,7 +217,6 @@ const specialRefactor = class items {
                 this.element.style.width = width + "px";}
 
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
-            this.element.style.marginTop =  merge(0, characterData[character]?.[this.name]?.displacement?.top + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
 
             this.multiplier = [
@@ -225,6 +235,9 @@ const specialRefactor = class items {
     animate(f) {
         this.element.style.objectPosition = this.multiplier[f];
         this.element.style.top = this.verticalSequence[f];}
+
+    animateFloat(f) {
+        this.element.style.marginTop = this.floatOffsets[f];};
 
     urlUpdate(character) {
         let src = merge(urlArray[8]?.[1], characterData[character]?.[this.name]?.fileUrl);

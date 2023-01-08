@@ -30,6 +30,7 @@ const playReset = () => { // this deals with resetting the play button
         floatInt = bool ? check : floatInt + add;
         for (let key in consumableData) {
             consumableData[key].animate(floatInt);} // gets new current time
+        specialData.animateFloat(floatInt);
 
         heartBeat[floatInt].classList.add("beat");
         $("#barDebug").textContent = floatInt;},
@@ -71,5 +72,15 @@ onwheel = (e) => {
 
     $("#scaleSlider").value = scaleRes;
     zoomEvent();};
+
+const zoomEvent = () => {
+    $doc.style.setProperty('--scaler',scaleRes);
+    transform.style.transform = "scale("+scaleRes+")";
+    transform.style.marginTop = -(scaleRes * 86)+ "px";
+    $('#scale').textContent = "1:" + scaleRes;},
+
+    scaleUpdate = () => {
+        scaleRes = document.getElementById("scaleSlider").value;
+        zoomEvent(); };
 
 frameTypeToggle(true);

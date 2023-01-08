@@ -40,7 +40,17 @@ let characterRefactor = class setup {
 
         $all("#characterUrl").forEach((e) => {
             e.onkeydown = (a) => {
-                bodyUrlSearch(a);};});
+                if(e.key === 'Enter') {
+                    const
+                        image = new Image(),
+                        item = e.target.value;
+                    image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
+                    image.onload = () => {
+                        currentCharacter.urlUpdate(item);
+                        return; }
+
+                    targetTimeout(e);}};
+        });
 
         this.clothingSet = clothing;
         this.ampBool = amp;
