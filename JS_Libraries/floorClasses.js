@@ -39,13 +39,13 @@ const floorRefactor = class floor {
         $("#backgrounds .inv")?.classList.remove("inv")
         $("#backgrounds").children[e].children[i].classList.add("inv")
 
-        let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
-
         if (JSON.stringify(this.flipToggle) === JSON.stringify(this.currentFloor)) {
             arrayShift(this.floorTileSets[e][i]);
             arrayShift(this.overlayTileSets[e][i]);
             $("#zone"+e+i).innerText = this.floorTileSets[e][i][0];}
         $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
+
+        let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
 
         this.danceFloor.style.background = push;
         this.floors.style.background = push;
@@ -89,7 +89,7 @@ const floorRefactor = class floor {
         let e = this.currentFloor[0], i = this.currentFloor[1];
         this.danceUrls = [
             "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor1.png')",
-            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor2.png')"];
+            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[1] + "_Floor2.png')"];
         this.danceFloor.style.background = this.danceUrls[this.floorBinary];}
 
     floorFlip() {
