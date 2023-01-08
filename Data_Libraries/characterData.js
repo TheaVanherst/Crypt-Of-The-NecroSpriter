@@ -134,8 +134,8 @@ const
             charm: {
                 bool: true,
                 offset: {
-                    top: 2, left: 4,
-                    sequence: [3, 2, 1, 2]},},
+                    top: 2, left: 4},
+                sequence: [3, 2, 1, 2]},
             shovel: {
                 offset: {
                     top: 4, left: 4}}
@@ -181,7 +181,7 @@ const
                 fileUrl: "characters/char10"},
             hat: {
                 offset: {
-                    top: 2, left: 2}},
+                    top: 1, left: 2}},
             weapon: {
                 offset: {
                     top: 3, left: 3}},
@@ -334,7 +334,8 @@ const
                 fileUrl: "characters/Klarinetta"},
             hat: {
                 offset: {
-                    top: 1, left: 1,}},
+                    top: 1, left: 1},
+                sequence: [1, 1, 2, 2]},
             weapon: {
                 bool: false},
             ring: {
@@ -346,7 +347,7 @@ const
             charm: {
                 offset: {
                     top: 2, left: 1,
-                    sequence: [1, 1, 2, 2]}},
+                    sequence: [1, 2, 2, 1]}},
             shovel: {
                 offset: {
                     top: 3, left: 1}},

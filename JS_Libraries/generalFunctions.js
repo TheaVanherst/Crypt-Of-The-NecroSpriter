@@ -13,6 +13,12 @@ const
     buttonTog = (e) => {
         e.classList.toggle('inv');},
 
+    urlRefresh = () => {
+        let date = new Date().getTime();
+        for (let key in itemArray) {
+            itemArray[key].urlUpdate(undefined,date)}
+        currentCharacter.urlUpdate()},
+
     bpmUpdate = () => {
         bpm = document.getElementById("bpmSlider").value; // gets the bpm for the slider
         $('#bpm').textContent = bpm; // sets the bpm from the slider value

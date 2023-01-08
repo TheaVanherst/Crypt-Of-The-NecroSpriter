@@ -2,9 +2,6 @@
 const floorRefactor = class floor {
     danceVisibility = true;
 
-    danceFloor = $("#danceFloor");
-    floor = $("#floor");
-
     currentFloor = ["2","0"];
     floorTileSets = [
         [["zone1","zone1"], ["zone2","zone2"], ["zone3_1","zone3_2"]],
@@ -17,11 +14,15 @@ const floorRefactor = class floor {
     flipToggle = []
 
     constructor() {
+        this.danceFloor = $("#danceFloor");
+        this.floors = $("#floor");
+
         for (let e in this.floorTileSets){
             $('#backgrounds').appendChild(createButton("div"));
             for (let i in this.floorTileSets[0]) {
                 let child = createButton("e", null, "zone" + e + i);
-                child.appendChild(createButton("t", this.floorTileSets[e][i][0]));
+                let title = createButton("t", this.floorTileSets[e][i][0])
+                child.appendChild(title);
                 child.style.background = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
                 $('#backgrounds').children[e].appendChild(child).onclick = () => {
                     this.backgroundUpdate(e,i); }}}
@@ -35,6 +36,9 @@ const floorRefactor = class floor {
 
     backgroundUpdate(e,i) {
         this.currentFloor = [e,i];
+        $("#backgrounds .inv")?.classList.remove("inv")
+        $("#backgrounds").children[e].children[i].classList.add("inv")
+
         let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
 
         if (JSON.stringify(this.flipToggle) === JSON.stringify(this.currentFloor)) {
@@ -44,17 +48,17 @@ const floorRefactor = class floor {
         $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
         this.danceFloor.style.background = push;
-        this.floor.style.background = push;
+        this.floors.style.background = push;
         $("#zone"+e+i).style.background = push;
 
         this.danceUpdate();
         this.flipToggle = [e,i];}
 
     floorToggle() {
-        this.floor.classList.toggle('invisible');
+        this.floors.classList.toggle('invisible');
         $("#backgroundButton").classList.toggle('inv');
 
-        if (this.floor.classList.contains('invisible')) { //this is really dumb and lazy-
+        if (this.floors.classList.contains('invisible')) { //this is really dumb and lazy-
             this.danceVisibility = false; // but there's no way to return a bool out of a toggle classlist.
             this.danceFloor.classList.add("invisible");
             $("#danceButton").setAttribute("class", "deact");

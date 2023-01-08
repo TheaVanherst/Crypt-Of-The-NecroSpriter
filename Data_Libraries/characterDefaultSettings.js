@@ -14,12 +14,14 @@ const defaultData = {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false}},
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     weapon: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false}},
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     ring: {
         offset: {
             top: 0, left: 0,
@@ -30,29 +32,32 @@ const defaultData = {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false}},
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     charm: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false}},
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     shovel: {
         offset: {
             top: 0, left: 0,
             sequence: [-1, 0, 1, 0],
-            flip: false}},
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     torch: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 4],
-            flip: false}
-        },
+            flip: false},
+        sequence: [1, 2, 3, 4]},
     hip: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 4],
-            flip: false
-        }
+            flip: false},
+        sequence: [1, 2, 3, 4]
     },
     special: {
         bool: false,
