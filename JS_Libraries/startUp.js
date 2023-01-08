@@ -19,12 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let key in itemData) {
         const itemName = "#" + itemData[key].name;
 
-        !itemData[key].bool ?
-            $(itemName).classList.add("invisible") :
-            itemToggle($(itemName + "Button"));
-        $(itemName + "Button").onclick = () => {
-            itemToggle($(itemName + "Button"));}
-
         if (itemData[key].url !== undefined) {
             if (!itemData[key].consumable && itemData[key].name !== "shield") {
                 itemArray[key] = new itemRefactor(key, defaultCharacter, frame)}

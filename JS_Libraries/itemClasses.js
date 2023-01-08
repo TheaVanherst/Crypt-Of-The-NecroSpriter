@@ -143,7 +143,9 @@ const consumableRefactor = class items {
             urlArray[this.id][1] = url;
             $("#" + this.name + "Url").placeholder = url;
             $("#" + this.name + "Url").value = "";
-            this.element.src = url + ".png?";}
+
+            this.src = url;
+            this.element.src = this.src;}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
@@ -162,22 +164,20 @@ const specialRefactor = class items {
     name = "special";
 
     constructor(character, f) {
-        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]?.[character]);
-        urlArray[character] = [this.name,[]]
-        urlArray[character][1][this.id] = src;
-
         this.element = $("#" + this.name);
-        this.element.src = src + ".png";
-
         this.button = $('#' + this.name + "Button");
 
-        itemData[character].bool ?
-            itemToggle(this.button) :
-            this.element.classList.add("invisible");
-        this.button.onclick = () => {itemToggle(this.button);}
+        if (characterData[character]?.[this.name]?.bool) {
+            this.button.classList.add('inv');
+            this.element.classList.remove('invisible');}
+        else {
+            this.element.classList.add("invisible");}
 
-        itemData[character].bool ? itemToggle(this.button) :
-            $("#" + this.name).classList.add("invisible");
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.urlUpdate()
+            this.element.src = this.src + "?" + new Date().getTime();}
 
         this.characterChange(character, f);}
 
@@ -227,20 +227,24 @@ const specialRefactor = class items {
         this.element.style.top = this.verticalSequence[f];}
 
     urlUpdate(character) {
-        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]);
+        let src = merge(urlArray[8]?.[1], characterData[character]?.[this.name]?.fileUrl);
 
-        if (this.element.src) {
+        if (src) {
             urlArray[8] = ["special", src];
 
             $("#" + this.name + "Url").classList.remove("deact");
             $("#" + this.name + "Url").placeholder = src;
             $("#" + this.name + "Url").value = "";
-            this.element.src = src + ".png?" + new Date().getTime(); }
+
+            this.src = src + ".png?" ;
+            this.element.src = this.src + new Date().getTime(); }
         else {
             urlArray[8] = ["special",""];
             $("#" + this.name + "Url").placeholder = "Not Applicable";
             $("#" + this.name + "Url").classList.add("deact");
-            this.element.removeAttribute('src')}};};
+            this.element.removeAttribute('src');}
+    };
+};
 
 const shieldRefactor = class items {
     currentPos; id;
@@ -249,6 +253,12 @@ const shieldRefactor = class items {
     bool = false;
 
     constructor(rotation, bool) {
+        this.element = $("#shield");
+        this.button = $("#shieldButton");
+
+        this.src = itemData[12].url + ".png";
+        $("#shieldUrl").placeholder = this.src;
+
         for (let key in itemData) {
             this.id = itemData[key].name === "shield" ? key : undefined;}
 
@@ -260,13 +270,19 @@ const shieldRefactor = class items {
 
         this.position.forEach(i => {
             $('#shieldSettings').appendChild(createButton("e",i,"shield" + i)).onclick = (e) => {
-                this.positionUpdate(e.target.outerText);};});
+                this.positionUpdate(e.target.outerText);};
+        });
+
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            $("#shield" + this.currentPos).classList.add("inv");
+            this.object.classList.remove("inv");
+
+            this.urlUpdate()
+        }
 
         $("#shield" + rotation).classList.add("inv");
-
-        $("#shieldButton").onclick = function () {
-            $("#shield" + this.currentPos).classList.add("inv");
-            this.object.classList.remove("inv");}
 
         this.object.setAttribute("class",rotation);
         $("#shield" + this.currentPos).classList.remove("inv");
@@ -283,11 +299,14 @@ const shieldRefactor = class items {
         this.currentPos = rotation;
         $("#shield" + this.currentPos).classList.add("inv");};
 
-    urlUpdate(url){
-        urlArray[this.id] = ["shield",url];
+    urlUpdate(){
+        let value = $("#shieldUrl").value;
+        if(value !== "" && value !== this.src){
+            this.src = value;}
 
-        $("#shieldUrl").placeholder = url;
+        urlArray[this.id] = ["shield",this.src];
+        $("#shieldUrl").placeholder = this.src;
         $("#shieldUrl").value = "";
-        $("#shield").src = url + ".png?" + new Date().getTime();
-
-        this.src = url + ".png";};};
+        $("#shield").src = this.src + "?" + new Date().getTime();
+    };
+};

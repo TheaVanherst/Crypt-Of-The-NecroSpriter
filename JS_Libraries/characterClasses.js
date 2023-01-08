@@ -1,4 +1,3 @@
-
 const
     mapItem = (id,bool,data) => {
         return Object.keys(data).map((k) => {
@@ -83,7 +82,8 @@ let characterRefactor = class setup {
 
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
-        for(let key in itemArray){itemArray[key].characterChange(character);}
+        for(let key in itemArray){
+            itemArray[key].characterChange(character);}
 
         $("#" + this.name).classList.add("inv");
         $("#characterDebug").textContent = this.name + " ";
