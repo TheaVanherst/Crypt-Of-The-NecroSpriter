@@ -16,9 +16,9 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 
 #floor, #danceFloor {
     background-repeat: repeat; object-fit: none;
-    background-position: top left; left: 14.5px; top: -350px;
+    background-position: top left; left: 14px; top: -350px;
     width: calc(72px * 10); height: calc(72px * 10); }
-#foreground { width:216px; margin: -5px 0 0 182.5px; }
+#foreground { width:216px; margin: -5px 0 0 182px; }
 
 /* TODO: Character css */
 

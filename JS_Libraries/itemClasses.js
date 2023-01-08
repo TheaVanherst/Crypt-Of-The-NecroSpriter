@@ -22,8 +22,7 @@ const itemRefactor = class items {
         this.button = $('#' + this.name + "Button");
 
         if (itemData[item].bool) {
-            this.button.classList.add('inv');
-            this.element.classList.remove('invisible');}
+            this.button.classList.add('inv');}
         else {
             this.element.classList.add("invisible");}
 
@@ -111,8 +110,7 @@ const consumableRefactor = class items {
 
         urlArray[item] = [this.name, this.src];
         if (itemData[item].bool) {
-            this.button.classList.add('inv');
-            this.element.classList.remove('invisible');}
+            this.button.classList.add('inv');}
         else {
             this.element.classList.add("invisible");}
 
@@ -162,14 +160,14 @@ const consumableRefactor = class items {
 
 const specialRefactor = class items {
     name = "special";
+    floatOffsets = [];
 
     constructor(character, f) {
         this.element = $("#" + this.name);
         this.button = $('#' + this.name + "Button");
 
         if (characterData[character]?.[this.name]?.bool) {
-            this.button.classList.add('inv');
-            this.element.classList.remove('invisible');}
+            this.button.classList.add('inv');}
         else {
             this.element.classList.add("invisible");}
 
@@ -180,8 +178,6 @@ const specialRefactor = class items {
             this.element.src = this.src + "?" + new Date().getTime();}
 
         this.characterChange(character, f);}
-
-    floatOffsets = [];
 
     characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);

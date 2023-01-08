@@ -171,7 +171,7 @@ const
                     scaleY: -1},
                 fileUrl: "items/familiar_soul"
             }
-        }, {
+        },{
             name: "Nocturna",
             dlc: 1,
             settings: {
