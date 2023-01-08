@@ -230,83 +230,84 @@ const specialRefactor = class items {
         let src = merge(urlArray[8]?.[1], characterData[character]?.[this.name]?.fileUrl);
 
         if (src) {
-            urlArray[8] = ["special", src];
+            this.src = src + ".png?" ;
+            urlArray[8] = ["special", this.src];
 
-            $("#" + this.name + "Url").classList.remove("deact");
-            $("#" + this.name + "Url").placeholder = src;
+            $("#" + this.name + "Url").placeholder = this.src;
             $("#" + this.name + "Url").value = "";
 
-            this.src = src + ".png?" ;
+            $("#" + this.name + "Url").classList.remove("deact");
             this.element.src = this.src + new Date().getTime(); }
         else {
             urlArray[8] = ["special",""];
             $("#" + this.name + "Url").placeholder = "Not Applicable";
+
             $("#" + this.name + "Url").classList.add("deact");
             this.element.removeAttribute('src');}
     };
 };
 
 const shieldRefactor = class items {
-    currentPos; id;
-    position = ["up","right","down"];
-    object = $('#shield');
-    bool = false;
+    id = 12; //dedicated slot in the url array chart.
 
     constructor(rotation, bool) {
-        this.element = $("#shield");
+        //general setup to save time later.
         this.button = $("#shieldButton");
+        this.element = $('#shield');
 
-        this.src = itemData[12].url + ".png";
-        $("#shieldUrl").placeholder = this.src;
+        //url updating
+        let src = itemData[this.id].url;
+        this.src = src + ".png";
+        $("#shieldUrl").placeholder = src;
+        this.element.src = this.src;
 
-        for (let key in itemData) {
-            this.id = itemData[key].name === "shield" ? key : undefined;}
-
+        //shield visibly (based on startUp.js)
         $('#shieldButton').setAttribute("class", bool ? "inv" : "");
-        this.object.setAttribute("class", bool ? "inv" : "");
+        this.element.setAttribute("class", !bool ? "invisible" : "");
 
-        if (this.position.indexOf(rotation) > 0) {
-            this.currentPos = rotation;}
-
-        this.position.forEach(i => {
-            $('#shieldSettings').appendChild(createButton("e",i,"shield" + i)).onclick = (e) => {
-                this.positionUpdate(e.target.outerText);};
+        //creates the buttons on startup.
+        let positionData = ["up","down","right"];
+        positionData.forEach(i => {
+            $('#shieldSettings').appendChild(
+                createButton("e",i,"shield" + i)
+            ).onclick = (e) => {
+                this.positionUpdate(e.target.outerText);
+            };
         });
+        //sets rotational data (based on startUp.js)
+        if (positionData.indexOf(rotation) > 0) {
+            this.currentPos = rotation;}
+        $("#shield" + rotation).classList.add("inv");
+        this.element.classList.add(rotation);
 
+        // binds the toggle button to refresh the url
         this.button.onclick = () => {
             buttonTog(this.button);
             this.element.classList.toggle('invisible');
             $("#shield" + this.currentPos).classList.add("inv");
-            this.object.classList.remove("inv");
+            this.element.classList.remove("inv");
 
-            this.urlUpdate()
-        }
-
-        $("#shield" + rotation).classList.add("inv");
-
-        this.object.setAttribute("class",rotation);
-        $("#shield" + this.currentPos).classList.remove("inv");
-        this.currentPos = rotation;
-        $("#shield" + this.currentPos).classList.add("inv");
-
-        this.urlUpdate(itemData[this.id].url);}
+            this.urlUpdate();
+        };
+    }
 
     positionUpdate(rotation) {
         $("#shieldButton").classList.add("inv");
-        this.object.setAttribute("class",rotation);
+        this.element.setAttribute("class",rotation);
 
         $("#shield" + this.currentPos).classList.remove("inv");
         this.currentPos = rotation;
         $("#shield" + this.currentPos).classList.add("inv");};
 
     urlUpdate(){
-        let value = $("#shieldUrl").value;
-        if(value !== "" && value !== this.src){
-            this.src = value;}
+        let src = merge($("#shieldUrl").value, this.src);
+        if(src !== this.src){
+            this.src = src;
+            urlArray[this.id] = ["shield",this.src];
 
-        urlArray[this.id] = ["shield",this.src];
-        $("#shieldUrl").placeholder = this.src;
-        $("#shieldUrl").value = "";
-        $("#shield").src = this.src + "?" + new Date().getTime();
+            $("#shieldUrl").placeholder = this.src;
+            $("#shieldUrl").value = "";
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
     };
 };
