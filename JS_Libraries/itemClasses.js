@@ -13,18 +13,24 @@ const itemRefactor = class items {
 
     constructor(item, character, f) {
         this.name = itemData[item].name;
-        this.src = itemData[item].url;
+        this.src = itemData[item].url + ".png";
         this.id = item;
 
         urlArray[item] = [this.name, this.src]
         this.element = $("#" + this.name);
-        this.element.src = this.src + ".png";
+        this.element.src = this.src;
+        this.button = $('#' + this.name + "Button");
 
-        itemData[item].bool ?
-            itemToggle($('#' + this.name + "Button")) :
-            this.element.classList.add("invisible");
-        $('#' + this.name + "Button").onclick = () => {
-            itemToggle($('#' + this.name + "Button"));}
+        if (itemData[item].bool) {
+            this.button.classList.add('inv');
+            this.element.classList.remove('invisible');}
+        else {
+            this.element.classList.add("invisible");}
+
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.element.src = this.src + "?" + new Date().getTime();}
 
         this.urlUpdate(itemData[item].url);
         this.characterChange(character, f);}
@@ -32,9 +38,9 @@ const itemRefactor = class items {
     characterChange(character, f) {
         if(characterData[character][this.name]?.bool === false) {
             this.element.classList.add("invisible");
-            $('#' + this.name + "Button").setAttribute("class","deact");}
+            this.button.setAttribute("class","deact");}
         else {
-            $('#' + this.name + "Button").classList.remove("deact");}
+            this.button.classList.remove("deact");}
 
         if(characterData[character][this.name]?.offset?.sequence === undefined){
             this.animationSequence = merge(
@@ -95,22 +101,28 @@ const equipmentOffsets = [
 
 const consumableRefactor = class items {
     constructor(item, f) {
-        let src = itemData[item].url;
+        this.src = itemData[item].url + ".png";
         this.name = itemData[item].name;
         this.id = item;
 
         this.element = $("#" + this.name);
-        this.element.src = src + ".png";
+        this.element.src = this.src;
         this.button = $('#' + this.name + "Button");
 
-        urlArray[item] = [this.name, src];
-        itemData[item].bool ?
-            itemToggle(this.button) :
-            this.element.classList.add("invisible");
-        this.button.onclick = () => {itemToggle(this.button);}
+        urlArray[item] = [this.name, this.src];
+        if (itemData[item].bool) {
+            this.button.classList.add('inv');
+            this.element.classList.remove('invisible');}
+        else {
+            this.element.classList.add("invisible");}
+
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.element.src = this.src + "?" + new Date().getTime();}
 
         this.#offsetAdjustment()
-        this.urlUpdate(src, f)
+        this.urlUpdate(this.src, f)
         this.animate(f);};
 
     animate(f) {
@@ -143,7 +155,8 @@ const consumableRefactor = class items {
         this.#offsetAdjustment()
 
         this.top = this.floatOffsets[frame] + 'px';
-        this.src = url + ".png";};};
+        this.src = url;};
+};
 
 const specialRefactor = class items {
     name = "special";

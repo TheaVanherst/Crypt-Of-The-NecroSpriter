@@ -17,7 +17,9 @@ const
         let id = e.id;
         buttonTog($("#"+id));
         id = id.replace("Button","");
-        $("#" + id).src = $("#" + id).src + "?" + new Date().getTime();},
+        console.log(id)
+        $("#" + id).src = consumableData[e] + "?" + new Date().getTime();
+    },
 
     timeUpdate = () => {
         let date = new Date().getTime();
