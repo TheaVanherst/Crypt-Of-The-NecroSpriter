@@ -207,7 +207,7 @@ const specialRefactor = class items {
 
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.marginTop =  merge(0, characterData[character]?.[this.name]?.displacement?.top + "px");
-            this.element.style.zIndex = merge(10, characterData[character]?.[this.name]?.zIndex);
+            this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
 
             this.multiplier = [
                 -(sequence[0] - 1) * width + "px 0", -(sequence[1] - 1) * width + "px 0",

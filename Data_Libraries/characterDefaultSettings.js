@@ -50,14 +50,12 @@ const defaultData = {
                 height: 0, width: 0
             },
             displacement: {
-                top: 0, left: 0
-            },
-            offset: {
-                top: [0, 0, 0, 0],
-                sequence: [0, 0, 0, 0],
-                rotation: 0,
-                flip: false
-            },
+                top: 0, left: 0,
+                sequence: [1, 1, 1, 1]},
+            sequence: [1, 2, 3, 4],
+            transform: {
+                scaleX: 0,
+                scaleY: 0},
             fileUrl: ""
         },
 

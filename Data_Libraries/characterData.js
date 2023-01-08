@@ -158,21 +158,18 @@ const
                 fileUrl: "characters/char14"},
             special: {
                 bool: true,
-                zIndex: 10,
                 resolution: {
-                    height: 23, width: 18
+                    height: 23, width: 17
                 },
                 displacement: {
-                    top: 2, left: -20
+                    top: 2, left: -21
                 },
                 offset: {
-                    top: [0, 0, 0, 0],
                     sequence: [0, 1, 2, 3],
                     flip: true
                 },
                 fileUrl: "items/familiar_soul"
             }
-
         }, {
             name: "Nocturna",
             dlc: 1,
