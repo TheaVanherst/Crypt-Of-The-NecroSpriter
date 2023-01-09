@@ -49,14 +49,17 @@ let characterRefactor = class setup {
                         currentCharacter.urlUpdate(item);
                         return; }
 
-                    targetTimeout(e);}};
+                    targetTimeout(e);}
+            };
         });
 
         this.clothingSet = clothing;
         this.ampBool = amp;
 
         this.update(character, amp);
-        this.animate(0);}
+        this.#debugUpdate(character)
+        this.animate(0);
+    }
 
     frameArray = [];
     ampArr = [[1,2,3,4],[5,6,11,16]];
@@ -99,7 +102,21 @@ let characterRefactor = class setup {
         $("#characterDebug").textContent = this.name + " ";
         $("#clothingDebug").textContent = this.clothingSet + 1;
 
-        this.animate(frame);};
+        this.#debugUpdate(character);
+        this.animate(frame);
+    };
+
+    #debugUpdate(e){
+        if(currentCharacter){
+            let returnString
+            let database = Object.entries(characterData[e]);
+            database.forEach(([key, value]) => {
+                let data = JSON.stringify(value)
+                returnString += key + " : " + data + "\n"; // 'one'
+            });
+            $("#charDebug").innerText = returnString;
+        }
+    }
 
     #floatChecks(frame) {
         this.floatOffsets = [0,0,0,0,0,0];
@@ -110,9 +127,11 @@ let characterRefactor = class setup {
         for (let key in this.floatOffsets) {
             this.floatOffsets[key] =
                 -(this.floatOffsets[key] + ((24 + bodyOffset) - this.height)) + "px 0 0 " +
-                Math.floor((24 - this.width) / 2) + "px";}
+                Math.floor((24 - this.width) / 2) + "px";
+        }
         for (let i = 0; i < random; i++) {
-            arrayShift(this.floatOffsets);}
+            arrayShift(this.floatOffsets);
+        }
 
         this.floatCycle(frame);};
 
@@ -124,7 +143,8 @@ let characterRefactor = class setup {
             this.floatOffsets[key] =
                 ((24 + this.bodyOffset) - this.height) + "px 0 0 " +
                 Math.floor((24 - this.width) / 2) + "px";}
-        this.floatCycle(frame);};
+        this.floatCycle(frame);
+    };
 
     flipped = false;
 

@@ -11,7 +11,7 @@ const floorRefactor = class floor {
         [["zone4"], ["zone5"], ["boss_1","boss_2","boss_3"]]];
     floorBinary = 0;
     floorArr = ["_NoMP",""];
-    flipToggle = []
+    flipToggle = [];
 
     constructor() {
         this.danceFloor = $("#danceFloor");
@@ -25,7 +25,9 @@ const floorRefactor = class floor {
                 child.appendChild(title);
                 child.style.background = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
                 $('#backgrounds').children[e].appendChild(child).onclick = () => {
-                    this.backgroundUpdate(e,i); }}}
+                    this.backgroundUpdate(e,i); }
+            }
+        }
 
         let a = this.floorTileSets[0].length,
             b = Math.floor(this.currentFloor[0] / a),
@@ -42,7 +44,8 @@ const floorRefactor = class floor {
         if (JSON.stringify(this.flipToggle) === JSON.stringify(this.currentFloor)) {
             arrayShift(this.floorTileSets[e][i]);
             arrayShift(this.overlayTileSets[e][i]);
-            $("#zone"+e+i).innerText = this.floorTileSets[e][i][0];}
+            $("#zone"+e+i).innerText = this.floorTileSets[e][i][0];
+        }
         $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
         let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
@@ -52,7 +55,8 @@ const floorRefactor = class floor {
         $("#zone"+e+i).style.background = push;
 
         this.danceUpdate();
-        this.flipToggle = [e,i];}
+        this.flipToggle = [e,i];
+    }
 
     floorToggle() {
         this.floors.classList.toggle('invisible');
@@ -62,14 +66,17 @@ const floorRefactor = class floor {
             this.danceVisibility = false; // but there's no way to return a bool out of a toggle classlist.
             this.danceFloor.classList.add("invisible");
             $("#danceButton").setAttribute("class", "deact");
-            $("#multiplierButton").setAttribute("class", "deact");}
-        else {
+            $("#multiplierButton").setAttribute("class", "deact");
+        } else {
             $("#danceButton").classList.remove("deact");
-            $("#multiplierButton").classList.remove("deact");}};
+            $("#multiplierButton").classList.remove("deact");
+        }
+    };
 
     foregroundToggle() {
         $("#foreground").classList.toggle('invisible');
-        $("#foregroundButton").classList.toggle('inv');};
+        $("#foregroundButton").classList.toggle('inv');
+    };
 
     danceSwitcher(a,b) {
         let objs = [$("#danceButton"),$("#multiplierButton")];
@@ -80,19 +87,22 @@ const floorRefactor = class floor {
 
             arrayShift(this.floorArr);
             this.danceUpdate();
-            this.danceFloor.classList.remove('invisible');}
+            this.danceFloor.classList.remove('invisible');
+        }
 
         objs[a].classList.length === 0 && objs[b].classList.length === 0 ?
-            this.danceFloor.classList.add('invisible') : null;};
+            this.danceFloor.classList.add('invisible') : null;
+    };
 
     danceUpdate() {
         let e = this.currentFloor[0], i = this.currentFloor[1];
         this.danceUrls = [
             "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor1.png')",
-            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[1] + "_Floor2.png')"];
+            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor2.png')"];
         this.danceFloor.style.background = this.danceUrls[this.floorBinary];}
 
     floorFlip() {
         this.floorBinary ^= 1;
-        this.danceFloor.style.background = this.danceUrls[this.floorBinary];}
+        this.danceFloor.style.background = this.danceUrls[this.floorBinary];
+    }
 }

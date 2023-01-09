@@ -87,6 +87,8 @@ container.tb7, container.tb7 options { width:var(--window7Width) }
 .tb8 .mid img {height:calc(var(--window2Height) + var(--window6Height) - var(--window1Height))}
 container.tb8 options, container.tb8 cont { width:var(--window1Width) }
 
+.tb9 {left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + var(--window3Width) + (var(--tablePadding) * 11));}
+
 .footer {position:absolute;
     left:calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 10));
     top:calc(var(--window3Height) + var(--window4Height) + 130px + var(--logoDesign))}

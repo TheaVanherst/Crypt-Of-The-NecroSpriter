@@ -76,7 +76,6 @@ const defaultData = {
             scaleY: 1},
         fileUrl: ""
     },
-
     clothingData: {
         bool: true,
         clothing: 1,

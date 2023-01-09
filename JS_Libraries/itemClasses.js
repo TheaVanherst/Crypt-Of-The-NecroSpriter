@@ -110,21 +110,26 @@ const consumableRefactor = class items {
 
         urlArray[item] = [this.name, this.src];
         if (itemData[item].bool) {
-            this.button.classList.add('inv');}
+            this.button.classList.add('inv');
+        }
         else {
-            this.element.classList.add("invisible");}
+            this.element.classList.add("invisible");
+        }
 
         this.button.onclick = () => {
             buttonTog(this.button);
             this.element.classList.toggle('invisible');
-            this.element.src = this.src + "?" + new Date().getTime();}
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
 
         this.#offsetAdjustment()
         this.urlUpdate(this.src, f)
-        this.animate(f);};
+        this.animate(f);
+    };
 
     animate(f) {
-        this.element.style.top = this.floatOffsets[f];};
+        this.element.style.top = this.floatOffsets[f];
+    };
 
     #offsetAdjustment() {
         this.height = this.element.naturalHeight;
@@ -132,9 +137,12 @@ const consumableRefactor = class items {
         this.floatOffsets = equipmentOffsets[random].map((x) => x);
 
         for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
-            arrayShift(this.floatOffsets);}
+            arrayShift(this.floatOffsets);
+        }
         for (let key in this.floatOffsets) {
-            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";}}
+            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";
+        }
+    }
 
     urlUpdate(url, date){
         if(url !== undefined) {
@@ -155,7 +163,8 @@ const consumableRefactor = class items {
         this.#offsetAdjustment()
 
         this.top = this.floatOffsets[frame] + 'px';
-        this.src = url;};
+        this.src = url;
+    };
 };
 
 const specialRefactor = class items {
@@ -182,14 +191,14 @@ const specialRefactor = class items {
     characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
         let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float)
-        let margintop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
+        let marginTop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
 
         if(floatBool){
             let random = Math.floor(Math.random() * 3);
-            this.floatOffsets = equipmentOffsets[random].map((x) => x + margintop + "px");
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
         } else {
             for (let i = 0; i < 6; i++){
-                this.floatOffsets[i] = margintop + "px"}}
+                this.floatOffsets[i] = marginTop + "px"}}
 
         if (!this.disabled) {
             this.multiplier = [0,0,0,0];
@@ -266,9 +275,9 @@ const shieldRefactor = class items {
 
         //url updating
         let src = itemData[this.id].url;
-        this.src = src + ".png";
+        this.src = src;
         $("#shieldUrl").placeholder = src;
-        this.element.src = this.src;
+        this.element.src = this.src + ".png";
 
         //shield visibly (based on startUp.js)
         $('#shieldButton').setAttribute("class", bool ? "inv" : "");

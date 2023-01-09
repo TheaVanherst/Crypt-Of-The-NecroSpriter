@@ -8,63 +8,64 @@ let
             altName : "helmet",
             bool : false,
             url : "items/hat",
-            consumable : false
+            type : "equipment"
         },{
             name : "weapon",
             bool : false,
             url : "items/weapon",
-            consumable : false
+            type : "equipment"
         },{
             name : "ring",
             bool : false,
             url : "items/ring",
-            consumable : false
+            type : "equipment"
         },{
             name : "boots",
             bool : false,
             url : "items/boots",
-            consumable : false
+            type : "equipment"
         },{
             name : "charm",
             bool : false,
             url : "items/charm",
-            consumable : false
+            type : "equipment"
         },{
             name : "shovel",
             bool : false,
             url : "items/shovel",
-            consumable : false
+            type : "equipment"
         },{
             name : "torch",
             bool : false,
             url : "items/torch",
-            consumable : false
+            type : "equipment"
         },{
             name : "hip",
             bool : false,
             url : "items/hip",
-            consumable : false
+            type : "equipment"
         },{
             name : "special",
-            bool : false,
+            type : "special"
         },{
             name : "spell",
             bool : false,
             url : "items/spell",
-            consumable : true
+            type : "consumable"
         },{
             name : "equipment",
             bool : false,
             url : "items/equipment",
-            consumable : true
+            type : "consumable"
         },{
             name : "item",
             bool : false,
             url : "items/item",
-            consumable : true
+            type : "consumable"
         },{
             name : "shield",
             bool : false,
             url : "items/shield",
+            type : "shield"
         }
     ]
