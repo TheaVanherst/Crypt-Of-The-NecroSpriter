@@ -16,7 +16,7 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 
 #floor, #danceFloor {
     background-repeat: repeat; object-fit: none;
-    background-position: top left; left: 14px; top: -350px;
+    background-position: top left; left: 15px; top: -350px;
     width: calc(72px * 10); height: calc(72px * 10); }
 #foreground { width:216px; margin: -5px 0 0 182px; }
 
@@ -28,7 +28,7 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
 #playerModel, #playerModel > *, #playerModel > * > *, #shadow {position:absolute}
 
 #playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
-#shadow {left:277.5px; top:73px; width: 24px; height: 27px; }
+#shadow {left:278px; top:73px; width: 24px; height: 27px; }
 
 #head, #body {position:absolute; object-fit: none;}
 

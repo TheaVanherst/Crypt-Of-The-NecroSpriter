@@ -222,7 +222,6 @@ const specialRefactor = class items {
                 this.element.style.width =      width + "px";}
 
             this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform.opacity);
-            console.log(characterData[character]?.[this.name])
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
 

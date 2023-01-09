@@ -56,8 +56,11 @@ let characterRefactor = class setup {
         this.clothingSet = clothing;
         this.ampBool = amp;
 
+        this.flipped = false;
+        this.flip();
+
         this.update(character, amp);
-        this.#debugUpdate(character)
+        this.#debugUpdate(character);
         this.animate(0);
     }
 
@@ -76,6 +79,7 @@ let characterRefactor = class setup {
         this.width =  merge(24, characterData[character]?.settings?.resolution?.width);
         this.height = merge(24, characterData[character]?.settings?.resolution?.height);
         this.#bodyOffsets(character);
+
 
         characterData[character]?.settings?.floatSequence === true ?
             this.#floatChecks(frame): this.#floatDisable(character, frame);
@@ -149,13 +153,17 @@ let characterRefactor = class setup {
     flipped = false;
 
     flip() {
-        if(this.flipped){
+        if(!this.flipped){
             this.playerElement.setAttribute("class", "");
             this.playerElement.style.translate = "0 0";}
         else {
             this.playerElement.setAttribute("class", "mirror");
-            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}
-        this.flipped = !this.flipped};
+            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}};
+
+    flipToggle() {
+        this.flipped = !this.flipped;
+        this.flip();}
+
     //this is dumb and lazy as shit but it's either this or fucking around with the entire animation offset loop.
 
     #bodyOffsets(character) {
