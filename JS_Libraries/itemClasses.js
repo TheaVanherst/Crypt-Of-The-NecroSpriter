@@ -215,12 +215,14 @@ const specialRefactor = class items {
             let width = merge(0, characterData[character]?.[this.name]?.resolution?.width);
             this.element.style.height = characterData[character]?.[this.name]?.resolution.height + "px";
             if (characterData[character]?.[this.name]?.transform) {
-                this.element.style.transform = "scale(" + scale[0] + ", " + scale[1] + ")";
-                this.element.style.width = width + 0.5 + "px";}
+                this.element.style.transform =  "scale(" + scale[0] + ", " + scale[1] + ")";
+                this.element.style.width =      width + 0.5 + "px";}
             else {
                 this.element.style.transform = "none";
-                this.element.style.width = width + "px";}
+                this.element.style.width =      width + "px";}
 
+            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform.opacity);
+            console.log(characterData[character]?.[this.name])
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
 

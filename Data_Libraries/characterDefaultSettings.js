@@ -72,6 +72,7 @@ const defaultData = {
             fixed: false},
         sequence: [1, 2, 3, 4],
         transform: {
+            opacity: 1,
             scaleX: 1,
             scaleY: 1},
         fileUrl: ""

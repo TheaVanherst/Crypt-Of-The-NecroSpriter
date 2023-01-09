@@ -167,6 +167,7 @@ const
                 offset: {
                     sequence: [0, 1, 2, 3],},
                 transform: {
+                    opacity: 0.5,
                     scaleX: 1,
                     scaleY: -1},
                 fileUrl: "items/familiar_soul"
