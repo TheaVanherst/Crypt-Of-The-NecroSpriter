@@ -4,13 +4,14 @@ const
             if(bool){return parseInt(data[k][id]);}
             else {return data[k][id];}});};
 
-const clothingData = [16,8], characterArray = [],
-    dlcCount = mapItem("dlc",true, characterData),
+const
+    clothingData = [15,8], characterArray = [],
+    dlcCount =      mapItem("dlc",true, characterData),
     characterList = mapItem("name",false, characterData);
 
 let characterRefactor = class setup {
-    headElement = document.querySelector("#head");
-    bodyElement = document.querySelector("#body");
+    headElement =   document.querySelector("#head");
+    bodyElement =   document.querySelector("#body");
     playerElement = document.querySelector("#playerModel");
 
     constructor(amp, clothing, character) {
@@ -20,11 +21,17 @@ let characterRefactor = class setup {
 
             for (let i = 0; i < clothingData[1]; i++) {
                 let cur = (clothingData[1] * e) + i;
+                if(cur < clothingData[0]){
+                    divS.appendChild(createButton("e", "", "clothing" + cur))
+                        .appendChild(createButton("t", cur + 1));
+                    divS.children[i].onclick = () => {
+                        this.clothingUpdate(cur);
+                    };
+                }
+            }
+        }
 
-                divS.appendChild(createButton("e", "", "clothing" + cur))
-                    .appendChild(createButton("t", cur + 1));
-                divS.children[i].onclick = () => {
-                    this.clothingUpdate(cur);}}}
+
 
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
             ($('#characterSelect').appendChild(createButton("t", dlcTypes[i]))) //prints what the character is from
@@ -41,27 +48,23 @@ let characterRefactor = class setup {
         $all("#characterUrl").forEach((e) => {
             e.onkeydown = (a) => {
                 if(e.key === 'Enter') {
-                    const
-                        image = new Image(),
-                        item = e.target.value;
-                    image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
-                    image.onload = () => {
-                        currentCharacter.urlUpdate(item);
-                        return; }
+                    let item = e.target.value,
+                        image = new Image();
+                        image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
+                        image.onload = () => {
+                            currentCharacter.urlUpdate(item);
+                            return;
+                        }
 
-                    targetTimeout(e);}
-            };
+                    targetTimeout(e);
+                }};
         });
 
-        this.clothingSet = clothing;
-        this.ampBool = amp;
-
-        this.flipped = false;
-        this.flip();
+        this.clothingSet =  clothing;
+        this.ampBool =      amp;
+        this.flipped =      false;
 
         this.update(character, amp);
-        this.#debugUpdate(character);
-        this.animate(0);
     }
 
     frameArray = [];
@@ -72,7 +75,7 @@ let characterRefactor = class setup {
     update(character) {
         $("#" + this.name)?.classList.remove("inv");
 
-        this.id = character;
+        this.id =   character;
         this.name = characterData[character].name;
         this.dlc =  characterData[character].dlc;
 
@@ -107,6 +110,7 @@ let characterRefactor = class setup {
         $("#clothingDebug").textContent = this.clothingSet + 1;
 
         this.#debugUpdate(character);
+        this.flip()
         this.animate(frame);
     };
 
@@ -164,8 +168,6 @@ let characterRefactor = class setup {
         this.flipped = !this.flipped;
         this.flip();}
 
-    //this is dumb and lazy as shit but it's either this or fucking around with the entire animation offset loop.
-
     #bodyOffsets(character) {
         if (characterData[character].settings?.head === false) {
             this.head = false;
@@ -187,21 +189,23 @@ let characterRefactor = class setup {
             this.clothingSet = 0;
             buttonTog($('#clothing' + this.clothingSet));}
         else {
-            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));}};
+            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));}
+    };
 
     clothingUpdate(clothing) {
-        buttonTog($('#clothing' + this.clothingSet));
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
+
+        buttonTog($('#clothing .inv'));
         buttonTog($('#clothing' + this.clothingSet));
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
-
-            this.headElement.classList.add("invisible");}
-        else {
+            this.headElement.classList.add("invisible");
+        } else {
             this.#floatDisable(this.id, frame);
-            this.headElement.classList.remove("invisible");}
+            this.headElement.classList.remove("invisible");
+        }
 
         $("#clothingDebug").textContent = clothing;
         this.animate(frame);};
@@ -214,7 +218,7 @@ let characterRefactor = class setup {
         this.playerElement.style.margin = this.floatOffsets[frame];};
 
     urlUpdate(url) {
-        url = merge(characterArray[this.id]?.[1], url, characterData[this.id].settings.fileUrl)
+        url = merge(characterArray[this.id]?.[1], url, characterData[this.id].settings.fileUrl);
         let srcLink = (this.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"])
             .map(i => i + ".png?" + new Date().getTime());
         characterArray[this.id] = [characterData[this.id].name,url];

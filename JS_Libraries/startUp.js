@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemName = "#" + itemData[key].name;
 
         if (itemData[key].url !== undefined) {
-            if (itemData[key].type === "equipment" || itemData[key].type === "consumable"){
+            if (itemData[key].type === "equipment"){
                 itemArray[key] = new itemRefactor(key, defaultCharacter, frame);
             } else if (itemData[key].type === "consumable") {
                 consumableList.push(key);

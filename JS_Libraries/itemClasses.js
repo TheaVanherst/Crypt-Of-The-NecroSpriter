@@ -175,22 +175,18 @@ const specialRefactor = class items {
         this.element = $("#" + this.name);
         this.button = $('#' + this.name + "Button");
 
-        if (characterData[character]?.[this.name]?.bool) {
-            this.button.classList.add('inv');}
-        else {
-            this.element.classList.add("invisible");}
-
         this.button.onclick = () => {
             buttonTog(this.button);
             this.element.classList.toggle('invisible');
             this.urlUpdate()
-            this.element.src = this.src + "?" + new Date().getTime();}
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
 
         this.characterChange(character, f);}
 
     characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
-        let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float)
+        let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float);
         let marginTop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
 
         if(floatBool){
@@ -198,7 +194,8 @@ const specialRefactor = class items {
             this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
         } else {
             for (let i = 0; i < 6; i++){
-                this.floatOffsets[i] = marginTop + "px"}}
+                this.floatOffsets[i] = marginTop + "px";
+        }}
 
         if (!this.disabled) {
             this.multiplier = [0,0,0,0];
