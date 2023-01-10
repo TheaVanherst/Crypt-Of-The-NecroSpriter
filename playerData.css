@@ -18,7 +18,7 @@ e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
     background-repeat: repeat; object-fit: none;
     background-position: top left; left: 15px; top: -350px;
     width: calc(72px * 10); height: calc(72px * 10); }
-#foreground { width:216px; margin: -5px 0 0 182px; }
+#foreground { width:216px; margin: -5px 0 0 183px; }
 
 /* TODO: Character css */
 

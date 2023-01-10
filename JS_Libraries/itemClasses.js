@@ -204,31 +204,28 @@ const specialRefactor = class items {
             this.element.classList.add("invisible");
             this.button.setAttribute("class","deact");}
         else {
-            let sequence = merge([1,2,3,4], characterData[character]?.[this.name]?.sequence),
-                scale = [
-                    characterData[character]?.[this.name]?.transform?.scaleY,
-                    characterData[character]?.[this.name]?.transform?.scaleX];
-
-            let width = merge(0, characterData[character]?.[this.name]?.resolution?.width);
-            this.element.style.height = characterData[character]?.[this.name]?.resolution.height + "px";
-            if (characterData[character]?.[this.name]?.transform) {
-                this.element.style.transform =  "scale(" + scale[0] + ", " + scale[1] + ")";
-                this.element.style.width =      width + 0.5 + "px";}
-            else {
-                this.element.style.transform = "none";
-                this.element.style.width =      width + "px";}
-
+            let width =                 characterData[character]?.[this.name]?.resolution?.width
+            this.element.style.height = characterData[character]?.[this.name]?.resolution.height
             this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform.opacity);
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
+            if (characterData[character]?.[this.name]?.transform) {
+                this.element.style.transform =
+                    "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
+                             + characterData[character]?.[this.name]?.transform?.scaleX + ")";
+                this.element.style.width =      width + 0.5 + "px";
+            } else {
+                this.element.style.transform = "none";
+                this.element.style.width =      width + "px";
+            }
 
+            let sequence =  merge([1,2,3,4], characterData[character]?.[this.name]?.sequence);
             this.multiplier = [
                 -(sequence[0] - 1) * width + "px 0", -(sequence[1] - 1) * width + "px 0",
                 -(sequence[2] - 1) * width + "px 0", -(sequence[3] - 1) * width + "px 0"];
-
-            this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence);
-            this.verticalSequence = this.verticalSequence.map((x) => x)
-            for (let key in this.verticalSequence){this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
+            this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence).map((x) => x)
+            for (let key in this.verticalSequence){
+                this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
 
             this.animate(f);
             this.button.classList.remove("deact");}
@@ -259,7 +256,8 @@ const specialRefactor = class items {
             $("#" + this.name + "Url").placeholder = "Not Applicable";
 
             $("#" + this.name + "Url").classList.add("deact");
-            this.element.removeAttribute('src');}
+            this.element.removeAttribute('src');
+        }
     };
 };
 

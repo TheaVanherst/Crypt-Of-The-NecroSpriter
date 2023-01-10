@@ -14,6 +14,7 @@ const floorRefactor = class floor {
     flipToggle = [];
 
     constructor() {
+        this.danceVisibility = true;
         this.danceFloor = $("#danceFloor");
         this.floors = $("#floor");
 
@@ -38,39 +39,40 @@ const floorRefactor = class floor {
 
     backgroundUpdate(e,i) {
         this.currentFloor = [e,i];
-        $("#backgrounds .inv")?.classList.remove("inv")
-        $("#backgrounds").children[e].children[i].classList.add("inv")
+
+        $("#backgrounds .inv")?.classList.remove("inv");
+        $("#backgrounds").children[e].children[i].classList.add("inv");
+        $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
         if (JSON.stringify(this.flipToggle) === JSON.stringify(this.currentFloor)) {
             arrayShift(this.floorTileSets[e][i]);
             arrayShift(this.overlayTileSets[e][i]);
             $("#zone"+e+i).innerText = this.floorTileSets[e][i][0];
         }
-        $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
         let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
+        this.danceFloor.style.background =  push;
+        this.floors.style.background =      push;
+        $("#zone"+e+i).style.background =   push;
 
-        this.danceFloor.style.background = push;
-        this.floors.style.background = push;
-        $("#zone"+e+i).style.background = push;
-
-        this.danceUpdate();
         this.flipToggle = [e,i];
+        this.danceUpdate();
     }
 
     floorToggle() {
         this.floors.classList.toggle('invisible');
         $("#backgroundButton").classList.toggle('inv');
 
-        if (this.floors.classList.contains('invisible')) { //this is really dumb and lazy-
-            this.danceVisibility = false; // but there's no way to return a bool out of a toggle classlist.
+        if (this.danceVisibility) { //this is really dumb and lazy-
             this.danceFloor.classList.add("invisible");
             $("#danceButton").setAttribute("class", "deact");
             $("#multiplierButton").setAttribute("class", "deact");
         } else {
+            this.danceFloor.classList.remove("invisible");
             $("#danceButton").classList.remove("deact");
             $("#multiplierButton").classList.remove("deact");
         }
+        this.danceVisibility = !this.danceVisibility
     };
 
     foregroundToggle() {
@@ -97,12 +99,19 @@ const floorRefactor = class floor {
     danceUpdate() {
         let e = this.currentFloor[0], i = this.currentFloor[1];
         this.danceUrls = [
-            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor1.png')",
-            "url('UI_Libraries/" + this.floorTileSets[e][i][0] + this.floorArr[0] + "_Floor2.png')"];
-        this.danceFloor.style.background = this.danceUrls[this.floorBinary];}
+            `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png')`,
+            `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor2.png')`];
+        this.danceFloor.style.background = this.danceUrls[this.floorBinary];
+
+        //TODO: This needs fixing.
+        // let urlCheck1 = new Image()
+        // urlCheck1.src = `UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png`;
+        // urlCheck1.onload = () => {}
+        // urlCheck1.onerror = () => {}
+    };
 
     floorFlip() {
         this.floorBinary ^= 1;
         this.danceFloor.style.background = this.danceUrls[this.floorBinary];
-    }
+    };
 }

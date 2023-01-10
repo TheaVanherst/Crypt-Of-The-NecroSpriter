@@ -44,7 +44,7 @@ const
             let url = e.target.value,
                 idStrip = (e.target.id).replace("Url","");
             image.src = url + ".png";
-            console.log(idStrip);
+            console.log(`RETURN URL: ${idStrip}`);
 
             image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {

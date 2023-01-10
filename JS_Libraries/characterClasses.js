@@ -83,7 +83,6 @@ let characterRefactor = class setup {
         this.height = merge(24, characterData[character]?.settings?.resolution?.height);
         this.#bodyOffsets(character);
 
-
         characterData[character]?.settings?.floatSequence === true ?
             this.#floatChecks(frame): this.#floatDisable(character, frame);
 
