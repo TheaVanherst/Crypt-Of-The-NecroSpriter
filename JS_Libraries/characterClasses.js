@@ -112,7 +112,7 @@ let characterRefactor = class setup {
             returnString += key + " : " + data + "\n"; // 'one'
         });
         $("#charDebug").innerText = returnString;
-    }
+    };
 
     #floatChecks(frame) {
         this.floatOffsets = [0,0,0,0,0,0];
@@ -129,7 +129,8 @@ let characterRefactor = class setup {
             arrayShift(this.floatOffsets);
         }
 
-        this.floatCycle(frame);};
+        this.floatCycle(frame);
+    };
 
     #floatDisable(character, frame){
         this.floatOffsets = [0,0,0,0,0,0];
@@ -150,11 +151,13 @@ let characterRefactor = class setup {
             this.playerElement.style.translate = "0 0";}
         else {
             this.playerElement.setAttribute("class", "mirror");
-            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}};
+            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";}
+    };
 
     flipToggle() {
         this.flipped = !this.flipped;
-        this.flip();}
+        this.flip();
+    };
 
     #bodyOffsets(character) {
         if (characterData[character].settings?.head === false) {
@@ -166,7 +169,8 @@ let characterRefactor = class setup {
             this.headElement.style.top = headOffset + "px";
             this.headElement.classList.remove("invisible");}
 
-        this.urlUpdate();};
+        this.urlUpdate();
+    };
 
     #clothingChecks(character) {
         let rows = merge(14, characterData[character]?.settings?.resolution?.rows);
@@ -196,14 +200,17 @@ let characterRefactor = class setup {
         }
 
         $("#clothingDebug").textContent = clothing;
-        this.animate(frame);};
+        this.animate(frame);
+    };
 
     animate(frame) {
         this.bodyElement.style.objectPosition = this.frameArray[frame] + this.clothingMulti;
-        this.headElement.style.objectPosition = this.frameArray[frame] + '0';};
+        this.headElement.style.objectPosition = this.frameArray[frame] + '0';
+    };
 
     floatCycle(frame) {
-        this.playerElement.style.margin = this.floatOffsets[frame];};
+        this.playerElement.style.margin = this.floatOffsets[frame];
+    };
 
     urlUpdate(url) {
         url = merge(characterArray[this.id]?.[1], url, characterData[this.id].settings.fileUrl);
@@ -216,7 +223,8 @@ let characterRefactor = class setup {
         this.src = url + ".png";
 
         $("#characterUrl").placeholder = url;
-        $("#characterUrl").value = "";};
+        $("#characterUrl").value = "";
+    };
 
     ampToggle() {
         if (this.characterAmp === false) {
@@ -224,8 +232,10 @@ let characterRefactor = class setup {
             amplifiedButton.setAttribute('class', "deact");}
         else {
             this.ampBool = !this.ampBool;
-            amplifiedButton.setAttribute('class', this.ampBool ? "inv" : "");}
-        this.ampFrameUpdate()}
+            amplifiedButton.setAttribute('class', this.ampBool ? "inv" : "");
+        }
+        this.ampFrameUpdate();
+    };
 
     ampFrameUpdate() {
         let multiplierGrab = [];
@@ -233,5 +243,6 @@ let characterRefactor = class setup {
             multiplierGrab[i] = -(this.width * i) + 'px ';}
         for(let i = 0; i < 4; i++) {
             this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];}
-        this.animate(frame);};
+        this.animate(frame);
+    };
 }

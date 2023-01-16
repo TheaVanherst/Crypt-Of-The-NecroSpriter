@@ -72,24 +72,30 @@ const itemRefactor = class items {
             characterData[character]?.[this.name]?.offset?.left ?
                 characterData[character][this.name].offset.left + "px" : 0;
 
-        this.animate(f);};
+        this.animate(f);
+    };
 
     animate(f) {
-        this.element.style.objectPosition = -this.multiplier[f] + "px " + this.verticalSequence[f] + "px"};
+        this.element.style.objectPosition = -this.multiplier[f] + "px " + this.verticalSequence[f] + "px"
+    };
 
     urlUpdate(url, date) {
         if(url !== undefined) {
             urlArray[this.id][1] = url;
             $("#" + this.name + "Url").placeholder = url;
             $("#" + this.name + "Url").value = "";
-            this.element.src = url + ".png?";}
+            this.element.src = url + ".png?";
+        }
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
             $("#" + this.name + "Url").value = "";
-        } else {
+        }
+        else {
             $("#" + this.name + "Url").placeholder = "No data";
-            $("#" + this.name + "Url").value = "";}};
+            $("#" + this.name + "Url").value = "";
+        }
+    };
 };
 
 let consumableData = [];
@@ -122,8 +128,8 @@ const consumableRefactor = class items {
             this.element.src = this.src + "?" + new Date().getTime();
         }
 
-        this.#offsetAdjustment()
-        this.urlUpdate(this.src, f)
+        this.#offsetAdjustment();
+        this.urlUpdate(this.src, f);
         this.animate(f);
     };
 
@@ -142,7 +148,7 @@ const consumableRefactor = class items {
         for (let key in this.floatOffsets) {
             this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";
         }
-    }
+    };
 
     urlUpdate(url, date){
         if(url !== undefined) {
@@ -151,16 +157,19 @@ const consumableRefactor = class items {
             $("#" + this.name + "Url").value = "";
 
             this.src = url;
-            this.element.src = this.src;}
+            this.element.src = this.src;
+        }
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
             $("#" + this.name + "Url").value = "";
-        } else {
+        }
+        else {
             $("#" + this.name + "Url").placeholder = "No data";
-            $("#" + this.name + "Url").value = "";}
+            $("#" + this.name + "Url").value = "";
+        }
 
-        this.#offsetAdjustment()
+        this.#offsetAdjustment();
 
         this.top = this.floatOffsets[frame] + 'px';
         this.src = url;
@@ -182,7 +191,8 @@ const specialRefactor = class items {
             this.element.src = this.src + "?" + new Date().getTime();
         }
 
-        this.characterChange(character, f);}
+        this.characterChange(character, f);
+    };
 
     characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
@@ -192,10 +202,12 @@ const specialRefactor = class items {
         if(floatBool){
             let random = Math.floor(Math.random() * 3);
             this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
-        } else {
+        }
+        else {
             for (let i = 0; i < 6; i++){
                 this.floatOffsets[i] = marginTop + "px";
-        }}
+            }
+        }
 
         if (!this.disabled) {
             this.multiplier = [0,0,0,0];
@@ -206,7 +218,7 @@ const specialRefactor = class items {
         else {
             let width =                 characterData[character]?.[this.name]?.resolution?.width
             this.element.style.height = characterData[character]?.[this.name]?.resolution.height
-            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform.opacity);
+            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform?.opacity);
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
             if (characterData[character]?.[this.name]?.transform) {
@@ -214,7 +226,8 @@ const specialRefactor = class items {
                     "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
                              + characterData[character]?.[this.name]?.transform?.scaleX + ")";
                 this.element.style.width =      width + 0.5 + "px";
-            } else {
+            }
+            else {
                 this.element.style.transform = "none";
                 this.element.style.width =      width + "px";
             }
@@ -230,17 +243,20 @@ const specialRefactor = class items {
             this.animate(f);
             this.button.classList.remove("deact");}
 
-        this.urlUpdate(character);}
+        this.urlUpdate(character);
+    };
 
     animate(f) {
         this.element.style.objectPosition = this.multiplier[f];
-        this.element.style.top = this.verticalSequence[f];}
+        this.element.style.top = this.verticalSequence[f];
+    };
 
     animateFloat(f) {
-        this.element.style.marginTop = this.floatOffsets[f];};
+        this.element.style.marginTop = this.floatOffsets[f];
+    };
 
     urlUpdate(character) {
-        let src = merge(urlArray[8]?.[1], characterData[character]?.[this.name]?.fileUrl);
+        let src = characterData[character]?.[this.name]?.fileUrl;
 
         if (src) {
             this.src = src + ".png?" ;
@@ -250,7 +266,8 @@ const specialRefactor = class items {
             $("#" + this.name + "Url").value = "";
 
             $("#" + this.name + "Url").classList.remove("deact");
-            this.element.src = this.src + new Date().getTime(); }
+            this.element.src = this.src + new Date().getTime();
+        }
         else {
             urlArray[8] = ["special",""];
             $("#" + this.name + "Url").placeholder = "Not Applicable";
@@ -262,24 +279,20 @@ const specialRefactor = class items {
 };
 
 const shieldRefactor = class items {
-    id = 12; //dedicated slot in the url array chart.
+    id = 12;
 
     constructor(rotation, bool) {
-        //general setup to save time later.
         this.button = $("#shieldButton");
         this.element = $('#shield');
 
-        //url updating
         let src = itemData[this.id].url;
         this.src = src;
         $("#shieldUrl").placeholder = src;
         this.element.src = this.src + ".png";
 
-        //shield visibly (based on startUp.js)
         $('#shieldButton').setAttribute("class", bool ? "inv" : "");
         this.element.setAttribute("class", !bool ? "invisible" : "");
 
-        //creates the buttons on startup.
         let positionData = ["up","down","right"];
         positionData.forEach(i => {
             $('#shieldSettings').appendChild(
@@ -288,13 +301,13 @@ const shieldRefactor = class items {
                 this.positionUpdate(e.target.outerText);
             };
         });
-        //sets rotational data (based on startUp.js)
+
         if (positionData.indexOf(rotation) > 0) {
-            this.currentPos = rotation;}
+            this.currentPos = rotation;
+        }
         $("#shield" + rotation).classList.add("inv");
         this.element.classList.add(rotation);
 
-        // binds the toggle button to refresh the url
         this.button.onclick = () => {
             buttonTog(this.button);
             this.element.classList.toggle('invisible');
@@ -303,7 +316,7 @@ const shieldRefactor = class items {
 
             this.urlUpdate();
         };
-    }
+    };
 
     positionUpdate(rotation) {
         $("#shieldButton").classList.add("inv");
@@ -311,7 +324,8 @@ const shieldRefactor = class items {
 
         $("#shield" + this.currentPos).classList.remove("inv");
         this.currentPos = rotation;
-        $("#shield" + this.currentPos).classList.add("inv");};
+        $("#shield" + this.currentPos).classList.add("inv");
+    };
 
     urlUpdate(){
         let src = merge($("#shieldUrl").value, this.src);

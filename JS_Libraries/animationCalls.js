@@ -18,29 +18,33 @@ window.setInterval(() => {
         animationPush();}
     }, bpm);
 
-const playReset = () => { // this deals with resetting the play button
+const playReset = () => {
         if (playTog) {
-            playTog = false; // forces animation to pause
+            playTog = false;
             $("#play")?.classList?.remove('inv');
-            animationPush();}}, // resets the button setting
+            animationPush();
+        }
+},
 
     floatPush = (bool, check, add) => {
         $("#bpmCounter").children[floatInt].classList.remove("beat");
 
         floatInt = bool ? check : floatInt + add;
         for (let key in consumableData) {
-            consumableData[key].animate(floatInt);} // gets new current time
+            consumableData[key].animate(floatInt);
+        }
         specialData.animateFloat(floatInt);
 
         heartBeat[floatInt].classList.add("beat");
-        $("#barDebug").textContent = floatInt;},
+        $("#barDebug").textContent = floatInt;
+},
 
     animationPush = () => {
         if (elapsed >= aniOffsets[0].length) {
             start = new Date().getTime();
             elapsed = 0;
             floorData.floorFlip();
-            floatPush(floatInt > 4, 0, +1);} // gets new current time
+            floatPush(floatInt > 4, 0, +1);}
 
         else if (elapsed < 0) {
             elapsed = 3;
@@ -58,29 +62,34 @@ const playReset = () => { // this deals with resetting the play button
         currentCharacter.animate(frame);
         specialData.animate(frame);
         for (let key in itemArray) {
-            itemArray[key].animate(frame);}
-        },
+            itemArray[key].animate(frame);
+        }
+},
 
-    frameTypeToggle = (e) => { //this is to push the current frame times
+    frameTypeToggle = (e) => {
         e ? buttonTog($("#aniType")) : null;
         aniOffsets.unshift(aniOffsets.pop());
-        arrayDivisional = 1000 / aniOffsets[0].length;};
+        arrayDivisional = 1000 / aniOffsets[0].length;
+};
 
 onwheel = (e) => {
     let newVal = parseInt((e.deltaY || e.deltaY*-1) > 0 ? -1 : 1) + parseInt(scaleRes);
     scaleRes = newVal > 12 ? 12 : newVal < 4 ? 4 : newVal;
 
     $("#scaleSlider").value = scaleRes;
-    zoomEvent();};
+    zoomEvent();
+};
 
 const zoomEvent = () => {
     $doc.style.setProperty('--scaler',scaleRes);
     transform.style.transform = "scale("+scaleRes+")";
     transform.style.marginTop = -(scaleRes * 86)+ "px";
-    $('#scale').textContent = "1:" + scaleRes;},
+    $('#scale').textContent = "1:" + scaleRes;
+    },
 
     scaleUpdate = () => {
         scaleRes = document.getElementById("scaleSlider").value;
-        zoomEvent(); };
+        zoomEvent();
+};
 
 frameTypeToggle(true);

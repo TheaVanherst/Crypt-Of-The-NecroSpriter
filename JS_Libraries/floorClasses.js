@@ -1,6 +1,7 @@
 const floorRefactor = class floor {
+
     danceType = 1;
-    currentFloor = [2, 0];
+    currentFloor = [];
     previousType = [];
 
     floorTileSets = [
@@ -9,10 +10,16 @@ const floorRefactor = class floor {
     overlayTileSets = [
         [["zone1", "zone1_shop"], ["zone2", "zone2_Alt"], ["zone3_Cold", "zone3_Hot"]],
         [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]];
+
     floorBinary = 0;
     floorArr = ["_NoMP", ""];
 
-    constructor() {
+    buttonToggle = [$("#danceButton"), $("#multiplierButton")]
+
+    constructor(zoneArea, danceType) {
+
+        this.danceType = danceType;
+
         this.danceFloor = $("#danceFloor");
         this.floors = $("#floor");
 
@@ -28,12 +35,14 @@ const floorRefactor = class floor {
         }}}
 
         let a = this.floorTileSets[0].length,
-            b = Math.floor(this.currentFloor[0] / a),
-            c = this.currentFloor[0] - (b * a);
-        this.previousType[1] = [`${b}`,`${c}`] //can't tell you why these needs to bet put into strings. They just do I guess.
+            b = Math.floor(zoneArea / a),
+            c = zoneArea - (b * a);
+        this.previousType[0] = this.danceType;
+        this.previousType[1] = [`${b}`,`${c}`]; //can't tell you why these needs to bet put into strings. They just do I guess.
+        this.currentFloor = [`${b}`,`${c}`];
         this.backgroundUpdate(b, c);
 
-        $("#backgroundButton, #foregroundButton, #danceButton").classList.add("inv");
+        this.buttonToggle[this.danceType - 1].classList.add("inv");
     };
 
     backgroundUpdate(e, i) {
@@ -42,13 +51,10 @@ const floorRefactor = class floor {
         $("#backgrounds .inv")?.classList.remove("inv");
         $("#backgrounds").children[e].children[i].classList.add("inv");
 
-        console.log(this.previousType[1], this.currentFloor);
-        console.log(JSON.stringify(this.previousType[1]), JSON.stringify(this.currentFloor));
         if (JSON.stringify(this.previousType[1]) === JSON.stringify(this.currentFloor) &&
             JSON.stringify([e, i]) === JSON.stringify(this.currentFloor)) {
                 arrayShift(this.floorTileSets[e][i]);
                 arrayShift(this.overlayTileSets[e][i]);
-
                 $("#zone" + e + i).children[0].innerText = this.floorTileSets[e][i][0];
         }
 
@@ -68,6 +74,12 @@ const floorRefactor = class floor {
     foregroundToggle() {
         $("#foreground").classList.toggle('invisible');
         $("#foregroundButton").classList.toggle('inv');
+    };
+
+    floorToggle() {
+        $("#floor").classList.toggle('invisible');
+        $("#danceFloor").classList.toggle('invisible');
+        $("#backgroundButton").classList.toggle('inv');
     };
 
     danceSwitcher(a) {
@@ -93,12 +105,13 @@ const floorRefactor = class floor {
         this.danceType = a;
         this.danceUpdate();
 
-        let urlCheck1 = new Image()
-        urlCheck1.src = this.danceUrls[0]
-        urlCheck1.onload = () => {
-            $("#danceButton").classList.remove('deact');}
-        urlCheck1.onerror = () => {
-            $("#danceButton").setAttribute("class", "deact");}
+        // let urlCheck1 = new Image()
+        // urlCheck1.src = this.danceUrls[0];
+        // urlCheck1.onerror = () => {
+        //     $("#danceButton").setAttribute("class", "deact");}
+        // urlCheck1.onload = () => {
+        //     $("#danceButton").classList.remove('deact');}
+
     };
 
     danceUpdate() {

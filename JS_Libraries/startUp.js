@@ -1,13 +1,20 @@
 
-$("render").style.backgroundColor = "darkslategray"; //background colour.
 let currentCharacter, shieldData, specialData, floorData;
 
 document.addEventListener('DOMContentLoaded', () => {
+    $("render").style.backgroundColor = "darkslategray"; //background colour.
+
     let defaultCharacter = 0; // TODO: This will initate as the default character.
 
     currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
     shieldData = new shieldRefactor("right", false); //default position of the shield / enabled by default
     specialData = new specialRefactor(defaultCharacter, frame); //don't touch this
+
+    $("#backgroundButton").classList.add("inv");
+    $("#foregroundButton").classList.add("inv");
+
+    floorData = new floorRefactor(0,1); //floor you want [0-5] & dance mode [0-2]
+    // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
     $("#scaleSlider").oninput = () => scaleUpdate();
@@ -26,12 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 consumableList.push(key);
             }
         } else {
-            $(itemName + "Url").placeholder = "No Startup URL"}}
+            $(itemName + "Url").placeholder = "No Startup URL"
+        }
+    }
 
     for (let key in consumableList) {
-        consumableData[key] = new consumableRefactor(consumableList[key], floatInt)}
-
-    floorData = new floorRefactor();
+        consumableData[key] = new consumableRefactor(consumableList[key], floatInt);
+    }
 
     $("#barDebug").textContent = floatInt;
     $("#beatDebug").textContent = frame;
