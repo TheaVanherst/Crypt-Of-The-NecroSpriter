@@ -1,11 +1,3 @@
-const
-    mapItem = (id,bool,data) => {
-        return Object.keys(data).map((k) => {
-            if(bool){return parseInt(data[k][id]);}
-            else {return data[k][id];}});};
-
-const
-    characterUrlArray = [];
 
 let characterRefactor = class setup {
     headElement =   document.querySelector("#head");
@@ -17,6 +9,7 @@ let characterRefactor = class setup {
     playerFloatOffsets = [8,9,10,11,10,9];
 
     height; width; head;
+    characterUrlArray = [];
 
     constructor(amp, clothing, character) {
         let dlcTypes = ["Base Game", "Amplified", "Synchrony"];
@@ -37,13 +30,13 @@ let characterRefactor = class setup {
             }
         }
 
-        let dlcCount = mapItem("dlc",true, characterData);
+        let dlcCount = this.#parser("dlc",true, characterData);
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
             ($('#characterSelect').appendChild(createButton("t", dlcTypes[i])))
                 .appendChild(createButton("options"));
         }
 
-        const characterList = mapItem("name",false, characterData);
+        const characterList = this.#parser("name",false, characterData);
         for (let key in characterData) {
             let char = characterList[key];
             $('#characterSelect').getElementsByTagName('options')[dlcCount[key]]
@@ -114,11 +107,17 @@ let characterRefactor = class setup {
         this.animate();
     };
 
+    #parser(id,bool,data){
+        return Object.keys(data).map((k) => {
+            return bool ? parseInt(data[k][id]) : data[k][id]});
+    };
+
     #debugUpdate(e){
-        let returnString
+        let returnString = ""
         let database = Object.entries(characterData[e]);
         database.forEach(([key, value]) => {
             let data = JSON.stringify(value)
+            console.log(data)
             returnString += key + " : " + data + "\n"; // 'one'
         });
         $("#charDebug").innerText = returnString;
@@ -192,7 +191,7 @@ let characterRefactor = class setup {
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            buttonTog($('#clothing' + this.clothingSet));}
+            $('#clothing' + this.clothingSet).classList.toggle('inv');}
         else {
             buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
         }
@@ -202,8 +201,9 @@ let characterRefactor = class setup {
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
 
-        buttonTog($('#clothing .inv'));
-        buttonTog($('#clothing' + this.clothingSet));
+        $('#clothing .inv').classList.toggle('inv');
+        $('#clothing' + this.clothingSet).classList.toggle('inv');
+
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
@@ -227,10 +227,10 @@ let characterRefactor = class setup {
     };
 
     urlUpdate(url) {
-        url = merge(characterUrlArray[this.id]?.[1], url, characterData[this.id].settings.fileUrl);
+        url = merge(this.characterUrlArray[this.id]?.[1], url, characterData[this.id]?.settings?.fileUrl);
         let srcLink = (this.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"])
             .map(i => i + ".png?" + new Date().getTime());
-        characterUrlArray[this.id] = [characterData[this.id].name,url];
+        this.characterUrlArray[this.id] = [characterData[this.id].name,url];
 
         this.head ? this.headElement.src = url + srcLink[0] : null;
         this.bodyElement.src = url + srcLink[1];

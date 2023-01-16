@@ -26,7 +26,7 @@ const itemRefactor = class items {
             this.element.classList.add("invisible");}
 
         this.button.onclick = () => {
-            buttonTog(this.button);
+            this.button.classList.toggle('inv');
             this.element.classList.toggle('invisible');
             this.element.src = this.src + "?" + new Date().getTime();}
 
@@ -125,7 +125,7 @@ const consumableRefactor = class items {
         }
 
         this.button.onclick = () => {
-            buttonTog(this.button);
+            this.button.classList.toggle('inv');
             this.element.classList.toggle('invisible');
             this.element.src = this.src + ".png?" + new Date().getTime();
         }
@@ -187,7 +187,7 @@ const specialRefactor = class items {
         this.button = $('#' + this.name + "Button");
 
         this.button.onclick = () => {
-            buttonTog(this.button);
+            this.button.classList.toggle('inv');
             this.element.classList.toggle('invisible');
             this.urlUpdate()
             this.element.src = this.src + "?" + new Date().getTime();
@@ -305,7 +305,7 @@ const shieldRefactor = class items {
         this.element.classList.add(rotation);
 
         this.button.onclick = () => {
-            buttonTog(this.button);
+            this.button.classList.toggle('inv');
             this.element.classList.toggle('invisible');
             $("#shield" + this.currentPos).classList.add("inv");
             this.element.classList.remove("inv");

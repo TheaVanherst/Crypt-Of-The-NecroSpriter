@@ -11,10 +11,6 @@ const
         newButton.classList.add('inv');
     },
 
-    buttonTog = (e) => {
-        e.classList.toggle('inv');
-    },
-
     urlRefresh = () => {
         let date = new Date().getTime();
         for (let key in itemArray) {

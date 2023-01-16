@@ -14,7 +14,7 @@ const heartBeat = $("#bpmCounter").children;
 window.setInterval(() => {
     if (playTog) {
         frame = aniOffsets[0][elapsed];
-        elapsed = Math.floor((new Date().getTime() - start) / bpm / 40);
+        elapsed = Math.floor((new Date().getTime() - start) / bpm / 40); //TODO: this needs fixing
         animationPush();
     }
 }, bpm);

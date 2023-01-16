@@ -82,6 +82,9 @@ Changing the boolean values in the itemData.js file will change their default vi
 
 - UI back-end rework.
 - Debug information user interface [?]
+- BPM timer rework.
+- Input for custom floor URL [?]
+- 
 
 If you need any assistance in using the tool, designing sprites or have any
 recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).

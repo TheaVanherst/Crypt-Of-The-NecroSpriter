@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
+    document.getElementById("bpmSlider").value = 130; //start-up bpm
     bpmUpdate();
-    playTog ? buttonTog($("#play")) : null;
+
+    if (playTog) {
+        $("#play").classList.add('inv');}
 
     scaleRes = 4; // default scale multiplier
     $('#scale').textContent = "1:" + scaleRes;
@@ -31,17 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
             specialData = new specialRefactor(defaultCharacter);
         }
 
-        let urlCheck = new Image()
-        urlCheck.src = itemData[key].url + ".png";
-        urlCheck.onerror = () => {
-            let urlbar = $(`#${itemData[key].name}Url`)
-            urlbar.classList.add("invalid");
-            urlbar.value = "";
-            urlbar.placeholder = "Invalid itemsData.js URL";
-            setTimeout(() => {
-                $(`#${itemData[key].name}Url`).classList.remove("invalid");
-            }, 2000);
-        };
+        let urlbar = $(`#${itemData[key].name}Url`)
+        if(itemData[key]?.url){
+            let urlCheck = new Image()
+            urlCheck.src = itemData[key].url + ".png";
+            urlCheck.onerror = () => {
+                urlbar.classList.add("invalid");
+                urlbar.value = "";
+                urlbar.placeholder = "Invalid itemsData.js URL";
+                setTimeout(() => {
+                    $(`#${itemData[key].name}Url`).classList.remove("invalid");
+                }, 2000);
+            };
+        } else {
+            urlbar.placeholder = "No itemsData.js URL";
+        }
+
     }
     delete itemData;
 
