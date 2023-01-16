@@ -13,32 +13,29 @@ const
     buttonTog = (e) => {
         e.classList.toggle('inv');},
 
-    itemToggle = (e) => {
-        let id = e.id;
-        buttonTog($("#"+id));
-        id = id.replace("Button","");
-
-        $("#" + id).src = $("#" + id).src + "?" + new Date().getTime();
-        $("#" + id)?.classList?.toggle("invisible");},
-
-    timeUpdate = () => {
+    urlRefresh = () => {
         let date = new Date().getTime();
         for (let key in itemArray) {
-            itemArray[key].urlUpdate(undefined,date)}
+            itemArray[key].urlUpdate(undefined,date);}
+        currentCharacter.urlUpdate()},
 
-        characterClass.urlUpdate()},
+    bpmUpdate = () => {
+        let newBPM = document.getElementById("bpmSlider").value; // gets the bpm for the slider
+        $('#bpm').textContent = newBPM; // sets the bpm from the slider value
 
-    bodyUrlSearch = (e) => {
-        if(e.key === 'Enter') {
-            const
-                image = new Image(),
-                item = e.target.value;
-            image.src = item + (characterClass.dlc !== 2 ? "_armor_body.png" : "_body.png");
-            image.onload = () => {
-                characterClass.urlUpdate(item);
-                return;}
+        let trackContainer = $('#trackContainer'); // shorthand
+        trackContainer.innerHTML = ''; // empties the current compatible tracks
 
-            targetTimeout(e)}},
+        let step = ((newBPM - (100 - 5)) / 5) - 1; // uses the step to calculate the array placement
+        for (let i = 0; i < songList[step].length; i++) { // grabs the songs in the array from the step calc
+
+            let item = document.createElement('t'); // creates a new text element
+            item.textContent = songList[step][i]; // sets text for each string in the array from @dataStorage
+            let br = document.createElement('br'); // makes a break for the next entry in the for loop
+
+            trackContainer.appendChild(item).appendChild(br);}
+        bpm = 60 / newBPM;
+        arrayDivisional = 1000 / aniOffsets[0].length;}, // appends to parent
 
     search = (e) => {
         if(e.key === 'Enter') {
@@ -47,28 +44,30 @@ const
             let url = e.target.value,
                 idStrip = (e.target.id).replace("Url","");
             image.src = url + ".png";
-            image.onload = () => {
-                let date = new Date().getTime();
+            console.log(`RETURN URL: ${idStrip}`);
 
+            image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {
                     if(itemArray[i].name === idStrip){
                         itemArray[i].urlUpdate(url);
                         return;}}
 
-                for (let i = 0; i < consumableItems.length; i++) {
-                    if(consumableItems[i].name === idStrip){
-                        consumableItems[i].urlUpdate(url);
+                for (let i = 0; i < consumableData.length; i++) {
+                    if(consumableData[i].name === idStrip){
+                        consumableData[i].urlUpdate(url);
                         return;}}
 
                 if(idStrip === "special"){
-                    specialItem.urlUpdate(url);
+                    specialData.urlUpdate(url);
                     return;}
 
                 if(idStrip === "shield"){
                     shieldData.urlUpdate(url);
-                    return;}};
+                    return;}
+            };
 
-            targetTimeout(e)}},
+            targetTimeout(e);
+        }},
 
     targetTimeout = (e) => {
         let placeholder = e.target.placeholder;

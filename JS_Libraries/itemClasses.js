@@ -11,31 +11,35 @@ const itemRefactor = class items {
     width = 24;
     height = 24;
 
-    constructor(item, character, frame) {
+    constructor(item, character, f) {
         this.name = itemData[item].name;
-        this.src = itemData[item].url;
+        this.src = itemData[item].url + ".png";
         this.id = item;
 
         urlArray[item] = [this.name, this.src]
         this.element = $("#" + this.name);
-        this.element.src = this.src + ".png";
+        this.element.src = this.src;
+        this.button = $('#' + this.name + "Button");
 
-        itemData[item].bool ?
-            itemToggle($('#' + this.name + "Button")) :
-            this.element.classList.add("invisible");
-        $('#' + this.name + "Button").onclick = () => {
-            itemToggle($('#' + this.name + "Button"));}
+        if (itemData[item].bool) {
+            this.button.classList.add('inv');}
+        else {
+            this.element.classList.add("invisible");}
+
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.element.src = this.src + "?" + new Date().getTime();}
 
         this.urlUpdate(itemData[item].url);
-        this.characterChange(character, frame);
-        this.animate(frame);}
+        this.characterChange(character, f);}
 
-    characterChange(character, frame) {
+    characterChange(character, f) {
         if(characterData[character][this.name]?.bool === false) {
             this.element.classList.add("invisible");
-            $('#' + this.name + "Button").setAttribute("class","deact");}
+            this.button.setAttribute("class","deact");}
         else {
-            $('#' + this.name + "Button").classList.remove("deact");}
+            this.button.classList.remove("deact");}
 
         if(characterData[character][this.name]?.offset?.sequence === undefined){
             this.animationSequence = merge(
@@ -68,10 +72,10 @@ const itemRefactor = class items {
             characterData[character]?.[this.name]?.offset?.left ?
                 characterData[character][this.name].offset.left + "px" : 0;
 
-        this.animate(frame);};
+        this.animate(f);};
 
-    animate(frame) {
-        this.element.style.objectPosition = -this.multiplier[frame] + "px " + this.verticalSequence[frame] + "px"};
+    animate(f) {
+        this.element.style.objectPosition = -this.multiplier[f] + "px " + this.verticalSequence[f] + "px"};
 
     urlUpdate(url, date) {
         if(url !== undefined) {
@@ -88,34 +92,44 @@ const itemRefactor = class items {
             $("#" + this.name + "Url").value = "";}};
 };
 
-let consumableItems = [];
+let consumableData = [];
 const equipmentOffsets = [
     [0,1,1,2,2,1],
     [0,1,2,2,1,1],
     [0,1,1,2,1,0]];
 
 const consumableRefactor = class items {
-    constructor(item, frame) {
-        let src = itemData[item].url;
+    constructor(item, f) {
+        this.src = itemData[item].url + ".png";
         this.name = itemData[item].name;
         this.id = item;
 
         this.element = $("#" + this.name);
-        this.element.src = src + ".png";
+        this.element.src = this.src;
         this.button = $('#' + this.name + "Button");
 
-        urlArray[item] = [this.name, src];
-        itemData[item].bool ?
-            itemToggle(this.button) :
+        urlArray[item] = [this.name, this.src];
+        if (itemData[item].bool) {
+            this.button.classList.add('inv');
+        }
+        else {
             this.element.classList.add("invisible");
-        this.button.onclick = () => {itemToggle(this.button);}
+        }
+
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
 
         this.#offsetAdjustment()
-        this.urlUpdate(src, frame)
-        this.animate(frame);};
+        this.urlUpdate(this.src, f)
+        this.animate(f);
+    };
 
-    animate(frame) {
-        this.element.style.top = this.floatOffsets[frame];};
+    animate(f) {
+        this.element.style.top = this.floatOffsets[f];
+    };
 
     #offsetAdjustment() {
         this.height = this.element.naturalHeight;
@@ -123,16 +137,21 @@ const consumableRefactor = class items {
         this.floatOffsets = equipmentOffsets[random].map((x) => x);
 
         for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
-            arrayShift(this.floatOffsets);}
+            arrayShift(this.floatOffsets);
+        }
         for (let key in this.floatOffsets) {
-            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";}}
+            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";
+        }
+    }
 
     urlUpdate(url, date){
         if(url !== undefined) {
             urlArray[this.id][1] = url;
             $("#" + this.name + "Url").placeholder = url;
             $("#" + this.name + "Url").value = "";
-            this.element.src = url + ".png?";}
+
+            this.src = url;
+            this.element.src = this.src;}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
@@ -144,33 +163,39 @@ const consumableRefactor = class items {
         this.#offsetAdjustment()
 
         this.top = this.floatOffsets[frame] + 'px';
-        this.src = url + ".png";};};
+        this.src = url;
+    };
+};
 
 const specialRefactor = class items {
     name = "special";
+    floatOffsets = [];
 
-    constructor(character, frame) {
-        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]?.[character]);
-        urlArray[character] = [this.name,[]]
-        urlArray[character][1][this.id] = src;
-
+    constructor(character, f) {
         this.element = $("#" + this.name);
-        this.element.src = src + ".png";
-
         this.button = $('#' + this.name + "Button");
 
-        itemData[character].bool ?
-            itemToggle(this.button) :
-            this.element.classList.add("invisible");
-        this.button.onclick = () => {itemToggle(this.button);}
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
+            this.urlUpdate()
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
 
-        itemData[character].bool ? itemToggle(this.button) :
-            $("#" + this.name).classList.add("invisible");
+        this.characterChange(character, f);}
 
-        this.characterChange(character, frame);}
-
-    characterChange(character, frame) {
+    characterChange(character, f) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
+        let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float);
+        let marginTop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
+
+        if(floatBool){
+            let random = Math.floor(Math.random() * 3);
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
+        } else {
+            for (let i = 0; i < 6; i++){
+                this.floatOffsets[i] = marginTop + "px";
+        }}
 
         if (!this.disabled) {
             this.multiplier = [0,0,0,0];
@@ -179,103 +204,124 @@ const specialRefactor = class items {
             this.element.classList.add("invisible");
             this.button.setAttribute("class","deact");}
         else {
-            let sequence = merge([1,2,3,4], characterData[character]?.[this.name]?.sequence),
-                scale = [
-                    characterData[character]?.[this.name]?.transform?.scaleY,
-                    characterData[character]?.[this.name]?.transform?.scaleX];
-
-            let width = merge(0, characterData[character]?.[this.name]?.resolution?.width);
-            this.element.style.height = characterData[character]?.[this.name]?.resolution.height + "px";
-            if (characterData[character]?.[this.name]?.transform) {
-                this.element.style.transform = "scale(" + scale[0] + ", " + scale[1] + ")";
-                this.element.style.width = width + 0.5 + "px";}
-            else {
-                this.element.style.transform = "none";
-                this.element.style.width = width + "px";}
-
+            let width =                 characterData[character]?.[this.name]?.resolution?.width
+            this.element.style.height = characterData[character]?.[this.name]?.resolution.height
+            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform.opacity);
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
-            this.element.style.marginTop =  merge(0, characterData[character]?.[this.name]?.displacement?.top + "px");
-            this.element.style.zIndex = merge(10, characterData[character]?.[this.name]?.zIndex);
+            this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
+            if (characterData[character]?.[this.name]?.transform) {
+                this.element.style.transform =
+                    "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
+                             + characterData[character]?.[this.name]?.transform?.scaleX + ")";
+                this.element.style.width =      width + 0.5 + "px";
+            } else {
+                this.element.style.transform = "none";
+                this.element.style.width =      width + "px";
+            }
 
+            let sequence =  merge([1,2,3,4], characterData[character]?.[this.name]?.sequence);
             this.multiplier = [
                 -(sequence[0] - 1) * width + "px 0", -(sequence[1] - 1) * width + "px 0",
                 -(sequence[2] - 1) * width + "px 0", -(sequence[3] - 1) * width + "px 0"];
+            this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence).map((x) => x)
+            for (let key in this.verticalSequence){
+                this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
 
-            this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence);
-            this.verticalSequence = this.verticalSequence.map((x) => x)
-            for (let key in this.verticalSequence){this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
-
-            this.animate(frame);
+            this.animate(f);
             this.button.classList.remove("deact");}
 
         this.urlUpdate(character);}
 
-    animate(frame) {
-        this.element.style.objectPosition = this.multiplier[frame];
-        this.element.style.top = this.verticalSequence[frame];}
+    animate(f) {
+        this.element.style.objectPosition = this.multiplier[f];
+        this.element.style.top = this.verticalSequence[f];}
+
+    animateFloat(f) {
+        this.element.style.marginTop = this.floatOffsets[f];};
 
     urlUpdate(character) {
-        let src = merge(characterData[character]?.[this.name]?.fileUrl, urlArray[8]?.[1]?.[character]);
+        let src = merge(urlArray[8]?.[1], characterData[character]?.[this.name]?.fileUrl);
 
-        if (src !== undefined) {
-            urlArray[8][1][character] = src;
+        if (src) {
+            this.src = src + ".png?" ;
+            urlArray[8] = ["special", this.src];
+
+            $("#" + this.name + "Url").placeholder = this.src;
+            $("#" + this.name + "Url").value = "";
 
             $("#" + this.name + "Url").classList.remove("deact");
-            $("#" + this.name + "Url").placeholder = src;
-            $("#" + this.name + "Url").value = "";
-            this.element.src = src + ".png?" + new Date().getTime(); }
+            this.element.src = this.src + new Date().getTime(); }
         else {
+            urlArray[8] = ["special",""];
             $("#" + this.name + "Url").placeholder = "Not Applicable";
+
             $("#" + this.name + "Url").classList.add("deact");
-            this.element.src = "";}};};
+            this.element.removeAttribute('src');
+        }
+    };
+};
 
 const shieldRefactor = class items {
-    currentPos; id;
-    position = ["up","right","down"];
-    object = $('#shield');
-    bool = false;
+    id = 12; //dedicated slot in the url array chart.
 
     constructor(rotation, bool) {
-        for (let key in itemData) {
-            this.id = itemData[key].name === "shield" ? key : undefined;}
+        //general setup to save time later.
+        this.button = $("#shieldButton");
+        this.element = $('#shield');
 
+        //url updating
+        let src = itemData[this.id].url;
+        this.src = src;
+        $("#shieldUrl").placeholder = src;
+        this.element.src = this.src + ".png";
+
+        //shield visibly (based on startUp.js)
         $('#shieldButton').setAttribute("class", bool ? "inv" : "");
-        this.object.setAttribute("class", bool ? "inv" : "");
+        this.element.setAttribute("class", !bool ? "invisible" : "");
 
-        if (this.position.indexOf(rotation) > 0) {
+        //creates the buttons on startup.
+        let positionData = ["up","down","right"];
+        positionData.forEach(i => {
+            $('#shieldSettings').appendChild(
+                createButton("e",i,"shield" + i)
+            ).onclick = (e) => {
+                this.positionUpdate(e.target.outerText);
+            };
+        });
+        //sets rotational data (based on startUp.js)
+        if (positionData.indexOf(rotation) > 0) {
             this.currentPos = rotation;}
-
-        this.position.forEach(i => {
-            $('#shieldSettings').appendChild(createButton("e",i,"shield" + i)).onclick = (e) => {
-                this.positionUpdate(e.target.outerText);};});
-
         $("#shield" + rotation).classList.add("inv");
+        this.element.classList.add(rotation);
 
-        $("#shieldButton").onclick = function () {
+        // binds the toggle button to refresh the url
+        this.button.onclick = () => {
+            buttonTog(this.button);
+            this.element.classList.toggle('invisible');
             $("#shield" + this.currentPos).classList.add("inv");
-            this.object.classList.remove("inv");}
+            this.element.classList.remove("inv");
 
-        this.object.setAttribute("class",rotation);
-        $("#shield" + this.currentPos).classList.remove("inv");
-        this.currentPos = rotation;
-        $("#shield" + this.currentPos).classList.add("inv");
-
-        this.urlUpdate(itemData[this.id].url);}
+            this.urlUpdate();
+        };
+    }
 
     positionUpdate(rotation) {
         $("#shieldButton").classList.add("inv");
-        this.object.setAttribute("class",rotation);
+        this.element.setAttribute("class",rotation);
 
         $("#shield" + this.currentPos).classList.remove("inv");
         this.currentPos = rotation;
         $("#shield" + this.currentPos).classList.add("inv");};
 
-    urlUpdate(url){
-        urlArray[this.id] = ["shield",url];
+    urlUpdate(){
+        let src = merge($("#shieldUrl").value, this.src);
+        if(src !== this.src){
+            this.src = src;
+            urlArray[this.id] = ["shield",this.src];
 
-        $("#shieldUrl").placeholder = url;
-        $("#shieldUrl").value = "";
-        $("#shield").src = url + ".png?" + new Date().getTime();
-
-        this.src = url + ".png";};
+            $("#shieldUrl").placeholder = this.src;
+            $("#shieldUrl").value = "";
+            this.element.src = this.src + "?" + new Date().getTime();
+        }
+    };
 };

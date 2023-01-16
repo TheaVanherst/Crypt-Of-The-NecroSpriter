@@ -1,85 +1,59 @@
 
-const backgroundUpdate = (obj,e,i) => obj?.setAttribute(
-    "style", "background-image : url('UI_Libraries/"+floorTileSets[e][i][0]+"_Floor.png')");
+$("render").style.backgroundColor = "darkslategray"; //background colour.
+let currentCharacter, shieldData, specialData, floorData;
 
 document.addEventListener('DOMContentLoaded', () => {
-    for (let e = 0; e < floorTileSets.length; e++){
-        $('#backgrounds').appendChild(createButton("div"));
+    let defaultCharacter = 0; // TODO: This will initate as the default character.
 
-        for (let i = 0; i < floorTileSets[0].length; i++) {
-            const child = createButton("e",null,floorTileSets[e][i][[0]]);//generates a button
-            child.appendChild(createButton("t",floorTileSets[e][i][[0]]));
-            backgroundUpdate(child,e,i);
-
-            $('#backgrounds').children[e].appendChild(child).onclick = function () {
-                if (floorTileSets[e][i].length > 1 && this.style.backgroundImage === $('#floor').style.backgroundImage) {
-                    arrayShift(floorTileSets[e][i]);
-                    arrayShift(overlayTileSets[e][i]);
-                    backgroundUpdate(this,e,i);}
-
-                $("#foreground").src = "UI_Libraries/" + overlayTileSets[e][i][0] + "_Overlay.png";
-
-                currentFloor = floorTileSets[e][i][0];
-                if (danceMode[0][1] || danceMode[1][1]) {
-                    floorFlip();}
-
-                if (e === 0 && i === 1) {
-                    if (danceMode[0][1]) {
-                        danceMode = [[danceMode[0][0],false], [danceMode[1][0],true]];
-                        multiplierFlip($('#floorMultiBool'));}
-                    $("#danceButton")?.classList?.add("deact");}
-                else {
-                    $("#danceButton")?.classList?.remove("deact");}
-
-                $("#floor").style.backgroundImage = this.style.backgroundImage;
-                this.children[0].textContent = overlayTileSets[e][i][[0]];
-
-                $all('#backgrounds e').forEach(id => {
-                    id.classList.remove("inv");});
-                this?.classList?.add('inv');}}}
+    currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
+    shieldData = new shieldRefactor("right", false); //default position of the shield / enabled by default
+    specialData = new specialRefactor(defaultCharacter, frame); //don't touch this
 
     $("#bpmSlider").oninput = () => bpmUpdate();
     $("#scaleSlider").oninput = () => scaleUpdate();
-    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => { search(a,e); };});
-
-    aniArrLength = aniOffsets[0].length;
-
+    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     bpmUpdate(); scaleUpdate();
+
     playTog ? buttonTog($("#play")) : null;
-    multiplierFlip(danceMode[0][0],danceMode[0][1]);
-    multiplierFlip(danceMode[1][0],danceMode[1][1]);
-
-    const c = currentFloor - 1,
-        v = c > 2 ? 1 : 0,
-        h = c > 2 ? c - 3 : c; //figures out which array to use for said floor
-    currentFloor = floorTileSets[v][h][0]; //sets current floor automatically
-    backgroundUpdate($('#floor'),v,h);
-    $("#foreground").src = "UI_Libraries/" + overlayTileSets[v][h][0] + "_Overlay.png";
-
-    $('#' + overlayTileSets[v][h][0]).classList.add('inv');
-    $("#floorDebug").textContent = danceMode[0][1] + " / " + danceMode[1][1] + " : ";
-    $("#flipDebug").textContent = floorFlipper ? 1 : 2;
 
     for (let key in itemData) {
         const itemName = "#" + itemData[key].name;
 
-        !itemData[key].bool ?
-            $(itemName).classList.add("invisible") :
-            itemToggle($(itemName + "Button"));
-        $(itemName + "Button").onclick = () => {
-            itemToggle($(itemName + "Button"));}
-
         if (itemData[key].url !== undefined) {
-            if (!itemData[key].consumable && itemData[key].name !== "shield") {
-                itemArray[key] = new itemRefactor(key, defaultCharacter, frame)}
-            else if (itemData[key].consumable) {
-                consumableList.push(key)}}
-        else {
+            if (itemData[key].type === "equipment"){
+                itemArray[key] = new itemRefactor(key, defaultCharacter, frame);
+            } else if (itemData[key].type === "consumable") {
+                consumableList.push(key);
+            }
+        } else {
             $(itemName + "Url").placeholder = "No Startup URL"}}
 
     for (let key in consumableList) {
-        consumableItems[key] = new consumableRefactor(consumableList[key], floatInt)}
+        consumableData[key] = new consumableRefactor(consumableList[key], floatInt)}
+
+    floorData = new floorRefactor();
+
+    $("#barDebug").textContent = floatInt;
+    $("#beatDebug").textContent = frame;
+    $("#elapsedDebug").textContent = elapsed;
 
     itemData = [];
     document.removeEventListener('DOMContentLoaded', () => {});
 }, false);
+
+const songList = [
+    ["Tombtorial"], //100
+    ["N/a"], ["N/a"], //105, 110
+    ["1-1 // Disco Descent"], //115
+    ["BOSS // Deep Blues [123]", "BOSS // King Conga", "BOSS // Golden Lute", "TRAINING // Watch Your Step"], //120
+    ["BOSS // Coral Riff [126]", "BOSS // Frankensteinway"], //125
+    ["LOBBY // Rhythmortis","1-2 // Crypteque","2-1 // Fungal Funk","4-1 // Styx and Stones", "5-1 // Voltzwaltz"], //130
+    ["3-1 // Stone Cold (cold)"," 3-1 // Igneous Rock (hot)"], //135
+    ["1-3 // Mausoleum Mash","2-2 // Grave Throbbing","BOSS // Necrodancer Phase 1","BOSS // Dead Ringer","5-2 // Power Cords"], //140
+    ["3-2 // Dance of the Decorous (cold)","3-2 March of the Profane (hot)","4-2 // Heart of the Crypt", "BOSS // Conductor"], //145
+    ["2-3 // Portabellohead", "BOSS // FortissiMole"], //150
+    ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)","5-3 // Six Feet Thunder"], //155
+    ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
+    ["N/a"], ["N/a"], //165, 170
+    ["BOSS // Death Metal"], //175
+    ["N/a"], ["N/a"], ["N/a"]]; //180 185 190
