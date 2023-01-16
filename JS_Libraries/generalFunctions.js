@@ -77,8 +77,10 @@ const
         let placeholder = e.target.placeholder;
         e.target.value = "";
         e.target.placeholder = "Not a valid directory";
+        e.target.classList.add("invalid");
 
         setTimeout(function () {
+            e.target.classList.remove("invalid");
             e.target.placeholder = placeholder;}, 1953);},
 
     arrayShift = (e) => {

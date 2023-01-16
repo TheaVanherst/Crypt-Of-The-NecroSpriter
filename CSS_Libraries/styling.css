@@ -73,6 +73,9 @@ e t {
     margin:     0 9.5px 0 0;}
 #urlData div:last-of-type {
     margin:     0 0 0 0;}
+.invalid {
+    background: black!important;
+    animation: blinker 0.5s linear infinite;}
 
 input[type=text] {
     padding:    5px 10px;
@@ -92,6 +95,14 @@ input[type=text]:focus {
 
     background:     #fff;
     color:          #000;}
+input[type=text].invalid {
+    color: white;
+    background: darkred;}
+
+@keyframes blinker {
+    from, to {  border-color: darkred}
+    49% {       border-color: darkred;}
+    50% {       border-color: red;}}
 
 /* TODO: TRACKLIST */
 

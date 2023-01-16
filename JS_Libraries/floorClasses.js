@@ -111,7 +111,6 @@ const floorRefactor = class floor {
         //     $("#danceButton").setAttribute("class", "deact");}
         // urlCheck1.onload = () => {
         //     $("#danceButton").classList.remove('deact');}
-
     };
 
     danceUpdate() {

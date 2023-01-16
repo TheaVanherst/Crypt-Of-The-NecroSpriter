@@ -1,17 +1,24 @@
 
-let currentCharacter, shieldData, specialData, floorData;
+let currentCharacter, shieldData, specialData, floorData, itemArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     $("render").style.backgroundColor = "darkslategray"; //background colour.
 
-    let defaultCharacter = 0; // TODO: This will initate as the default character.
+    let defaultCharacter = 11; // This will initate as the default character.
+    // - 11 is my demo of Vahn, a sprite designed with Crypt of the Necrospriter.
 
     currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
-    shieldData = new shieldRefactor("right", false); //default position of the shield / enabled by default
-    specialData = new specialRefactor(defaultCharacter, frame); //don't touch this
 
-    $("#backgroundButton").classList.add("inv");
-    $("#foregroundButton").classList.add("inv");
+    let foreFloorArr = [true, true] // change these for the default start-up settings of the floor / foreground.
+    // first setting is the floor, second is the foreground.
+
+    if (foreFloorArr[0] === true){
+            $("#backgroundButton").classList.add("inv");}
+    else {  $("#floor").classList.add('invisible');
+            $("#danceFloor").classList.add('invisible');}
+    if (foreFloorArr[1] === true){
+            $("#foregroundButton").classList.add("inv");}
+    else {  $("#foreground").classList.add('invisible');}
 
     floorData = new floorRefactor(0,1); //floor you want [0-5] & dance mode [0-2]
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
@@ -26,24 +33,34 @@ document.addEventListener('DOMContentLoaded', () => {
     playTog ? buttonTog($("#play")) : null;
 
     for (let key in itemData) {
-        const itemName = "#" + itemData[key].name;
-
-        if (itemData[key].url !== undefined) {
-            if (itemData[key].type === "equipment"){
-                itemArray[key] = new itemRefactor(key, defaultCharacter, frame);
-            } else if (itemData[key].type === "consumable") {
-                consumableData[key] = new consumableRefactor(key, floatInt);
-            }
-        } else {
-            $(itemName + "Url").placeholder = "No Startup URL";
+        if (itemData[key].type === "equipment") {
+            itemArray[key] = new itemRefactor(key, defaultCharacter);
+        } else if (itemData[key].type === "consumable") {
+            consumableData[key] = new consumableRefactor(key);
+        } else if (itemData[key].type === "shield") {
+            shieldData = new shieldRefactor("right", false);
+        } else if (itemData[key].type === "special") {
+            specialData = new specialRefactor(defaultCharacter); //don't touch this
         }
+
+        let urlCheck = new Image()
+        urlCheck.src = itemData[key].url + ".png";
+        urlCheck.onerror = () => {
+            let urlbar = $(`#${itemData[key].name}Url`)
+            urlbar.classList.add("invalid");
+            urlbar.value = "";
+            urlbar.placeholder = "Invalid itemsData.js URL";
+            setTimeout(() => {
+                $(`#${itemData[key].name}Url`).classList.remove("invalid");
+            }, 2000);
+        };
     }
+    delete itemData;
 
     $("#barDebug").textContent = floatInt;
     $("#beatDebug").textContent = frame;
     $("#elapsedDebug").textContent = elapsed;
 
-    itemData = [];
     document.removeEventListener('DOMContentLoaded', () => {});
 }, false);
 

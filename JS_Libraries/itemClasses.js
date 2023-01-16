@@ -4,14 +4,13 @@ const
         charm: {sequence: [1, 2, 3, 2]},
         shovel: {offset:{sequence: [2, 1, 0, 1]}}};
 
-let itemArray = [],
-    urlArray = [];
+let urlArray = [];
 
 const itemRefactor = class items {
     width = 24;
     height = 24;
 
-    constructor(item, character, f) {
+    constructor(item, character) {
         this.name = itemData[item].name;
         this.src = itemData[item].url + ".png";
         this.id = item;
@@ -32,9 +31,9 @@ const itemRefactor = class items {
             this.element.src = this.src + "?" + new Date().getTime();}
 
         this.urlUpdate(itemData[item].url);
-        this.characterChange(character, f);}
+        this.characterChange(character);}
 
-    characterChange(character, f) {
+    characterChange(character) {
         if(characterData[character][this.name]?.bool === false) {
             this.element.classList.add("invisible");
             this.button.setAttribute("class","deact");}
@@ -45,10 +44,10 @@ const itemRefactor = class items {
             this.animationSequence = merge(
                 defaultVerticalOffsets[this.name]?.sequence,
                 characterData[character][this.name]?.sequence,
-                [1,2,3,4])}
+                [1,2,3,4]);}
         else {
             this.animationSequence = merge([1,1,1,1],
-                defaultVerticalOffsets[this.name]?.sequence)}
+                defaultVerticalOffsets[this.name]?.sequence);}
         this.verticalSequence = merge(
             defaultVerticalOffsets[this.name]?.offset?.sequence,
             characterData[character][this.name]?.offset?.sequence,
@@ -72,25 +71,27 @@ const itemRefactor = class items {
             characterData[character]?.[this.name]?.offset?.left ?
                 characterData[character][this.name].offset.left + "px" : 0;
 
-        this.animate(f);
+        this.animate();
     };
 
-    animate(f) {
-        this.element.style.objectPosition = -this.multiplier[f] + "px " + this.verticalSequence[f] + "px"
+
+    animate() {
+        this.element.style.objectPosition = -this.multiplier[frame] + "px " + this.verticalSequence[frame] + "px"
     };
 
     urlUpdate(url, date) {
+        if (!date){
+            date = new Date().getTime()}
+
         if(url !== undefined) {
             urlArray[this.id][1] = url;
             $("#" + this.name + "Url").placeholder = url;
             $("#" + this.name + "Url").value = "";
-            this.element.src = url + ".png?";
-        }
+            this.element.src = url + ".png?";}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
-            $("#" + this.name + "Url").value = "";
-        }
+            $("#" + this.name + "Url").value = "";}
         else {
             $("#" + this.name + "Url").placeholder = "No data";
             $("#" + this.name + "Url").value = "";
@@ -105,7 +106,7 @@ const equipmentOffsets = [
     [0,1,1,2,1,0]];
 
 const consumableRefactor = class items {
-    constructor(item, f) {
+    constructor(item) {
         this.src = itemData[item]?.url + ".png";
         this.name = itemData[item].name;
         this.id = item;
@@ -116,8 +117,7 @@ const consumableRefactor = class items {
 
         urlArray[item] = [this.name, this.src];
         if (itemData[item].bool) {
-            this.button.classList.add('inv');
-        }
+            this.button.classList.add('inv');}
         else {
             this.element.classList.add("invisible");
         }
@@ -129,12 +129,12 @@ const consumableRefactor = class items {
         }
 
         this.#offsetAdjustment();
-        this.urlUpdate(this.src, f);
-        this.animate(f);
+        this.urlUpdate(this.src);
+        this.animate();
     };
 
-    animate(f) {
-        this.element.style.top = this.floatOffsets[f];
+    animate() {
+        this.element.style.top = this.floatOffsets[frame];
     };
 
     #offsetAdjustment() {
@@ -151,19 +151,20 @@ const consumableRefactor = class items {
     };
 
     urlUpdate(url, date){
+        if (!date){
+            date = new Date().getTime()}
+
         if(url !== undefined) {
             urlArray[this.id][1] = url;
             $("#" + this.name + "Url").placeholder = url;
             $("#" + this.name + "Url").value = "";
 
             this.src = url;
-            this.element.src = this.src;
-        }
+            this.element.src = this.src;}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
             $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
-            $("#" + this.name + "Url").value = "";
-        }
+            $("#" + this.name + "Url").value = "";}
         else {
             $("#" + this.name + "Url").placeholder = "No data";
             $("#" + this.name + "Url").value = "";
@@ -180,7 +181,7 @@ const specialRefactor = class items {
     name = "special";
     floatOffsets = [];
 
-    constructor(character, f) {
+    constructor(character) {
         this.element = $("#" + this.name);
         this.button = $('#' + this.name + "Button");
 
@@ -191,22 +192,20 @@ const specialRefactor = class items {
             this.element.src = this.src + "?" + new Date().getTime();
         }
 
-        this.characterChange(character, f);
+        this.characterChange(character);
     };
 
-    characterChange(character, f) {
+    characterChange(character) {
         this.disabled = merge(false, characterData[character]?.[this.name]?.bool);
         let floatBool = merge(false, characterData[character]?.[this.name]?.displacement?.float);
         let marginTop = merge(0, characterData[character]?.[this.name]?.displacement?.top);
 
         if(floatBool){
             let random = Math.floor(Math.random() * 3);
-            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
-        }
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");}
         else {
             for (let i = 0; i < 6; i++){
-                this.floatOffsets[i] = marginTop + "px";
-            }
+                this.floatOffsets[i] = marginTop + "px";}
         }
 
         if (!this.disabled) {
@@ -217,20 +216,17 @@ const specialRefactor = class items {
             this.button.setAttribute("class","deact");}
         else {
             let width =                 characterData[character]?.[this.name]?.resolution?.width
-            this.element.style.height = characterData[character]?.[this.name]?.resolution.height
+            this.element.style.height = characterData[character]?.[this.name]?.resolution?.height + "px"
             this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform?.opacity);
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
             this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
             if (characterData[character]?.[this.name]?.transform) {
                 this.element.style.transform =
                     "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
-                             + characterData[character]?.[this.name]?.transform?.scaleX + ")";
-                this.element.style.width =      width + 0.5 + "px";
-            }
+                             + characterData[character]?.[this.name]?.transform?.scaleX + ")";}
             else {
-                this.element.style.transform = "none";
-                this.element.style.width =      width + "px";
-            }
+                this.element.style.transform = "none";}
+            this.element.style.width =  width + "px";
 
             let sequence =  merge([1,2,3,4], characterData[character]?.[this.name]?.sequence);
             this.multiplier = [
@@ -238,41 +234,42 @@ const specialRefactor = class items {
                 -(sequence[2] - 1) * width + "px 0", -(sequence[3] - 1) * width + "px 0"];
             this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence).map((x) => x)
             for (let key in this.verticalSequence){
-                this.verticalSequence[key] = -this.verticalSequence[key] + "px";}
+                this.verticalSequence[key] = -this.verticalSequence[key] + "px";
+            }
 
-            this.animate(f);
+            this.animate();
+            this.animateFloat();
             this.button.classList.remove("deact");}
 
         this.urlUpdate(character);
     };
 
-    animate(f) {
-        this.element.style.objectPosition = this.multiplier[f];
-        this.element.style.top = this.verticalSequence[f];
+    animate() {
+        this.element.style.objectPosition = this.multiplier[frame];
+        this.element.style.top = this.verticalSequence[frame];
     };
 
-    animateFloat(f) {
-        this.element.style.marginTop = this.floatOffsets[f];
+    animateFloat() {
+        this.element.style.marginTop = this.floatOffsets[frame];
     };
 
     urlUpdate(character) {
         let src = characterData[character]?.[this.name]?.fileUrl;
+        let urlbar = $("#" + this.name + "Url")
 
         if (src) {
             this.src = src + ".png?" ;
             urlArray[8] = ["special", this.src];
 
-            $("#" + this.name + "Url").placeholder = this.src;
-            $("#" + this.name + "Url").value = "";
-
-            $("#" + this.name + "Url").classList.remove("deact");
-            this.element.src = this.src + new Date().getTime();
-        }
+            urlbar.placeholder = this.src;
+            urlbar.value = "";
+            urlbar.classList.remove("deact");
+            this.element.src = this.src + new Date().getTime();}
         else {
             urlArray[8] = ["special",""];
-            $("#" + this.name + "Url").placeholder = "Not Applicable";
+            urlbar.placeholder = "Not Applicable";
 
-            $("#" + this.name + "Url").classList.add("deact");
+            urlbar.classList.add("deact");
             this.element.removeAttribute('src');
         }
     };

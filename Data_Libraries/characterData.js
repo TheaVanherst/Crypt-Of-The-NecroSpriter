@@ -7,7 +7,6 @@ const
         [1,2,3,4]];
 
 const
-    dlcTypes = ["Base Game", "Amplified", "Synchrony"],
     characterData = [
         {
             name: "Cadence",
@@ -159,7 +158,7 @@ const
                 resolution: {
                     height: 23, width: 17},
                 displacement: {
-                    top: 1, left: -21,
+                    top: -1, left: -20,
                     float: true,
                     fixed: true},
                 offset: {
