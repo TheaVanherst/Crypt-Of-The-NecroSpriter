@@ -26,12 +26,7 @@ let characterRefactor = class setup {
                         .appendChild(createButton("t", cur + 1));
                     divS.children[i].onclick = () => {
                         this.clothingUpdate(cur);
-                    };
-                }
-            }
-        }
-
-
+        };}}}
 
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
             ($('#characterSelect').appendChild(createButton("t", dlcTypes[i]))) //prints what the character is from
@@ -52,19 +47,15 @@ let characterRefactor = class setup {
                         image = new Image();
                         image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
                         image.onload = () => {
-                            currentCharacter.urlUpdate(item);
-                            return;
-                        }
-
+                            currentCharacter.urlUpdate(item);}
                     targetTimeout(e);
-                }};
-        });
+        }};});
 
         this.clothingSet =  clothing;
         this.ampBool =      amp;
         this.flipped =      false;
 
-        this.update(character, amp);
+        this.update(character);
     }
 
     frameArray = [];
@@ -114,15 +105,13 @@ let characterRefactor = class setup {
     };
 
     #debugUpdate(e){
-        if(currentCharacter){
-            let returnString
-            let database = Object.entries(characterData[e]);
-            database.forEach(([key, value]) => {
-                let data = JSON.stringify(value)
-                returnString += key + " : " + data + "\n"; // 'one'
-            });
-            $("#charDebug").innerText = returnString;
-        }
+        let returnString
+        let database = Object.entries(characterData[e]);
+        database.forEach(([key, value]) => {
+            let data = JSON.stringify(value)
+            returnString += key + " : " + data + "\n"; // 'one'
+        });
+        $("#charDebug").innerText = returnString;
     }
 
     #floatChecks(frame) {
