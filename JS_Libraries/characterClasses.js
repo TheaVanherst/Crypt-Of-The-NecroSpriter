@@ -82,9 +82,9 @@ let characterRefactor = class setup {
         this.#bodyOffsets(character);
 
         if (characterData[character]?.settings?.floatSequence === true) {
-            this.#floatChecks(frame);}
+            this.#floatChecks();}
         else {
-            this.#floatDisable(character, frame);
+            this.#floatDisable(character);
         }
 
         this.headElement.style.height = this.height + "px";
@@ -111,7 +111,7 @@ let characterRefactor = class setup {
 
         this.#debugUpdate(character);
         this.flip()
-        this.animate(frame);
+        this.animate();
     };
 
     #debugUpdate(e){
@@ -124,7 +124,7 @@ let characterRefactor = class setup {
         $("#charDebug").innerText = returnString;
     };
 
-    #floatChecks(frame) {
+    #floatChecks() {
         this.floatOffsets = [0,0,0,0,0,0];
         let bodyOffset = merge(0, characterData[this.name]?.settings?.offset?.body);
 
@@ -139,19 +139,18 @@ let characterRefactor = class setup {
             arrayShift(this.floatOffsets);
         }
 
-        this.floatCycle(frame);
+        this.floatCycle();
     };
 
-    #floatDisable(character, frame){
+    #floatDisable(character){
         this.floatOffsets = [0,0,0,0,0,0];
         this.bodyOffset = merge(0, characterData[character]?.settings?.offset?.body);
 
         for (let key in this.floatOffsets) {
             this.floatOffsets[key] =
-                ((24 + this.bodyOffset) - this.height) + "px 0 0 " +
-                Math.floor((24 - this.width) / 2) + "px";
+                ((24 + this.bodyOffset) - this.height) + "px 0 0 " + Math.floor((24 - this.width) / 2) + "px";
         }
-        this.floatCycle(frame);
+        this.floatCycle();
     };
 
     flipped = false;
@@ -208,21 +207,21 @@ let characterRefactor = class setup {
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
             this.headElement.classList.add("invisible");}
         else {
-            this.#floatDisable(this.id, frame);
+            this.#floatDisable(this.id);
             this.headElement.classList.remove("invisible");
         }
 
         $("#clothingDebug").textContent = clothing;
-        this.animate(frame);
+        this.animate();
     };
 
-    animate(frame) {
+    animate() {
         this.bodyElement.style.objectPosition = this.frameArray[frame] + this.clothingMulti;
         this.headElement.style.objectPosition = this.frameArray[frame] + '0';
     };
 
-    floatCycle(frame) {
-        this.playerElement.style.margin = this.floatOffsets[frame];
+    floatCycle() {
+        this.playerElement.style.margin = this.floatOffsets[floatInt];
     };
 
     urlUpdate(url) {
