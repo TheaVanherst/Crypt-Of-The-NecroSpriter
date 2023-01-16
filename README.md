@@ -28,6 +28,7 @@ A Javascript Crypt Of The Necromancer Spritesheet Renderer <br>
       - Shield has directional controls depending on which direction the character is facing.
     - Equipment slots such as Food, Torch and Shovel.
     - Designated URL assignement to indivdual item types. Via. `directory/image`
+      - URL Validation on address entery & error notification.
     - Items disable / enable depending on if the respective character can equip
 - Background image selection and toggle with the character preview.
     - 8 different floor types, including a dance floor mode and a multiplier mode.
@@ -50,7 +51,7 @@ You can also change them using the URL directory by just typing the directory it
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
 <picture>
-  <img alt="Animated sample of the visual apperance and possibility of the software." src="https://steamuserimages-a.akamaihd.net/ugc/1947272866714939327/D8A72D8F5C5851CED8AEF5A82DCE76739AE16CC2/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false">
+  <img alt="Animated sample of the visual apperance and possibility of the software." src="./DEMO_Images/2893560157_preview_Fb5MkBsXwAAwXYU.png">
 </picture>
 
 A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
