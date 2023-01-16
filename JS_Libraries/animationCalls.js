@@ -35,6 +35,7 @@ const playReset = () => {
         }
         specialData.animateFloat(floatInt);
 
+
         heartBeat[floatInt].classList.add("beat");
         $("#barDebug").textContent = floatInt;
     },
@@ -59,10 +60,11 @@ const playReset = () => {
         $("#beatDebug").textContent = frame;
         $("#elapsedDebug").textContent = elapsed;
 
-        currentCharacter.animate(frame);
-        specialData.animate(frame);
+        currentCharacter.animate();
+        currentCharacter.floatCycle()
+        specialData.animate();
         for (let key in itemArray) {
-            itemArray[key].animate(frame);
+            itemArray[key].animate();
         }
     },
 

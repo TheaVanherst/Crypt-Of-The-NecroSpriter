@@ -16,6 +16,7 @@
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   
 </p></pre>
 A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
+
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
   - Custom URL injector for individual characters
@@ -23,20 +24,20 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
 * Dynamic clothing selection, based on the character selected.
   - 'Amplification mode' toggle and preview from the Amplified DLC.
 - Equipment animation preview with character specific offsets & settings.
-    - Helmet, Weapon, Wrist, Charm, Hip and Boot equip-ables.
-    - Special and Shield toggles equip-ables.
-      - Shield has directional controls depending on which direction the character is facing.
-    - Equipment slots such as Food, Torch and Shovel.
-    - Designated URL assignement to indivdual item types. Via. `directory/image`
-      - URL Validation on address entry & error notification.
-    - Items disable / enable depending on if the respective character can equip
+  - Helmet, Weapon, Wrist, Charm, Hip and Boot equipables.
+  - Special and Shield toggles equipables.
+    - Shield has directional controls depending on which direction the character is facing.
+  - Equipment slots such as Food, Torch and Shovel.
+  - Designated URL assignment to individual item types. Via. `directory/image`
+    - URL Validation on address entry & error notification.
+  - Items disable / enable depending on if the respective character can equip
 - Background image selection and toggle with the character preview.
-    - 8 different floor types, including a dance floor mode and a multiplier mode.
+  - 8 different floor types, including a dance floor mode and a multiplier mode.
 * Foreground render preview, to show a closer resemblance to how sprites are rendered ingame.
-    - 10 total foregrounds included by default with additional expandability, each of which depend on the floor type you select.
+  - 10 total foregrounds included by default with additional expandability, each of which depend on the floor type you select.
 * Individual frame selecting, alongside render previewing based on BPM.
-    - Render speed slider based on beats per minute, based on tracks featured in that game.
-    - A list of tracks featured in the game at each BPM step of 5, including bosses.
+  - Render speed slider based on beats per minute, based on tracks featured in that game.
+  - A list of tracks featured in the game at each BPM step of 5, including bosses.
 - Scaling feature, with a slider to change the resolution size of the left hand side preview.
 - Two different render modes, linear and the more accurate in-game beat driven render.
 
@@ -51,29 +52,36 @@ You can also change them using the URL directory by just typing the directory it
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
 <picture>
-  <img alt="Animated sample of the visual appearance and possibility of the software." src="./DEMO_Images/Armour_Sets.gif">
+  <img alt="directory changing" src="./DEMO_Images/urlchanger.gif">
 </picture>
 
-A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
-This site was built using Crypt of the Necrospriter, and available on the [Steam Workshop][1].
+Crypt of the Necrospriter also features a playable version of Vahn which replaces Nocturna, including all Armour sets & her bat transformation.
+She was drawn and tested using the software as a proof of concept, and available on the [Steam Workshop][1].
 
 [1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
 
 <pre>NOTES:</pre>
 
 Each sprite-sheet is individually programmable per character based on the directory.
-So if you wish to change the sprite-sheet directory for a specific character, select the character you wish to change, and type it in the assosiated field, you then can change character to whomever you want and the directory data will be locally stored. 
+So if you wish to change the sprite-sheet directory for a specific character, select the character you wish to change, and type it in the assosiated field, you then can change character to whomever you want and the directory data will be locally stored.
 If you wish to reset the custom entries, simply refresh the page and everything will be set back to the default directories.
 
 Different characters have different file formatting, so be aware of the file naming conventions Crypt of the Necrodancer has, as a lot of these adjustments are pre-baked into the code to try and compensate for such. So I would just recommend to not try to change the naming convention too much.
 
 Directories on launch are determined by the data that is in `'JS_Libraries/characterData.js'`.
-Change the url directory and save, on page refresh it will then default to the new directory you inserted.
+Change the url directory and it'll update - on page refresh it will then default to the new directory you inserted.
 
+<picture>
+  <img alt="asset design and updating" src="./DEMO_Images/weapon_update.gif">
+</picture>
+
+Item directories on launch are determined by `'JS_Libraries/itemData.js'`.
+Any invalid urls will be detected on page-start up and notify you after page initialization.
+Changing the boolean values in the itemData.js file will change their default visibility.
 <pre>UPCOMING:</pre>
-                                               
+
 - UI back-end rework.
 - Debug information user interface [?]
 
-if you want any assistance in using the tool, designing sprites or have any
-recommendations for the sprite renderer, contact me on Twitter or my discord TheaVanherst#1953.
+If you need any assistance in using the tool, designing sprites or have any
+recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).

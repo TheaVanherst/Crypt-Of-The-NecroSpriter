@@ -1,5 +1,6 @@
 
-let currentCharacter, shieldData, specialData, floorData, itemArray = [];
+let currentCharacter, floorData;
+let itemArray = [], consumableList = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
     let defaultCharacter = 11; // This will initate as the default character.
