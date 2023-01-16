@@ -1,15 +1,19 @@
 const
     aniOffsets = [
-        [1,1,1,2, 2,2,2,2, 2,2,2,2,
-         3,3,3,3, 3,3,3,3, 3,3,4,4,
-         4,4,4,4, 4,4], [1,2,3,4]];
+        [
+            1,1,1,
+            2,2,2,2,2,2,2,
+            3,3,3,3,3,3,3,3,3,
+            4,4,4,4,4,4,
+        ],[
+            1,1,1,1,1,1,
+            2,2,2,2,2,2,
+            3,3,3,3,3,3,
+            4,4,4,4,4,4,4,
+        ]
+    ];
 
 const
-    transform = $('#transform'),
-    amplifiedButton = $('#amplifiedButton');
-
-const
-    dlcTypes = ["Base Game", "Amplified", "Synchrony"],
     characterData = [
         {
             name: "Cadence",
@@ -161,7 +165,7 @@ const
                 resolution: {
                     height: 23, width: 17},
                 displacement: {
-                    top: 1, left: -21,
+                    top: -1, left: -20,
                     float: true,
                     fixed: true},
                 offset: {

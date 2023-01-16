@@ -1,53 +1,136 @@
 
-/* URL garbage I have to shove in the source directory */
+/* TODO: CUSTOM CURSORS */
 
-body {cursor: url('UI_Libraries/default_cursor.png'), auto}
-input[type=text]{cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
-.slider, .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
-e:hover {cursor: url('UI_Libraries/hover_cursor.png'), auto!important}
+body {
+    cursor: url('UI_Libraries/default_cursor.png'), auto;}
+input[type=text] {
+    cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
+.slider,
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
+    cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
+e:hover {
+    cursor: url('UI_Libraries/hover_cursor.png'), auto!important;}
 
-#logo { position: absolute; top: var(--tablePadding);
-    left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}
+/* TODO: URL ELEMENTS */
+
+#logo {
+    position:   absolute;
+    top:        var(--tablePadding);
+    left:       calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}
 
 /* TODO: RENDER CSS & SCALING */
 
-#floor, #danceFloor, #foreground { position:absolute;
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
+#floor, #danceFloor, #foreground {
+    position:           absolute;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
 
 #floor, #danceFloor {
-    background-repeat: repeat; object-fit: none;
-    background-position: top left; left: 15px; top: -350px;
-    width: calc(72px * 10); height: calc(72px * 10); }
-#foreground { width:216px; margin: -5px 0 0 183px; }
+    background-repeat:      repeat;
+    object-fit:             none;
+    background-position:    top left;
 
-/* TODO: Character css */
+    left:   15px;
+    top:   -350px;
+    width:  calc(72px * 10);
+    height: calc(72px * 10); }
+#foreground {
+    width:  216px;
+    margin:-5px 0 0 183px; }
 
-#characterUrl {width: calc(var(--window3Width) - (25px))}
+/* TODO: GENERAL CHARACTER CSS */
 
-#playerModel { image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
-#playerModel, #playerModel > *, #playerModel > * > *, #shadow {position:absolute}
+#characterUrl {
+    width: calc(var(--window3Width) - (25px));}
 
-#playerModel { left: 278.5px; top:74px; width: 24px; height: 30px; }
-#shadow {left:278px; top:73px; width: 24px; height: 27px; }
+#transform {
+    position:   relative;
+    top:        280px;
+    transform:  scale(var(--scaler));
+    margin-top: calc((var(--scaler) * 86px) * -1);}
+#playerModel {
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
+#playerModel,
+#playerModel > *,
+#playerModel > * > *,
+#shadow {
+    position:   absolute;}
 
-#head, #body {position:absolute; object-fit: none;}
+#playerModel {
+    left:   278.5px;
+    top:    74px;
+    width:  24px;
+    height: 30px; }
+#shadow {
+    left:   278px;
+    top:    73px;
+    width:  24px;
+    height: 27px; }
 
-#hat, #boots, #ring, #weapon, #torch, #charm,  #hip, #shovel {
-    width: 24px; height: 24px; object-fit: none}
 
-#shovel {left: 1px; }
-#consumables { top: 6px; }
-#spell { left: 22px; }
-#equipment { margin-top: -6px; left: 7px; }
-#item { left: -7px; }
+#head, #body {
+    position:   absolute;
+    object-fit: none;}
 
-#special { position:absolute; object-fit: none; z-index: 10; object-position: 0px 0px;}
+/* TODO: CONSUMABLES & CHARACTER EQUIPMENT */
 
-#shield { width: 24px; height: 24px; top: 4px; object-fit: none; position: absolute;}
-#shield.up {margin:-9px 0 0 0; z-index: 0; object-position: -72px 0; }
-#shield.right { margin:-2px 0 0 16px; z-index: 10; object-position: 0 0; }
-#shield.down {margin:9px 0 0 0; z-index: 20; object-position: -24px 0; }
+#hat,
+#boots,
+#ring,
+#weapon,
+#torch,
+#charm,
+#hip,
+#shovel {
+    width:      24px;
+    height:     24px;
+    object-fit: none}
+#shovel {
+    left:   1px; }
+#consumables {
+    top:    6px; }
+#spell {
+    left:   22px; }
+#equipment {
+    margin:-6px 0 0 0;
+    left:   7px; }
+#item {
+    left:  -7px; }
+#special {
+    position:   absolute;
+    object-fit: none;
+    z-index:    10;
 
-.flip { transform: scaleX(-1); object-position-x: 0.5px; }
-.mirror { transform: scaleX(-1); translate: 0.5px 0;}
+    object-position:    0 0;}
 
+#shield {
+    width:  24px;
+    height: 24px;
+    top:    4px;
+
+    object-fit: none;
+    position:   absolute;}
+#shield.up {
+    margin:             -9px 0 0 0;
+    z-index:            0;
+    object-position:   -72px 0;}
+#shield.right {
+    margin:             -2px 0 0 16px;
+    z-index:            10;
+    object-position:    0 0;}
+#shield.down {
+    margin:             9px 0 0 0;
+    z-index:            20;
+    object-position:   -24px 0;}
+
+/* TODO: TOGGLEABLE */
+
+.flip {
+    transform:          scaleX(-1);}
+.mirror {
+    transform:          scaleX(-1);
+    translate:          0.5px 0;}
+.invisible {
+    display:            none !important}

@@ -1,95 +1,176 @@
 
 :root{
     --tablePadding: 15px; --logoDesign: 75px;
-    --window1Height: 680px; --window2Height: 396px; --window3Height: 575px; --window4Height: 64px; --window6Height: 338px;
-    --window1Width: 580px; --window2Width: 324px; --window3Width: 218px; --window5Width: 250px; --window7Width: 190px;}
 
-#crop, render{ width: var(--window1Width); height: 543px;
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated; }
-render {position:absolute!important; overflow: hidden}
-#crop { position: relative; overflow: hidden; margin: 13px 0 13px -2px;
-    border: 2px solid rgba(255,255,255,0.5); width: var(--window1Width); }
+    --window1Height: 680px; --window1Width: 580px;
+    --window2Height: 396px; --window2Width: 324px;
+    --window3Height: 575px; --window3Width: 218px;
+    --window4Height:  64px; --window5Width: 250px;
+    --window6Height: 338px; --window7Width: 190px;
+    }
 
-#transform { position:relative; top: 280px; }
+#crop,
+render {
+    width:  var(--window1Width);
+    height: 543px;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated; }
+render {
+    position:   absolute!important;
+    overflow:   hidden}
+#crop {
+    position:   relative;
+    overflow:   hidden;
+    margin:     13px 0 13px -2px;
+    border:     2px solid rgba(255,255,255,0.5);
+    width:      var(--window1Width); }
 
 /* TODO: MENU SETTINGS */
 
-cont { margin:10px 0; display: block; }
-cont options, options setin { display: inline-table; }
-cont options { padding:5px 0; }
-options > div { padding:0 0 10px 0; }
-options > div:last-of-type { padding: 0 0 0 0; }
+cont {
+    margin:     10px 0;
+    display:    block; }
+cont options,
+options setin {
+    display:    inline-table; }
+cont options {
+    padding:    5px 0 5px 0; }
+options > div {
+    padding:    0 0 10px 0; }
+options > div:last-of-type {
+    padding:    0 0 0 0; }
 
-cont th {text-align: left;}
-th, tr img {padding: 0; margin: -4px -2px}
+cont th {
+    text-align: left;}
+th,
+tr img {
+    padding:    0;
+    margin:    -4px -2px}
 
 /* TODO: TABLE SIZE SETTINGS */
 
-table { padding:var(--tablePadding)}
-table .mid img {width:24px} /* table image resolutions */
-table > tr > th {height:24px; width:24px}
-table .top img {height:24px}
+table {
+    padding:    var(--tablePadding)}
+table .mid img {
+    width:  24px} /* table image resolutions */
+table > tr > th {
+    height: 24px;
+    width:  24px;}
+table .top img {
+    height: 24px;}
 
-container {padding:var(--tablePadding) var(--tablePadding);
-    margin: var(--tablePadding) 0 0 calc(2px + var(--tablePadding))}
-controller div:first-of-type {margin: 13px 0 13px 0}
-container, table {position:absolute}
+container {
+    padding:    var(--tablePadding) var(--tablePadding);
+    margin:     var(--tablePadding) 0 0 calc(2px + var(--tablePadding));}
+controller div:first-of-type {
+    margin:     13px 0 13px 0;}
+container,
+table {
+    position:   absolute;}
 
 /* TODO: RENDER WINDOW */
-.tb1 .top img, .tb1 {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2))} /* container width */
-.tb1 .mid img {height:var(--window1Height)}
-container.tb1 options, container.tb1 cont { width:var(--window1Width) }
+.tb1 .top img,
+.tb1 {
+    width:  calc(var(--window1Width) - 40px + (var(--tablePadding) * 2));}
+.tb1 .mid img {
+    height: var(--window1Height);}
+container.tb1 options,
+container.tb1 cont {
+    width:  var(--window1Width);}
 
 /* TODO: ENVIROMENT TABLE */
-.tb2 {left: calc(var(--window1Width) + (var(--tablePadding) * 3))} /* set this the same as the thing above + 50*/
-.tb2 .top img, .tb2 {width:calc(var(--window2Width) - 40px + (var(--tablePadding) * 2))}
-.tb2 .mid img {height:var(--window2Height)}
-container.tb2, container.tb2 options { width:var(--window2Width) }
+.tb2 {
+    left:   calc(var(--window1Width) + (var(--tablePadding) * 3));}
+.tb2 .top img,
+.tb2 {
+    width:  calc(var(--window2Width) - 40px + (var(--tablePadding) * 2));}
+.tb2 .mid img {
+    height: var(--window2Height);}
+container.tb2,
+container.tb2 options {
+    width:  var(--window2Width);}
 
 /* TODO: CHARACTER TABLE SHEETS */
-.tb3 {left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 9));
-    top: 75px} /* set this the same as the thing above + 50*/
-.tb3 .top img, .tb3 {width:calc(var(--window3Width) - 40px + (var(--tablePadding) * 2))}
-.tb3 .mid img {height:var(--window3Height)}
-container.tb3, container.tb3 options { width:var(--window3Width) }
+.tb3 {
+    left:   calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 9));
+    top:    75px}
+.tb3 .top img,
+.tb3 {
+    width:  calc(var(--window3Width) - 40px + (var(--tablePadding) * 2));}
+.tb3 .mid img {
+    height: var(--window3Height);}
+container.tb3,
+container.tb3 options {
+    width:  var(--window3Width);}
 
-container.tb3 e {width:80px; margin: 0 10px 10px 0!important; display:inline-table}
-container.tb3 e:nth-child(even){margin: 0 0 10px 0!important}
+container.tb3 e {
+    width:      80px;
+    margin:     0 10px 10px 0!important;
+    display:    inline-table}
+container.tb3 e:nth-child(even){
+    margin:     0 0 10px 0!important;}
 
 /* TODO: RESCALER TABLE */
-.tb4 {left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 9));
-    top: calc(var(--window3Height) + (var(--tablePadding) * 4) + var(--logoDesign))} /* set this the same as the thing above + 50*/
-.tb4 .top img, .tb4 {width:calc(var(--window3Width) - 40px + (var(--tablePadding) * 2))}
-.tb4 .mid img {height:var(--window4Height)}
-container.tb4, container.tb4 options {width:var(--window3Width);}
+.tb4 {
+    left:   calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 9));
+    top:    calc(var(--window3Height) + (var(--tablePadding) * 4) + var(--logoDesign));}
+.tb4 .top img,
+.tb4 {
+    width:  calc(var(--window3Width) - 40px + (var(--tablePadding) * 2));}
+.tb4 .mid img {
+    height: var(--window4Height);}
+container.tb4,
+container.tb4 options {
+    width:  var(--window3Width);}
 
-.tb5 {left: calc(var(--window1Width) + var(--window2Width) + var(--window3Width) + (var(--tablePadding) * 8));
-    width:calc(var(--window5Width) - 40px + (var(--tablePadding) * 2))}
+.tb5 {
+    left:   calc(var(--window1Width) + var(--window2Width) + var(--window3Width) + (var(--tablePadding) * 8));
+    width:  calc(var(--window5Width) - 40px + (var(--tablePadding) * 2));}
 
 /* TODO: EQUIPABLES AND TOOLS */
-.tb6 {left: calc(var(--window1Width) + (var(--tablePadding) * 3));
-    top: calc(var(--window2Height) + (var(--tablePadding) * 4))}
-.tb6 .top img, .tb6 {width:calc(var(--window2Width) - 40px + (var(--tablePadding) * 2))}
-.tb6 .mid img {height:var(--window6Height)}
-container.tb6, container.tb6 options { width:var(--window2Width) }
+.tb6 {
+    left:   calc(var(--window1Width) + (var(--tablePadding) * 3));
+    top:    calc(var(--window2Height) + (var(--tablePadding) * 4));}
+.tb6 .top img,
+.tb6 {
+    width:  calc(var(--window2Width) - 40px + (var(--tablePadding) * 2));}
+.tb6 .mid img {
+    height: var(--window6Height)}
+container.tb6,
+container.tb6 options {
+    width:  var(--window2Width) }
 
 /* TODO: URL DIRECTORY DATA */
-.tb7 {left: calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 6))}
-.tb7 .mid img {height:794px}
-.tb7 .top img, .tb7 {width:calc(var(--window7Width) - 40px + (var(--tablePadding) * 2))}
-container.tb7, container.tb7 options { width:var(--window7Width) }
+.tb7 {
+    left:   calc(var(--window1Width) + var(--window2Width) + (var(--tablePadding) * 6));}
+.tb7 .mid img {
+    height: 794px;}
+.tb7 .top img,
+.tb7 {
+    width:  calc(var(--window7Width) - 40px + (var(--tablePadding) * 2));}
+container.tb7,
+container.tb7 options {
+    width:  var(--window7Width);}
 
-.tb7#urlData > div {padding: 0 0 10px 0}
+.tb7#urlData > div {
+    padding:    0 0 10px 0;}
 
 /* TODO: BPM / DEBUG SHEET */
-.tb8 .top img, .tb8 {width:calc(var(--window1Width) - 40px + (var(--tablePadding) * 2));
-    top: calc(var(--window1Height) + (var(--tablePadding) * 4))} /* container width */
-.tb8 .mid img {height:calc(var(--window2Height) + var(--window6Height) - var(--window1Height))}
-container.tb8 options, container.tb8 cont { width:var(--window1Width) }
+.tb8 .top img,
+.tb8 {
+    width:  calc(var(--window1Width) - 40px + (var(--tablePadding) * 2));
+    top:    calc(var(--window1Height) + (var(--tablePadding) * 4));}
+.tb8 .mid img {
+    height: calc(var(--window2Height) + var(--window6Height) - var(--window1Height));}
+container.tb8 options,
+container.tb8 cont {
+    width:  var(--window1Width);}
 
-.tb9 {left: calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + var(--window3Width) + (var(--tablePadding) * 11));}
+.tb9 {
+    left:   calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + var(--window3Width) + (var(--tablePadding) * 11));}
 
-.footer {position:absolute;
-    left:calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 10));
-    top:calc(var(--window3Height) + var(--window4Height) + 130px + var(--logoDesign))}
+.footer {
+    position:   absolute;
+    left:   calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * 10));
+    top:    calc(var(--window3Height) + var(--window4Height) + 130px + var(--logoDesign));}
 

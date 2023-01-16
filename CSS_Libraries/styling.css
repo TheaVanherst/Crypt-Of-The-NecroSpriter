@@ -1,107 +1,236 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 :root{
-   --scaler : 10;}
+   --scaler : 4;}
 
 /* TODO: WINDOW SIZE SETTINGS */
 
-body { margin: 0; padding: 0;
-    background-color: black; color:white;
-    font-family: 'Silkscreen', cursive;
-    letter-spacing: -2px; font-size:14px}
+body {
+    margin: 0;
+    padding: 0;
+
+    background:     black;
+    color:          white;
+
+    font-family:    'Silkscreen', cursive;
+    letter-spacing: -2px;
+    font-size:      14px}
 
 #refreshButton > * {
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;
-    width:14px; height: 14px; top:2px; position:relative }
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+
+    width:      14px;
+    height:     14px;
+    top:        2px;
+    position:   relative;}
 #refreshButton:active > * {
-filter: invert(1);}
-#refreshButton { float: right }
+    filter:     invert(1);}
+#refreshButton {
+    float:      right }
 
-/* button over toggle */
-e { padding:5px 10px; margin:0 5px; display: inline-block;
-    color: #fff; border: solid 2px #fff; background-color: #000; }
-e:hover { background-color: #696969FF}
-.inv, e:active { color: #000; background-color: #fff; border: solid 2px #000}
-.inv { border: solid 2px #fff} e.inv:active {border: solid 2px #000}
-.deact { border: solid 2px #696969FF!important; color: #696969FF!important;
+/* TODO: BUTTON CSS */
+
+e {
+    padding:5px 10px;
+    margin:0 5px;
+    display: inline-block;
+
+    color:      #fff;
+    border:     solid 2px #fff;
+    background: #000; }
+e:hover {
+    background: #696969FF;}
+
+.inv, e:active {
+    color:      #000;
+    background: #fff;
+    border:     solid 2px #000}
+
+.inv {
+    border: solid 2px #fff}
+e.inv:active {
+    border: solid 2px #000}
+
+.deact {
+    border: solid 2px #696969FF!important;
+    color:  #696969FF!important;
+
     pointer-events: none!important;}
-e:first-of-type {margin: 0 4px 0 0}
-e:not(:first-of-type):last-of-type {margin: 0 0 0 4px}
+e:first-of-type {
+    margin:     0 4px 0 0}
+e:not(:first-of-type):last-of-type {
+    margin:     0 0 0 4px}
 
-e t { display: flex; justify-content: center}
+e t {
+    display:            flex;
+    justify-content:    center}
 
-/* TODO: UI CONTAINERS */
+/* TODO: URL CONTAINERS */
 
-#urlData div { display: inline-block; margin:0 9.5px 0 0;}
-#urlData div:last-of-type {margin:0 0 0 0;}
+#urlData div {
+    display:    inline-block;
+    margin:     0 9.5px 0 0;}
+#urlData div:last-of-type {
+    margin:     0 0 0 0;}
+.invalid {
+    background: black!important;
+    animation: blinker 0.5s linear infinite;}
 
-input[type=text] { padding:5px 10px; display: inline-block;
-    color: #fff; border: solid 2px #fff; background-color: #000;
-    width: calc((var(--window7Width) + 4px) - (var(--tablePadding) * 2));
-    font-family: 'Silkscreen', cursive; letter-spacing: -2px; }
+input[type=text] {
+    padding:    5px 10px;
+    display:    inline-block;
+    width:      calc((var(--window7Width) + 4px) - (var(--tablePadding) * 2));
+
+    color:      #fff;
+    border:     solid 2px #fff;
+    background: #000;
+
+    font-family:    'Silkscreen', cursive;
+    letter-spacing: -2px; }
 input[type=text]:focus {
-    outline-style: none;
-    box-shadow: none;
-    border-style: double;
-    background-color:#fff; color:#000
-}
+    outline-style:  none;
+    box-shadow:     none;
+    border-style:   double;
 
-.slider {height: 3px; background: #fff}
-.slider::-webkit-slider-thumb,.slider::-moz-range-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 8px; height: 24px; border-radius: 0;
-    background: #000; cursor: pointer; border: 2px solid #fff}
-#bpmSlider {width:calc(var(--window2Width) - 3px)}
-#scaleSlider {width:calc(var(--window3Width))}
+    background:     #fff;
+    color:          #000;}
+input[type=text].invalid {
+    color: white;
+    background: darkred;}
 
-#trackContainer { padding:10px; margin:5px 0;
-    width:calc(var(--window2Width) - (12px * 2)); height: 90px;
-    color: #fff; border: solid 2px #fff; background-color: #000}
+@keyframes blinker {
+    from, to {  border-color: darkred; color: red;}
+    49% {       border-color: darkred;}
+    50% {       border-color: red;}}
 
-:root { --backgroundCol : 3; --backgroundColPad : 5px}
+/* TODO: TRACKLIST */
 
-#shieldButton {top: 315px; }
-#shieldButton e:not(:first-of-type) { width: 52px; }
+#trackContainer {
+    padding:    10px;
+    margin:     5px 0;
 
-#clothing e { width: 8px }
-#clothing tr e { width: 35px; height:35px}
+    width:      calc(var(--window2Width) - (12px * 2));
+    height:     90px;
 
-#backgrounds e {margin: 0 var(--backgroundColPad); padding:0;
-    width:calc((var(--window2Width) / var(--backgroundCol)) - 11px)!important;
-    background-size:200%; height:56px!important;
-    image-rendering: -moz-crisp-edges; image-rendering: pixelated;}
-#backgrounds e:first-of-type {margin: 0 var(--backgroundColPad) 0 0}
-#backgrounds e:last-of-type {margin: 0 0 0 var(--backgroundColPad)}
+    color:      #fff;
+    border:     solid 2px #fff;
+    background: #000}
 
-#backgrounds t {z-index: 10; padding: 0 7px 2px}
-#backgrounds e.inv t {background-color:#fff}
-#backgrounds e:active t {background-color:#000; color:#fff}
-#backgrounds e t {position: absolute}
 
-#backgrounds > div {vertical-align: top;
-    position: relative; display: inline-flex}
+/* TODO: SCALING DATA */
 
-.invisible { display: none !important}
+.slider {
+    height:     3px;
+    background: #fff}
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance:         none;
+
+    width:  8px;
+    height: 24px;
+
+    cursor:         pointer;
+    border-radius:  0;
+    background:     #000;
+    border:         2px solid #fff}
+
+/* TODO: SHIELD DATA */
+
+:root {
+    --backgroundCol :       3;
+    --backgroundColPad :    5px}
+
+#shieldButton {
+    top:    315px; }
+#shieldButton e:not(:first-of-type) {
+    width:  52px; }
+
+#clothing e {
+    width:  8px }
+#clothing tr e {
+    width:  35px;
+    height: 35px}
+
+/* TODO: BACKGROUND BUTTONS */
+
+#backgrounds e {
+    margin:     0 var(--backgroundColPad);
+    padding:    0;
+    width:      calc((var(--window2Width) / var(--backgroundCol)) - 11px)!important;
+    height:     56px!important;
+
+    background-size:    200%;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
+#backgrounds e:first-of-type {
+    margin:     0 var(--backgroundColPad) 0 0}
+#backgrounds e:last-of-type {
+    margin:     0 0 0 var(--backgroundColPad)}
+
+#backgrounds t {
+    z-index:    10;
+    padding:    0 7px 2px}
+
+#backgrounds e.inv t {
+    background: #fff}
+#backgrounds e:active t {
+    background: #000;
+    color:      #fff}
+#backgrounds e t {
+    position:   absolute}
+
+#backgrounds > div {
+    vertical-align: top;
+    position:       relative;
+    display:        inline-flex}
 
 /* TODO: DEBUG SIZE SETTINGS */
 
-#bpmCounter {width:calc((48px + 10px) * 6 + 15px); display: inline-block;}
-.bpm {image-rendering: -moz-crisp-edges; image-rendering: pixelated}
-.bpm {position:relative; display: inline-table; margin: 0 0 0 5px;
-    width: 48px; height: 44px }
-.bpm > img {position:absolute; width: inherit; height: inherit}
+#debug {
+    display:    inline-block;
+    position:   absolute; }
+#debug > t {
+    top:       -5px;
+    position:   relative;}
 
-.beat {transform: scale(1.5);
-    -webkit-animation:scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
-    animation:scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both}
+#scaleSlider {
+    width:      calc(var(--window3Width))}
+#bpmSlider {
+    width:      calc(var(--window2Width) - 3px)}
+#bpmCounter {
+    width:      calc((48px + 10px) * 6 + 15px);
+    display:    inline-block;}
+.bpm {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+    position:   relative;
+    display:    inline-table;
+    margin:     0 0 0 5px;
+    width:      48px;
+    height:     44px }
+.bpm > img {
+    position:   absolute;
+    width:      inherit;
+    height:     inherit}
+
+.beat {
+    transform:  scale(1.5);
+    -webkit-animation:  scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
+    animation:          scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both}
 
 @-webkit-keyframes scale-up-center{
-    0%{-webkit-transform:scale(1.5);transform:scale(1.5)}
-    100%{-webkit-transform:scale(1);transform:scale(1)}}
+    0%{
+        -webkit-transform:  scale(1.5);
+        transform:          scale(1.5);}
+    100%{
+        -webkit-transform:  scale(1);
+        transform:          scale(1);}}
 @keyframes scale-up-center{
-    0%{-webkit-transform:scale(1.5);transform:scale(1.5)}
-    100%{-webkit-transform:scale(1);transform:scale(1)}}
-
-#debug { display: inline-block; position:absolute; }
-#debug > t {top: -5px; position: relative;
-}
+    0%{
+        -webkit-transform:  scale(1.5);
+        transform:          scale(1.5);}
+    100%{
+        -webkit-transform:  scale(1);
+        transform:          scale(1);}}
