@@ -16,10 +16,6 @@
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   
 </p></pre>
 A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
-<picture>
-  <img alt="asset design and updating" src="./DEMO_Images/Armour_Sets.gif">
-</picture>
-
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
   - Custom URL injector for individual characters
@@ -27,12 +23,11 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
 * Dynamic clothing selection, based on the character selected.
   - 'Amplification mode' toggle and preview from the Amplified DLC.
 - Equipment animation preview with character specific offsets & settings.
-    - Helmet, Weapon, Wrist, Charm, Hip and Boot equipables.
-    - Special and Shield toggles equipables.
+    - Helmet, Weapon, Wrist, Charm, Hip and Boot equip-ables.
+    - Special and Shield toggles equip-ables.
       - Shield has directional controls depending on which direction the character is facing.
     - Equipment slots such as Food, Torch and Shovel.
     - Designated URL assignment to individual item types. Via. `directory/image`
-      - URL Validation on address entry & error notification.
     - Items disable / enable depending on if the respective character can equip
 - Background image selection and toggle with the character preview.
     - 8 different floor types, including a dance floor mode and a multiplier mode.
@@ -55,7 +50,7 @@ You can also change them using the URL directory by just typing the directory it
 Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
 
 <picture>
-  <img alt="directory changing" src="./DEMO_Images/urlchanger.gif">
+  <img alt="Animated sample of the visual appearance and possibility of the software." src="./DEMO_Images/Armour_Sets.gif">
 </picture>
 
 A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
