@@ -82,19 +82,20 @@ const itemRefactor = class items {
     urlUpdate(url, date) {
         if (!date){
             date = new Date().getTime()}
+        let urlbar = $("#" + this.name + "Url")
 
         if(url !== undefined) {
             urlArray[this.id][1] = url;
-            $("#" + this.name + "Url").placeholder = url;
-            $("#" + this.name + "Url").value = "";
+            urlbar.placeholder = url;
+            urlbar.value = "";
             this.element.src = url + ".png?";}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
-            $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
-            $("#" + this.name + "Url").value = "";}
+            urlbar.placeholder = urlArray[this.id][1];
+            urlbar.value = "";}
         else {
-            $("#" + this.name + "Url").placeholder = "No data";
-            $("#" + this.name + "Url").value = "";
+            urlbar.placeholder = "No data";
+            urlbar.value = "";
         }
     };
 };
@@ -134,7 +135,7 @@ const consumableRefactor = class items {
     };
 
     animate() {
-        this.element.style.top = this.floatOffsets[frame];
+        this.element.style.top = this.floatOffsets[floatInt];
     };
 
     #offsetAdjustment() {
@@ -153,26 +154,25 @@ const consumableRefactor = class items {
     urlUpdate(url, date){
         if (!date){
             date = new Date().getTime()}
+        let urlbar = $("#" + this.name + "Url")
 
         if(url !== undefined) {
             urlArray[this.id][1] = url;
-            $("#" + this.name + "Url").placeholder = url;
-            $("#" + this.name + "Url").value = "";
+            urlbar.placeholder = url;
+            urlbar.value = "";
 
             this.src = url;
             this.element.src = this.src;}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
-            $("#" + this.name + "Url").placeholder = urlArray[this.id][1];
-            $("#" + this.name + "Url").value = "";}
+            urlbar.placeholder = urlArray[this.id][1];
+            urlbar.value = "";}
         else {
-            $("#" + this.name + "Url").placeholder = "No data";
-            $("#" + this.name + "Url").value = "";
+            urlbar.placeholder = "No data";
+            urlbar.value = "";
         }
 
         this.#offsetAdjustment();
-
-        this.top = this.floatOffsets[frame] + 'px';
         this.src = url;
     };
 };

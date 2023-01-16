@@ -1,5 +1,4 @@
 const floorRefactor = class floor {
-
     danceType = 1;
     currentFloor = [];
     previousType = [];
@@ -16,12 +15,16 @@ const floorRefactor = class floor {
 
     buttonToggle = [$("#danceButton"), $("#multiplierButton")]
 
-    constructor(zoneArea, danceType) {
-
-        this.danceType = danceType;
+    constructor(zoneArea, danceType, floorVisibility, foregroundVisiblity) {
 
         this.danceFloor = $("#danceFloor");
         this.floors = $("#floor");
+        this.floorVisible = !floorVisibility;
+        this.floorToggle();
+        this.foregVisible = !foregroundVisiblity;
+        this.foregroundToggle();
+
+        this.danceType = danceType;
 
         for (let e in this.floorTileSets) {
             $('#backgrounds').appendChild(createButton("div"));
@@ -71,14 +74,33 @@ const floorRefactor = class floor {
         $("#flipDebug").textContent = this.floorBinary
     };
 
-    foregroundToggle(e) {
-        $("#foreground").classList.toggle('invisible');
-        $("#foregroundButton").classList.toggle('inv');
+    foregroundToggle() {
+        this.foregVisible = !this.foregVisible
+
+        if(this.foregVisible){
+            $("#foreground").classList.remove('invisible');
+            $("#foregroundButton").classList.add('inv');
+        } else {
+            $("#foreground").classList.add('invisible');
+            $("#foregroundButton").classList.remove('inv');
+        }
     };
 
     floorToggle() {
-        $("#floor").classList.toggle('invisible');
-        $("#danceFloor").classList.toggle('invisible');
+        this.floorVisible = !this.floorVisible;
+
+        if (this.floorVisible === false){
+            this.danceSwitcher(0);
+            this.danceFloor.classList.add('invisible');
+
+            this.floors.classList.add('invisible');
+            $("#danceButton").setAttribute("class", "deact");
+            $("#multiplierButton").setAttribute("class", "deact");}
+        else {
+            this.floors.classList.remove('invisible');
+            $("#danceButton").setAttribute("class", "");
+            $("#multiplierButton").setAttribute("class", "");}
+
         $("#backgroundButton").classList.toggle('inv');
     };
 

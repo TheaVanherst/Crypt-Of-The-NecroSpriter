@@ -100,7 +100,7 @@ input[type=text].invalid {
     background: darkred;}
 
 @keyframes blinker {
-    from, to {  border-color: darkred}
+    from, to {  border-color: darkred; color: red;}
     49% {       border-color: darkred;}
     50% {       border-color: red;}}
 

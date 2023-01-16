@@ -74,7 +74,12 @@ const playReset = () => {
 };
 
 onwheel = (e) => {
-    let newVal = parseInt((e.deltaY || e.deltaY*-1) > 0 ? -1 : 1) + parseInt(scaleRes);
+    let newVal;
+    if (e.deltaY) {
+        newVal = parseInt((e.deltaY || e.deltaY * -1) > 0 ? -1 : 1) + parseInt(scaleRes);
+    }
+
+    console.log(e.deltaY)
     scaleRes = newVal > 12 ? 12 : newVal < 4 ? 4 : newVal;
 
     $("#scaleSlider").value = scaleRes;

@@ -9,18 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
 
-    let foreFloorArr = [true, true] // change these for the default start-up settings of the floor / foreground.
-    // first setting is the floor, second is the foreground.
-
-    if (foreFloorArr[0] === true){
-            $("#backgroundButton").classList.add("inv");}
-    else {  $("#floor").classList.add('invisible');
-            $("#danceFloor").classList.add('invisible');}
-    if (foreFloorArr[1] === true){
-            $("#foregroundButton").classList.add("inv");}
-    else {  $("#foreground").classList.add('invisible');}
-
-    floorData = new floorRefactor(0,1); //floor you want [0-5] & dance mode [0-2]
+    floorData = new floorRefactor(0,1, true, true);
+    //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
