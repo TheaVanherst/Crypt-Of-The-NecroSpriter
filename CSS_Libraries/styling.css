@@ -43,8 +43,7 @@ input[type=text]:focus {
     outline-style: none;
     box-shadow: none;
     border-style: double;
-    background-color:#fff; color:#000
-}
+    background-color:#fff; color:#000}
 
 .slider {height: 3px; background: #fff}
 .slider::-webkit-slider-thumb,.slider::-moz-range-thumb {

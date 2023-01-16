@@ -1,9 +1,7 @@
 const floorRefactor = class floor {
-    danceVisibility = true;
-
     danceType = 1;
-    previousType = 1;
-    currentFloor = ["2", "0"];
+    currentFloor = [2, 0];
+    previousType = [];
 
     floorTileSets = [
         [["zone1", "zone1"], ["zone2", "zone2"], ["zone3_1", "zone3_2"]],
@@ -13,10 +11,8 @@ const floorRefactor = class floor {
         [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]];
     floorBinary = 0;
     floorArr = ["_NoMP", ""];
-    flipToggle = [];
 
     constructor() {
-        this.danceVisibility = true;
         this.danceFloor = $("#danceFloor");
         this.floors = $("#floor");
 
@@ -29,55 +25,44 @@ const floorRefactor = class floor {
                 child.style.background = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
                 $('#backgrounds').children[e].appendChild(child).onclick = () => {
                     this.backgroundUpdate(e, i);
-                }
-            }
-        }
+        }}}
 
         let a = this.floorTileSets[0].length,
             b = Math.floor(this.currentFloor[0] / a),
             c = this.currentFloor[0] - (b * a);
+        this.previousType[1] = [`${b}`,`${c}`] //can't tell you why these needs to bet put into strings. They just do I guess.
         this.backgroundUpdate(b, c);
 
         $("#backgroundButton, #foregroundButton, #danceButton").classList.add("inv");
     };
 
     backgroundUpdate(e, i) {
-        this.currentFloor = [e, i];
+        this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
 
         $("#backgrounds .inv")?.classList.remove("inv");
         $("#backgrounds").children[e].children[i].classList.add("inv");
-        $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
-        if (JSON.stringify(this.flipToggle) === JSON.stringify(this.currentFloor)) {
-            arrayShift(this.floorTileSets[e][i]);
-            arrayShift(this.overlayTileSets[e][i]);
-            $("#zone" + e + i).innerText = this.floorTileSets[e][i][0];
+        console.log(this.previousType[1], this.currentFloor);
+        console.log(JSON.stringify(this.previousType[1]), JSON.stringify(this.currentFloor));
+        if (JSON.stringify(this.previousType[1]) === JSON.stringify(this.currentFloor) &&
+            JSON.stringify([e, i]) === JSON.stringify(this.currentFloor)) {
+                arrayShift(this.floorTileSets[e][i]);
+                arrayShift(this.overlayTileSets[e][i]);
+
+                $("#zone" + e + i).children[0].innerText = this.floorTileSets[e][i][0];
         }
+
+        this.previousType[1] = this.currentFloor
+
+        $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
 
         let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
         this.danceFloor.style.background = push;
         this.floors.style.background = push;
         $("#zone" + e + i).style.background = push;
 
-        this.flipToggle = [e, i];
         this.danceUpdate();
         $("#flipDebug").textContent = this.floorBinary
-    }
-
-    floorToggle() {
-        this.floors.classList.toggle('invisible');
-        $("#backgroundButton").classList.toggle('inv');
-
-        if (this.danceVisibility) { //this is really dumb and lazy-
-            this.danceFloor.classList.add("invisible");
-            $("#danceButton").setAttribute("class", "deact");
-            $("#multiplierButton").setAttribute("class", "deact");
-        } else {
-            this.danceFloor.classList.remove("invisible");
-            $("#danceButton").classList.remove("deact");
-            $("#multiplierButton").classList.remove("deact");
-        }
-        this.danceVisibility = !this.danceVisibility
     };
 
     foregroundToggle() {
@@ -86,15 +71,6 @@ const floorRefactor = class floor {
     };
 
     danceSwitcher(a) {
-        let urlCheck1 = new Image()
-        let arr = this.currentFloor
-        urlCheck1.src = `UI_Libraries/${this.floorTileSets[arr[0]][arr[1]][0]}${this.floorArr[0]}_Floor1.png`;
-        urlCheck1.onload = () => {
-        }
-        urlCheck1.onerror = () => {
-            $("#danceButton").setAttribute("class", "deact");
-        }
-
         if (a !== this.danceType) {
             this.danceFloor.classList.remove('invisible');
             if (a === 1) {
@@ -108,21 +84,26 @@ const floorRefactor = class floor {
             a = 0;
             this.danceFloor.classList.add('invisible');
             $("#danceButton").setAttribute("class", "");
-            $("#multiplierButton").setAttribute("class", "");
-        }
+            $("#multiplierButton").setAttribute("class", "");}
 
-        if (this.previousType !== a && a !== 0) {
-            this.previousType = a;
-            arrayShift(this.floorArr);
-        }
+        if (this.previousType[0] !== a && a !== 0) {
+            this.previousType[0] = a;
+            arrayShift(this.floorArr);  }
 
         this.danceType = a;
         this.danceUpdate();
+
+        let urlCheck1 = new Image()
+        urlCheck1.src = this.danceUrls[0]
+        urlCheck1.onload = () => {
+            $("#danceButton").classList.remove('deact');}
+        urlCheck1.onerror = () => {
+            $("#danceButton").setAttribute("class", "deact");}
     };
 
     danceUpdate() {
         let e = this.currentFloor[0], i = this.currentFloor[1];
-        $("#floorDebug").textContent = `[${this.currentFloor}],[${this.previousType},${this.danceType}] : `
+        $("#floorDebug").textContent = `[${this.currentFloor}],[${this.previousType[0]},[${this.previousType[1]}],${this.danceType}] : `
         this.danceUrls = [
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png')`,
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor2.png')`];
