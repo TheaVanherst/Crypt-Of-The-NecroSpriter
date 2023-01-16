@@ -1,17 +1,19 @@
-
 const
     createButton = (css,text,id) => {
         let item = (document.createElement(css));
         if(text !== "" && text !== undefined){item.textContent = text;}
         if(id !== "" && id !== undefined){item.id = id;}
-        return item;},
+        return item;
+    },
 
     buttonAdjustment = (button, newVal, newButton) => {
         $all(button + " e").classList?.remove('inv');
-        newButton.classList.add('inv');},
+        newButton.classList.add('inv');
+    },
 
     buttonTog = (e) => {
-        e.classList.toggle('inv');},
+        e.classList.toggle('inv');
+    },
 
     urlRefresh = () => {
         let date = new Date().getTime();
@@ -41,7 +43,7 @@ const
             trackContainer.appendChild(item).appendChild(br);
         }
         bpm = 60 / newBPM;
-},
+    },
 
     search = (e) => {
         if(e.key === 'Enter') {
@@ -93,19 +95,7 @@ const
         e.unshift(e.pop());
     },
 
-    styleProxy = {
-        get: (object, property) => {
-            return (value) => {
-                if (value) {
-                    object[property] = value;
-                    return new Proxy(object, styleProxy);}
-                return object[property];};}
-    },
-
-    style = (selector) => {
-        return new Proxy(selector.style, styleProxy);
-    },
-
     merge = (defaultData, newData, fallback) => {
         return newData !== undefined ? newData.valueOf() :
-            defaultData !== undefined ? defaultData.valueOf() : fallback;};
+            defaultData !== undefined ? defaultData.valueOf() : fallback;
+    };

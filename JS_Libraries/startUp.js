@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
-            itemArray[key] = new itemRefactor(key, defaultCharacter);
-        } else if (itemData[key].type === "consumable") {
-            consumableData[key] = new consumableRefactor(key);
-        } else if (itemData[key].type === "shield") {
-            shieldData = new shieldRefactor(key, "right", false);
-        } else if (itemData[key].type === "special") {
+            itemArray[key] = new itemRefactor(key, defaultCharacter);}
+        else if (itemData[key].type === "consumable") {
+            consumableData[key] = new consumableRefactor(key);}
+        else if (itemData[key].type === "shield") {
+            shieldData = new shieldRefactor(key, "right", false);}
+        else if (itemData[key].type === "special") {
             specialData = new specialRefactor(defaultCharacter);
         }
 

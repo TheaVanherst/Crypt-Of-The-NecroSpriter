@@ -49,7 +49,8 @@ let characterRefactor = class setup {
             $('#characterSelect').getElementsByTagName('options')[dlcCount[key]]
                 .appendChild(createButton('e', char, char)).onclick = () => {
                 this.update(key);
-                specialData.characterChange(key);}
+                specialData.characterChange(key);
+            };
         }
 
         $all("#characterUrl").forEach((e) => {
@@ -92,9 +93,7 @@ let characterRefactor = class setup {
         this.headElement.style.width = this.width + "px";
         this.bodyElement.style.width = this.width + "px";
 
-        style($("#consumables"))
-            .marginTop(Math.floor((24 - this.height) / 2) - 5 + "px")
-            .marginLeft(Math.ceil(-(24 - this.width) / 2) + "px");
+        $("#consumables").style.margin = `${Math.floor((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
 
         this.characterAmp = merge(true, characterData[this.id]?.settings?.amp)
@@ -103,7 +102,8 @@ let characterRefactor = class setup {
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
         for(let key in itemArray){
-            itemArray[key].characterChange(character);}
+            itemArray[key].characterChange(character);
+        }
 
         $("#" + this.name).classList.add("inv");
         $("#characterDebug").textContent = this.name + " ";
@@ -179,7 +179,8 @@ let characterRefactor = class setup {
             this.head = true;
             let headOffset = -(merge(0, characterData[character]?.settings?.offset?.head));
             this.headElement.style.top = headOffset + "px";
-            this.headElement.classList.remove("invisible");}
+            this.headElement.classList.remove("invisible");
+        }
 
         this.urlUpdate();
     };
@@ -193,7 +194,8 @@ let characterRefactor = class setup {
             this.clothingSet = 0;
             buttonTog($('#clothing' + this.clothingSet));}
         else {
-            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));}
+            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
+        }
     };
 
     clothingUpdate(clothing) {
@@ -252,9 +254,11 @@ let characterRefactor = class setup {
     ampFrameUpdate() {
         let multiplierGrab = [];
         for (let i = 0; i < 16; i++) {
-            multiplierGrab[i] = -(this.width * i) + 'px ';}
-        for(let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];}
+            multiplierGrab[i] = -(this.width * i) + 'px ';
+        }
+        for (let i = 0; i < 4; i++) {
+            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];
+        }
         this.animate(frame);
     };
 }

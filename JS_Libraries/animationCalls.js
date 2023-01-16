@@ -15,7 +15,8 @@ window.setInterval(() => {
     if (playTog) {
         frame = aniOffsets[0][elapsed];
         elapsed = Math.floor((new Date().getTime() - start) / bpm / 40);
-        animationPush();}
+        animationPush();
+    }
 }, bpm);
 
 const playReset = () => {
@@ -46,11 +47,11 @@ const playReset = () => {
             start = new Date().getTime();
             floorData.floorFlip();
             floatPush(floatInt > 4, 0, +1);}
-
         else if (elapsed < 0) {
             elapsed = 3;
             floorData.floorFlip();
-            floatPush(floatInt < 1,  5, -1);}
+            floatPush(floatInt < 1,  5, -1);
+        }
 
         $("#playerModel").style.margin =
             -currentCharacter.floatOffsets[floatInt] + "px 0 0 " +
