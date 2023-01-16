@@ -27,7 +27,8 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
     - Special and Shield toggles equip-ables.
       - Shield has directional controls depending on which direction the character is facing.
     - Equipment slots such as Food, Torch and Shovel.
-    - Designated URL assignment to individual item types. Via. `directory/image`
+    - Designated URL assignement to indivdual item types. Via. `directory/image`
+      - URL Validation on address entery & error notification.
     - Items disable / enable depending on if the respective character can equip
 - Background image selection and toggle with the character preview.
     - 8 different floor types, including a dance floor mode and a multiplier mode.
