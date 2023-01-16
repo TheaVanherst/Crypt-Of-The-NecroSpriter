@@ -1,11 +1,12 @@
 
 let start = new Date().getTime(),
-    elapsed = 0,
-    frame = 0,
     bpm,
     arrayDivisional,
 
+    elapsed = 0,
+    frame = 0,
     floatInt = 0,
+
     playTog = false,
     scaleRes;
 
@@ -66,8 +67,8 @@ const playReset = () => {
         }
 },
 
-    frameTypeToggle = (e) => {
-        e ? buttonTog($("#aniType")) : null;
+    frameTypeToggle = () => {
+        $("#aniType").classList.toggle("inv")
         aniOffsets.unshift(aniOffsets.pop());
         arrayDivisional = 1000 / aniOffsets[0].length;
 };
@@ -77,19 +78,8 @@ onwheel = (e) => {
     scaleRes = newVal > 12 ? 12 : newVal < 4 ? 4 : newVal;
 
     $("#scaleSlider").value = scaleRes;
-    zoomEvent();
-};
-
-const zoomEvent = () => {
     $doc.style.setProperty('--scaler',scaleRes);
-    transform.style.transform = "scale("+scaleRes+")";
-    transform.style.marginTop = -(scaleRes * 86)+ "px";
     $('#scale').textContent = "1:" + scaleRes;
-    },
-
-    scaleUpdate = () => {
-        scaleRes = document.getElementById("scaleSlider").value;
-        zoomEvent();
 };
 
 frameTypeToggle(true);

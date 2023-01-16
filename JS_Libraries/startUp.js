@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
-    $("#scaleSlider").oninput = () => scaleUpdate();
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
-    bpmUpdate(); scaleUpdate();
+    bpmUpdate();
+
+    scaleRes = 4; // default scale multiplier
+    $('#scale').textContent = "1:" + scaleRes;
 
     playTog ? buttonTog($("#play")) : null;
 
@@ -30,15 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (itemData[key].type === "equipment"){
                 itemArray[key] = new itemRefactor(key, defaultCharacter, frame);
             } else if (itemData[key].type === "consumable") {
-                consumableList.push(key);
+                consumableData[key] = new consumableRefactor(key, floatInt);
             }
         } else {
-            $(itemName + "Url").placeholder = "No Startup URL"
+            $(itemName + "Url").placeholder = "No Startup URL";
         }
-    }
-
-    for (let key in consumableList) {
-        consumableData[key] = new consumableRefactor(consumableList[key], floatInt);
     }
 
     $("#barDebug").textContent = floatInt;

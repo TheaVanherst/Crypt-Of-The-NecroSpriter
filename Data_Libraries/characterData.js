@@ -1,12 +1,10 @@
 const
     aniOffsets = [
-        [1,1,1,2, 2,2,2,2, 2,2,2,2,
-         3,3,3,3, 3,3,3,3, 3,3,4,4,
-         4,4,4,4, 4,4], [1,2,3,4]];
-
-const
-    transform = $('#transform'),
-    amplifiedButton = $('#amplifiedButton');
+        [1,1,1,
+         2, 2,2,2,2, 2,2,2,2,
+         3,3,3,3, 3,3,3,3, 3,3,
+         4,4, 4,4,4,4, 4,4],
+        [1,2,3,4]];
 
 const
     dlcTypes = ["Base Game", "Amplified", "Synchrony"],

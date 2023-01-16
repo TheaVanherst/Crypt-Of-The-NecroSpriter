@@ -106,7 +106,7 @@ const equipmentOffsets = [
 
 const consumableRefactor = class items {
     constructor(item, f) {
-        this.src = itemData[item].url + ".png";
+        this.src = itemData[item]?.url + ".png";
         this.name = itemData[item].name;
         this.id = item;
 

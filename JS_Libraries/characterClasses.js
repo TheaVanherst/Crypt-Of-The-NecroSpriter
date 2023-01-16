@@ -155,6 +155,7 @@ let characterRefactor = class setup {
     };
 
     flipToggle() {
+        $("#flipTog").classList.toggle("inv")
         this.flipped = !this.flipped;
         this.flip();
     };

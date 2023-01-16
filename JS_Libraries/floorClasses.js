@@ -71,7 +71,7 @@ const floorRefactor = class floor {
         $("#flipDebug").textContent = this.floorBinary
     };
 
-    foregroundToggle() {
+    foregroundToggle(e) {
         $("#foreground").classList.toggle('invisible');
         $("#foregroundButton").classList.toggle('inv');
     };
