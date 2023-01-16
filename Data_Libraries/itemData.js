@@ -1,6 +1,4 @@
 
-let consumableList = [];
-
 let
     itemData = [
         {

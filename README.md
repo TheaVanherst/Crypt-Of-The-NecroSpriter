@@ -16,9 +16,6 @@
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   
 </p></pre>
 A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
-<picture>
-  <img alt="asset design and updating" src="./DEMO_Images/weapon_update.gif">
-</picture>
 
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
@@ -58,8 +55,8 @@ Examples of how to specify the directory are displayed in the text-boxes beforeh
   <img alt="directory changing" src="./DEMO_Images/urlchanger.gif">
 </picture>
 
-A playable version of Vahn which replaces Nocturna, featuring all Armour sets + bat transformation.
-This site was built using Crypt of the Necrospriter, and available on the [Steam Workshop][1].
+Crypt of the Necrospriter also features a playable version of Vahn which replaces Nocturna, including all Armour sets & her bat transformation.
+She was drawn and tested using the software as a proof of concept, and available on the [Steam Workshop][1].
 
 [1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
 
@@ -72,12 +69,19 @@ If you wish to reset the custom entries, simply refresh the page and everything 
 Different characters have different file formatting, so be aware of the file naming conventions Crypt of the Necrodancer has, as a lot of these adjustments are pre-baked into the code to try and compensate for such. So I would just recommend to not try to change the naming convention too much.
 
 Directories on launch are determined by the data that is in `'JS_Libraries/characterData.js'`.
-Change the url directory and save, on page refresh it will then default to the new directory you inserted.
+Change the url directory and it'll update - on page refresh it will then default to the new directory you inserted.
 
+<picture>
+  <img alt="asset design and updating" src="./DEMO_Images/weapon_update.gif">
+</picture>
+
+Item directories on launch are determined by `'JS_Libraries/itemData.js'`.
+Any invalid urls will be detected on page-start up and notify you after page initialization.
+Changing the boolean values in the itemData.js file will change their default visibility.
 <pre>UPCOMING:</pre>
 
 - UI back-end rework.
 - Debug information user interface [?]
 
-if you want any assistance in using the tool, designing sprites or have any
-recommendations for the sprite renderer, contact me on Twitter or my discord TheaVanherst#1953.
+If you need any assistance in using the tool, designing sprites or have any
+recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).
