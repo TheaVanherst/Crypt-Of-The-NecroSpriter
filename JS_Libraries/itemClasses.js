@@ -88,6 +88,8 @@ const itemRefactor = class items {
             urlArray[this.id][1] = url;
             urlbar.placeholder = url;
             urlbar.value = "";
+
+            this.src = url + ".png";
             this.element.src = url + ".png?";}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
@@ -100,7 +102,6 @@ const itemRefactor = class items {
     };
 };
 
-let consumableData = [];
 const equipmentOffsets = [
     [0,1,1,2,2,1],
     [0,1,2,2,1,1],
@@ -108,7 +109,7 @@ const equipmentOffsets = [
 
 const consumableRefactor = class items {
     constructor(item) {
-        this.src = itemData[item]?.url + ".png";
+        this.src = itemData[item]?.url;
         this.name = itemData[item].name;
         this.id = item;
 
@@ -126,7 +127,7 @@ const consumableRefactor = class items {
         this.button.onclick = () => {
             buttonTog(this.button);
             this.element.classList.toggle('invisible');
-            this.element.src = this.src + "?" + new Date().getTime();
+            this.element.src = this.src + ".png?" + new Date().getTime();
         }
 
         this.#offsetAdjustment();
@@ -161,7 +162,7 @@ const consumableRefactor = class items {
             urlbar.placeholder = url;
             urlbar.value = "";
 
-            this.src = url;
+            this.src = url + ".png";
             this.element.src = this.src;}
         else if (this.src !== undefined) {
             this.element.src = urlArray[this.id][1] + ".png?" + date;
@@ -191,7 +192,6 @@ const specialRefactor = class items {
             this.urlUpdate()
             this.element.src = this.src + "?" + new Date().getTime();
         }
-
         this.characterChange(character);
     };
 
@@ -276,9 +276,8 @@ const specialRefactor = class items {
 };
 
 const shieldRefactor = class items {
-    id = 12;
-
-    constructor(rotation, bool) {
+    constructor(id, rotation, bool) {
+        this.id = id;
         this.button = $("#shieldButton");
         this.element = $('#shield');
 

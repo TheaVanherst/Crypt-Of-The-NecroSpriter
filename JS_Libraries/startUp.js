@@ -1,6 +1,6 @@
 
 let currentCharacter, floorData;
-let itemArray = [], consumableList = [], specialData, shieldData;
+let itemArray = [], consumableData = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
     let defaultCharacter = 11; // This will initate as the default character.
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (itemData[key].type === "consumable") {
             consumableData[key] = new consumableRefactor(key);
         } else if (itemData[key].type === "shield") {
-            shieldData = new shieldRefactor("right", false);
+            shieldData = new shieldRefactor(key, "right", false);
         } else if (itemData[key].type === "special") {
             specialData = new specialRefactor(defaultCharacter);
         }
@@ -71,4 +71,4 @@ const songList = [
     ["BOSS // Death Metal"], //175
     ["N/a"], //180
     ["N/a"], //185
-    ["N/a"]]; 190
+    ["N/a"]]; //190
