@@ -2,26 +2,23 @@
 let currentCharacter, shieldData, specialData, floorData, itemArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    $("render").style.backgroundColor = "darkslategray"; //background colour.
-
     let defaultCharacter = 11; // This will initate as the default character.
-    // - 11 is my demo of Vahn, a sprite designed with Crypt of the Necrospriter.
-
     currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
 
+    $("render").style.backgroundColor = "darkslategray"; //background colour.
     floorData = new floorRefactor(0,1, true, true);
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
-    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     bpmUpdate();
+    playTog ? buttonTog($("#play")) : null;
 
     scaleRes = 4; // default scale multiplier
     $('#scale').textContent = "1:" + scaleRes;
 
-    playTog ? buttonTog($("#play")) : null;
 
+    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
             itemArray[key] = new itemRefactor(key, defaultCharacter);
@@ -30,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (itemData[key].type === "shield") {
             shieldData = new shieldRefactor("right", false);
         } else if (itemData[key].type === "special") {
-            specialData = new specialRefactor(defaultCharacter); //don't touch this
+            specialData = new specialRefactor(defaultCharacter);
         }
 
         let urlCheck = new Image()
@@ -56,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const songList = [
     ["Tombtorial"], //100
-    ["N/a"], ["N/a"], //105, 110
+    ["N/a"], //105
+    ["N/a"], //110
     ["1-1 // Disco Descent"], //115
     ["BOSS // Deep Blues [123]", "BOSS // King Conga", "BOSS // Golden Lute", "TRAINING // Watch Your Step"], //120
     ["BOSS // Coral Riff [126]", "BOSS // Frankensteinway"], //125
@@ -67,6 +65,9 @@ const songList = [
     ["2-3 // Portabellohead", "BOSS // FortissiMole"], //150
     ["3-3 // A Cold sweat (cold)","3-3 // A Hot Mess (hot)","5-3 // Six Feet Thunder"], //155
     ["4-3 // The Wight To Remain","BOSS // Necrodancer Phase 2"], //160
-    ["N/a"], ["N/a"], //165, 170
+    ["N/a"], //165
+    ["N/a"], //170
     ["BOSS // Death Metal"], //175
-    ["N/a"], ["N/a"], ["N/a"]]; //180 185 190
+    ["N/a"], //180
+    ["N/a"], //185
+    ["N/a"]]; 190

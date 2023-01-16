@@ -38,7 +38,6 @@ const
             trackContainer.appendChild(item).appendChild(br);
         }
         bpm = 60 / newBPM;
-        arrayDivisional = 1000 / aniOffsets[0].length;
 },
 
     search = (e) => {

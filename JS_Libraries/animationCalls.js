@@ -1,7 +1,6 @@
 
 let start = new Date().getTime(),
     bpm,
-    arrayDivisional,
 
     elapsed = 0,
     frame = 0,
@@ -15,9 +14,9 @@ const heartBeat = $("#bpmCounter").children;
 window.setInterval(() => {
     if (playTog) {
         frame = aniOffsets[0][elapsed];
-        elapsed = Math.floor((new Date().getTime() - start) / bpm / arrayDivisional);
+        elapsed = Math.floor((new Date().getTime() - start) / bpm / 40);
         animationPush();}
-    }, bpm);
+}, bpm);
 
 const playReset = () => {
         if (playTog) {
@@ -25,7 +24,7 @@ const playReset = () => {
             $("#play")?.classList?.remove('inv');
             animationPush();
         }
-},
+    },
 
     floatPush = (bool, check, add) => {
         $("#bpmCounter").children[floatInt].classList.remove("beat");
@@ -38,12 +37,12 @@ const playReset = () => {
 
         heartBeat[floatInt].classList.add("beat");
         $("#barDebug").textContent = floatInt;
-},
+    },
 
     animationPush = () => {
-        if (elapsed >= aniOffsets[0].length) {
-            start = new Date().getTime();
+        if (elapsed >= 25) {
             elapsed = 0;
+            start = new Date().getTime();
             floorData.floorFlip();
             floatPush(floatInt > 4, 0, +1);}
 
@@ -65,26 +64,22 @@ const playReset = () => {
         for (let key in itemArray) {
             itemArray[key].animate(frame);
         }
-},
+    },
 
     frameTypeToggle = () => {
         $("#aniType").classList.toggle("inv")
         aniOffsets.unshift(aniOffsets.pop());
-        arrayDivisional = 1000 / aniOffsets[0].length;
-};
+    };
 
 onwheel = (e) => {
     let newVal;
     if (e.deltaY) {
-        newVal = parseInt((e.deltaY || e.deltaY * -1) > 0 ? -1 : 1) + parseInt(scaleRes);
+        newVal = parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(scaleRes);
     }
 
-    console.log(e.deltaY)
     scaleRes = newVal > 12 ? 12 : newVal < 4 ? 4 : newVal;
+    $doc.style.setProperty('--scaler',scaleRes);
 
     $("#scaleSlider").value = scaleRes;
-    $doc.style.setProperty('--scaler',scaleRes);
     $('#scale').textContent = "1:" + scaleRes;
 };
-
-frameTypeToggle(true);

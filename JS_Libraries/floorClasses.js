@@ -137,11 +137,12 @@ const floorRefactor = class floor {
 
     danceUpdate() {
         let e = this.currentFloor[0], i = this.currentFloor[1];
-        $("#floorDebug").textContent = `[${this.currentFloor}],[${this.previousType[0]},[${this.previousType[1]}],${this.danceType}] : `
         this.danceUrls = [
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png')`,
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor2.png')`];
         this.danceFloor.style.background = this.danceUrls[this.floorBinary];
+
+        $("#floorDebug").textContent = `[${this.currentFloor}:${this.floorTileSets[e][i][0]}](${this.danceType}):`
     };
 
     floorFlip() {
