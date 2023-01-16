@@ -2,7 +2,10 @@
 const floorRefactor = class floor {
     danceVisibility = true;
 
+    danceType = 1;
+    previousType = 1;
     currentFloor = ["2","0"];
+
     floorTileSets = [
         [["zone1","zone1"], ["zone2","zone2"], ["zone3_1","zone3_2"]],
         [["zone4"], ["zone5"], ["boss_1","boss_2","boss_1"]]];
@@ -80,20 +83,34 @@ const floorRefactor = class floor {
         $("#foregroundButton").classList.toggle('inv');
     };
 
-    danceSwitcher(a,b) {
-        let objs = [$("#danceButton"),$("#multiplierButton")];
+    danceSwitcher(a) {
+        let urlCheck1 = new Image()
+        let arr = this.currentFloor
+        urlCheck1.src = `UI_Libraries/${this.floorTileSets[arr[0]][arr[1]][0]}${this.floorArr[0]}_Floor1.png`;
+        urlCheck1.onload = () => {}
+        urlCheck1.onerror = () => {
+            $("#danceButton").setAttribute("class", "deact");}
 
-        objs[b].classList.remove('inv');
-        if (objs[a].classList !== objs[b].classList) {
-            objs[a].classList.toggle('inv');
-
-            arrayShift(this.floorArr);
-            this.danceUpdate();
+        if (a !== this.danceType) {
             this.danceFloor.classList.remove('invisible');
-        }
+            if (a === 1) {
+                $("#danceButton").setAttribute("class", "inv");
+                $("#multiplierButton").setAttribute("class", "");}
+            else if (a === 2) {
+                $("#danceButton").setAttribute("class", " ");
+                $("#multiplierButton").setAttribute("class", "inv");}
+        } else {
+            a = 0;
+            this.danceFloor.classList.add('invisible');
+            $("#danceButton").setAttribute("class", "");
+            $("#multiplierButton").setAttribute("class", "");}
 
-        objs[a].classList.length === 0 && objs[b].classList.length === 0 ?
-            this.danceFloor.classList.add('invisible') : null;
+        if (this.previousType !== a && a !== 0) {
+            this.previousType = a;
+            arrayShift(this.floorArr);}
+
+        this.danceType = a;
+        this.danceUpdate();
     };
 
     danceUpdate() {
@@ -102,12 +119,6 @@ const floorRefactor = class floor {
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png')`,
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor2.png')`];
         this.danceFloor.style.background = this.danceUrls[this.floorBinary];
-
-        //TODO: This needs fixing.
-        // let urlCheck1 = new Image()
-        // urlCheck1.src = `UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png`;
-        // urlCheck1.onload = () => {}
-        // urlCheck1.onerror = () => {}
     };
 
     floorFlip() {
