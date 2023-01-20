@@ -15,9 +15,11 @@ e:hover {
 /* TODO: URL ELEMENTS */
 
 #logo {
-    position:   absolute;
-    top:        var(--tablePadding);
-    left:       calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 15px 0 0 0 ;
+}
 
 /* TODO: RENDER CSS & SCALING */
 
@@ -31,18 +33,14 @@ e:hover {
     object-fit:             none;
     background-position:    top left;
 
-    left:   15px;
     top:   -350px;
     width:  calc(72px * 10);
     height: calc(72px * 10); }
 #foreground {
     width:  216px;
-    margin:-5px 0 0 183px; }
+    margin:-6px 0 0 168px; }
 
 /* TODO: GENERAL CHARACTER CSS */
-
-#characterUrl {
-    width: calc(var(--window3Width) - (25px));}
 
 #transform {
     position:   relative;
@@ -58,17 +56,20 @@ e:hover {
 #shadow {
     position:   absolute;}
 
+:root {
+    --offsetLeft : 264px;
+}
+
 #playerModel {
-    left:   278.5px;
+    left:   var(--offsetLeft);
     top:    74px;
     width:  24px;
     height: 30px; }
 #shadow {
-    left:   278px;
-    top:    73px;
+    left:   var(--offsetLeft);
+    top:    72px;
     width:  24px;
     height: 27px; }
-
 
 #head, #body {
     position:   absolute;
@@ -76,17 +77,11 @@ e:hover {
 
 /* TODO: CONSUMABLES & CHARACTER EQUIPMENT */
 
-#hat,
-#boots,
-#ring,
-#weapon,
-#torch,
-#charm,
-#hip,
-#shovel {
+#hat,#weapon,#ring, #boots,
+#torch, #charm, #hip, #shovel {
     width:      24px;
     height:     24px;
-    object-fit: none}
+    object-fit: none;}
 #shovel {
     left:   1px; }
 #consumables {
