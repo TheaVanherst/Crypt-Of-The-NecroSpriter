@@ -133,7 +133,6 @@ let characterRefactor = class setup {
         let database = Object.entries(characterData[e]);
         database.forEach(([key, value]) => {
             let data = JSON.stringify(value)
-            console.log(data)
             returnString += key + " : " + data + "\n"; // 'one'
         });
         $("#charDebug").innerText = returnString;

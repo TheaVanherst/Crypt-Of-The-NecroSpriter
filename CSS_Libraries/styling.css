@@ -122,7 +122,7 @@ e t {
 input[type=text] {
     padding:    5px 10px;
     display:    inline-block;
-    width: -moz-available;
+    width:      calc(100% - 24px);
 
     color:      #fff;
     border:     solid 2px #fff;

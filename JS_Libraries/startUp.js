@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     scaleRes = 4; // default scale multiplier
     $('#scale').textContent = "1:" + scaleRes;
     document.getElementById("scaleSlider").value = scaleRes; //start-up scale
-    scale(scaleRes);
     $("#scaleSlider").oninput = (e) => scale(e.target.value);
+    scrollWheel(scaleRes);
 
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {

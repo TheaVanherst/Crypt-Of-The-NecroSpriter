@@ -1,4 +1,14 @@
 
+:root{
+    --tablePadding: 15px; --logoDesign: 75px;
+
+    --window1Width: 600px;
+    --window2Width: 370px;
+    --window3Width: 250px;
+    --window5Width: 250px;
+    --window7Width: 150px;
+}
+
 div + div:not(.inline) {
     padding:    10px 0 0 0;}
 
@@ -11,6 +21,13 @@ panel {
     font-size:  14px;}
 
 panel { padding: 0 5px;}
+
+.col1 {width: var(--window1Width);}
+.col2 {width: var(--window2Width);}
+.col3 {width: var(--window3Width);}
+.col4 {width: var(--window5Width);}
+.col5 {width: var(--window7Width);}
+
 table { padding: 5px 0;}
 panel:first-of-type {   padding-left:   10px;}
 panel:last-of-type {    padding-right:  10px;}

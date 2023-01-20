@@ -69,7 +69,7 @@ If you wish to reset the custom entries, simply refresh the page and everything 
 Different characters have different file formatting, so be aware of the file naming conventions Crypt of the Necrodancer has, as a lot of these adjustments are pre-baked into the code to try and compensate for such. So I would just recommend to not try to change the naming convention too much.
 
 Directories on launch are determined by the data that is in `'JS_Libraries/characterData.js'`.
-Change the url directory and it'll update - on page refresh it will then default to the new directory you inserted.
+Change the url directory, and it'll update - on page refresh it will then default to the new directory you inserted.
 
 <picture>
   <img alt="asset design and updating" src="./DEMO_Images/weapon_update.gif">
@@ -82,6 +82,8 @@ Changing the boolean values in the itemData.js file will change their default vi
 
 - UI back-end rework.
 - Debug information user interface [?]
+- BPM timer rework.
+- Input for custom floor URL [?]
 
 If you need any assistance in using the tool, designing sprites or have any
 recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).
