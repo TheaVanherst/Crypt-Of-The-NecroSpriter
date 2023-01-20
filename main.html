@@ -66,11 +66,13 @@
                                             <e class="clickable" onclick="elapsed--; playReset(); animationPush();">Prev</e>
                                             <e id="play" onclick="playTog = !playTog; this.classList.toggle('inv')">Play</e>
                                             <e class="clickable" onclick="elapsed++; playReset(); animationPush();">Next</e>
-                                            <e id="aniType" onclick="frameTypeToggle();">Animation Type</e>
+                                            <e id="aniType" onclick="frameTypeToggle();">Render Type</e>
                                             <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
 
                                             <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
                                                 <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
+                                            <e id="debugTog" class="inv" onclick="this.classList.toggle('inv');
+                                                $('#debugTable').classList.toggle('invisible');" class="rightFloat">Debug</e>
                                         </div>
                                     </div>
                                 </div>
@@ -265,12 +267,12 @@
             </table>
 
             <div class="footer">
-                <t>Release 20230120 CTNS.Master:1.3.2</t><br>
+                <t>Release 20230120 CTNS.Beta:1.3.2</t><br>
             </div>
         </panel>
 
         <panel class="col5">
-            <table>
+            <table class="invisible" id="debugTable">
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
