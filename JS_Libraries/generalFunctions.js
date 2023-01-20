@@ -1,24 +1,25 @@
-
 const
     createButton = (css,text,id) => {
         let item = (document.createElement(css));
         if(text !== "" && text !== undefined){item.textContent = text;}
         if(id !== "" && id !== undefined){item.id = id;}
-        return item;},
+        return item;
+    },
 
     buttonAdjustment = (button, newVal, newButton) => {
         $all(button + " e").classList?.remove('inv');
-        newButton.classList.add('inv');},
-
-    buttonTog = (e) => {
-        e.classList.toggle('inv');},
+        newButton.classList.add('inv');
+    },
 
     urlRefresh = () => {
         let date = new Date().getTime();
         for (let key in itemArray) {
-            itemArray[key].urlUpdate(undefined,date);
-        }
-        currentCharacter.urlUpdate();
+            itemArray[key].urlUpdate(date);}
+        for (let i = 0; i < consumableData.length; i++) {
+            consumableData[i].urlUpdate(date);}
+        specialData.urlUpdate(date);
+        shieldData.urlUpdate(date);
+        currentCharacter.urlUpdate(date);
     },
 
     bpmUpdate = () => {
@@ -38,7 +39,7 @@ const
             trackContainer.appendChild(item).appendChild(br);
         }
         bpm = 60 / newBPM;
-},
+    },
 
     search = (e) => {
         if(e.key === 'Enter') {
@@ -46,31 +47,41 @@ const
 
             let url = e.target.value,
                 idStrip = (e.target.id).replace("Url","");
+
             image.src = url + ".png";
-            console.log(`RETURN URL: ${idStrip}`);
+            // console.log(`RETURN URL: ${idStrip}`);
 
             image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {
                     if(itemArray[i].name === idStrip){
                         itemArray[i].urlUpdate(url);
                         return;}}
-
-                for (let i = 0; i < consumableData.length; i++) {
+                for (let i = itemArray.length + 1; i < consumableData.length; i++) {
                     if(consumableData[i].name === idStrip){
                         consumableData[i].urlUpdate(url);
                         return;}}
-
                 if(idStrip === "special"){
                     specialData.urlUpdate(url);
                     return;}
-
                 if(idStrip === "shield"){
                     shieldData.urlUpdate(url);
                     return;}
+
+                console.log("Item look-up failed.")
             };
 
-            targetTimeout(e);
+            image.onerror = () => {
+                targetTimeout(e);
+            }
         }},
+
+    scale = (a) => {
+        scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        $doc.style.setProperty('--scaler',scaleRes);
+
+        $("#scaleSlider").value = scaleRes;
+        $('#scale').textContent = "1:" + scaleRes;
+    }
 
     targetTimeout = (e) => {
         let placeholder = e.target.placeholder;
@@ -80,22 +91,15 @@ const
 
         setTimeout(function () {
             e.target.classList.remove("invalid");
-            e.target.placeholder = placeholder;}, 1953);},
+            e.target.placeholder = placeholder;
+        }, 1953);
+    },
 
     arrayShift = (e) => {
-        e.unshift(e.pop());},
-
-    styleProxy = {
-        get: (object, property) => {
-            return (value) => {
-                if (value) {
-                    object[property] = value;
-                    return new Proxy(object, styleProxy);}
-                return object[property];};}},
-
-    style = (selector) => {
-        return new Proxy(selector.style, styleProxy);},
+        e.unshift(e.pop());
+    },
 
     merge = (defaultData, newData, fallback) => {
         return newData !== undefined ? newData.valueOf() :
-            defaultData !== undefined ? defaultData.valueOf() : fallback;};
+            defaultData !== undefined ? defaultData.valueOf() : fallback;
+    };

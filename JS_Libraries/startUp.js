@@ -1,6 +1,6 @@
 
 let currentCharacter, floorData;
-let itemArray = [], consumableList = [], specialData, shieldData;
+let itemArray = [], consumableData = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
     let defaultCharacter = 11; // This will initate as the default character.
@@ -12,36 +12,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
     $("#bpmSlider").oninput = () => bpmUpdate();
+    document.getElementById("bpmSlider").value = 130; //start-up bpm
     bpmUpdate();
-    playTog ? buttonTog($("#play")) : null;
+
+    if (playTog) {
+        $("#play").classList.add('inv');}
 
     scaleRes = 4; // default scale multiplier
     $('#scale').textContent = "1:" + scaleRes;
-
+    document.getElementById("scaleSlider").value = scaleRes; //start-up scale
+    scale(scaleRes);
+    $("#scaleSlider").oninput = (e) => scale(e.target.value);
 
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
-            itemArray[key] = new itemRefactor(key, defaultCharacter);
-        } else if (itemData[key].type === "consumable") {
-            consumableData[key] = new consumableRefactor(key);
-        } else if (itemData[key].type === "shield") {
-            shieldData = new shieldRefactor("right", false);
-        } else if (itemData[key].type === "special") {
+            itemArray[key] = new itemRefactor(key, defaultCharacter);}
+        else if (itemData[key].type === "consumable") {
+            consumableData[key] = new consumableRefactor(key);}
+        else if (itemData[key].type === "shield") {
+            shieldData = new shieldRefactor(key, "right", false);}
+        else if (itemData[key].type === "special") {
             specialData = new specialRefactor(defaultCharacter);
         }
 
-        let urlCheck = new Image()
-        urlCheck.src = itemData[key].url + ".png";
-        urlCheck.onerror = () => {
-            let urlbar = $(`#${itemData[key].name}Url`)
-            urlbar.classList.add("invalid");
-            urlbar.value = "";
-            urlbar.placeholder = "Invalid itemsData.js URL";
-            setTimeout(() => {
-                $(`#${itemData[key].name}Url`).classList.remove("invalid");
-            }, 2000);
-        };
+        let urlbar = $(`#${itemData[key].name}Url`)
+        if(itemData[key]?.url){
+            let urlCheck = new Image()
+            urlCheck.src = itemData[key].url + ".png";
+            urlCheck.onerror = () => {
+                urlbar.classList.add("invalid");
+                urlbar.value = "";
+                urlbar.placeholder = "Invalid itemsData.js URL";
+                setTimeout(() => {
+                    $(`#${itemData[key].name}Url`).classList.remove("invalid");
+                }, 2000);
+            };
+        } else {
+            urlbar.placeholder = "No itemsData.js URL";
+        }
+
     }
     delete itemData;
 
@@ -71,4 +81,4 @@ const songList = [
     ["BOSS // Death Metal"], //175
     ["N/a"], //180
     ["N/a"], //185
-    ["N/a"]]; 190
+    ["N/a"]]; //190

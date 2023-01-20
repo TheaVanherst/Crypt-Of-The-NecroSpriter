@@ -1,11 +1,3 @@
-const
-    mapItem = (id,bool,data) => {
-        return Object.keys(data).map((k) => {
-            if(bool){return parseInt(data[k][id]);}
-            else {return data[k][id];}});};
-
-const
-    characterUrlArray = [];
 
 let characterRefactor = class setup {
     headElement =   document.querySelector("#head");
@@ -17,13 +9,17 @@ let characterRefactor = class setup {
     playerFloatOffsets = [8,9,10,11,10,9];
 
     height; width; head;
+    characterUrlArray = [];
 
     constructor(amp, clothing, character) {
         let dlcTypes = ["Base Game", "Amplified", "Synchrony"];
         this.clothingData = [15,8]
 
         for (let e = 0; e < Math.ceil(this.clothingData[0] / this.clothingData[1]); e++) {
-            $('#clothing').appendChild(createButton("div"));
+            let row = createButton("div");
+                row.classList.add("flex")
+            $('#clothing').appendChild(row);
+
             let divS = $('#clothing').children[e];
 
             for (let i = 0; i < this.clothingData[1]; i++) {
@@ -32,24 +28,38 @@ let characterRefactor = class setup {
                     divS.appendChild(createButton("e", "", "clothing" + cur))
                         .appendChild(createButton("t", cur + 1));
                     divS.children[i].onclick = () => {
-                        this.clothingUpdate(cur);};
-                }
+                        this.clothingUpdate(cur);};}
             }
         }
 
-        let dlcCount = mapItem("dlc",true, characterData);
+        let dlcCount = this.#parser("dlc",true, characterData);
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
-            ($('#characterSelect').appendChild(createButton("t", dlcTypes[i])))
-                .appendChild(createButton("options"));
+
+            let dlcSet = createButton("div");
+            let dlcName = createButton("d", dlcTypes[i]);
+            dlcSet.appendChild(dlcName);
+            $('#characterSelect').appendChild(dlcSet);
         }
 
-        const characterList = mapItem("name",false, characterData);
+        const characterList = this.#parser("name",false, characterData);
+        let rowKey = 0, countKey = 0;
         for (let key in characterData) {
+            let dlcElementpre = $('#characterSelect').children[dlcCount[key]]
+            if(!dlcElementpre.children[rowKey]) {
+                rowKey = 0;
+                countKey = 0;}
+            if (countKey % 2 === 0){
+                let rowContainer = createButton("div");
+                    rowContainer.classList.add("flex");
+                dlcElementpre.appendChild(rowContainer);
+                rowKey += 1;}
+
             let char = characterList[key];
-            $('#characterSelect').getElementsByTagName('options')[dlcCount[key]]
-                .appendChild(createButton('e', char, char)).onclick = () => {
+            dlcElementpre.children[rowKey].appendChild(createButton('e', char, char)).onclick = () => {
                 this.update(key);
-                specialData.characterChange(key);}
+                specialData.characterChange(key);
+            };
+            countKey++
         }
 
         $all("#characterUrl").forEach((e) => {
@@ -92,9 +102,7 @@ let characterRefactor = class setup {
         this.headElement.style.width = this.width + "px";
         this.bodyElement.style.width = this.width + "px";
 
-        style($("#consumables"))
-            .marginTop(Math.floor((24 - this.height) / 2) - 5 + "px")
-            .marginLeft(Math.ceil(-(24 - this.width) / 2) + "px");
+        $("#consumables").style.margin = `${Math.floor((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
 
         this.characterAmp = merge(true, characterData[this.id]?.settings?.amp)
@@ -103,7 +111,8 @@ let characterRefactor = class setup {
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
         for(let key in itemArray){
-            itemArray[key].characterChange(character);}
+            itemArray[key].characterChange(character);
+        }
 
         $("#" + this.name).classList.add("inv");
         $("#characterDebug").textContent = this.name + " ";
@@ -114,11 +123,17 @@ let characterRefactor = class setup {
         this.animate();
     };
 
+    #parser(id,bool,data){
+        return Object.keys(data).map((k) => {
+            return bool ? parseInt(data[k][id]) : data[k][id]});
+    };
+
     #debugUpdate(e){
-        let returnString
+        let returnString = ""
         let database = Object.entries(characterData[e]);
         database.forEach(([key, value]) => {
             let data = JSON.stringify(value)
+            console.log(data)
             returnString += key + " : " + data + "\n"; // 'one'
         });
         $("#charDebug").innerText = returnString;
@@ -179,7 +194,8 @@ let characterRefactor = class setup {
             this.head = true;
             let headOffset = -(merge(0, characterData[character]?.settings?.offset?.head));
             this.headElement.style.top = headOffset + "px";
-            this.headElement.classList.remove("invisible");}
+            this.headElement.classList.remove("invisible");
+        }
 
         this.urlUpdate();
     };
@@ -191,17 +207,19 @@ let characterRefactor = class setup {
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            buttonTog($('#clothing' + this.clothingSet));}
+            $('#clothing' + this.clothingSet).classList.toggle('inv');}
         else {
-            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));}
+            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
+        }
     };
 
     clothingUpdate(clothing) {
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
 
-        buttonTog($('#clothing .inv'));
-        buttonTog($('#clothing' + this.clothingSet));
+        $('#clothing .inv').classList.toggle('inv');
+        $('#clothing' + this.clothingSet).classList.toggle('inv');
+
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
@@ -225,10 +243,10 @@ let characterRefactor = class setup {
     };
 
     urlUpdate(url) {
-        url = merge(characterUrlArray[this.id]?.[1], url, characterData[this.id].settings.fileUrl);
+        url = merge(this.characterUrlArray[this.id]?.[1], url, characterData[this.id]?.settings?.fileUrl);
         let srcLink = (this.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"])
             .map(i => i + ".png?" + new Date().getTime());
-        characterUrlArray[this.id] = [characterData[this.id].name,url];
+        this.characterUrlArray[this.id] = [characterData[this.id].name,url];
 
         this.head ? this.headElement.src = url + srcLink[0] : null;
         this.bodyElement.src = url + srcLink[1];
@@ -252,9 +270,11 @@ let characterRefactor = class setup {
     ampFrameUpdate() {
         let multiplierGrab = [];
         for (let i = 0; i < 16; i++) {
-            multiplierGrab[i] = -(this.width * i) + 'px ';}
-        for(let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];}
+            multiplierGrab[i] = -(this.width * i) + 'px ';
+        }
+        for (let i = 0; i < 4; i++) {
+            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];
+        }
         this.animate(frame);
     };
 }
