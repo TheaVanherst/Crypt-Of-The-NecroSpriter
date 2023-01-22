@@ -1,12 +1,12 @@
 
-let currentCharacter, floorData;
-let itemArray = [], consumableData = [], specialData, shieldData;
+let currentCharacter, floorData; //don't touch
+let itemArray = [], consumableData = [], specialData, shieldData; //don't touch
 
 document.addEventListener('DOMContentLoaded', () => {
-    let defaultCharacter = 11; // This will initate as the default character.
+    let defaultCharacter = 0; // This will initiate as the default character [0-17].
     currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
 
-    $("render").style.backgroundColor = "darkslategray"; //background colour.
+    $("#crop").style.backgroundColor = "darkslategray"; //background colour.
     floorData = new floorRefactor(0,1, true, true);
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
@@ -15,15 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("bpmSlider").value = 130; //start-up bpm
     bpmUpdate();
 
-    if (playTog) {
-        $("#play").classList.add('inv');}
-
     scaleRes = 4; // default scale multiplier
-    $('#scale').textContent = "1:" + scaleRes;
+    $('#scale').textContent = "1:" + scaleRes; //don't touch
     document.getElementById("scaleSlider").value = scaleRes; //start-up scale
-    $("#scaleSlider").oninput = (e) => scale(e.target.value);
-    scrollWheel(scaleRes);
+    $("#scaleSlider").oninput = (e) => scale(e.target.value); //don't touch
 
+    $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
@@ -32,27 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
             consumableData[key] = new consumableRefactor(key);}
         else if (itemData[key].type === "shield") {
             shieldData = new shieldRefactor(key, "right", false);}
-        else if (itemData[key].type === "special") {
-            specialData = new specialRefactor(defaultCharacter);
-        }
 
-        let urlbar = $(`#${itemData[key].name}Url`)
+        let urlBar = $(`#${itemData[key].name}Url`)
         if(itemData[key]?.url){
             let urlCheck = new Image()
             urlCheck.src = itemData[key].url + ".png";
             urlCheck.onerror = () => {
-                urlbar.classList.add("invalid");
-                urlbar.value = "";
-                urlbar.placeholder = "Invalid itemsData.js URL";
+                urlBar.classList.add("invalid");
+                urlBar.value = "";
+                urlBar.placeholder = "Invalid itemsData.js URL";
                 setTimeout(() => {
                     $(`#${itemData[key].name}Url`).classList.remove("invalid");
                 }, 2000);
             };
         } else {
-            urlbar.placeholder = "No itemsData.js URL";
+            urlBar.placeholder = "No itemsData.js URL";
         }
-
     }
+    specialData = new specialRefactor(defaultCharacter);
+
     delete itemData;
 
     $("#barDebug").textContent = floatInt;

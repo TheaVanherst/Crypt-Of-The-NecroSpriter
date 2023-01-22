@@ -11,73 +11,72 @@
     </head>
 
     <body>
-        <panel class="col1">
+        <panel class="col1 scrollArea">
             <table>
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
-                            <div>
-                                <d>Render View</d>
-                                <div id="crop">
-                                    <render>
-                                        <div id="transform">
-                                            <div id="floor"></div>
-                                            <div id="danceFloor"></div>
-                                            <img id="shadow" src="UI_Libraries/shadow.png">
-                                            <img id="foreground">
-                                            <div id="playerModel">
-                                                <img id="special">
-                                                <img id="shield" class="invisible">
+                        <div>
+                            <d>Render View</d>
+                            <div id="crop">
+                                <div id="transform">
+                                    <div class="inline" id="floor"></div>
+                                    <div class="inline" id="danceFloor"></div>
+                                    <img id="shadow" src="UI_Libraries/shadow.png">
+                                    <img id="foreground">
+                                    <div id="playerModel">
+                                        <img id="special">
+                                        <img id="shield" class="invisible">
 
-                                                <div id="consumables">
-                                                    <img id="item">
-                                                    <img id="equipment">
-                                                    <img id="spell"></div>
+                                        <div id="consumables">
+                                            <img id="item">
+                                            <img id="equipment">
+                                            <img id="spell"></div>
 
-                                                <img id="shovel">
-                                                <img id="body">
-                                                <img id="charm">
-                                                <img id="head">
+                                        <img id="shovel">
+                                        <img id="body">
+                                        <img id="charm">
+                                        <img id="head">
 
-                                                <img id="hat">
-                                                <img id="boots">
-                                                <img id="hip">
+                                        <img id="hat">
+                                        <img id="boots">
+                                        <img id="hip">
 
-                                                <img id="weapon">
-                                                <img id="torch">
-                                                <img id="ring">
-                                            </div></div>
-                                    </render>
-                                </div>
-
-                                <div>
-                                    <d>Animation settings</d>
-                                    <div>
-                                        <div class="flex">
-                                            <e id="danceButton" onclick="floorData.danceSwitcher(1);">Dance Floor</e>
-                                            <e id="multiplierButton" onclick="floorData.danceSwitcher(2);">Multiplier</e>
-                                            <e id="amplifiedButton" onclick="currentCharacter.ampToggle();">AMPLIFIED</e>
-                                            <e id="backgroundButton" onclick="floorData.floorToggle();">background</e>
-                                            <e id="foregroundButton" onclick="floorData.foregroundToggle();">Foreground</e>
-                                        </div>
-                                        <div class="buttons">
-                                            <e class="clickable" onclick="elapsed--; playReset(); animationPush();">Prev</e>
-                                            <e id="play" onclick="playTog = !playTog; this.classList.toggle('inv')">Play</e>
-                                            <e class="clickable" onclick="elapsed++; playReset(); animationPush();">Next</e>
-                                            <e id="aniType" onclick="frameTypeToggle();">Render Type</e>
-                                            <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
-
-                                            <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
-                                                <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
-                                            <e id="debugTog" class="inv" onclick="this.classList.toggle('inv');
-                                                $('#debugTable').classList.toggle('invisible');" class="rightFloat">Debug</e>
-                                        </div>
+                                        <img id="weapon">
+                                        <img id="torch">
+                                        <img id="ring">
                                     </div>
                                 </div>
                             </div>
 
+                            <div>
+                                <d>Animation settings</d>
+                                <div>
+                                    <div class="flex">
+                                        <e id="danceButton"      onclick="floorData.danceSwitcher(1);  "> Dance Floor </e>
+                                        <e id="multiplierButton" onclick="floorData.danceSwitcher(2);  "> Multiplier  </e>
+                                        <e id="amplifiedButton"  onclick="currentCharacter.ampToggle();"> AMPLIFIED   </e>
+                                        <e id="backgroundButton" onclick="floorData.floorToggle();     "> background  </e>
+                                        <e id="foregroundButton" onclick="floorData.foregroundToggle();"> Foreground  </e>
+                                    </div>
+                                    <div class="buttons">
+                                        <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed--; animationPush();">Prev</e>
+                                        <e onclick="playTog ^= true; this.classList.toggle('pressed', playTog);">Play</e>
+                                        <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed++; animationPush();">Next</e>
+                                        <e id="aniType" onclick="currentCharacter.frameType()">Render Type</e>
+                                        <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
+
+                                        <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
+                                            <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
+                                        <e id="debugTog" class="pressed" onclick="
+                                            this.classList.toggle('pressed');
+                                            $('#debugTable').classList.toggle('invisible');" class="rightFloat">
+                                            Debug
+                                        </e>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </th>
                     <th></th>
@@ -90,20 +89,19 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
-                            <div>
-                                <div id="bpmCounter">
-                                    <img class="bpm" src="UI_Libraries/heart.png">
-                                    <img class="bpm" src="UI_Libraries/heart.png">
-                                    <img class="bpm" src="UI_Libraries/heart.png">
-                                    <img class="bpm" src="UI_Libraries/heart.png">
-                                    <img class="bpm" src="UI_Libraries/heart.png">
-                                    <img class="bpm" src="UI_Libraries/heart.png"></div>
-                                <div class="inline" id="debug">
-                                    <t>Beat : </t><t id="beatDebug"></t><t> Bar : </t><t id="barDebug"></t><t> Frame : </t><t id="elapsedDebug"></t><br>
-                                    <t>Char : </t><t id="characterDebug"></t><t> : </t><t id="clothingDebug"></t><br>
-                                    <t>Floor : </t><t id="floorDebug"></t><t> : </t><t id="flipDebug"></t>
-                                </div>
+                        <div>
+                            <div id="bpmCounter">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png">
+                            </div>
+                            <div class="inline" id="debug">
+                                <ln>Beat: <l id="beatDebug"></l> Bar: <l id="barDebug"></l> Frm: <l id="elapsedDebug"></l></ln>
+                                <ln>Char: <p id="characterDebug"></p>: <l id="clothingDebug"></l></ln>
+                                <ln>Flr: <p id="floorDebug"></p> : <l id="flipDebug"></l></ln>
                             </div>
                         </div>
                     </th>
@@ -119,21 +117,22 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
+                        <div>
+                            <d>Main Render Settings</d>
+                            <d>Animation Speed (BPM)</d>
                             <div>
-                                <d>Main Render Settings</d>
-                                <d>Animation Speed (BPM)</d>
+                                <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
                                 <div>
-                                    <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
-                                    <div><t>100</t><t style="float:right">190</t></div>
-                                    current BPM: <t id="bpm"></t>
+                                    <p>100</p>
+                                    <p class="rightFloat">190</p>
                                 </div>
-                                <d>Compatible Tracks:</d>
-                                <div id="trackContainer"></div>
-
-                                <d>Background</d>
-                                <div id="backgrounds"></div>
+                                current BPM: <t id="bpm"></t>
                             </div>
+                            <d>Compatible Tracks:</d>
+                            <div id="trackContainer"></div>
+
+                            <d>Background</d>
+                            <div id="backgrounds"></div>
                         </div>
                     </th>
                     <th></th>
@@ -146,38 +145,37 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
-                            <div>
-                                <d>Equipables & Consumables</d>
-                                <d>Clothing</d>
-                                <div id="clothing"></div>
+                        <div>
+                            <d>Equipables & Consumables</d>
+                            <d>Clothing</d>
+                            <div id="clothing"></div>
 
-                                <d>Armour / Weapon Slots</d>
-                                <div id="equipmentSlots">
-                                    <div class="flex">
-                                        <e id="hatButton">Helmet</e>
-                                        <e id="weaponButton">Weapon</e>
-                                        <e id="ringButton">Ring</e>
-                                        <e id="bootsButton">Boots</e>
-                                    </div><div class="flex">
-                                        <e id="spellButton">Spell</e>
-                                        <e id="itemButton">Item</e>
-                                        <e id="equipmentButton">equipment</e>
-                                        <e id="charmButton">Charm</e>
-                                    </div>
+                            <d>Armour / Weapon Slots</d>
+                            <div id="equipmentSlots">
+                                <div class="flex">
+                                    <e id="hatButton">Helmet</e>
+                                    <e id="weaponButton">Weapon</e>
+                                    <e id="ringButton">Ring</e>
+                                    <e id="bootsButton">Boots</e>
                                 </div>
+                                <div class="flex">
+                                    <e id="spellButton">Spell</e>
+                                    <e id="itemButton">Item</e>
+                                    <e id="equipmentButton">equipment</e>
+                                    <e id="charmButton">Charm</e>
+                                </div>
+                            </div>
 
-                                <d>Tools & Misc</d>
-                                <div class="flex" id="consumableSlots">
-                                    <e id="shovelButton">Shovel</e>
-                                    <e id="torchButton">Torch</e>
-                                    <e id="hipButton">Hip</e>
-                                    <e id="specialButton">Special</e>
-                                </div>
-                                <d>shield Controller</d>
-                                <div class="flex" id="shieldSettings">
-                                    <e id="shieldButton">Shield</e>
-                                </div>
+                            <d>Tools & Misc</d>
+                            <div class="flex" id="consumableSlots">
+                                <e id="shovelButton">Shovel</e>
+                                <e id="torchButton">Torch</e>
+                                <e id="hipButton">Hip</e>
+                                <e id="specialButton">Special</e>
+                            </div>
+                            <d>shield Controller</d>
+                            <div class="flex" id="shieldSettings">
+                                <e id="shieldButton">Shield</e>
                             </div>
                         </div>
                     </th>
@@ -193,23 +191,21 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket" id="urlData">
-                            <div>
-                                <d>URL Directory Data</d>
-                                <d>Helmet</d><input type="text" id="hatUrl">
-                                <d>Weapon</d><input type="text" id="weaponUrl">
-                                <d>Ring</d><input type="text" id="ringUrl">
-                                <d>Boots</d><input type="text" id="bootsUrl">
-                                <d>Spell</d><input type="text" id="spellUrl">
-                                <d>Item</d><input type="text" id="itemUrl">
-                                <d>Equipment</d><input type="text" id="equipmentUrl">
-                                <d>Charm</d><input type="text" id="charmUrl">
-                                <d>Shovel</d><input type="text" id="shovelUrl">
-                                <d>Torch</d><input type="text" id="torchUrl">
-                                <d>Hip</d><input type="text" id="hipUrl">
-                                <d>Special</d><input type="text" id="specialUrl">
-                                <d>Shield</d><input type="text" id="shieldUrl">
-                            </div>
+                        <div>
+                            <d>URL Directory Data</d>
+                            <d>Helmet</d><input type="text" id="hatUrl">
+                            <d>Weapon</d><input type="text" id="weaponUrl">
+                            <d>Ring</d><input type="text" id="ringUrl">
+                            <d>Boots</d><input type="text" id="bootsUrl">
+                            <d>Spell</d><input type="text" id="spellUrl">
+                            <d>Item</d><input type="text" id="itemUrl">
+                            <d>Equipment</d><input type="text" id="equipmentUrl">
+                            <d>Charm</d><input type="text" id="charmUrl">
+                            <d>Shovel</d><input type="text" id="shovelUrl">
+                            <d>Torch</d><input type="text" id="torchUrl">
+                            <d>Hip</d><input type="text" id="hipUrl">
+                            <d>Special</d><input type="text" id="specialUrl">
+                            <d>Shield</d><input type="text" id="shieldUrl">
                         </div>
                     </th>
                     <th></th>
@@ -217,28 +213,23 @@
                 <tr><th></th><th></th><th></th></tr>
             </table>
         </panel>
-
         <panel class="col4">
-            <div id="logo">
-                <img src="UI_Libraries/logo_small.png">
-            </div>
-
             <table>
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
+                        <div>
+                            <div id="logo">
+                                <img src="UI_Libraries/logo_small.png">
+                            </div>
                             <div>
-                                <d>Characters</d>
                                 <div>
-                                    <div>
-                                        <d>Character URL</d>
-                                        <input type="text" id="characterUrl">
-                                    </div>
+                                    <d>Character URL</d>
+                                    <input type="text" id="characterUrl">
                                 </div>
-                                <div id="characterSelect"></div>
                             </div>
+                            <div id="characterSelect"></div>
                         </div>
                     </th>
                     <th></th>
@@ -251,13 +242,15 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket" id="scrollArea">
+                        <div class="scrollArea">
+                            <d>Scale [Pixel ratio]</d>
                             <div>
-                                <d>Scale [Pixel ratio]</d>
-                                <div style="top:5px; position: relative">
-                                    <input type="range" min="4" max="12" step="1" class="slider" id="scaleSlider"><br>
-                                    <t>1:4</t><t style="float:right">1:12</t><br>
-                                    <div>current scale: <t id="scale">N/a</t></div></div>
+                                <input type="range" min="4" max="12" step="1" class="slider" id="scaleSlider">
+                                <div>
+                                    <p>1:4</p>
+                                    <p class="rightFloat">1:12</p>
+                                </div>
+                                current scale: <p id="scale">N/a</p>
                             </div>
                         </div>
                     </th>
@@ -265,22 +258,18 @@
                 </tr>
                 <tr><th></th><th></th><th></th></tr>
             </table>
-
-            <div class="footer">
-                <t>Release 20230120 CTNS.Beta:1.3.2</t><br>
+            <div>
+                <p>Release 20230122 CTNS.Master:1.3.2</p>
             </div>
         </panel>
-
         <panel class="col5">
             <table class="invisible" id="debugTable">
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
                     <th>
-                        <div class="UIBracket">
-                            <div>
-                                <div id="charDebug"></div>
-                            </div>
+                        <div>
+                            <div id="charDebug"></div>
                         </div>
                     </th>
                     <th></th>

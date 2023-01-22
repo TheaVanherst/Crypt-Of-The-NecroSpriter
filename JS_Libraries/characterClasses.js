@@ -17,33 +17,35 @@ let characterRefactor = class setup {
 
         for (let e = 0; e < Math.ceil(this.clothingData[0] / this.clothingData[1]); e++) {
             let row = createButton("div");
-                row.classList.add("flex")
+                row.classList.add("flex");
             $('#clothing').appendChild(row);
 
             let divS = $('#clothing').children[e];
 
             for (let i = 0; i < this.clothingData[1]; i++) {
                 let cur = (this.clothingData[1] * e) + i;
-                if(cur < this.clothingData[0]){
-                    divS.appendChild(createButton("e", "", "clothing" + cur))
-                        .appendChild(createButton("t", cur + 1));
-                    divS.children[i].onclick = () => {
-                        this.clothingUpdate(cur);};}
+                if (cur < this.clothingData[0]) {
+                    let clothingButton = createButton("e", cur + 1, "clothing" + cur)
+                        clothingButton.classList.add("tog");
+                        clothingButton.onclick = () => {
+                            this.clothingUpdate(cur);
+                    };
+                    divS.appendChild(clothingButton);
+                }
             }
         }
 
         let dlcCount = this.#parser("dlc",true, characterData);
         for (let i = 0; i < Math.max.apply(Math, dlcCount) + 1; i++) {
-
             let dlcSet = createButton("div");
-            let dlcName = createButton("d", dlcTypes[i]);
-            dlcSet.appendChild(dlcName);
+                dlcSet.appendChild(createButton("d", dlcTypes[i]));
             $('#characterSelect').appendChild(dlcSet);
         }
 
         const characterList = this.#parser("name",false, characterData);
         let rowKey = 0, countKey = 0;
         for (let key in characterData) {
+
             let dlcElementpre = $('#characterSelect').children[dlcCount[key]]
             if(!dlcElementpre.children[rowKey]) {
                 rowKey = 0;
@@ -54,10 +56,14 @@ let characterRefactor = class setup {
                 dlcElementpre.appendChild(rowContainer);
                 rowKey += 1;}
 
+            // character selection buttons
             let char = characterList[key];
-            dlcElementpre.children[rowKey].appendChild(createButton('e', char, char)).onclick = () => {
-                this.update(key);
-                specialData.characterChange(key);
+            let buttonElem = createButton('e', char, char)
+                buttonElem.classList.add('tog')
+            dlcElementpre.children[rowKey].appendChild(buttonElem)
+                .onclick = () => {
+                    this.update(key);
+                    specialData.characterChange(key);
             };
             countKey++
         }
@@ -68,8 +74,11 @@ let characterRefactor = class setup {
                     let item = e.target.value,
                         image = new Image();
                         image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
-                        image.onload = () => {currentCharacter.urlUpdate(item);};
-                    targetTimeout(e);}
+                        image.onload = () => {
+                            currentCharacter.urlUpdate(item);
+                        };
+                    targetTimeout(e);
+                }
             };
         });
 
@@ -81,7 +90,7 @@ let characterRefactor = class setup {
     };
 
     update(character) {
-        $("#" + this.name)?.classList.remove("inv");
+        $("#" + this.name)?.classList.remove("pressed");
 
         this.id =   character;
         this.name = characterData[character].name;
@@ -92,8 +101,8 @@ let characterRefactor = class setup {
         this.#bodyOffsets(character);
 
         if (characterData[character]?.settings?.floatSequence === true) {
-            this.#floatChecks();}
-        else {
+            this.#floatChecks();
+        } else {
             this.#floatDisable(character);
         }
 
@@ -105,7 +114,6 @@ let characterRefactor = class setup {
         $("#consumables").style.margin = `${Math.floor((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
 
-        this.characterAmp = merge(true, characterData[this.id]?.settings?.amp)
         this.ampFrameUpdate();
 
         this.#clothingChecks(character);
@@ -114,7 +122,7 @@ let characterRefactor = class setup {
             itemArray[key].characterChange(character);
         }
 
-        $("#" + this.name).classList.add("inv");
+        $("#" + this.name).classList.add("pressed");
         $("#characterDebug").textContent = this.name + " ";
         $("#clothingDebug").textContent = this.clothingSet + 1;
 
@@ -152,8 +160,6 @@ let characterRefactor = class setup {
         for (let i = 0; i < random; i++) {
             arrayShift(this.floatOffsets);
         }
-
-        this.floatCycle();
     };
 
     #floatDisable(character){
@@ -162,9 +168,8 @@ let characterRefactor = class setup {
 
         for (let key in this.floatOffsets) {
             this.floatOffsets[key] =
-                ((24 + this.bodyOffset) - this.height) + "px 0 0 " + Math.floor((24 - this.width) / 2) + "px";
+                ((24 + this.bodyOffset) - this.height) + "px 0 0 " + Math.ceil((24 - this.width) / 2) + "px";
         }
-        this.floatCycle();
     };
 
     flipped = false;
@@ -175,14 +180,20 @@ let characterRefactor = class setup {
             this.playerElement.style.translate = "0 0";}
         else {
             this.playerElement.setAttribute("class", "mirror");
-            this.playerElement.style.translate = -(Math.floor((24 - this.width) / 2) * 2) + "px 0";
+            this.playerElement.style.translate = -(Math.floor(24 - this.width)) + "px 0";
         }
     };
 
     flipToggle() {
-        $("#flipTog").classList.toggle("inv")
+        $("#flipTog").classList.toggle("pressed")
         this.flipped = !this.flipped;
         this.flip();
+    };
+
+    frameType() {
+        $("#aniType").classList.toggle('pressed');
+        aniOffsets.unshift(aniOffsets.pop());
+        arrayDivisional = 1000 / aniOffsets[0].length;
     };
 
     #bodyOffsets(character) {
@@ -202,11 +213,17 @@ let characterRefactor = class setup {
     #clothingChecks(character) {
         let rows = merge(14, characterData[character]?.settings?.resolution?.rows);
         for (let i = 0; i < this.clothingData[0]; i++) {
-            $('#clothing' + i).setAttribute('class', i < rows ? "" : "deact");}
+            if(i < rows){
+                $('#clothing' + i).classList.remove("deactivate")
+            } else {
+                $('#clothing' + i).classList.remove("pressed")
+                $('#clothing' + i).classList.add("deactivate")
+            }
+        }
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            $('#clothing' + this.clothingSet).classList.toggle('inv');}
+            $('#clothing' + this.clothingSet).classList.toggle('pressed');}
         else {
             buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
         }
@@ -216,8 +233,8 @@ let characterRefactor = class setup {
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
 
-        $('#clothing .inv').classList.toggle('inv');
-        $('#clothing' + this.clothingSet).classList.toggle('inv');
+        $('#clothing .pressed').classList.toggle('pressed');
+        $('#clothing' + this.clothingSet).classList.toggle('pressed');
 
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
@@ -235,9 +252,6 @@ let characterRefactor = class setup {
     animate() {
         this.bodyElement.style.objectPosition = this.frameArray[frame] + this.clothingMulti;
         this.headElement.style.objectPosition = this.frameArray[frame] + '0';
-    };
-
-    floatCycle() {
         this.playerElement.style.margin = this.floatOffsets[floatInt];
     };
 
@@ -255,13 +269,12 @@ let characterRefactor = class setup {
         $("#characterUrl").value = "";
     };
 
-    ampToggle() {
-        if (this.characterAmp === false) {
+    ampToggle(bool) {
+        if (bool) {
             this.ampBool = false;
-            $("#amplifiedButton").setAttribute('class', "deact");}
-        else {
-            this.ampBool = !this.ampBool;
-            $("#amplifiedButton").setAttribute('class', this.ampBool ? "inv" : "");
+            $("#amplifiedButton").setAttribute('class', "deactivate");
+        } else {
+            $("#amplifiedButton").classList.toggle('pressed', this.ampBool ^= true);
         }
         this.ampFrameUpdate();
     };

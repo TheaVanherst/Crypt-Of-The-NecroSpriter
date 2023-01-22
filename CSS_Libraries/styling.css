@@ -6,90 +6,116 @@
 /* TODO: WINDOW SIZE SETTINGS */
 
 body {
-    margin: 0;
-    padding: 0;
+    margin:     0;
+    padding:    0 0 10px 10px;
 
-    background:     black;
-    color:          white;
+    background: black;
+    color:      white;
 
     font-family:    'Silkscreen', cursive;
     letter-spacing: -2px;
-    font-size:      14px}
+    font-size:      14px;}
 
-#refreshButton > * {
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
-
-    width:      14px;
-    height:     14px;
-    top:        2px;
-    position:   relative;}
-#refreshButton:active > * {
-    filter:     invert(1);}
-
-.rightFloat {
-    margin: 0 10px 0 0!important;
-    float:      right}
-
-/* TODO: BUTTON CSS */
+p {
+    padding:    0;
+    margin:     0;
+    display:    inline-block;}
+l {
+    display:    inline-block;
+    position:   relative;
+    overflow:   visible;
+    width:      10px;}
 
 d {
     line-height: 100%;
-    display: block;
-    margin: 10px 0 5px 0;}
-
+    display:    block;
+    margin:     10px 0 5px 0;}
 d:first-of-type {
-    margin:    0 0 10px 0;}
+    margin:     0 0 10px 0;}
+d:only-of-type {
+    margin:     0 0 5px 0;}
+
+ln {
+    display:    block;}
+
+/* applicable classes */
+
+.rightFloat {
+    float:      right}
+.centerFloat {
+    text-align: center;}
+
+/* TODO: BUTTON CSS */
 
 e {
-    padding:    5px clamp(5px, 10px, 10px);
+    padding:    5px 8px;
     display:    inline-block;
-
     color:      #fff;
     border:     solid 2px #fff;
-    background: #000; }
+    background: #000;}
+
 e:hover {
+    color:      #000;
+    border:     solid 2px #000;
+    background: #696969FF;}
+e:active {
+    color:      #fff;
     background: #696969FF;}
 
-.inv, e:active {
+.pressed {
     color:      #000;
     background: #fff;
-    border: solid 2px #000}
-.inv {
-    border: solid 2px #fff}
-e.inv:active {
-    border: solid 2px #000}
+    border:     solid 2px #fff}
+e.pressed:hover {
+    color:      #fff;
+    border:     solid 2px #fff}
+e.pressed:not(.tog):active {
+    border:     solid 2px #000}
 
-.deact {
-    border: solid 2px #696969FF!important;
-    color:  #696969FF!important;
+e.tog.pressed:hover {
+    background: #c4c4c4;}
+
+.deactivate {
+    border:     solid 2px #696969FF;
+    color:      #696969FF;
+
+    transition: color ease-out 1s;
+    animation:  deblink 0.5s ease-out;
 
     pointer-events: none!important;}
-e:not(:first-of-type):last-of-type {
-    margin:     0}
+e:not(.deactivate) {
+    animation:  reblink 0.5s ease-out;}
 
-e t {
-    display:            flex;
-    justify-content:    center}
+/* TODO: UNIQUE BUTTON CLASSES */
+
+/* toggle classes */
+
+.flip {
+    transform:  scaleX(-1);}
+.invisible {
+    display:    none !important}
+.invalid {
+    background: black!important;
+    animation:  blinker 0.5s linear infinite;}
+
+/* flex button grid */
 
 .flex {
-    gap: clamp(5px, 10px, 10px);
+    gap:        clamp(5px, 10px, 10px);
     max-width:  100%;
     display:    flex;}
 
 .flex e {
-    width: 100%;
+    width:      100%;
+    margin:     0 auto;
+
     flex-basis: fit-content;
-    margin: 0 auto;
-    flex-grow: 1;
+    flex-grow:  1;
     text-align: center;}
 .flex  e:first-child {
-    margin: 0 auto 0 0;}
+    margin:     0 auto 0 0;}
 .flex  e:last-child{
-    margin: 0 0 0 auto;}
-
-.cenText {
-    text-align: center;}
+    margin:     0 0 0 auto;}
 
 .flexGrid {
     min-width:  100%;
@@ -98,31 +124,25 @@ e t {
     flex-wrap:  wrap;}
 
 .buttons {
-    margin:     0 -10px -10px 0;
     font-size:  0;}
 .buttons > e {
-    margin-right: 10px;
-    font-size: 14px;}
-
-#clothing tr e {
-    width:      35px;
-    height:     35px}
+    margin:     0 10px 0 0;
+    font-size:  14px;}
+.buttons > e.rightFloat {
+    float:      right;
+    margin:     0 0 0 10px;}
 
 /* TODO: URL CONTAINERS */
 
-#urlData > div > div {
-    padding:    0 0 10px 0;
-    margin:     0 9.5px 0 0;}
-#urlData > div > div:last-of-type {
-    margin:     0 0 0 0;}
-.invalid {
-    background: black!important;
-    animation: blinker 0.5s linear infinite;}
-
 input[type=text] {
-    padding:    5px 10px;
+    padding:    3px 10px 5px 10px;
     display:    inline-block;
-    width:      calc(100% - 24px);
+
+    width:      max-content;
+    min-width:  -moz-available;
+    width:      fill-available;
+    width:      var(--textBoxWidth);
+    min-width:  -webkit-fill-available;
 
     color:      #fff;
     border:     solid 2px #fff;
@@ -139,13 +159,12 @@ input[type=text]:focus {
     background:     #fff;
     color:          #000;}
 input[type=text].invalid {
-    color: white;
-    background: darkred;}
-
-@keyframes blinker {
-    from, to {  border-color: darkred; color: red;}
-    49% {       border-color: darkred;}
-    50% {       border-color: red;}}
+    color:          white;
+    background:     darkred;}
+input[type="text"]:not(.deactivate) {
+    animation:  reblink 0.5s ease-out;}
+input[type="text"].deactivate {
+    border:     solid 2px #696969FF;}
 
 /* TODO: TRACK LIST */
 
@@ -156,25 +175,26 @@ input[type=text].invalid {
     color:      #fff;
     border:     solid 2px #fff;
     background: #000;
-    display: block;}
+    display:    block;}
 
 /* TODO: SCALING DATA */
 
 .slider {
     height:     3px;
-    background: #fff}
+    background: #fff;}
 .slider::-webkit-slider-thumb,
 .slider::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance:         none;
-
-    width:  8px;
-    height: 24px;
+    width:      8px;
+    height:     24px;
 
     cursor:         pointer;
     border-radius:  0;
     background:     #000;
     border:         2px solid #fff;}
+
+input[type=range]{
+    -webkit-appearance: none;
+    appearance:         none;}
 
 /* TODO: BACKGROUND BUTTONS */
 
@@ -185,21 +205,35 @@ input[type=text].invalid {
 #backgrounds e {
     padding:    0;
     width:      33%;
-    height:     56px!important;
+    height:     46px !important;}
 
-    background-size:    200%;
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
+#backgrounds e p {
+    padding:    0 7px 2px 5px}
 
-#backgrounds e t {
-    position:   absolute;
-    z-index:    10;
-    padding:    0 7px 2px}
-#backgrounds e.inv t {
-    background: #fff}
-#backgrounds e:active t {
-    background: #000;
-    color:      #fff}
+#backgrounds e.pressed p {
+    background: #fff;}
+
+#backgrounds e:hover {
+    background: #696969FF;}
+#backgrounds e:hover p {
+    background: #696969FF;}
+
+#backgrounds e:active p {
+    color:      #fff;
+    background: #696969FF;}
+
+/* refresh button */
+
+#refreshButton > * {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+
+    width:      14px;
+    height:     14px;
+    top:        2px;
+    position:   relative;}
+#refreshButton:active > * {
+    filter:     invert(1);}
 
 /* TODO: DEBUG SIZE SETTINGS */
 
@@ -208,7 +242,11 @@ input[type=text].invalid {
     display:    inline-block;}
 
 .slider {
-    width: 100%;}
+    width:      100%;
+    width:      -webkit-fill-available;}
+
+/* TODO: BPM FEED */
+
 #bpmCounter {
     padding:    0 20px 0 5px;
     display:    inline-block;}
@@ -233,13 +271,42 @@ input[type=text].invalid {
     -webkit-animation:  scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
     animation:          scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both}
 
+/* TODO: ANIMATIONS*/
+
 @-webkit-keyframes scale-up-center{
     0%{
         transform:          scale(1.5);}
     100%{
-        transform:          scale(1);}}
+        transform:          scale(1);}
+}
 @keyframes scale-up-center{
     0%{
         transform:          scale(1.5);}
     100%{
-        transform:          scale(1);}}
+        transform:          scale(1);}
+}
+
+@keyframes blinker {
+    from, to {
+        border-color:   darkred;
+        color:          red;}
+    49% {
+        border-color:   darkred;}
+    50% {
+        border-color:   red;}
+}
+
+@keyframes deblink {
+    0%  {
+        border:     2px solid darkred;
+        color:      red;}
+}
+@keyframes reblink {
+    0%  {
+        border:     2px solid green;
+        color:      lawngreen;}
+
+    20%  {
+        border:     2px solid green;
+        color:      palegreen;}
+}

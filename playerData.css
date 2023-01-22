@@ -4,72 +4,66 @@
 body {
     cursor: url('UI_Libraries/default_cursor.png'), auto;}
 input[type=text] {
-    cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
+    cursor: url('UI_Libraries/text_cursor.png'),    auto!important;}
 .slider,
 .slider::-webkit-slider-thumb,
 .slider::-moz-range-thumb {
-    cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
+    cursor: url('UI_Libraries/grab_cursor.png'),    auto!important;}
 e:hover {
-    cursor: url('UI_Libraries/hover_cursor.png'), auto!important;}
-
-/* TODO: URL ELEMENTS */
-
-#logo {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    padding: 15px 0 0 0 ;
-}
+    cursor: url('UI_Libraries/hover_cursor.png'),   auto!important;}
 
 /* TODO: RENDER CSS & SCALING */
 
+#playerModel,
+#playerModel > *,
+#playerModel > * > *,
+#shadow {
+    position:       absolute;}
+
+#playerModel, #shadow,
+#floor, #danceFloor, #foreground,
+#transform {
+    top: 50%;
+    -ms-transform:  translateY(-50%);
+    transform:      translateY(-50%);}
+
 #floor, #danceFloor, #foreground {
+    left:               -11px;
     position:           absolute;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
-
 #floor, #danceFloor {
     background-repeat:      repeat;
     object-fit:             none;
     background-position:    top left;
 
-    top:   -350px;
-    width:  calc(72px * 10);
-    height: calc(72px * 10); }
+    top:    4px;
+    width:  100%;
+    height: 544px; }
+
 #foreground {
     width:  216px;
-    margin:-6px 0 0 168px; }
-
-/* TODO: GENERAL CHARACTER CSS */
+    height: 168px; /* this is slightly wrong lol */
+    margin: -7px 0 0 168px; }
 
 #transform {
     position:   relative;
-    top:        280px;
-    transform:  scale(var(--scaler));
-    margin-top: calc((var(--scaler) * 86px) * -1);}
+    transform:  scale(var(--scaler));}
+
 #playerModel {
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
-#playerModel,
-#playerModel > *,
-#playerModel > * > *,
-#shadow {
-    position:   absolute;}
 
-:root {
-    --offsetLeft : 264px;
-}
-
+#shadow,
 #playerModel {
-    left:   var(--offsetLeft);
-    top:    74px;
     width:  24px;
-    height: 30px; }
-#shadow {
-    left:   var(--offsetLeft);
-    top:    72px;
-    width:  24px;
-    height: 27px; }
+    height: 27px;
+    left:   50%;
+    -ms-transform:  translate(-50%, -50%);
+    transform:      translate(-50%, -50%);}
+.mirror {
+    -ms-transform:  translate(-50%, -50%) scaleX(-1)!important;
+    transform:      translate(-50%, -50%) scaleX(-1)!important;}
 
 #head, #body {
     position:   absolute;
@@ -119,13 +113,3 @@ e:hover {
     margin:             9px 0 0 0;
     z-index:            20;
     object-position:   -24px 0;}
-
-/* TODO: TOGGLEABLE */
-
-.flip {
-    transform:          scaleX(-1);}
-.mirror {
-    transform:          scaleX(-1);
-    translate:          0.5px 0;}
-.invisible {
-    display:            none !important}

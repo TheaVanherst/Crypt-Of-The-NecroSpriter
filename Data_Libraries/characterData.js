@@ -6,10 +6,10 @@ const
             3,3,3,3,3,3,3,3,3,
             4,4,4,4,4,4,
         ],[
-            1,1,1,1,1,1,
-            2,2,2,2,2,2,
-            3,3,3,3,3,3,
-            4,4,4,4,4,4,4,
+            1,
+            2,
+            3,
+            4,
         ]
     ];
 
@@ -256,6 +256,8 @@ const
             settings: {
                 resolution: {
                     width: 25, height: 28},
+                offset: {
+                    body: 1},
                 fileUrl : "characters/Suzu"},
             hat: {
                 offset: {

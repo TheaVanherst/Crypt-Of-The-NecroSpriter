@@ -5,6 +5,7 @@ let start = new Date().getTime(),
     elapsed = 0,
     frame = 0,
     floatInt = 0,
+    arrayDivisional,
 
     playTog = false,
     scaleRes;
@@ -14,19 +15,12 @@ const heartBeat = $("#bpmCounter").children;
 window.setInterval(() => {
     if (playTog) {
         frame = aniOffsets[0][elapsed];
-        elapsed = Math.floor((new Date().getTime() - start) / bpm / 40); //TODO: this needs fixing
+        elapsed = Math.floor((new Date().getTime() - start) / bpm / arrayDivisional);
         animationPush();
     }
 }, bpm);
 
-const playReset = () => {
-        if (playTog) {
-            playTog = false;
-            $("#play")?.classList?.remove('inv');
-            animationPush();
-        }
-    },
-
+const
     floatPush = (bool, check, add) => {
         $("#bpmCounter").children[floatInt].classList.remove("beat");
 
@@ -42,7 +36,7 @@ const playReset = () => {
     },
 
     animationPush = () => {
-        if (elapsed >= 25) {
+        if (elapsed >= aniOffsets[0].length) {
             elapsed = 0;
             start = new Date().getTime();
             floorData.floorFlip();
@@ -62,16 +56,10 @@ const playReset = () => {
         $("#elapsedDebug").textContent = elapsed;
 
         currentCharacter.animate();
-        currentCharacter.floatCycle()
         specialData.animate();
         for (let key in itemArray) {
             itemArray[key].animate();
         }
-    },
-
-    frameTypeToggle = () => {
-        $("#aniType").classList.toggle("inv")
-        aniOffsets.unshift(aniOffsets.pop());
     },
 
     scrollWheel = (e) => {
@@ -80,6 +68,3 @@ const playReset = () => {
             scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(scaleRes));
         }
     };
-
-$("#crop").onwheel = (e) => scrollWheel(e);
-$("#scrollArea").onwheel = (e) => scrollWheel(e);

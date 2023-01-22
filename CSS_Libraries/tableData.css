@@ -1,13 +1,13 @@
 
 :root{
-    --tablePadding: 15px; --logoDesign: 75px;
-
-    --window1Width: 600px;
-    --window2Width: 370px;
-    --window3Width: 250px;
-    --window5Width: 250px;
-    --window7Width: 150px;
+    --textBoxWidth:     154px;
+    --debugBoxWidth:    272px;
 }
+
+#logo {
+    justify-content: center;
+    text-align:     center;
+    display:        flex;}
 
 div + div:not(.inline) {
     padding:    10px 0 0 0;}
@@ -18,36 +18,36 @@ panel {
     vertical-align: top;
     display:    inline-block;
     position:   relative;
-    font-size:  14px;}
 
-panel { padding: 0 5px;}
+    font-size:  14px;
+    padding:    0 10px 0 0;}
 
-.col1 {width: var(--window1Width);}
-.col2 {width: var(--window2Width);}
-.col3 {width: var(--window3Width);}
-.col4 {width: var(--window5Width);}
-.col5 {width: var(--window7Width);}
+table {
+    width:      max-content;
+    width:      -moz-available;
+    min-width:  -webkit-fill-available;
+    width:      fill-available;
 
-table { padding: 5px 0;}
-panel:first-of-type {   padding-left:   10px;}
-panel:last-of-type {    padding-right:  10px;}
-table:first-of-type {   padding-top:    10px;}
-table:last-of-type {    padding-bottom: 10px;}
+    max-width:  inherit;}
+
+table, panel > div { padding: 10px 0 0 0;}
 
 th {
     transition: height .5s ease-in-out;
-    height: auto;
-    display: table-cell;
-    padding:    0;
-    text-align: left;}
+    display:    table-cell;
+    text-align: left;
+
+    height:     auto;
+    padding:    0;}
 tr {
-    display: table-row;}
+    display:    table-row;}
 
 tbody > tr:nth-child(2) {
-    margin-bottom: -20px;}
+    margin-bottom:     -20px;}
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
     display:            table-cell;
     background-repeat:  repeat-y;
+    background-position: left;
     background-image:   url("/UI_Libraries/border_side2.png");}
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
     background-repeat:  repeat-x;
@@ -55,55 +55,44 @@ tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
 
 tbody > tr:first-of-type >  th:nth-child(2),
 tbody > tr:last-of-type > th:nth-child(2) {
-    width: 100%;}
+    width:      100%;}
 
 tbody > tr:nth-child(2) > th:first-of-type {    transform: rotate(0deg  );}
-tbody > tr:nth-child(2) > th:last-of-type {     transform: rotate(180deg);}
+tbody > tr:nth-child(2) > th:last-of-type {     transform: scale(-100%, 100%);}
 
 tbody > tr:first-of-type >  th:nth-child(2) {   transform: rotate(0deg  );}
-tbody > tr:last-of-type > th:nth-child(2) {     transform: rotate(180deg);}
+tbody > tr:last-of-type > th:nth-child(2) {     transform: scale(100%, -100%);}
 
 tbody > tr:not(:nth-child(2)) > th:first-of-type,
 tbody > tr:nth-child(2) > th:not(:nth-child(2)),
 tbody > tr:not(:nth-child(2)) > th:last-of-type {
-    width:      24px;}
+    width:      18px;}
 
-tbody > tr:not(:nth-child(2)) > th:first-of-type,
-tbody > tr:not(:nth-child(2)) > th:last-of-type {
-    height:     24px;
+tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
+    height:     18px;
     display:    block;
-    background-image: url("/UI_Libraries/border_corner1.png");}
+    background: url("/UI_Libraries/border_corner1.png");}
 
 tbody > tr:first-of-type > th:first-of-type {   transform: rotate(0deg  ); margin: 0 -3px -3px 0;}
 tbody > tr:first-of-type > th:last-of-type  {   transform: rotate(90deg ); margin: 0 0 -3px -3px;}
 tbody > tr:last-of-type  > th:first-of-type {   transform: rotate(270deg); margin: -3px -3px 0 0;}
 tbody > tr:last-of-type  > th:last-of-type  {   transform: rotate(180deg); margin: -3px 0 0 -3px;}
 
-.UIBracket {
-    padding:    0;
-    margin: -5px;
-    font-weight:    normal;}
-.UIBracket > div {
-    width:      100%;
-    background: black;
-    z-index:    100;}
-.UIBracket > div {
-    width:      100%;}
+tbody > tr > th > div {
+    width:          initial;
+    font-weight:    normal;
+    background:     black;
+    z-index:        100;}
 
-#crop,
-render {
-    height: 543px;
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated; }
-render {
-    width: 100%;
-    overflow:   hidden}
 #crop {
-    overflow: hidden;
-    width:  calc(100% - 4px);
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;
+    overflow:           hidden;
+
+    height:     544px;
+    width:      calc(100% - 4px);
     border:     2px solid rgba(255,255,255,0.5);}
 
 #charDebug {
-    word-wrap: break-word;
-    max-width: 250px;
-}
+    word-wrap:  break-word;
+    width: var(--debugBoxWidth);}
