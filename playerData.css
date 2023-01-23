@@ -20,47 +20,58 @@ e:hover {
 #shadow {
     position:       absolute;}
 
-#playerModel, #shadow,
-#floor, #danceFloor, #foreground,
+#playerModel,
+#shadow,
 #transform {
     top: 50%;
     -ms-transform:  translateY(-50%);
-    transform:      translateY(-50%);}
+    transform:      translateY(-50%);
 
-#floor, #danceFloor, #foreground {
-    left:               -11px;
-    position:           absolute;
+    height:             24px!important;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
-#floor, #danceFloor {
-    background-repeat:      repeat;
-    object-fit:             none;
-    background-position:    top left;
-
-    top:    4px;
-    width:  100%;
-    height: 544px; }
-
-#foreground {
-    width:  216px;
-    height: 168px; /* this is slightly wrong lol */
-    margin: -7px 0 0 168px; }
 
 #transform {
     position:   relative;
     transform:  scale(var(--scaler));}
 
-#playerModel {
+#floor,
+#danceFloor,
+#foreground {
+    top: 50%;
+    -ms-transform:  translate(-50%, -50%);
+    transform:      translate(-50%, -50%);
+    left: 50%;
+
+    width:  216px;
+    height: 168px;
+
+    position:           absolute;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
+#floor,
+#danceFloor {
+    margin: 7px 0 0 0;
 
+    background-repeat:      repeat;
+    object-fit:             none;
+    background-position:    top left;}
+#foreground {
+    margin: -8px 0 0 0;}
+
+#shadow {
+    margin: 2px 0 0 -1px;}
+#playerModel {
+    height:             24px!important;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
 #shadow,
 #playerModel {
     width:  24px;
-    height: 27px;
     left:   50%;
     -ms-transform:  translate(-50%, -50%);
     transform:      translate(-50%, -50%);}
+
 .mirror {
     -ms-transform:  translate(-50%, -50%) scaleX(-1)!important;
     transform:      translate(-50%, -50%) scaleX(-1)!important;}

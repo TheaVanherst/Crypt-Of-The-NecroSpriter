@@ -61,16 +61,15 @@ tbody > tr:nth-child(2) > th:last-of-type {
 
 tbody > tr:last-of-type > th:nth-child(2) {     transform: scale(100%, -100%);}
 
-
 tbody > tr:not(:nth-child(2)) > th:first-of-type,
 tbody > tr:nth-child(2) > th:not(:nth-child(2)),
 tbody > tr:not(:nth-child(2)) > th:last-of-type {
-    width:      18px;}
+    width:      22px;}
 
 tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
-    height:     18px;
+    height:     22px;
     display:    block;
-    background: url("/UI_Libraries/border_corner1.png");}
+    background-image: url("/UI_Libraries/border_corner1.png");}
 
 tbody > tr:first-of-type > th:first-of-type {   transform: rotate(0deg  ); margin: 0 -3px -3px 0;}
 tbody > tr:first-of-type > th:last-of-type  {   transform: rotate(90deg ); margin: 0 0 -3px -3px;}
@@ -78,10 +77,12 @@ tbody > tr:last-of-type  > th:first-of-type {   transform: rotate(270deg); margi
 tbody > tr:last-of-type  > th:last-of-type  {   transform: rotate(180deg); margin: -3px 0 0 -3px;}
 
 tbody > tr > th > div {
+    margin:         -4px;
     width:          initial;
     font-weight:    normal;
     background:     black;
-    z-index:        100;}
+    position:       relative;
+    z-index:        100000;}
 
 #crop {
     image-rendering:    -moz-crisp-edges;
