@@ -187,8 +187,8 @@ let characterRefactor = class setup {
         }
     };
 
-    flipToggle() {
-        $("#flipTog").classList.toggle("pressed")
+    flipToggle(e) {
+        e.classList.toggle("pressed")
         this.flipped = !this.flipped;
         this.flip();
     };

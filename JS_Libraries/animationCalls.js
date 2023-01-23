@@ -68,3 +68,13 @@ const
             scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(scaleRes));
         }
     };
+
+    playToggle = (bool) => {
+        if (bool) {
+            playTog ^= true;
+        } else {
+            playTog = false;
+        }
+        $('#playTog').classList.toggle('pressed', playTog);
+        animationPush();
+    }

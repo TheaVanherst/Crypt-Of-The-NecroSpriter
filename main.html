@@ -59,10 +59,10 @@
                                         <e id="foregroundButton" onclick="floorData.foregroundToggle();"> Foreground  </e>
                                     </div>
                                     <div class="buttons">
-                                        <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed--; animationPush();">Prev</e>
-                                        <e onclick="playTog ^= true; this.classList.toggle('pressed', playTog);">Play</e>
-                                        <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed++; animationPush();">Next</e>
-                                        <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
+                                        <e onclick="playToggle(false); elapsed--;"> Prev </e>
+                                        <e onclick="playToggle(true)" id="playTog"> Play </e>
+                                        <e onclick="playToggle(false); elapsed++;"> Next </e>
+                                        <e onclick="currentCharacter.flipToggle(this);"> Mirror </e>
 
                                         <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
                                             <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>

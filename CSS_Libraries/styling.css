@@ -111,7 +111,7 @@ e.flippant:not(.deactivate) {
 .flex e {
     width:      100%;
     margin:     0 auto;
-    flex-grow:  1;
+    flex:       content;
     text-align: center;}
 
 .flexGrid {
