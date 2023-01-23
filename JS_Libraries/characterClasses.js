@@ -74,12 +74,13 @@ let characterRefactor = class setup {
                 if(e.key === 'Enter') {
                     let item = e.target.value,
                         image = new Image();
-                        image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
-                        image.onload = () => {
-                            console.log(this)
-                            currentCharacter.urlUpdate(item);
-                        };
-                    targetTimeout(e);
+                    image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
+                    image.onload = () => {
+                        currentCharacter.urlUpdate(item);
+                    };
+                    image.onerror = () => {
+                        targetTimeout(e);
+                    }
                 }
             };
         });
