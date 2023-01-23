@@ -1,7 +1,7 @@
 
 :root{
     --textBoxWidth:     152px;
-    --debugBoxWidth:    267px;
+    --debugBoxWidth:    260px;
 }
 
 #logo {
@@ -83,6 +83,14 @@ tbody > tr > th > div {
     background:     black;
     position:       relative;
     z-index:        100000;}
+
+.innerTable {
+    color:      #fff;
+    background: #000;
+    border:     solid 2px #696969FF;
+
+    padding:    8px 10px 10px 10px;
+    display:    block;}
 
 #crop {
     image-rendering:    -moz-crisp-edges;

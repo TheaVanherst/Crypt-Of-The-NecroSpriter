@@ -20,28 +20,28 @@ e:hover {
 #shadow {
     position:       absolute;}
 
+#transform {
+    top: 50%;
+    left: 50%;
+    margin: 0 0 0 -1px;
+    position:   relative;
+    transform:  scale(var(--scaler));}
+
 #playerModel,
 #shadow,
 #transform {
-    top: 50%;
-    -ms-transform:  translateY(-50%);
-    transform:      translateY(-50%);
-
+    width:              24px;
     height:             24px!important;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
-
-#transform {
-    position:   relative;
-    transform:  scale(var(--scaler));}
 
 #floor,
 #danceFloor,
 #foreground {
     top: 50%;
+    left: 50%;
     -ms-transform:  translate(-50%, -50%);
     transform:      translate(-50%, -50%);
-    left: 50%;
 
     width:  216px;
     height: 168px;
@@ -65,16 +65,10 @@ e:hover {
     height:             24px!important;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
-#shadow,
-#playerModel {
-    width:  24px;
-    left:   50%;
-    -ms-transform:  translate(-50%, -50%);
-    transform:      translate(-50%, -50%);}
 
 .mirror {
-    -ms-transform:  translate(-50%, -50%) scaleX(-1)!important;
-    transform:      translate(-50%, -50%) scaleX(-1)!important;}
+    -ms-transform:  scaleX(-1)!important;
+    transform:      scaleX(-1)!important;}
 
 #head, #body {
     position:   absolute;

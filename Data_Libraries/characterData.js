@@ -142,7 +142,14 @@ const
                 sequence: [3, 2, 1, 2]},
             shovel: {
                 offset: {
-                    top: 4, left: 4}}
+                    top: 4, left: 4}},
+            torch: {
+                offset: {
+                    top: 5, left: 2}},
+            hip: {
+                offset: {
+                    top: 2, left: 4},
+                sequence: [4, 1, 2, 3]}
         },{
             name: "Bolt",
             dlc: 0,

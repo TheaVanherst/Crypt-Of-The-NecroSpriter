@@ -37,12 +37,10 @@
                                         <img id="shovel">
                                         <img id="body">
                                         <img id="charm">
+                                        <img id="hip">
                                         <img id="head">
-
                                         <img id="hat">
                                         <img id="boots">
-                                        <img id="hip">
-
                                         <img id="weapon">
                                         <img id="torch">
                                         <img id="ring">
@@ -64,13 +62,7 @@
                                         <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed--; animationPush();">Prev</e>
                                         <e onclick="playTog ^= true; this.classList.toggle('pressed', playTog);">Play</e>
                                         <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed++; animationPush();">Next</e>
-                                        <e id="aniType" onclick="currentCharacter.frameType()">Render Type</e>
                                         <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
-                                        <e id="debugTog" class="pressed" onclick="
-                                            this.classList.toggle('pressed');
-                                            $('#debugTable').classList.toggle('toggle');">
-                                            Debug
-                                        </e>
 
                                         <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
                                             <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
@@ -129,7 +121,7 @@
                                 current BPM: <t id="bpm"></t>
                             </div>
                             <d>Compatible Tracks:</d>
-                            <div id="trackContainer"></div>
+                            <div class="innerTable" id="trackContainer"></div>
 
                             <d>Background</d>
                             <div id="backgrounds"></div>
@@ -263,13 +255,18 @@
             </div>
         </panel>
         <panel class="col5">
-            <table class="toggle" id="debugTable">
+            <table id="debugTable">
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
                     <th>
                         <div>
-                            <div id="charDebug"></div>
+                            <d>Advanced Options</d>
+                            <div>
+                                <e id="aniType" onclick="currentCharacter.frameType()">Render Type</e>
+                            </div>
+                            <d>Advanced Options</d>
+                            <div class="innerTable" id="charDebug"></div>
                         </div>
                     </th>
                     <th></th>

@@ -165,13 +165,7 @@ input[type="text"].deactivate {
 /* TODO: TRACK LIST */
 
 #trackContainer {
-    padding:    10px;
-    height:     90px;
-
-    color:      #fff;
-    border:     solid 2px #fff;
-    background: #000;
-    display:    block;}
+    height:     90px;}
 
 /* TODO: SCALING DATA */
 
