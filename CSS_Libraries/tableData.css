@@ -1,7 +1,7 @@
 
 :root{
-    --textBoxWidth:     154px;
-    --debugBoxWidth:    272px;
+    --textBoxWidth:     152px;
+    --debugBoxWidth:    267px;
 }
 
 #logo {
@@ -42,26 +42,25 @@ th {
 tr {
     display:    table-row;}
 
-tbody > tr:nth-child(2) {
-    margin-bottom:     -20px;}
-tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
-    display:            table-cell;
-    background-repeat:  repeat-y;
-    background-position: left;
-    background-image:   url("/UI_Libraries/border_side2.png");}
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
-    background-repeat:  repeat-x;
+    width:      100%;
+    background-image:   url("/UI_Libraries/border_side1.png");
+    background-repeat:  repeat-x;}
+tbody > tr:first-of-type > th:nth-child(2) {
     background-image:   url("/UI_Libraries/border_side1.png");}
 
-tbody > tr:first-of-type >  th:nth-child(2),
-tbody > tr:last-of-type > th:nth-child(2) {
-    width:      100%;}
+tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
+    display:            table-cell;
+    background-repeat:  repeat-y;}
+tbody > tr:nth-child(2) >  th:first-of-type {
+    background-image:   url("/UI_Libraries/border_side2.png");
+    background-position: left;}
+tbody > tr:nth-child(2) > th:last-of-type {
+    background-image:   url("/UI_Libraries/border_side4.png");
+    background-position: right;}
 
-tbody > tr:nth-child(2) > th:first-of-type {    transform: rotate(0deg  );}
-tbody > tr:nth-child(2) > th:last-of-type {     transform: scale(-100%, 100%);}
-
-tbody > tr:first-of-type >  th:nth-child(2) {   transform: rotate(0deg  );}
 tbody > tr:last-of-type > th:nth-child(2) {     transform: scale(100%, -100%);}
+
 
 tbody > tr:not(:nth-child(2)) > th:first-of-type,
 tbody > tr:nth-child(2) > th:not(:nth-child(2)),
@@ -95,4 +94,12 @@ tbody > tr > th > div {
 
 #charDebug {
     word-wrap:  break-word;
-    width: var(--debugBoxWidth);}
+    width:      var(--debugBoxWidth);
+    min-width:  -moz-available;
+    min-width:  -webkit-fill-available;}
+#debugTable {
+    height: min-content;
+    transition:
+        opacity 1s cubic-bezier(.05, .69, .14, 1)
+        height 1s cubic-bezier(.05, .69, .14, 1);
+}

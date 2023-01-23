@@ -50,6 +50,7 @@ ln {
 e {
     padding:    5px 8px;
     display:    inline-block;
+    white-space: nowrap;
     color:      #fff;
     border:     solid 2px #fff;
     background: #000;}
@@ -83,7 +84,7 @@ e.tog.pressed:hover {
     animation:  deblink 0.5s ease-out;
 
     pointer-events: none!important;}
-e:not(.deactivate) {
+e.flippant:not(.deactivate) {
     animation:  reblink 0.5s ease-out;}
 
 /* TODO: UNIQUE BUTTON CLASSES */
@@ -94,6 +95,8 @@ e:not(.deactivate) {
     transform:  scaleX(-1);}
 .invisible {
     display:    none !important}
+.toggle {
+    opacity:    0;}
 .invalid {
     background: black!important;
     animation:  blinker 0.5s linear infinite;}
@@ -101,21 +104,15 @@ e:not(.deactivate) {
 /* flex button grid */
 
 .flex {
-    gap:        clamp(5px, 10px, 10px);
+    gap:        10px;
     max-width:  100%;
     display:    flex;}
 
 .flex e {
     width:      100%;
     margin:     0 auto;
-
-    flex-basis: fit-content;
     flex-grow:  1;
     text-align: center;}
-.flex  e:first-child {
-    margin:     0 auto 0 0;}
-.flex  e:last-child{
-    margin:     0 0 0 auto;}
 
 .flexGrid {
     min-width:  100%;
@@ -128,8 +125,7 @@ e:not(.deactivate) {
 .buttons > e {
     margin:     0 10px 0 0;
     font-size:  14px;}
-.buttons > e.rightFloat {
-    float:      right;
+.buttons > e.rightFloat:last-of-type {
     margin:     0 0 0 10px;}
 
 /* TODO: URL CONTAINERS */
@@ -161,7 +157,7 @@ input[type=text]:focus {
 input[type=text].invalid {
     color:          white;
     background:     darkred;}
-input[type="text"]:not(.deactivate) {
+input[type="text"].flippant:not(.deactivate) {
     animation:  reblink 0.5s ease-out;}
 input[type="text"].deactivate {
     border:     solid 2px #696969FF;}

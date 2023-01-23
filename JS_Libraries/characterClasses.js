@@ -25,12 +25,13 @@ let characterRefactor = class setup {
             for (let i = 0; i < this.clothingData[1]; i++) {
                 let cur = (this.clothingData[1] * e) + i;
                 if (cur < this.clothingData[0]) {
-                    let clothingButton = createButton("e", cur + 1, "clothing" + cur)
-                        clothingButton.classList.add("tog");
-                        clothingButton.onclick = () => {
+                    let buttonElem = createButton("e", cur + 1, "clothing" + cur)
+                        buttonElem.classList.add("tog");
+                        buttonElem.classList.add('flippant');
+                        buttonElem.onclick = () => {
                             this.clothingUpdate(cur);
                     };
-                    divS.appendChild(clothingButton);
+                    divS.appendChild(buttonElem);
                 }
             }
         }
@@ -69,12 +70,13 @@ let characterRefactor = class setup {
         }
 
         $all("#characterUrl").forEach((e) => {
-            e.onkeydown = (a) => {
+            e.onkeydown = (e) => {
                 if(e.key === 'Enter') {
                     let item = e.target.value,
                         image = new Image();
                         image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
                         image.onload = () => {
+                            console.log(this)
                             currentCharacter.urlUpdate(item);
                         };
                     targetTimeout(e);

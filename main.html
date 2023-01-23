@@ -66,14 +66,14 @@
                                         <e onclick="playTog = false; this.classList.toggle('pressed', false); elapsed++; animationPush();">Next</e>
                                         <e id="aniType" onclick="currentCharacter.frameType()">Render Type</e>
                                         <e id="flipTog" onclick="currentCharacter.flipToggle();">Mirror</e>
+                                        <e id="debugTog" class="pressed" onclick="
+                                            this.classList.toggle('pressed');
+                                            $('#debugTable').classList.toggle('toggle');">
+                                            Debug
+                                        </e>
 
                                         <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
                                             <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
-                                        <e id="debugTog" class="pressed" onclick="
-                                            this.classList.toggle('pressed');
-                                            $('#debugTable').classList.toggle('invisible');" class="rightFloat">
-                                            Debug
-                                        </e>
                                     </div>
                                 </div>
                             </div>
@@ -153,25 +153,25 @@
                             <d>Armour / Weapon Slots</d>
                             <div id="equipmentSlots">
                                 <div class="flex">
-                                    <e id="hatButton">Helmet</e>
-                                    <e id="weaponButton">Weapon</e>
-                                    <e id="ringButton">Ring</e>
-                                    <e id="bootsButton">Boots</e>
+                                    <e class="flippant" id="hatButton">Helmet</e>
+                                    <e class="flippant" id="weaponButton">Weapon</e>
+                                    <e class="flippant" id="ringButton">Ring</e>
+                                    <e class="flippant" id="bootsButton">Boots</e>
                                 </div>
                                 <div class="flex">
-                                    <e id="spellButton">Spell</e>
-                                    <e id="itemButton">Item</e>
-                                    <e id="equipmentButton">equipment</e>
-                                    <e id="charmButton">Charm</e>
+                                    <e class="flippant" id="spellButton">Spell</e>
+                                    <e class="flippant" id="itemButton">Item</e>
+                                    <e class="flippant" id="equipmentButton">equipment</e>
+                                    <e class="flippant" id="charmButton">Charm</e>
                                 </div>
                             </div>
 
                             <d>Tools & Misc</d>
                             <div class="flex" id="consumableSlots">
-                                <e id="shovelButton">Shovel</e>
-                                <e id="torchButton">Torch</e>
-                                <e id="hipButton">Hip</e>
-                                <e id="specialButton">Special</e>
+                                <e class="flippant" id="shovelButton">Shovel</e>
+                                <e class="flippant" id="torchButton">Torch</e>
+                                <e class="flippant" id="hipButton">Hip</e>
+                                <e class="flippant" id="specialButton">Special</e>
                             </div>
                             <d>shield Controller</d>
                             <div class="flex" id="shieldSettings">
@@ -191,21 +191,21 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div>
+                        <div id="itemUrls">
                             <d>URL Directory Data</d>
-                            <d>Helmet</d><input type="text" id="hatUrl">
-                            <d>Weapon</d><input type="text" id="weaponUrl">
-                            <d>Ring</d><input type="text" id="ringUrl">
-                            <d>Boots</d><input type="text" id="bootsUrl">
-                            <d>Spell</d><input type="text" id="spellUrl">
-                            <d>Item</d><input type="text" id="itemUrl">
-                            <d>Equipment</d><input type="text" id="equipmentUrl">
-                            <d>Charm</d><input type="text" id="charmUrl">
-                            <d>Shovel</d><input type="text" id="shovelUrl">
-                            <d>Torch</d><input type="text" id="torchUrl">
-                            <d>Hip</d><input type="text" id="hipUrl">
-                            <d>Special</d><input type="text" id="specialUrl">
-                            <d>Shield</d><input type="text" id="shieldUrl">
+                            <d>Helmet</d><input class="flippant" type="text" id="hatUrl">
+                            <d>Weapon</d><input class="flippant" type="text" id="weaponUrl">
+                            <d>Ring</d><input class="flippant" type="text" id="ringUrl">
+                            <d>Boots</d><input class="flippant" type="text" id="bootsUrl">
+                            <d>Spell</d><input class="flippant" type="text" id="spellUrl">
+                            <d>Item</d><input class="flippant" type="text" id="itemUrl">
+                            <d>Equipment</d><input class="flippant" type="text" id="equipmentUrl">
+                            <d>Charm</d><input class="flippant" type="text" id="charmUrl">
+                            <d>Shovel</d><input class="flippant" type="text" id="shovelUrl">
+                            <d>Torch</d><input class="flippant" type="text" id="torchUrl">
+                            <d>Hip</d><input class="flippant" type="text" id="hipUrl">
+                            <d>Special</d><input class="flippant" type="text" id="specialUrl">
+                            <d>Shield</d><input class="flippant" type="text" id="shieldUrl">
                         </div>
                     </th>
                     <th></th>
@@ -263,7 +263,7 @@
             </div>
         </panel>
         <panel class="col5">
-            <table class="invisible" id="debugTable">
+            <table class="toggle" id="debugTable">
                 <tr><th></th><th></th><th></th></tr>
                 <tr>
                     <th></th>
