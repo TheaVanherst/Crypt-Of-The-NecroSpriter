@@ -263,8 +263,6 @@ const
             settings: {
                 resolution: {
                     width: 25, height: 28},
-                offset: {
-                    body: 1},
                 fileUrl : "characters/Suzu"},
             hat: {
                 offset: {

@@ -114,7 +114,7 @@ let characterRefactor = class setup {
         this.headElement.style.width = this.width + "px";
         this.bodyElement.style.width = this.width + "px";
 
-        $("#consumables").style.margin = `${Math.floor((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
+        $("#consumables").style.margin = `${Math.ceil((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
 
         this.ampFrameUpdate();
@@ -236,7 +236,7 @@ let characterRefactor = class setup {
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
 
-        $('#clothing .pressed').classList.toggle('pressed');
+        $('#clothing .pressed')?.classList?.toggle('pressed');
         $('#clothing' + this.clothingSet).classList.toggle('pressed');
 
 

@@ -12,13 +12,14 @@ const itemRefactor = class items {
 
     constructor(item, character) {
         this.name = itemData[item].name;
-        this.src = itemData[item].url + ".png";
-        this.id = item;
+        this.id =   item;
 
-        urlArray[item] = [this.name, this.src]
-        this.element = $("#" + this.name);
-        this.element.src = this.src;
-        this.button = $('#' + this.name + "Button");
+        this.ogUrl =    itemData[item].url;
+        this.src =      this.ogUrl + ".png";
+
+        this.element =      $("#" + this.name);
+        this.element.src =  this.src;
+        this.button =       $('#' + this.name + "Button");
 
         if (itemData[item].bool) {
             this.button.classList.add('pressed');}
@@ -85,15 +86,15 @@ const itemRefactor = class items {
         let urlBar = $("#" + this.name + "Url")
 
         if(url !== undefined) {
-            urlArray[this.id][1] = url;
+            this.ogUrl = url;
             urlBar.placeholder = url;
             urlBar.value = "";
 
             this.src = url + ".png";
             this.element.src = url + ".png?";}
-        else if (this.src !== undefined) {
-            this.element.src = urlArray[this.id][1] + ".png?" + date;
-            urlBar.placeholder = urlArray[this.id][1];
+        else if (this.ogUrl !== undefined) {
+            this.element.src = this.ogUrl + ".png?" + date;
+            urlBar.placeholder = this.ogUrl;
             urlBar.value = "";}
         else {
             urlBar.placeholder = "No data";
@@ -109,26 +110,26 @@ const equipmentOffsets = [
 
 const consumableRefactor = class items {
     constructor(item) {
-        this.src = itemData[item]?.url;
         this.name = itemData[item].name;
         this.id = item;
 
+        this.ogUrl = itemData[item]?.url;
+        this.src = this.ogUrl;
+
         this.element = $("#" + this.name);
-        this.element.src = this.src;
+        this.element.src = this.src + "?" + new Date().getTime();
         this.button = $('#' + this.name + "Button");
 
-        urlArray[item] = [this.name, this.src];
-
         if (itemData[item].bool) {
-            this.button.classList.add('pressed');}
-        else {
+            this.button.classList.add('pressed');
+        } else {
             this.element.classList.add("invisible");
         }
 
         this.button.onclick = () => {
             this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
-            this.element.src = this.src + ".png?" + new Date().getTime();
+            this.element.src = this.src + "?" + new Date().getTime();
         }
 
         this.#offsetAdjustment();
@@ -158,23 +159,22 @@ const consumableRefactor = class items {
             date = new Date().getTime()}
         let urlBar = $("#" + this.name + "Url")
         if(url !== undefined) {
-            urlArray[this.id][1] = url;
+            this.ogUrl = url;
             urlBar.placeholder = url;
             urlBar.value = "";
 
             this.src = url + ".png";
-            this.element.src = this.src;}
-        else if (this.src !== undefined) {
-            this.element.src = urlArray[this.id][1] + ".png?" + date;
-            urlBar.placeholder = urlArray[this.id][1];
-            urlBar.value = "";}
-        else {
+            this.element.src = this.src;
+        } else if (this.ogUrl !== undefined) {
+            this.element.src = this.ogUrl + ".png?" + date;
+            urlBar.placeholder = this.ogUrl;
+            urlBar.value = "";
+        } else {
             urlBar.placeholder = "No data";
             urlBar.value = "";
         }
 
         this.#offsetAdjustment();
-        this.src = url;
     };
 };
 
@@ -202,8 +202,8 @@ const specialRefactor = class items {
 
         if(floatBool){
             let random = Math.floor(Math.random() * 3);
-            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");}
-        else {
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
+        } else {
             for (let i = 0; i < 6; i++){
                 this.floatOffsets[i] = marginTop + "px";
             }
@@ -211,13 +211,13 @@ const specialRefactor = class items {
 
         if (this.disabled) {
             /* general character settings */
-            let width =                     characterData[character]?.[this.name]?.resolution?.width;
-            this.element.style.width =      width + "px";
-            this.element.style.height =     characterData[character]?.[this.name]?.resolution?.height + "px"
-            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform?.opacity);
+            let width = characterData[character]?.[this.name]?.resolution?.width;
+            this.element.style.width = width + "px";
+            this.element.style.height = characterData[character]?.[this.name]?.resolution?.height + "px"
+            this.element.style.opacity = merge(1, characterData[character]?.[this.name]?.transform?.opacity);
 
             /* transformation data */
-            this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
+            this.element.style.zIndex = merge(10, characterData[character]?.[this.name]?.zIndex);
             this.element.style.transform = characterData[character]?.[this.name]?.transform ?
                 "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
                 + characterData[character]?.[this.name]?.transform?.scaleX + ")" :
@@ -225,7 +225,8 @@ const specialRefactor = class items {
 
             /* animation sequence offset sheet */
             this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
-            this.multiplier = [-0 * width + "px 0", -1 * width + "px 0", -2 * width + "px 0", -3 * width + "px 0"];
+            let frames = merge([1,2,3,4],characterData[character]?.[this.name]?.sequence);
+            this.multiplier = [-(frames[0] - 1) * width + "px 0", -(frames[1] - 1) * width + "px 0", -(frames[2] - 1) * width + "px 0", -(frames[3] - 1) * width + "px 0"];
             /* multiplies the width by animation sequence pattern */
 
             /* float animation offset sheet */
@@ -236,6 +237,7 @@ const specialRefactor = class items {
 
             this.animate();
             this.animateFloat();
+            this.urlUpdate();
 
             this.button.classList.remove("deactivate");
         } else {
@@ -246,7 +248,7 @@ const specialRefactor = class items {
             this.button.setAttribute("class","deactivate");
         }
 
-        this.urlUpdate(character);
+        this.urlUpdate();
     };
 
     animate() {
@@ -258,20 +260,20 @@ const specialRefactor = class items {
         this.element.style.marginTop = this.floatOffsets[frame];
     };
 
-    urlUpdate(character) {
-        let src = characterData[character]?.[this.name]?.fileUrl;
-        let urlBar = $("#" + this.name + "Url")
+    urlUpdate(src) {
+        if(!src){
+            src = characterData[currentCharacter.id]?.[this.name]?.fileUrl;
+        }
+        let urlBar = $("#specialUrl")
 
         if (src) {
             this.src = src + ".png?" ;
-            urlArray[11] = ["special", this.src];
 
-            urlBar.placeholder = this.src;
+            urlBar.placeholder = src;
             urlBar.value = "";
             urlBar.classList.remove("deactivate");
             this.element.src = this.src + new Date().getTime();
         } else {
-            urlArray[11] = ["special",""];
             urlBar.placeholder = "Not Applicable";
 
             urlBar.classList.add("deactivate");
