@@ -44,22 +44,16 @@ tr {
 
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
     width:      100%;
-    background-image:   url("/UI_Libraries/border_side1.png");
+    background-image:   url("/UI_Libraries/border_Top.png");
     background-repeat:  repeat-x;}
-tbody > tr:first-of-type > th:nth-child(2) {
-    background-image:   url("/UI_Libraries/border_side1.png");}
 
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
-    display:            table-cell;
+    height:     100%;
+    background-image:   url("/UI_Libraries/border_Left.png");
     background-repeat:  repeat-y;}
-tbody > tr:nth-child(2) >  th:first-of-type {
-    background-image:   url("/UI_Libraries/border_side2.png");
-    background-position: left;}
-tbody > tr:nth-child(2) > th:last-of-type {
-    background-image:   url("/UI_Libraries/border_side4.png");
-    background-position: right;}
 
 tbody > tr:last-of-type > th:nth-child(2) {     transform: scale(100%, -100%);}
+tbody > tr:nth-child(2) > th:last-of-type{      transform: scale(-100%, 100%);}
 
 tbody > tr:not(:nth-child(2)) > th:first-of-type,
 tbody > tr:nth-child(2) > th:not(:nth-child(2)),

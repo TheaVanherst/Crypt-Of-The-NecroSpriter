@@ -4,8 +4,6 @@ const
         charm: {sequence: [1, 2, 3, 2]},
         shovel: {offset:{sequence: [2, 1, 0, 1]}}};
 
-let urlArray = [];
-
 const itemRefactor = class items {
     width = 24;
     height = 24;
@@ -334,7 +332,6 @@ const shieldRefactor = class items {
         let src = merge($("#shieldUrl").value, this.src);
         if(src !== this.src){
             this.src = src;
-            urlArray[this.id] = ["shield",this.src];
 
             $("#shieldUrl").placeholder = this.src;
             $("#shieldUrl").value = "";

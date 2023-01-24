@@ -11,23 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
-    $("#bpmSlider").oninput = () => bpmUpdate();
     document.getElementById("bpmSlider").value = 130; //start-up bpm
     bpmUpdate();
+    document.getElementById("scaleSlider").value = 4; //start-up scale
+    scale(4);
 
-    scaleRes = 4; // default scale multiplier
-    $('#scale').textContent = "1:" + scaleRes; //don't touch
-    document.getElementById("scaleSlider").value = scaleRes; //start-up scale
-    $("#scaleSlider").oninput = (e) => scale(e.target.value); //don't touch
-
-    $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
-    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
-            itemArray[key] = new itemRefactor(key, defaultCharacter);}
-        else if (itemData[key].type === "consumable") {
-            consumableData[key] = new consumableRefactor(key);}
-        else if (itemData[key].type === "shield") {
+            itemArray[key] = new itemRefactor(key, defaultCharacter);
+        } else if (itemData[key].type === "consumable") {
+            consumableData[key] = new consumableRefactor(key);
+        } else if (itemData[key].type === "shield") {
             shieldData = new shieldRefactor(key, "right", false);}
 
         let urlBar = $(`#${itemData[key].name}Url`)
@@ -49,10 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     specialData = new specialRefactor(defaultCharacter);
 
     delete itemData;
-
-    $("#barDebug").textContent = floatInt;
-    $("#beatDebug").textContent = frame;
-    $("#elapsedDebug").textContent = elapsed;
 
     document.removeEventListener('DOMContentLoaded', () => {});
 }, false);
@@ -77,3 +67,17 @@ const songList = [
     ["N/a"], //180
     ["N/a"], //185
     ["N/a"]]; //190
+
+document.addEventListener('DOMContentLoaded', () => {
+    $("#bpmSlider").oninput = () => bpmUpdate();
+    $("#scaleSlider").oninput = (e) => scale(e.target.value); //don't touch
+
+    $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
+    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
+
+    $("#barDebug").textContent = floatInt;
+    $("#beatDebug").textContent = frame;
+    $("#elapsedDebug").textContent = elapsed;
+
+    document.removeEventListener('DOMContentLoaded', () => {});
+}, false);
