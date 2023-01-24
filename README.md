@@ -72,7 +72,7 @@ If you wish to reset the custom entries, simply refresh the page and everything 
 
 Different characters have different file formatting, so be aware of the file naming conventions Crypt of the Necrodancer has, as a lot of these adjustments are pre-baked into the code to try and compensate for such. So I would just recommend to not try to change the naming convention too much.
 
-Directories on launch are determined by the data that is in `'JS_Libraries/characterData.js'`.
+Directories on launch are determined by the data that is in `'Data_Libraries/characterData.js'`.
 Change the url directory, and it'll update - on page refresh it will then default to the new directory you inserted.
 
 <picture>
