@@ -5,7 +5,6 @@ let characterRefactor = class setup {
     playerElement = document.querySelector("#playerModel");
 
     frameArray = [];
-    playerFloatOffsets = [8,9,10,11,10,9];
 
     height; width; head;
     characterUrlArray = [];
@@ -150,14 +149,14 @@ let characterRefactor = class setup {
     };
 
     #floatChecks() {
-        this.floatOffsets = [0,0,0,0,0,0];
+
         let bodyOffset = merge(0, characterData[this.name]?.settings?.offset?.body);
 
         let random = Math.floor(Math.random() * 3);
-        this.floatOffsets = this.playerFloatOffsets.map((x) => x);
-        for (let key in this.floatOffsets) {
+        let floatOffsets = [8,9,10,11,10,9]
+        for (let key in floatOffsets) {
             this.floatOffsets[key] =
-                -(this.floatOffsets[key] + ((24 + bodyOffset) - this.height)) + "px 0 0 " +
+                -(floatOffsets[key] + ((24 + bodyOffset) - this.height)) + "px 0 0 " +
                 Math.floor((24 - this.width) / 2) + "px";
         }
         for (let i = 0; i < random; i++) {
