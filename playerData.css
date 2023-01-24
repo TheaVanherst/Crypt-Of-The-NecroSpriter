@@ -34,9 +34,7 @@ e:hover {
 #shadow,
 #transform {
     width:              24px;
-    height:             24px!important;
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
+    height:             24px!important;}
 
 #floor,
 #danceFloor,
@@ -49,34 +47,25 @@ e:hover {
     width:  216px;
     height: 168px;
 
-    position:           absolute;
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
+    position:           absolute;}
 #floor,
 #danceFloor {
-    margin: 7px 0 0 0;
-
-    background-repeat:      repeat;
-    object-fit:             none;
-    background-position:    top left;}
+    margin:     7px 0 0 0;
+    object-fit: none;}
 #foreground {
-    margin: -8px 0 0 0;}
+    margin:    -8px 0 0 0;}
 
 #shadow {
-    margin: 2px 0 0 -1px;}
+    margin:     2px 0 0 0;}
 #playerModel {
     z-index:    2;
-    height:     24px!important;
-
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
+    height:     24px!important;}
 
 .mirror {
     -ms-transform:  scaleX(-1)!important;
     transform:      scaleX(-1)!important;}
 
 #head, #body {
-    position:   absolute;
     object-fit: none;}
 
 /* TODO: CONSUMABLES & CHARACTER EQUIPMENT */

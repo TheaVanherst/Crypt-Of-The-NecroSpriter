@@ -32,13 +32,8 @@ table, panel > div { padding: 10px 0 0 0;}
 
 th {
     transition: height .5s ease-in-out;
-    display:    table-cell;
     text-align: left;
-
-    height:     auto;
     padding:    0;}
-tr {
-    display:    table-row;}
 
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
     width:      100%;
@@ -46,7 +41,6 @@ tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
     background-repeat:  repeat-x;}
 
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
-    height:     100%;
     background-image:   url("/UI_Libraries/border_Left.png");
     background-repeat:  repeat-y;}
 

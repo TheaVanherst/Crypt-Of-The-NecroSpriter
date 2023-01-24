@@ -46,6 +46,10 @@ d:only-of-type {
 
 div + div:not(.inline) { /* forces inline with other div elements */
     padding:    10px 0 0 0;}
+.inline {
+    display: inline-block;
+    white-space: nowrap;
+}
 
 ln { /* forces new line with text if contained in */
     display:    block;}
@@ -265,16 +269,12 @@ input[type=range]::-moz-range-thumb {
 /* TODO: BPM FEED */
 
 #bpmCounter {
-    padding:    0 20px 0 5px;
-    display:    inline-block;}
+    padding:    0 5px 0 5px;}
 .bpm {
     image-rendering: -moz-crisp-edges;
     image-rendering: pixelated;
-    position:   relative;
-    display:    inline-table;
     margin:     0 0 0 5px;
-    width:      48px;
-    height:     44px }
+    width:      48px;}
 .bpm:first-child {
     margin:     0}
 
