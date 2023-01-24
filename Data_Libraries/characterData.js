@@ -342,7 +342,7 @@ const
                 },
                 offset: {
                     body: 1},
-                ampMultiplier: 1,
+                ampMultiplier: 2,
                 fileUrl: "characters/Klarinetta"},
             hat: {
                 offset: {

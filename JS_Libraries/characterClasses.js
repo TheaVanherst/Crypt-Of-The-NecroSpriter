@@ -5,7 +5,6 @@ let characterRefactor = class setup {
     playerElement = document.querySelector("#playerModel");
 
     frameArray = [];
-    ampArr = [[1,2,3,4],[5,6,11,16]];
     playerFloatOffsets = [8,9,10,11,10,9];
 
     height; width; head;
@@ -292,14 +291,19 @@ let characterRefactor = class setup {
 
     ampFrameUpdate() {
         let multiplierGrab = [],
-            ampTog = this.ampTog ? 1 : 0
+            ampTog = this.ampTog ? 1 : 0,
+            ampArr = [[0,0,0,0],[1,1,2,3]],
+            ampMultiplier = merge(1, characterData[this.id]?.settings?.ampMultiplier),
+            charColumns = merge(16, characterData[this.id]?.settings?.resolution?.columns);
 
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < charColumns; i++) {
             multiplierGrab[i] = -(this.width * i) + 'px ';
         }
         for (let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[this.ampArr[ampTog][i] - 1];
+            this.frameArray[i] = multiplierGrab[i + (ampMultiplier * (4 * ampArr[ampTog][i]))];
         }
+
+        console.log(this.frameArray)
         this.animate();
     };
 }
