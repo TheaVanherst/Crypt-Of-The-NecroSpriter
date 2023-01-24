@@ -52,32 +52,40 @@ const floorRefactor = class floor {
         let a = this.floorTileSets[0].length,
             b = Math.floor(zoneArea / a),
             c = zoneArea - (b * a);
+        this.currentFloor = [`${b}`,`${c}`];
+        this.previousType = [`${b}`,`${c}`];
         this.backgroundUpdate(b, c);
 
         this.buttonToggle[this.danceType - 1].classList.add("pressed");
     };
 
     backgroundUpdate(e, i) {
+        if (e !== this.currentFloor[0] || i !== this.currentFloor[1]) {
+            let row = this.currentFloor[0],
+                col = this.currentFloor[1];
+            $("#zone" + row + col + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[row][col][0] + "_Floor.png')";
+            $("#zone" + row + col + " f p").innerText = this.floorTileSets[row][col][0];
+            console.log(this.floorTileSets[row][col][0])
+        } else {
+            arrayShift(this.floorTileSets[e][i]);
+            arrayShift(this.overlayTileSets[e][i]);
+        }
+
         this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
 
         $("#backgrounds .pressed")?.classList.remove("pressed");
         $("#backgrounds").children[e].children[i].classList.add("pressed");
 
-        if (JSON.stringify(this.previousType[1]) === JSON.stringify(this.currentFloor)) {
-            arrayShift(this.floorTileSets[e][i]);
-            arrayShift(this.overlayTileSets[e][i]);
-        }
+        this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
 
         if (this.floorTileSets[e][i][1]) {
             $("#zone" + e + i + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][1] + "_Floor.png')";
-            $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1]
+            $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1];
         }
 
-        this.previousType[1] = this.currentFloor
+        this.previousType[1] = this.currentFloor;
 
         $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
-
-        console.log(floorData)
 
         let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
         this.danceFloor.style.backgroundImage = push;
