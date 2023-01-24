@@ -148,7 +148,7 @@ const consumableRefactor = class items {
             arrayShift(this.floatOffsets);
         }
         for (let key in this.floatOffsets) {
-            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";
+            this.floatOffsets[key] = (this.floatOffsets[key] - Math.ceil(this.height / 2)) + "px";
         }
     };
 

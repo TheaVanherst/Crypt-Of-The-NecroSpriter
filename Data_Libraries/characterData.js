@@ -384,8 +384,5 @@ const
                     scaleY: -1},
                 fileUrl: "items/weapon_greatsword"
             }
-        },{
-            name: "custom",
-            dlc: 2,
         }
     ]

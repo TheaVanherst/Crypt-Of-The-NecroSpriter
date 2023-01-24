@@ -61,6 +61,7 @@ e:hover {
 #shadow {
     margin: 2px 0 0 -1px;}
 #playerModel {
+    z-index: 2;
     height:             24px!important;
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;}
@@ -82,15 +83,21 @@ e:hover {
     object-fit: none;}
 #shovel {
     left:   1px; }
+
+#consumables,
+#spell, #equipment, #item {
+    position: absolute;}
+
 #consumables {
-    top:    6px; }
+    top:    8px; }
 #spell {
     left:   22px; }
 #equipment {
-    margin:-6px 0 0 0;
+    margin:-8px 0 0 0;
     left:   7px; }
 #item {
     left:  -7px; }
+
 #special {
     position:   absolute;
     object-fit: none;
