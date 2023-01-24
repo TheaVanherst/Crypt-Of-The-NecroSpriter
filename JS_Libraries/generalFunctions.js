@@ -6,24 +6,30 @@ const
         return item;
     },
 
-    buttonAdjustment = (button, newVal, newButton) => {
-        $all(button + " e").classList?.remove('inv');
-        newButton.classList.add('inv');
-    },
-
     urlRefresh = () => {
-        let date = new Date().getTime();
         for (let key in itemArray) {
-            itemArray[key].urlUpdate(date);}
-        for (let i = 0; i < consumableData.length; i++) {
-            consumableData[i].urlUpdate(date);}
-        specialData.urlUpdate(date);
-        shieldData.urlUpdate(date);
-        currentCharacter.urlUpdate(date);
+            itemArray[key].urlUpdate();
+        }
+        for (let i = 0; i < consumableData.length - itemArray.length; i++) {
+            consumableData[i + itemArray.length].urlUpdate();
+        }
+        specialData.urlUpdate();
+        shieldData.urlUpdate();
+        currentCharacter.urlUpdate();
     },
 
-    bpmUpdate = () => {
-        let newBPM = document.getElementById("bpmSlider").value;
+    bpmUpdate = (e) => {
+        let newBPM
+        if (e?.deltaY) {
+            e.preventDefault();
+            let value = $("#bpmSlider").value;
+
+            newBPM = parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt(value)
+            $("#bpmSlider").value = newBPM;
+        } else {
+            newBPM = $("#bpmSlider").value;
+        }
+
         $('#bpm').textContent = newBPM;
 
         let trackContainer = $('#trackContainer');
@@ -33,11 +39,12 @@ const
         for (let i = 0; i < songList[step].length; i++) {
 
             let item = document.createElement('t');
-            item.textContent = songList[step][i];
+                item.textContent = songList[step][i];
             let br = document.createElement('br');
 
             trackContainer.appendChild(item).appendChild(br);
         }
+        arrayDivisional = 1000 / aniOffsets[0].length;
         bpm = 60 / newBPM;
     },
 
@@ -55,11 +62,14 @@ const
                 for (let i = 0; i < itemArray.length; i++) {
                     if(itemArray[i].name === idStrip){
                         itemArray[i].urlUpdate(url);
-                        return;}}
+                        return;}
+                }
                 for (let i = itemArray.length + 1; i < consumableData.length; i++) {
                     if(consumableData[i].name === idStrip){
                         consumableData[i].urlUpdate(url);
-                        return;}}
+                        return;}
+                }
+
                 if(idStrip === "special"){
                     specialData.urlUpdate(url);
                     return;}
@@ -73,7 +83,17 @@ const
             image.onerror = () => {
                 targetTimeout(e);
             }
-        }},
+        }
+    },
+
+    scale = (a) => {
+        let scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        $("#transform").style.transform = `scale(${scaleRes})`;
+
+        $("#scaleSlider").value = scaleRes;
+        $('#scale').textContent = "1:" + scaleRes;
+    },
+
 
     targetTimeout = (e) => {
         let placeholder = e.target.placeholder;

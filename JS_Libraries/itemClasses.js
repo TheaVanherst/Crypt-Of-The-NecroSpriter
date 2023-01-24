@@ -4,29 +4,28 @@ const
         charm: {sequence: [1, 2, 3, 2]},
         shovel: {offset:{sequence: [2, 1, 0, 1]}}};
 
-let urlArray = [];
-
 const itemRefactor = class items {
     width = 24;
     height = 24;
 
     constructor(item, character) {
         this.name = itemData[item].name;
-        this.src = itemData[item].url + ".png";
-        this.id = item;
+        this.id =   item;
 
-        urlArray[item] = [this.name, this.src]
-        this.element = $("#" + this.name);
-        this.element.src = this.src;
-        this.button = $('#' + this.name + "Button");
+        this.ogUrl =    itemData[item].url;
+        this.src =      this.ogUrl + ".png";
+
+        this.element =      $("#" + this.name);
+        this.element.src =  this.src;
+        this.button =       $('#' + this.name + "Button");
 
         if (itemData[item].bool) {
-            this.button.classList.add('inv');}
+            this.button.classList.add('pressed');}
         else {
             this.element.classList.add("invisible");}
 
         this.button.onclick = () => {
-            this.button.classList.toggle('inv');
+            this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
             this.element.src = this.src + "?" + new Date().getTime();}
 
@@ -36,9 +35,9 @@ const itemRefactor = class items {
     characterChange(character) {
         if(characterData[character][this.name]?.bool === false) {
             this.element.classList.add("invisible");
-            this.button.setAttribute("class","deact");}
+            this.button.setAttribute("class","deactivate");}
         else {
-            this.button.classList.remove("deact");}
+            this.button.classList.remove("deactivate");}
 
         if(characterData[character][this.name]?.offset?.sequence === undefined){
             this.animationSequence = merge(
@@ -82,22 +81,22 @@ const itemRefactor = class items {
     urlUpdate(url, date) {
         if (!date){
             date = new Date().getTime()}
-        let urlbar = $("#" + this.name + "Url")
+        let urlBar = $("#" + this.name + "Url")
 
         if(url !== undefined) {
-            urlArray[this.id][1] = url;
-            urlbar.placeholder = url;
-            urlbar.value = "";
+            this.ogUrl = url;
+            urlBar.placeholder = url;
+            urlBar.value = "";
 
             this.src = url + ".png";
             this.element.src = url + ".png?";}
-        else if (this.src !== undefined) {
-            this.element.src = urlArray[this.id][1] + ".png?" + date;
-            urlbar.placeholder = urlArray[this.id][1];
-            urlbar.value = "";}
+        else if (this.ogUrl !== undefined) {
+            this.element.src = this.ogUrl + ".png?" + date;
+            urlBar.placeholder = this.ogUrl;
+            urlBar.value = "";}
         else {
-            urlbar.placeholder = "No data";
-            urlbar.value = "";
+            urlBar.placeholder = "No data";
+            urlBar.value = "";
         }
     };
 };
@@ -109,23 +108,24 @@ const equipmentOffsets = [
 
 const consumableRefactor = class items {
     constructor(item) {
-        this.src = itemData[item]?.url;
         this.name = itemData[item].name;
         this.id = item;
 
+        this.ogUrl = itemData[item]?.url;
+        this.src = this.ogUrl;
+
         this.element = $("#" + this.name);
-        this.element.src = this.src;
+        this.element.src = this.src + "?" + new Date().getTime();
         this.button = $('#' + this.name + "Button");
 
-        urlArray[item] = [this.name, this.src];
         if (itemData[item].bool) {
-            this.button.classList.add('inv');}
-        else {
+            this.button.classList.add('pressed');
+        } else {
             this.element.classList.add("invisible");
         }
 
         this.button.onclick = () => {
-            this.button.classList.toggle('inv');
+            this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
             this.element.src = this.src + ".png?" + new Date().getTime();
         }
@@ -148,33 +148,31 @@ const consumableRefactor = class items {
             arrayShift(this.floatOffsets);
         }
         for (let key in this.floatOffsets) {
-            this.floatOffsets[key] = (this.floatOffsets[key] - (this.height / 2)) + "px";
+            this.floatOffsets[key] = (this.floatOffsets[key] - Math.ceil(this.height / 2)) + "px";
         }
     };
 
     urlUpdate(url, date){
         if (!date){
             date = new Date().getTime()}
-        let urlbar = $("#" + this.name + "Url")
-
+        let urlBar = $("#" + this.name + "Url")
         if(url !== undefined) {
-            urlArray[this.id][1] = url;
-            urlbar.placeholder = url;
-            urlbar.value = "";
+            this.ogUrl = url;
+            urlBar.placeholder = url;
+            urlBar.value = "";
 
             this.src = url + ".png";
-            this.element.src = this.src;}
-        else if (this.src !== undefined) {
-            this.element.src = urlArray[this.id][1] + ".png?" + date;
-            urlbar.placeholder = urlArray[this.id][1];
-            urlbar.value = "";}
-        else {
-            urlbar.placeholder = "No data";
-            urlbar.value = "";
+            this.element.src = this.src;
+        } else if (this.ogUrl !== undefined) {
+            this.element.src = this.ogUrl + ".png?" + date;
+            urlBar.placeholder = this.ogUrl;
+            urlBar.value = "";
+        } else {
+            urlBar.placeholder = "No data";
+            urlBar.value = "";
         }
 
         this.#offsetAdjustment();
-        this.src = url;
     };
 };
 
@@ -187,7 +185,7 @@ const specialRefactor = class items {
         this.button = $('#' + this.name + "Button");
 
         this.button.onclick = () => {
-            this.button.classList.toggle('inv');
+            this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
             this.urlUpdate()
             this.element.src = this.src + "?" + new Date().getTime();
@@ -202,46 +200,53 @@ const specialRefactor = class items {
 
         if(floatBool){
             let random = Math.floor(Math.random() * 3);
-            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");}
-        else {
+            this.floatOffsets = equipmentOffsets[random].map((x) => x + marginTop + "px");
+        } else {
             for (let i = 0; i < 6; i++){
-                this.floatOffsets[i] = marginTop + "px";}
+                this.floatOffsets[i] = marginTop + "px";
+            }
         }
 
-        if (!this.disabled) {
-            this.multiplier = [0,0,0,0];
-            this.verticalSequence = [0,0,0,0];
-
-            this.element.classList.add("invisible");
-            this.button.setAttribute("class","deact");}
-        else {
-            let width =                 characterData[character]?.[this.name]?.resolution?.width
+        if (this.disabled) {
+            /* general character settings */
+            let width = characterData[character]?.[this.name]?.resolution?.width;
+            this.element.style.width = width + "px";
             this.element.style.height = characterData[character]?.[this.name]?.resolution?.height + "px"
-            this.element.style.opacity =    merge(1, characterData[character]?.[this.name]?.transform?.opacity);
-            this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
-            this.element.style.zIndex =     merge(10, characterData[character]?.[this.name]?.zIndex);
-            if (characterData[character]?.[this.name]?.transform) {
-                this.element.style.transform =
-                    "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
-                             + characterData[character]?.[this.name]?.transform?.scaleX + ")";}
-            else {
-                this.element.style.transform = "none";}
-            this.element.style.width =  width + "px";
+            this.element.style.opacity = merge(1, characterData[character]?.[this.name]?.transform?.opacity);
 
-            let sequence =  merge([1,2,3,4], characterData[character]?.[this.name]?.sequence);
-            this.multiplier = [
-                -(sequence[0] - 1) * width + "px 0", -(sequence[1] - 1) * width + "px 0",
-                -(sequence[2] - 1) * width + "px 0", -(sequence[3] - 1) * width + "px 0"];
+            /* transformation data */
+            this.element.style.zIndex = merge(10, characterData[character]?.[this.name]?.zIndex);
+            this.element.style.transform = characterData[character]?.[this.name]?.transform ?
+                "scale(" + characterData[character]?.[this.name]?.transform?.scaleY + ", "
+                + characterData[character]?.[this.name]?.transform?.scaleX + ")" :
+                "none"
+
+            /* animation sequence offset sheet */
+            this.element.style.marginLeft = merge(0, characterData[character]?.[this.name]?.displacement?.left + "px");
+            let frames = merge([1,2,3,4],characterData[character]?.[this.name]?.sequence);
+            this.multiplier = [-(frames[0] - 1) * width + "px 0", -(frames[1] - 1) * width + "px 0", -(frames[2] - 1) * width + "px 0", -(frames[3] - 1) * width + "px 0"];
+            /* multiplies the width by animation sequence pattern */
+
+            /* float animation offset sheet */
             this.verticalSequence = merge([1,1,1,1],characterData[character]?.[this.name]?.displacement?.sequence).map((x) => x)
-            for (let key in this.verticalSequence){
+            for (let key in this.verticalSequence) {
                 this.verticalSequence[key] = -this.verticalSequence[key] + "px";
             }
 
             this.animate();
             this.animateFloat();
-            this.button.classList.remove("deact");}
+            this.urlUpdate();
 
-        this.urlUpdate(character);
+            this.button.classList.remove("deactivate");
+        } else {
+            this.multiplier = [0,0,0,0];
+            this.verticalSequence = [0,0,0,0];
+
+            this.element.classList.add("invisible");
+            this.button.setAttribute("class","deactivate");
+        }
+
+        this.urlUpdate();
     };
 
     animate() {
@@ -253,23 +258,23 @@ const specialRefactor = class items {
         this.element.style.marginTop = this.floatOffsets[frame];
     };
 
-    urlUpdate(character) {
-        let src = characterData[character]?.[this.name]?.fileUrl;
-        let urlbar = $("#" + this.name + "Url")
+    urlUpdate(src) {
+        if(!src){
+            src = characterData[currentCharacter.id]?.[this.name]?.fileUrl;
+        }
+        let urlBar = $("#specialUrl")
 
         if (src) {
             this.src = src + ".png?" ;
-            urlArray[8] = ["special", this.src];
 
-            urlbar.placeholder = this.src;
-            urlbar.value = "";
-            urlbar.classList.remove("deact");
-            this.element.src = this.src + new Date().getTime();}
-        else {
-            urlArray[8] = ["special",""];
-            urlbar.placeholder = "Not Applicable";
+            urlBar.placeholder = src;
+            urlBar.value = "";
+            urlBar.classList.remove("deactivate");
+            this.element.src = this.src + new Date().getTime();
+        } else {
+            urlBar.placeholder = "Not Applicable";
 
-            urlbar.classList.add("deact");
+            urlBar.classList.add("deactivate");
             this.element.removeAttribute('src');
         }
     };
@@ -286,7 +291,7 @@ const shieldRefactor = class items {
         $("#shieldUrl").placeholder = src;
         this.element.src = this.src + ".png";
 
-        $('#shieldButton').setAttribute("class", bool ? "inv" : "");
+        $('#shieldButton').setAttribute("class", bool ? "pressed" : "");
         this.element.setAttribute("class", !bool ? "invisible" : "");
 
         let positionData = ["up","down","right"];
@@ -301,33 +306,32 @@ const shieldRefactor = class items {
         if (positionData.indexOf(rotation) > 0) {
             this.currentPos = rotation;
         }
-        $("#shield" + rotation).classList.add("inv");
+        $("#shield" + rotation).classList.add("pressed");
         this.element.classList.add(rotation);
 
         this.button.onclick = () => {
-            this.button.classList.toggle('inv');
+            this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
-            $("#shield" + this.currentPos).classList.add("inv");
-            this.element.classList.remove("inv");
+            $("#shield" + this.currentPos).classList.add("pressed");
+            this.element.classList.remove("pressed");
 
             this.urlUpdate();
         };
     };
 
     positionUpdate(rotation) {
-        $("#shieldButton").classList.add("inv");
+        $("#shieldButton").classList.add("pressed");
         this.element.setAttribute("class",rotation);
 
-        $("#shield" + this.currentPos).classList.remove("inv");
+        $("#shield" + this.currentPos).classList.remove("pressed");
         this.currentPos = rotation;
-        $("#shield" + this.currentPos).classList.add("inv");
+        $("#shield" + this.currentPos).classList.add("pressed");
     };
 
     urlUpdate(){
         let src = merge($("#shieldUrl").value, this.src);
         if(src !== this.src){
             this.src = src;
-            urlArray[this.id] = ["shield",this.src];
 
             $("#shieldUrl").placeholder = this.src;
             $("#shieldUrl").value = "";

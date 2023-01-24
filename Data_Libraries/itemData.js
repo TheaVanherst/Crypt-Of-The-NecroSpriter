@@ -1,5 +1,4 @@
 
-let
     itemData = [
         {
             name : "hat",
@@ -42,9 +41,6 @@ let
             bool : false,
             url : "items/hip",
             type : "equipment"
-        },{
-            name : "special",
-            type : "special"
         },{
             name : "spell",
             bool : false,

@@ -4,71 +4,76 @@
 body {
     cursor: url('UI_Libraries/default_cursor.png'), auto;}
 input[type=text] {
-    cursor: url('UI_Libraries/text_cursor.png'), auto!important;}
+    cursor: url('UI_Libraries/text_cursor.png'),    auto!important;}
+
 .slider,
 .slider::-webkit-slider-thumb,
 .slider::-moz-range-thumb {
-    cursor: url('UI_Libraries/grab_cursor.png'), auto!important;}
+    cursor: url('UI_Libraries/grab_cursor.png'),    auto!important;}
+input[type="range" i] {
+    cursor: url('UI_Libraries/grab_cursor.png'), default !important;}
+
 e:hover {
-    cursor: url('UI_Libraries/hover_cursor.png'), auto!important;}
-
-/* TODO: URL ELEMENTS */
-
-#logo {
-    position:   absolute;
-    top:        var(--tablePadding);
-    left:       calc(var(--window1Width) + var(--window2Width) + var(--window7Width) + (var(--tablePadding) * (9 + 3)));}
+    cursor: url('UI_Libraries/hover_cursor.png'),   auto!important;}
 
 /* TODO: RENDER CSS & SCALING */
 
-#floor, #danceFloor, #foreground {
-    position:           absolute;
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
-
-#floor, #danceFloor {
-    background-repeat:      repeat;
-    object-fit:             none;
-    background-position:    top left;
-
-    left:   15px;
-    top:   -350px;
-    width:  calc(72px * 10);
-    height: calc(72px * 10); }
-#foreground {
-    width:  216px;
-    margin:-5px 0 0 183px; }
-
-/* TODO: GENERAL CHARACTER CSS */
-
-#characterUrl {
-    width: calc(var(--window3Width) - (25px));}
-
-#transform {
-    position:   relative;
-    top:        280px;
-    transform:  scale(var(--scaler));
-    margin-top: calc((var(--scaler) * 86px) * -1);}
-#playerModel {
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;}
 #playerModel,
 #playerModel > *,
 #playerModel > * > *,
 #shadow {
-    position:   absolute;}
+    position:       absolute;}
 
-#playerModel {
-    left:   278.5px;
-    top:    74px;
-    width:  24px;
-    height: 30px; }
+#transform {
+    top:    50%;
+    left:   50%;
+    margin: 0 0 0 -1px;
+    position:   relative;}
+
+#playerModel,
+#shadow,
+#transform {
+    width:              24px;
+    height:             24px!important;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
+
+#floor,
+#danceFloor,
+#foreground {
+    top:    50%;
+    left:   50%;
+    -ms-transform:  translate(-50%, -50%);
+    transform:      translate(-50%, -50%);
+
+    width:  216px;
+    height: 168px;
+
+    position:           absolute;
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
+#floor,
+#danceFloor {
+    margin: 7px 0 0 0;
+
+    background-repeat:      repeat;
+    object-fit:             none;
+    background-position:    top left;}
+#foreground {
+    margin: -8px 0 0 0;}
+
 #shadow {
-    left:   278px;
-    top:    73px;
-    width:  24px;
-    height: 27px; }
+    margin: 2px 0 0 -1px;}
+#playerModel {
+    z-index:    2;
+    height:     24px!important;
 
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;}
+
+.mirror {
+    -ms-transform:  scaleX(-1)!important;
+    transform:      scaleX(-1)!important;}
 
 #head, #body {
     position:   absolute;
@@ -76,28 +81,28 @@ e:hover {
 
 /* TODO: CONSUMABLES & CHARACTER EQUIPMENT */
 
-#hat,
-#boots,
-#ring,
-#weapon,
-#torch,
-#charm,
-#hip,
-#shovel {
+#hat,#weapon,#ring, #boots,
+#torch, #charm, #hip, #shovel {
     width:      24px;
     height:     24px;
-    object-fit: none}
+    object-fit: none;}
 #shovel {
     left:   1px; }
+
+#consumables,
+#spell, #equipment, #item {
+    position: absolute;}
+
 #consumables {
-    top:    6px; }
+    top:    8px; }
 #spell {
     left:   22px; }
 #equipment {
-    margin:-6px 0 0 0;
+    margin:-8px 0 0 0;
     left:   7px; }
 #item {
     left:  -7px; }
+
 #special {
     position:   absolute;
     object-fit: none;
@@ -125,12 +130,9 @@ e:hover {
     z-index:            20;
     object-position:   -24px 0;}
 
-/* TODO: TOGGLEABLE */
-
-.flip {
-    transform:          scaleX(-1);}
-.mirror {
-    transform:          scaleX(-1);
-    translate:          0.5px 0;}
-.invisible {
-    display:            none !important}
+@keyframes bounce {
+    0%,30%, 100% {transform: translateY(0);}
+    5% {transform: translateY(-10px);}
+    15% {transform: translateY(-13px);}
+    25% {transform: translateY(-10px);}
+}

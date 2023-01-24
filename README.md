@@ -20,9 +20,12 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
   - Custom URL injector for individual characters
-  - Character preview can also be flipped to change the character direction.
-* Dynamic clothing selection, based on the character selected.
+  - Character preview can be flipped to change the character direction.
   - 'Amplification mode' toggle and preview from the Amplified DLC.
+    * Character amplification toggling per character dependent on availability.
+* Dynamic clothing selection, based on the character selected.
+  - Each character will have different sets of clothing available to them based on how many types of clothing said character has available.
+  - Unique clothing functions for specific characters. Eg. Nocturna & her bat mode.
 - Equipment animation preview with character specific offsets & settings.
   - Helmet, Weapon, Wrist, Charm, Hip and Boot equipables.
   - Special and Shield toggles equipables.
@@ -30,10 +33,11 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
   - Equipment slots such as Food, Torch and Shovel.
   - Designated URL assignment to individual item types. Via. `directory/image`
     - URL Validation on address entry & error notification.
-  - Items disable / enable depending on if the respective character can equip
+  - Items disable / enable depending on if the respective character can equip.
+    * Toggling between characters displays an animation to notify the differences between characters clearly.
 - Background image selection and toggle with the character preview.
   - 8 different floor types, including a dance floor mode and a multiplier mode.
-* Foreground render preview, to show a closer resemblance to how sprites are rendered ingame.
+* Foreground render preview, to show a closer resemblance to how sprites are rendered in-game.
   - 10 total foregrounds included by default with additional expandability, each of which depend on the floor type you select.
 * Individual frame selecting, alongside render previewing based on BPM.
   - Render speed slider based on beats per minute, based on tracks featured in that game.

@@ -1,61 +1,49 @@
 
-let currentCharacter, floorData;
+let currentCharacter, floorData; //don't touch
 let itemArray = [], consumableData = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
-    let defaultCharacter = 11; // This will initate as the default character.
-    currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
+    let startCharacter = 0; // This will initiate as the default character [0-17].
+    currentCharacter = new characterRefactor(false, 4, startCharacter); //AMP mode / clothing set / def char
 
-    $("render").style.backgroundColor = "darkslategray"; //background colour.
+    $("#crop").style.backgroundColor = "darkslategray"; //background colour.
     floorData = new floorRefactor(0,1, true, true);
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
-    $("#bpmSlider").oninput = () => bpmUpdate();
     document.getElementById("bpmSlider").value = 130; //start-up bpm
     bpmUpdate();
+    document.getElementById("scaleSlider").value = 4; //start-up scale
+    scale(4);
 
-    if (playTog) {
-        $("#play").classList.add('inv');}
-
-    scaleRes = 4; // default scale multiplier
-    $('#scale').textContent = "1:" + scaleRes;
-
-
-    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
-            itemArray[key] = new itemRefactor(key, defaultCharacter);}
-        else if (itemData[key].type === "consumable") {
-            consumableData[key] = new consumableRefactor(key);}
-        else if (itemData[key].type === "shield") {
+            itemArray[key] = new itemRefactor(key, startCharacter);
+        } else if (itemData[key].type === "consumable") {
+            consumableData[key] = new consumableRefactor(key);
+        } else if (itemData[key].type === "shield") {
             shieldData = new shieldRefactor(key, "right", false);}
-        else if (itemData[key].type === "special") {
-            specialData = new specialRefactor(defaultCharacter);
-        }
 
-        let urlbar = $(`#${itemData[key].name}Url`)
+        let urlBar = $(`#${itemData[key].name}Url`)
+
         if(itemData[key]?.url){
             let urlCheck = new Image()
             urlCheck.src = itemData[key].url + ".png";
             urlCheck.onerror = () => {
-                urlbar.classList.add("invalid");
-                urlbar.value = "";
-                urlbar.placeholder = "Invalid itemsData.js URL";
+                urlBar.classList.add("invalid");
+                urlBar.value = "";
+                urlBar.placeholder = "Invalid itemsData.js URL";
                 setTimeout(() => {
                     $(`#${itemData[key].name}Url`).classList.remove("invalid");
                 }, 2000);
             };
         } else {
-            urlbar.placeholder = "No itemsData.js URL";
+            urlBar.placeholder = "No itemsData.js URL";
         }
-
     }
-    delete itemData;
+    specialData = new specialRefactor(startCharacter);
 
-    $("#barDebug").textContent = floatInt;
-    $("#beatDebug").textContent = frame;
-    $("#elapsedDebug").textContent = elapsed;
+    delete itemData;
 
     document.removeEventListener('DOMContentLoaded', () => {});
 }, false);
@@ -80,3 +68,20 @@ const songList = [
     ["N/a"], //180
     ["N/a"], //185
     ["N/a"]]; //190
+
+// General scripts that are required to be bound & assigned on startup.
+// don't touch these please.
+document.addEventListener('DOMContentLoaded', () => {
+    $("#bpmSlider").oninput = (e) => bpmUpdate(e);
+    $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
+    $("#scaleSlider").oninput = (e) => scale(e);
+
+    $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
+    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
+
+    $("#barDebug").textContent = floatInt;
+    $("#beatDebug").textContent = frame;
+    $("#elapsedDebug").textContent = elapsed;
+
+    document.removeEventListener('DOMContentLoaded', () => {});
+}, false);

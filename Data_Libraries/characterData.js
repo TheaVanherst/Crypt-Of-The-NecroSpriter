@@ -6,10 +6,10 @@ const
             3,3,3,3,3,3,3,3,3,
             4,4,4,4,4,4,
         ],[
-            1,1,1,1,1,1,
-            2,2,2,2,2,2,
-            3,3,3,3,3,3,
-            4,4,4,4,4,4,4,
+            1,
+            2,
+            3,
+            4,
         ]
     ];
 
@@ -142,7 +142,14 @@ const
                 sequence: [3, 2, 1, 2]},
             shovel: {
                 offset: {
-                    top: 4, left: 4}}
+                    top: 4, left: 4}},
+            torch: {
+                offset: {
+                    top: 5, left: 2}},
+            hip: {
+                offset: {
+                    top: 2, left: 4},
+                sequence: [4, 1, 2, 3]}
         },{
             name: "Bolt",
             dlc: 0,
@@ -335,7 +342,7 @@ const
                 },
                 offset: {
                     body: 1},
-                ampMultiplier: 1,
+                ampMultiplier: 2,
                 fileUrl: "characters/Klarinetta"},
             hat: {
                 offset: {
@@ -377,8 +384,5 @@ const
                     scaleY: -1},
                 fileUrl: "items/weapon_greatsword"
             }
-        },{
-            name: "custom",
-            dlc: 2,
         }
     ]
