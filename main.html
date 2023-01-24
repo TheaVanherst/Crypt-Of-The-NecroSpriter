@@ -23,27 +23,27 @@
                                 <div id="transform">
                                     <div class="inline" id="floor"></div>
                                     <div class="inline" id="danceFloor"></div>
-                                    <img id="shadow" src="UI_Libraries/shadow.png">
-                                    <img id="foreground">
+                                    <img id="shadow" alt="shadow" src="UI_Libraries/shadow.png">
+                                    <img id="foreground" alt="foreground" src="">
                                     <div id="playerModel">
-                                        <img id="special">
-                                        <img id="shield" class="invisible">
+                                        <img id="special" alt="Special" src="">
+                                        <img id="shield" alt="shield" src="" class="invisible">
 
                                         <div id="consumables">
-                                            <img id="item">
-                                            <img id="equipment">
-                                            <img id="spell"></div>
+                                            <img id="item" alt="item" src="">
+                                            <img id="equipment" alt="equipment" src="">
+                                            <img id="spell" alt="spell" src=""></div>
 
-                                        <img id="shovel">
-                                        <img id="body">
-                                        <img id="charm">
-                                        <img id="hip">
-                                        <img id="head">
-                                        <img id="hat">
-                                        <img id="boots">
-                                        <img id="weapon">
-                                        <img id="torch">
-                                        <img id="ring">
+                                        <img id="shovel" alt="shovel" src="">
+                                        <img id="body" alt="body" src="">
+                                        <img id="charm" alt="charm" src="">
+                                        <img id="hip" alt="hip" src="">
+                                        <img id="head" alt="head" src="">
+                                        <img id="hat" alt="hat" src="">
+                                        <img id="boots" alt="boots" src="">
+                                        <img id="weapon" alt="weapon" src="">
+                                        <img id="torch" alt="torch" src="">
+                                        <img id="ring" alt="ring" src="">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                         <e id="mirror" onclick="currentCharacter.flip(true);"> Mirror </e>
 
                                         <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
-                                            <img id="refresh" src="UI_Libraries/refresh_Arrow.png"></e>
+                                            <img id="refresh" src="UI_Libraries/refresh_Arrow.png" alt="refresh"></e>
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +83,12 @@
                     <th>
                         <div>
                             <div id="bpmCounter">
-                                <img class="bpm" src="UI_Libraries/heart.png">
-                                <img class="bpm" src="UI_Libraries/heart.png">
-                                <img class="bpm" src="UI_Libraries/heart.png">
-                                <img class="bpm" src="UI_Libraries/heart.png">
-                                <img class="bpm" src="UI_Libraries/heart.png">
-                                <img class="bpm" src="UI_Libraries/heart.png">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat1">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat2">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat3">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat4">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat5">
+                                <img class="bpm" src="UI_Libraries/heart.png" alt="Beat6">
                             </div>
                             <div class="inline" id="debug">
                                 <ln>Beat: <l id="beatDebug"></l> Bar: <l id="barDebug"></l> Frm: <l id="elapsedDebug"></l></ln>
@@ -213,7 +213,7 @@
                     <th>
                         <div>
                             <div id="logo">
-                                <img src="UI_Libraries/logo_small.png">
+                                <img src="UI_Libraries/logo_small.png" alt="Crypt of the Necrospriter">
                             </div>
                             <div>
                                 <div>
@@ -278,7 +278,6 @@
 
     <script>
         const // ignore this, it's general purpose shortcuts to save time addressing items.
-            $doc = document.documentElement,
             $ = document.querySelector.bind(document),
             $all = document.querySelectorAll.bind(document);
     </script>

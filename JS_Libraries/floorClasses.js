@@ -60,12 +60,14 @@ const floorRefactor = class floor {
     };
 
     backgroundUpdate(e, i) {
-        if (e !== this.currentFloor[0] || i !== this.currentFloor[1]) {
+        if (e !== this.currentFloor[0] || i !== this.currentFloor[1]) { //checks if new floor is different to previous
             let row = this.currentFloor[0],
                 col = this.currentFloor[1];
-            $("#zone" + row + col + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[row][col][0] + "_Floor.png')";
-            $("#zone" + row + col + " f p").innerText = this.floorTileSets[row][col][0];
-            console.log(this.floorTileSets[row][col][0])
+
+            if($("#zone" + row + col + " f")) { //checks if embedded f element exists (if toggleable)
+                $("#zone" + row + col + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[row][col][0] + "_Floor.png')";
+                $("#zone" + row + col + " f p").innerText = this.floorTileSets[row][col][0];
+            }
         } else {
             arrayShift(this.floorTileSets[e][i]);
             arrayShift(this.overlayTileSets[e][i]);
@@ -78,19 +80,18 @@ const floorRefactor = class floor {
 
         this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
 
-        if (this.floorTileSets[e][i][1]) {
-            $("#zone" + e + i + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][1] + "_Floor.png')";
-            $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1];
+        if (e === this.currentFloor[0] || i === this.currentFloor[1]) { //checks if current floor is same as previous to save unneeded url updates
+            if (this.floorTileSets[e][i][1]) {  //checks if embedded f element exists (if toggleable)
+                $("#zone" + e + i + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][1] + "_Floor.png')";
+                $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1];
+            }
         }
 
         this.previousType[1] = this.currentFloor;
 
         $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
-
-        let push = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')"
-        this.danceFloor.style.backgroundImage = push;
-        this.floors.style.backgroundImage = push;
-        $("#zone" + e + i).style.backgroundImage = push;
+        this.floors.style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
+        $("#zone" + e + i).style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
         $("#zone" + e + i + " > p").innerText = this.floorTileSets[e][i][0];
 
         this.danceUpdate();

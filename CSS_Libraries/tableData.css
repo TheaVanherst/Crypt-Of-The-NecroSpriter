@@ -9,9 +9,6 @@
     text-align:     center;
     display:        flex;}
 
-div + div:not(.inline) {
-    padding:    10px 0 0 0;}
-
 body {
     font-size:  0;}
 panel {
@@ -70,7 +67,7 @@ tbody > tr:first-of-type > th:last-of-type  {   transform: rotate(90deg ); margi
 tbody > tr:last-of-type  > th:first-of-type {   transform: rotate(270deg); margin: -3px -3px 0 0;}
 tbody > tr:last-of-type  > th:last-of-type  {   transform: rotate(180deg); margin: -3px 0 0 -3px;}
 
-tbody > tr > th > div {
+tbody > tr > th > div { /* internal table container */
     margin:         -4px;
     width:          initial;
     font-weight:    normal;
@@ -78,13 +75,15 @@ tbody > tr > th > div {
     position:       relative;
     z-index:        100000;}
 
-.innerTable {
+.innerTable { /* light border to seperate internal tables */
     color:      #fff;
     background: #000;
     border:     solid 2px #696969FF;
 
     padding:    8px 10px 10px 10px;
     display:    block;}
+
+/* unique table types */
 
 #crop {
     image-rendering:    -moz-crisp-edges;
