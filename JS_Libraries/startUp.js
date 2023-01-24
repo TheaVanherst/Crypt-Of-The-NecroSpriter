@@ -3,8 +3,8 @@ let currentCharacter, floorData; //don't touch
 let itemArray = [], consumableData = [], specialData, shieldData; //don't touch
 
 document.addEventListener('DOMContentLoaded', () => {
-    let defaultCharacter = 0; // This will initiate as the default character [0-17].
-    currentCharacter = new characterRefactor(false, 4, defaultCharacter); //AMP mode / clothing set / def char
+    let startCharacter = 0; // This will initiate as the default character [0-17].
+    currentCharacter = new characterRefactor(false, 4, startCharacter); //AMP mode / clothing set / def char
 
     $("#crop").style.backgroundColor = "darkslategray"; //background colour.
     floorData = new floorRefactor(0,1, true, true);
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
-            itemArray[key] = new itemRefactor(key, defaultCharacter);
+            itemArray[key] = new itemRefactor(key, startCharacter);
         } else if (itemData[key].type === "consumable") {
             consumableData[key] = new consumableRefactor(key);
         } else if (itemData[key].type === "shield") {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             urlBar.placeholder = "No itemsData.js URL";
         }
     }
-    specialData = new specialRefactor(defaultCharacter);
+    specialData = new specialRefactor(startCharacter);
 
     delete itemData;
 
@@ -68,9 +68,12 @@ const songList = [
     ["N/a"], //185
     ["N/a"]]; //190
 
+
+// General scripts that are required to be bound & assigned on startup.
+// don't touch these please.
 document.addEventListener('DOMContentLoaded', () => {
     $("#bpmSlider").oninput = () => bpmUpdate();
-    $("#scaleSlider").oninput = (e) => scale(e.target.value); //don't touch
+    $("#scaleSlider").oninput = (e) => scale(e.target.value);
 
     $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});

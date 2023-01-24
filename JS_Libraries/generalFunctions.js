@@ -6,11 +6,6 @@ const
         return item;
     },
 
-    buttonAdjustment = (button, newVal, newButton) => {
-        $all(button + " e").classList?.remove('pressed');
-        newButton.classList.add('pressed');
-    },
-
     urlRefresh = () => {
         for (let key in itemArray) {
             itemArray[key].urlUpdate();
@@ -81,8 +76,8 @@ const
     },
 
     scale = (a) => {
-        scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
-        $doc.style.setProperty('--scaler',scaleRes);
+        let scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        $("#transform").style.transform = `scale(${scaleRes})`;
 
         $("#scaleSlider").value = scaleRes;
         $('#scale').textContent = "1:" + scaleRes;

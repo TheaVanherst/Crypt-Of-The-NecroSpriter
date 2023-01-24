@@ -7,8 +7,7 @@ let start = new Date().getTime(),
     floatInt = 0,
     arrayDivisional,
 
-    playTog = false,
-    scaleRes;
+    playTog = false;
 
 const heartBeat = $("#bpmCounter").children;
 
@@ -65,7 +64,8 @@ const
     scrollWheel = (e) => {
         if (e.deltaY) {
             e.preventDefault();
-            scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(scaleRes));
+            let value = $("#scaleSlider").value
+            scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(value));
         }
     };
 

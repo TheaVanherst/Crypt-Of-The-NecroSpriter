@@ -227,9 +227,9 @@ let characterRefactor = class setup {
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            $('#clothing' + this.clothingSet).classList.toggle('pressed');
+            $('#clothing0').classList.toggle('pressed');
         } else {
-            buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
+            $(`#clothing${this.clothingSet}`).classList.add('pressed');
         }
     };
 
@@ -260,7 +260,10 @@ let characterRefactor = class setup {
     };
 
     urlUpdate(url) {
-        url = merge(this.characterUrlArray[this.id]?.[1], url, characterData[this.id]?.settings?.fileUrl);
+        if (!url){
+            url = merge(this.characterUrlArray[this.id]?.[1], characterData[this.id]?.settings?.fileUrl);
+        }
+
         let srcLink = (this.dlc !== 2 ? ["_heads", "_armor_body"] : ["_head", "_body"])
             .map(i => i + ".png?" + new Date().getTime());
         this.characterUrlArray[this.id] = [characterData[this.id].name,url];
