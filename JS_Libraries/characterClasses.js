@@ -86,7 +86,7 @@ let characterRefactor = class setup {
         });
 
         this.clothingSet =  clothing;
-        this.ampBool =      amp;
+        this.ampTog =       amp;
         this.flipped =      false;
 
         this.update(character);
@@ -109,6 +109,9 @@ let characterRefactor = class setup {
             this.#floatDisable(character);
         }
 
+        this.amp =  merge(true, characterData[character]?.settings?.amp);
+        this.ampToggle();
+
         this.headElement.style.height = this.height + "px";
         this.bodyElement.style.height = this.height + "px";
         this.headElement.style.width = this.width + "px";
@@ -116,8 +119,6 @@ let characterRefactor = class setup {
 
         $("#consumables").style.margin = `${Math.ceil((24 - this.height) / 2) - 5}px 0 0 ${Math.ceil(-(24 - this.width) / 2)}px`;
         $("#shield").style.left = Math.floor(-(24 - (this.width)) / 2) + "px";
-
-        this.ampFrameUpdate();
 
         this.#clothingChecks(character);
         this.clothingMulti = -this.height * this.clothingSet + 'px ';
@@ -177,20 +178,20 @@ let characterRefactor = class setup {
 
     flipped = false;
 
-    flip() {
+    flip(bool) {
+        if (bool) {
+            this.flipped ^= true;
+        }
+
         if(!this.flipped){
+            $("#mirror").classList.remove("pressed")
             this.playerElement.setAttribute("class", "");
-            this.playerElement.style.translate = "0 0";}
-        else {
+            this.playerElement.style.translate = "0 0";
+        } else {
+            $("#mirror").classList.add("pressed")
             this.playerElement.setAttribute("class", "mirror");
             this.playerElement.style.translate = -(Math.floor(24 - this.width)) + "px 0";
         }
-    };
-
-    flipToggle(e) {
-        e.classList.toggle("pressed")
-        this.flipped = !this.flipped;
-        this.flip();
     };
 
     frameType() {
@@ -202,8 +203,8 @@ let characterRefactor = class setup {
     #bodyOffsets(character) {
         if (characterData[character].settings?.head === false) {
             this.head = false;
-            this.headElement.classList.add("invisible");}
-        else {
+            this.headElement.classList.add("invisible");
+        } else {
             this.head = true;
             let headOffset = -(merge(0, characterData[character]?.settings?.offset?.head));
             this.headElement.style.top = headOffset + "px";
@@ -217,17 +218,17 @@ let characterRefactor = class setup {
         let rows = merge(14, characterData[character]?.settings?.resolution?.rows);
         for (let i = 0; i < this.clothingData[0]; i++) {
             if(i < rows){
-                $('#clothing' + i).classList.remove("deactivate")
+                $('#clothing' + i).classList.remove("deactivate");
             } else {
-                $('#clothing' + i).classList.remove("pressed")
-                $('#clothing' + i).classList.add("deactivate")
+                $('#clothing' + i).classList.remove("pressed");
+                $('#clothing' + i).classList.add("deactivate");
             }
         }
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            $('#clothing' + this.clothingSet).classList.toggle('pressed');}
-        else {
+            $('#clothing' + this.clothingSet).classList.toggle('pressed');
+        } else {
             buttonAdjustment("#clothing",this.clothingSet, $('#clothing' + this.clothingSet));
         }
     };
@@ -240,10 +241,10 @@ let characterRefactor = class setup {
         $('#clothing' + this.clothingSet).classList.toggle('pressed');
 
 
-        if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1){
+        if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1) {
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;
-            this.headElement.classList.add("invisible");}
-        else {
+            this.headElement.classList.add("invisible");
+        } else {
             this.#floatDisable(this.id);
             this.headElement.classList.remove("invisible");
         }
@@ -273,23 +274,29 @@ let characterRefactor = class setup {
     };
 
     ampToggle(bool) {
-        if (bool) {
-            this.ampBool = false;
+        if (!this.amp) {
+            this.ampTog = false;
             $("#amplifiedButton").setAttribute('class', "deactivate");
         } else {
-            $("#amplifiedButton").classList.toggle('pressed', this.ampBool ^= true);
+            if(bool){
+                this.ampTog ^= true;
+            }
+            $("#amplifiedButton").classList.remove('deactivate');
+            $("#amplifiedButton").classList.toggle('pressed', this.ampTog);
         }
         this.ampFrameUpdate();
     };
 
     ampFrameUpdate() {
-        let multiplierGrab = [];
+        let multiplierGrab = [],
+            ampTog = this.ampTog ? 1 : 0
+
         for (let i = 0; i < 16; i++) {
             multiplierGrab[i] = -(this.width * i) + 'px ';
         }
         for (let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[this.ampArr[this.ampBool ? 1 : 0][i] - 1];
+            this.frameArray[i] = multiplierGrab[this.ampArr[ampTog][i] - 1];
         }
-        this.animate(frame);
+        this.animate();
     };
 }
