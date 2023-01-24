@@ -1,7 +1,5 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
-:root{
-   --scaler : 4;}
 
 /* TODO: WINDOW SIZE SETTINGS */
 
@@ -16,11 +14,19 @@ body {
     letter-spacing: -2px;
     font-size:      14px;}
 
+/* TODO: General streamline formatting */
+
+img {
+    font-size: 11px!important;}
+
 p {
     padding:    0;
     margin:     0;
     display:    inline-block;}
-l {
+
+/* TODO: UNIQUE ATTRIBUTE ASSIGNING */
+
+l { /* forces max width for debug elements */
     display:    inline-block;
     position:   relative;
     overflow:   visible;
@@ -35,10 +41,14 @@ d:first-of-type {
 d:only-of-type {
     margin:     0 0 5px 0;}
 
-ln {
-    display:    block;}
 
-/* applicable classes */
+/* TODO: General styling fixes */
+
+div + div:not(.inline) { /* forces inline with other div elements */
+    padding:    10px 0 0 0;}
+
+ln { /* forces new line with text if contained in */
+    display:    block;}
 
 .rightFloat {
     float:      right}
@@ -58,7 +68,7 @@ e {
 e:hover {
     color:      #000;
     border:     solid 2px #000;
-    background: #696969FF;}
+    background: #c4c4c4;}
 e:active {
     color:      #fff;
     background: #696969FF;}
@@ -134,10 +144,8 @@ input[type=text] {
     padding:    3px 10px 5px 10px;
     display:    inline-block;
 
-    width:      max-content;
-    min-width:  -moz-available;
-    width:      fill-available;
     width:      var(--textBoxWidth);
+    min-width:  -moz-available;
     min-width:  -webkit-fill-available;
 
     color:      #fff;
@@ -150,10 +158,17 @@ input[type=text] {
 input[type=text]:focus {
     outline-style:  none;
     box-shadow:     none;
-    border-style:   double;
 
     background:     #fff;
     color:          #000;}
+
+input[type=text]:active {
+    outline-style:  none;
+    box-shadow:     none;
+
+    color:      #fff;
+    background: #696969FF;}
+
 input[type=text].invalid {
     color:          white;
     background:     darkred;}
@@ -193,21 +208,35 @@ input[type=range]{
     display:    flex;}
 
 #backgrounds e {
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;
+    background-size:    cover;
+    overflow:           hidden;
+
     padding:    0;
     width:      33%;
     height:     46px !important;}
 
-#backgrounds e p {
-    padding:    0 7px 2px 5px}
+#backgrounds e f {
+    display:    none;
+    position:   absolute;
 
+    height:     inherit;
+    width:      calc(33% - 10px);
+
+    background-size:    cover;}
+#backgrounds e:hover f {
+    display:    block;}
+
+#backgrounds e p {
+    padding: 0 7px 2px 5px}
 #backgrounds e.pressed p {
-    background: #fff;}
+    background-color: #fff;}
 
 #backgrounds e:hover {
-    background: #696969FF;}
+    background-color: #696969FF;}
 #backgrounds e:hover p {
-    background: #696969FF;}
-
+    background-color: #696969FF;}
 #backgrounds e:active p {
     color:      #fff;
     background: #696969FF;}
