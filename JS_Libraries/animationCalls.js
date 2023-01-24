@@ -9,8 +9,6 @@ let start = new Date().getTime(),
 
     playTog = false;
 
-const heartBeat = $("#bpmCounter").children;
-
 window.setInterval(() => {
     if (playTog) {
         frame = aniOffsets[0][elapsed];
@@ -29,8 +27,7 @@ const
         }
         specialData.animateFloat(floatInt);
 
-
-        heartBeat[floatInt].classList.add("beat");
+        $("#bpmCounter").children[floatInt].classList.add("beat");
         $("#barDebug").textContent = floatInt;
     },
 

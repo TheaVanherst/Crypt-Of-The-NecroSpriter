@@ -7,10 +7,7 @@ const
             4,4,4,4,4,4,
         ],[
             1, 2, 3, 4,
-        ]
-    ];
-
-const
+        ]],
     characterData = [
         {
             name: "Cadence",

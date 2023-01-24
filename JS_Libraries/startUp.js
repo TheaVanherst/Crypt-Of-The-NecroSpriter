@@ -3,6 +3,7 @@ let currentCharacter, floorData; //don't touch
 let itemArray = [], consumableData = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
+
     let startCharacter = 0; // This will initiate as the default character [0-17].
     currentCharacter = new characterRefactor(false, 4, startCharacter); //AMP mode / clothing set / def char
 
@@ -11,10 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 
-    document.getElementById("bpmSlider").value = 130; //start-up bpm
-    bpmUpdate();
-    document.getElementById("scaleSlider").value = 4; //start-up scale
-    scale(4);
+    $("#bpmSlider").value = 130; //start-up bpm
+    $("#scaleSlider").value = 4; //start-up scale
+
+    let shieldSettings = ["right", false]
+    //direction of shield [up, right, down] / visibility [true or false]
+
+    specialData = new specialRefactor(startCharacter);
 
     for (let key in itemData) {
         if (itemData[key].type === "equipment") {
@@ -22,28 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (itemData[key].type === "consumable") {
             consumableData[key] = new consumableRefactor(key);
         } else if (itemData[key].type === "shield") {
-            shieldData = new shieldRefactor(key, "right", false);}
-
-        let urlBar = $(`#${itemData[key].name}Url`)
-
-        if(itemData[key]?.url){
-            let urlCheck = new Image()
-            urlCheck.src = itemData[key].url + ".png";
-            urlCheck.onerror = () => {
-                urlBar.classList.add("invalid");
-                urlBar.value = "";
-                urlBar.placeholder = "Invalid itemsData.js URL";
-                setTimeout(() => {
-                    $(`#${itemData[key].name}Url`).classList.remove("invalid");
-                }, 2000);
-            };
-        } else {
-            urlBar.placeholder = "No itemsData.js URL";
+            shieldData = new shieldRefactor(key, shieldSettings[0], shieldSettings[1]);
         }
     }
-    specialData = new specialRefactor(startCharacter);
-
-    delete itemData;
 
     document.removeEventListener('DOMContentLoaded', () => {});
 }, false);
@@ -70,8 +55,33 @@ const songList = [
     ["N/a"]]; //190
 
 // General scripts that are required to be bound & assigned on startup.
-// don't touch these please.
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    bpmUpdate();
+    scale();
+
+    for (let key in itemData) {
+        let urlBar = $(`#${itemData[key].name}Url`)
+
+        if(itemData[key]?.url){
+            let urlCheck = new Image()
+            urlCheck.src = itemData[key].url + ".png";
+            urlCheck.onerror = () => {
+                urlBar.classList.add("invalid");
+                urlBar.value = "";
+                urlBar.placeholder = "Invalid itemsData.js URL";
+                setTimeout(() => {
+                    $(`#${itemData[key].name}Url`).classList.remove("invalid");
+                }, 2000);
+            };
+        } else {
+            urlBar.placeholder = "No itemsData.js URL";
+        }
+    }
+
+    delete itemData;
+
     $("#bpmSlider").oninput = (e) => bpmUpdate(e);
     $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
     $("#scaleSlider").oninput = (e) => scale(e);

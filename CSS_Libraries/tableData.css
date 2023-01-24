@@ -1,13 +1,12 @@
 
+/* TODO: incompatibility fallback widths */
+
 :root{
     --textBoxWidth:     152px;
     --debugBoxWidth:    260px;
 }
 
-#logo {
-    justify-content: center;
-    text-align:     center;
-    display:        flex;}
+/* TODO: General refactoring */
 
 body {
     font-size:  0;}
@@ -28,6 +27,8 @@ table {
     max-width:  inherit;}
 
 table, panel > div { padding: 10px 0 0 0;}
+
+/* TODO: Table Visuals */
 
 th {
     transition: height .5s ease-in-out;
@@ -67,7 +68,7 @@ tbody > tr:first-of-type > th:last-of-type  {   transform: rotate(90deg ); margi
 tbody > tr:last-of-type  > th:first-of-type {   transform: rotate(270deg); margin: -3px -3px 0 0;}
 tbody > tr:last-of-type  > th:last-of-type  {   transform: rotate(180deg); margin: -3px 0 0 -3px;}
 
-tbody > tr > th > div { /* internal table container */
+tbody > tr > th > div {
     margin:         -4px;
     width:          initial;
     font-weight:    normal;
@@ -75,7 +76,7 @@ tbody > tr > th > div { /* internal table container */
     position:       relative;
     z-index:        100000;}
 
-.innerTable { /* light border to seperate internal tables */
+.innerTable {
     color:      #fff;
     background: #000;
     border:     solid 2px #696969FF;
@@ -83,7 +84,12 @@ tbody > tr > th > div { /* internal table container */
     padding:    8px 10px 10px 10px;
     display:    block;}
 
-/* unique table types */
+/* TODO: unique table types */
+
+#logo {
+    justify-content: center;
+    text-align:     center;
+    display:        flex;}
 
 #crop {
     image-rendering:    -moz-crisp-edges;

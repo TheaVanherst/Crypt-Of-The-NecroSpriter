@@ -25,6 +25,8 @@ const
             let value = $("#bpmSlider").value;
 
             newBPM = parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt(value)
+            newBPM = newBPM > 190 ? 190 : newBPM < 100 ? 100 : newBPM;
+
             $("#bpmSlider").value = newBPM;
         } else {
             newBPM = $("#bpmSlider").value;
@@ -56,7 +58,7 @@ const
                 idStrip = (e.target.id).replace("Url","");
 
             image.src = url + ".png";
-            // console.log(`RETURN URL: ${idStrip}`);
+            console.log(`RETURN URL: ${idStrip}`);
 
             image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {
@@ -87,7 +89,13 @@ const
     },
 
     scale = (a) => {
-        let scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        let scaleRes
+        if(!a){
+            scaleRes = $("#scaleSlider").value;
+        } else {
+            scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        }
+
         $("#transform").style.transform = `scale(${scaleRes})`;
 
         $("#scaleSlider").value = scaleRes;
