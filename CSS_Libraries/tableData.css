@@ -94,6 +94,8 @@ tbody > tr > th > div { /* internal table container */
     width:      calc(100% - 4px);
     border:     2px solid rgba(255,255,255,0.5);}
 
+#trackContainer {
+    height:     90px;}
 #charDebug {
     word-wrap:  break-word;
     width:      var(--debugBoxWidth);

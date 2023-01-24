@@ -53,7 +53,6 @@
                                     <div class="flex">
                                         <e id="danceButton"      onclick="floorData.danceSwitcher(1);       "> Dance Floor </e>
                                         <e id="multiplierButton" onclick="floorData.danceSwitcher(2);       "> Multiplier  </e>
-                                        <e id="amplifiedButton"  onclick="currentCharacter.ampToggle(true); "> AMPLIFIED   </e>
                                         <e id="backgroundButton" onclick="floorData.floorToggle();          "> background  </e>
                                         <e id="foregroundButton" onclick="floorData.foregroundToggle();     "> Foreground  </e>
                                     </div>
@@ -62,6 +61,7 @@
                                         <e onclick="playToggle(true)" id="playTog"> Play </e>
                                         <e onclick="playToggle(false); elapsed++;"> Next </e>
                                         <e id="mirror" onclick="currentCharacter.flip(true);"> Mirror </e>
+                                        <e id="amplifiedButton"  onclick="currentCharacter.ampToggle(true); "> AMPLIFIED </e>
 
                                         <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
                                             <img id="refresh" src="UI_Libraries/refresh_Arrow.png" alt="refresh"></e>
@@ -92,7 +92,7 @@
                             <div class="inline" id="debug">
                                 <ln>Beat: <l id="beatDebug"></l> Bar: <l id="barDebug"></l> Frm: <l id="elapsedDebug"></l></ln>
                                 <ln>Char: <p id="characterDebug"></p>: <l id="clothingDebug"></l></ln>
-                                <ln>Flr: <p id="floorDebug"></p> : <l id="flipDebug"></l></ln>
+                                <ln>Flr: <p id="floorDebug"></p>: <l id="flipDebug"></l></ln>
                             </div>
                         </div>
                     </th>
@@ -110,8 +110,8 @@
                     <th>
                         <div>
                             <d>Main Render Settings</d>
-                            <d>Animation Speed (BPM)</d>
-                            <div>
+                            <div id="bpmContainer">
+                                <d>Animation Speed (BPM)</d>
                                 <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
                                 <div>
                                     <p>100</p>

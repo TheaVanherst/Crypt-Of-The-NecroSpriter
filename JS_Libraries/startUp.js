@@ -72,8 +72,9 @@ const songList = [
 // General scripts that are required to be bound & assigned on startup.
 // don't touch these please.
 document.addEventListener('DOMContentLoaded', () => {
-    $("#bpmSlider").oninput = () => bpmUpdate();
-    $("#scaleSlider").oninput = (e) => scale(e.target.value);
+    $("#bpmSlider").oninput = (e) => bpmUpdate(e);
+    $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
+    $("#scaleSlider").oninput = (e) => scale(e);
 
     $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
     $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});

@@ -18,8 +18,18 @@ const
         currentCharacter.urlUpdate();
     },
 
-    bpmUpdate = () => {
-        let newBPM = document.getElementById("bpmSlider").value;
+    bpmUpdate = (e) => {
+        let newBPM
+        if (e?.deltaY) {
+            e.preventDefault();
+            let value = $("#bpmSlider").value;
+
+            newBPM = parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt(value)
+            $("#bpmSlider").value = newBPM;
+        } else {
+            newBPM = $("#bpmSlider").value;
+        }
+
         $('#bpm').textContent = newBPM;
 
         let trackContainer = $('#trackContainer');

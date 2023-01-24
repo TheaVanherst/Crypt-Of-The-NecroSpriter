@@ -177,29 +177,29 @@ input[type="text"].flippant:not(.deactivate) {
 input[type="text"].deactivate {
     border:     solid 2px #696969FF;}
 
-/* TODO: TRACK LIST */
-
-#trackContainer {
-    height:     90px;}
-
 /* TODO: SCALING DATA */
 
-.slider {
-    height:     3px;
-    background: #fff;}
-.slider::-webkit-slider-thumb,
-.slider::-moz-range-thumb {
-    width:      8px;
-    height:     24px;
+input[type=range] {
+    -webkit-appearance: none;
+    background: #fff;
+    height:     3px;}
 
-    cursor:         pointer;
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance:         none;
+
+    width:      12px;
+    height:     28px;
     border-radius:  0;
     background:     #000;
     border:         2px solid #fff;}
 
-input[type=range]{
-    -webkit-appearance: none;
-    appearance:         none;}
+input[type=range]::-moz-range-thumb {
+    width:      8px;
+    height:     24px;
+    border-radius:  0;
+    background:     #000;
+    border:         2px solid #fff;}
 
 /* TODO: BACKGROUND BUTTONS */
 

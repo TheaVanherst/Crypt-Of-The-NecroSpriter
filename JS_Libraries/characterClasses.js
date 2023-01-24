@@ -185,11 +185,11 @@ let characterRefactor = class setup {
 
         if(!this.flipped){
             $("#mirror").classList.remove("pressed")
-            this.playerElement.setAttribute("class", "");
+            this.playerElement.classList.remove("mirror");
             this.playerElement.style.translate = "0 0";
         } else {
             $("#mirror").classList.add("pressed")
-            this.playerElement.setAttribute("class", "mirror");
+            this.playerElement.classList.add("class", "mirror");
             this.playerElement.style.translate = -(Math.floor(24 - this.width)) + "px 0";
         }
     };

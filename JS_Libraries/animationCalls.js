@@ -75,6 +75,7 @@ const
         } else {
             playTog = false;
         }
+
         $('#playTog').classList.toggle('pressed', playTog);
         animationPush();
     }
