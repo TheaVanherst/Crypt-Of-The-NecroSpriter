@@ -127,7 +127,7 @@ const consumableRefactor = class items {
         this.button.onclick = () => {
             this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
-            this.element.src = this.src + "?" + new Date().getTime();
+            this.element.src = this.src + ".png?" + new Date().getTime();
         }
 
         this.#offsetAdjustment();

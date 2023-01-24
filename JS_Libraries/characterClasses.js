@@ -57,6 +57,7 @@ let characterRefactor = class setup {
 
             // character selection buttons
             let char = characterList[key];
+
             let buttonElem = createButton('e', char, char)
                 buttonElem.classList.add('tog')
             dlcElementpre.children[rowKey].appendChild(buttonElem)
@@ -143,6 +144,7 @@ let characterRefactor = class setup {
         let database = Object.entries(characterData[e]);
         database.forEach(([key, value]) => {
             let data = JSON.stringify(value)
+            console.log(data)
             returnString += key + " : " + data + "\n"; // 'one'
         });
         $("#charDebug").innerText = returnString;
@@ -234,10 +236,9 @@ let characterRefactor = class setup {
     clothingUpdate(clothing) {
         this.clothingSet = clothing;
         this.clothingMulti = -(this.height * clothing) + 'px';
-
+        
         $('#clothing .pressed')?.classList?.toggle('pressed');
         $('#clothing' + this.clothingSet).classList.toggle('pressed');
-
 
         if(characterData[this.id]?.clothingData?.clothing === this.clothingSet + 1) {
             characterData[this.id]?.clothingData?.floatSequence ? this.#floatChecks(frame) : null;

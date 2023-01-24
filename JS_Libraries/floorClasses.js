@@ -162,6 +162,7 @@ const floorRefactor = class floor {
         this.danceFloor.style.backgroundImage = this.danceUrls[this.floorBinary];
 
         $("#floorDebug").textContent = `${this.currentFloor} ${this.floorTileSets[e][i][0]}${this.danceType}`
+
     };
 
     floorFlip() {

@@ -1,6 +1,6 @@
 
 let currentCharacter, floorData; //don't touch
-let itemArray = [], consumableData = [], specialData, shieldData; //don't touch
+let itemArray = [], consumableData = [], specialData, shieldData;
 
 document.addEventListener('DOMContentLoaded', () => {
     let startCharacter = 0; // This will initiate as the default character [0-17].
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             shieldData = new shieldRefactor(key, "right", false);}
 
         let urlBar = $(`#${itemData[key].name}Url`)
+
         if(itemData[key]?.url){
             let urlCheck = new Image()
             urlCheck.src = itemData[key].url + ".png";
@@ -67,7 +68,6 @@ const songList = [
     ["N/a"], //180
     ["N/a"], //185
     ["N/a"]]; //190
-
 
 // General scripts that are required to be bound & assigned on startup.
 // don't touch these please.

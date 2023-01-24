@@ -56,7 +56,7 @@ const
                 idStrip = (e.target.id).replace("Url","");
 
             image.src = url + ".png";
-            console.log(`RETURN URL: ${idStrip}`);
+            // console.log(`RETURN URL: ${idStrip}`);
 
             image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {
@@ -69,6 +69,7 @@ const
                         consumableData[i].urlUpdate(url);
                         return;}
                 }
+
                 if(idStrip === "special"){
                     specialData.urlUpdate(url);
                     return;}
@@ -92,6 +93,7 @@ const
         $("#scaleSlider").value = scaleRes;
         $('#scale').textContent = "1:" + scaleRes;
     },
+
 
     targetTimeout = (e) => {
         let placeholder = e.target.placeholder;
