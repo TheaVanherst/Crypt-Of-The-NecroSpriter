@@ -290,20 +290,13 @@ let characterRefactor = class setup {
     };
 
     ampFrameUpdate() {
-        let multiplierGrab = [],
-            ampTog = this.ampTog ? 1 : 0,
+        let ampTog = this.ampTog ? 1 : 0,
             ampArr = [[0,0,0,0],[1,1,2,3]],
-            ampMultiplier = merge(1, characterData[this.id]?.settings?.ampMultiplier),
-            charColumns = merge(16, characterData[this.id]?.settings?.resolution?.columns);
+            ampMultiplier = merge(1, characterData[this.id]?.settings?.ampMultiplier);
 
-        for (let i = 0; i < charColumns; i++) {
-            multiplierGrab[i] = -(this.width * i) + 'px ';
-        }
         for (let i = 0; i < 4; i++) {
-            this.frameArray[i] = multiplierGrab[i + (ampMultiplier * (4 * ampArr[ampTog][i]))];
-        }
+            this.frameArray[i] = -(i + (ampMultiplier * (4 * ampArr[ampTog][i]))) * this.width + "px ";}
 
-        console.log(this.frameArray)
         this.animate();
     };
 }
