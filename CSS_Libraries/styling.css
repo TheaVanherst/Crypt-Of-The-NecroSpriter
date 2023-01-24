@@ -157,14 +157,12 @@ input[type=text] {
 
 input[type=text]:focus {
     outline-style:  none;
-    box-shadow:     none;
 
     background:     #fff;
     color:          #000;}
 
 input[type=text]:active {
     outline-style:  none;
-    box-shadow:     none;
 
     color:      #fff;
     background: #696969FF;}
@@ -172,7 +170,7 @@ input[type=text]:active {
 input[type=text].invalid {
     color:          white;
     background:     darkred;}
-input[type="text"].flippant:not(.deactivate) {
+input[type="text"].flippant:not(.deactivate):not(.invalid) {
     animation:  reblink 0.5s ease-out;}
 input[type="text"].deactivate {
     border:     solid 2px #696969FF;}
