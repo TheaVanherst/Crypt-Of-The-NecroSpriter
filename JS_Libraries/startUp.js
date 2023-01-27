@@ -82,6 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     delete itemData;
 
+    $all("panel").forEach((a) => {
+        let nav = createButton("div");
+            nav.classList.add("navigation")
+            nav.classList.add("invisible")
+
+        let pre = createButton("a");
+            pre.href = 'javascript:void(0)';
+            pre.onclick = (e) => {return moveChoiceTo(e.target.parentElement, -1);}
+        let preText = createButton("e", "Shift Left");
+        pre.appendChild(preText);
+        nav.appendChild(pre);
+
+        let nex = createButton("a");
+        nex.href = 'javascript:void(0)';
+        nex.onclick = (e) => {return moveChoiceTo(e.target.parentElement, 1);}
+        let nexText = createButton("e", "Shift Right");
+        nex.appendChild(nexText);
+        nav.appendChild(nex);
+
+        a.insertBefore(nav, a.firstChild);
+    });
+
     $("#bpmSlider").oninput = (e) => bpmUpdate(e);
     $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
     $("#scaleSlider").oninput = (e) => scale(e);

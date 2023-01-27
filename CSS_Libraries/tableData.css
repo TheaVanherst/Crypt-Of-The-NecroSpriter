@@ -3,7 +3,7 @@
 
 :root{
     --textBoxWidth:     152px;
-    --debugBoxWidth:    260px;
+    --debugBoxWidth:    245px;
 }
 
 /* TODO: General refactoring */
@@ -85,12 +85,21 @@ tbody > tr > th > div {
     text-align:     center;
     display:        flex;}
 
+.navigation {
+    padding:        10px 18px 0 18px;
+    margin:         0 0 0 auto;
+    max-width:      min-content;
+    white-space:    nowrap;}
+.navigation e {
+    margin-left: 10px;
+}
+
 #crop {
     image-rendering:    -moz-crisp-edges;
     image-rendering:    pixelated;
     overflow:           hidden;
 
-    height:     544px;
+    height:     534px;
     width:      calc(100% - 4px);
     border:     2px solid rgba(255,255,255,0.5);}
 
@@ -106,4 +115,9 @@ tbody > tr > th > div {
     transition:
         opacity 1s cubic-bezier(.05, .69, .14, 1)
         height 1s cubic-bezier(.05, .69, .14, 1);
+}
+
+#debugTable .flex e:only-child {
+    max-width: fit-content;
+    margin: 0 0;
 }

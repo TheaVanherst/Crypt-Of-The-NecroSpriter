@@ -88,21 +88,6 @@ const
         }
     },
 
-    scale = (a) => {
-        let scaleRes
-        if(!a){
-            scaleRes = $("#scaleSlider").value;
-        } else {
-            scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
-        }
-
-        $("#transform").style.transform = `scale(${scaleRes})`;
-
-        $("#scaleSlider").value = scaleRes;
-        $('#scale').textContent = "1:" + scaleRes;
-    },
-
-
     targetTimeout = (e) => {
         let placeholder = e.target.placeholder;
         e.target.value = "";
@@ -122,4 +107,35 @@ const
     merge = (defaultData, newData, fallback) => {
         return newData !== undefined ? newData.valueOf() :
             defaultData !== undefined ? defaultData.valueOf() : fallback;
+    },
+
+    scale = (a) => {
+        let scaleRes
+        if(!a){
+            scaleRes = $("#scaleSlider").value;
+        } else {
+            scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        }
+
+        $("#transform").style.transform = `scale(${scaleRes})`;
+
+        $("#scaleSlider").value = scaleRes;
+        $('#scale').textContent = "1:" + scaleRes;
+    },
+
+    navToggle = () => {
+        $all(".navigation").forEach((e) => {e.classList.toggle('invisible')})
+        $("#navTog").classList.toggle('pressed')
+    }
+
+    moveChoiceTo = (elem_choice, direction) => {
+        let span = elem_choice.parentNode.parentNode,
+            td = span.parentNode;
+
+        if (direction === -1 && span.previousElementSibling) {
+            td.insertBefore(span, span.previousElementSibling);
+        } else if (direction === 1 && span.nextElementSibling) {
+            td.insertBefore(span, span.nextElementSibling.nextElementSibling)
+        }
     };
+

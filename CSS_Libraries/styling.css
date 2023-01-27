@@ -139,8 +139,8 @@ e.flippant:not(.deactivate) {
 .buttons > e {
     margin:     0 10px 0 0;
     font-size:  14px;}
-.buttons > e.rightFloat:last-of-type {
-    margin:     0 0 0 10px;}
+.buttons > .rightFloat {
+    margin:     0;}
 
 /* TODO: URL CONTAINERS */
 
