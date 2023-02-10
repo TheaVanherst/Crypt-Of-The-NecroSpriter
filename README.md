@@ -84,9 +84,8 @@ Any invalid urls will be detected on page-start up and notify you after page ini
 Changing the boolean values in the itemData.js file will change their default visibility.
 <pre>UPCOMING:</pre>
 
-- UI back-end rework.
 - Debug information user interface [?]
-- BPM timer rework.
+- BPM timer rework [?]
 - Input for custom floor URL [?]
 
 If you need any assistance in using the tool, designing sprites or have any
