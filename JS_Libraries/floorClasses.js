@@ -19,15 +19,15 @@ const floorRefactor = class floor {
 
         this.danceFloor = $("#danceFloor");
         this.floors = $("#floor");
-        this.floorVisible = !floorVisibility;
-        this.floorToggle();
-        this.foregVisible = !foregroundVisibility;
-        this.foregroundToggle();
+        this.background = $('#backgrounds');
+        this.foreground = $("#foreground");
+        this.floorToggle(true);
+        this.foregroundToggle(true);
 
         this.danceType = danceType;
 
         for (let e in this.floorTileSets) {
-            $('#backgrounds').appendChild(createButton("div"));
+            this.background.appendChild(createButton("div"));
             for (let i in this.floorTileSets[0]) {
                 let child = createButton("e", null, "zone" + e + i);
                 let title = createButton("p", this.floorTileSets[e][i][0])
@@ -43,17 +43,14 @@ const floorRefactor = class floor {
                 child.appendChild(title);
 
                 child.style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
-                $('#backgrounds').children[e].appendChild(child).onclick = () => {
+                this.background.children[e].appendChild(child).onclick = () => {
                     this.backgroundUpdate(e, i);
                 }
             }
         }
 
-        let a = this.floorTileSets[0].length,
-            b = Math.floor(zoneArea / a),
-            c = zoneArea - (b * a);
-        this.currentFloor = [`${b}`,`${c}`];
-        this.previousType = [`${b}`,`${c}`];
+        let a = this.floorTileSets[0].length, b = Math.floor(zoneArea / a), c = zoneArea - (b * a);
+        this.currentFloor = this.previousType = [`${b}`,`${c}`];
         this.backgroundUpdate(b, c);
 
         this.buttonToggle[this.danceType - 1].classList.add("pressed");
@@ -61,71 +58,57 @@ const floorRefactor = class floor {
 
     backgroundUpdate(e, i) {
         if (e !== this.currentFloor[0] || i !== this.currentFloor[1]) { //checks if new floor is different to previous
-            let row = this.currentFloor[0],
-                col = this.currentFloor[1];
-
-            if($("#zone" + row + col + " f")) { //checks if embedded f element exists (if toggleable)
-                $("#zone" + row + col + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[row][col][0] + "_Floor.png')";
-                $("#zone" + row + col + " f p").innerText = this.floorTileSets[row][col][0];
-            }
-        } else {
+            let r = this.currentFloor[0],
+                c = this.currentFloor[1];
+            if(!!$((`#zone${r}${c} f`))) { //checks if embedded f element exists (if toggleable)
+                $((`#zone${r}${c} f`)).style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[r][c][0]}_Floor.png')`;
+                $((`#zone${r}${c} f p`)).innerText = this.floorTileSets[r][c][0];}}
+        else {
             arrayShift(this.floorTileSets[e][i]);
             arrayShift(this.overlayTileSets[e][i]);
         }
 
-        this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
-
         $("#backgrounds .pressed")?.classList.remove("pressed");
-        $("#backgrounds").children[e].children[i].classList.add("pressed");
+        this.background.children[e].children[i].classList.add("pressed");
 
         this.currentFloor = [`${e}`,`${i}`]; //Refer to line 33.
-
-        if (e === this.currentFloor[0] || i === this.currentFloor[1]) { //checks if current floor is same as previous to save unneeded url updates
-            if (this.floorTileSets[e][i][1]) {  //checks if embedded f element exists (if toggleable)
-                $("#zone" + e + i + " f").style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][1] + "_Floor.png')";
-                $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1];
-            }
-        }
-
+        if (this.floorTileSets[e][i][1]) {  //checks if embedded f element exists (if toggleable)
+            $("#zone" + e + i + " f").style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[e][i][1]}_Floor.png')`;
+            $("#zone" + e + i + " f p").innerText = this.floorTileSets[e][i][1];}
         this.previousType[1] = this.currentFloor;
 
-        $("#foreground").src = 'UI_Libraries/' + this.overlayTileSets[e][i][0] + "_Overlay.png";
-        this.floors.style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
-        $("#zone" + e + i).style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
+        this.foreground.src = `UI_Libraries/${this.overlayTileSets[e][i][0]}_Overlay.png`;
+        this.floors.style.backgroundImage = $("#zone" + e + i).style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[e][i][0]}_Floor.png')`;
         $("#zone" + e + i + " > p").innerText = this.floorTileSets[e][i][0];
 
         this.danceUpdate();
-        $("#flipDebug").textContent = this.floorBinary
+        $("#flipDebug").textContent = this.floorBinary;
     };
 
     foregroundToggle() {
-        this.foregVisible = !this.foregVisible
-
-        if(this.foregVisible){
-            $("#foreground").classList.remove('invisible');
-            $("#foregroundButton").classList.add('pressed');
-        } else {
-            $("#foreground").classList.add('invisible');
-            $("#foregroundButton").classList.remove('pressed');
-        }
+        let temp = [
+            [["#foreground", 'invisible'], ["#foregroundButton", 'pressed']],
+            [["#foregroundButton", 'pressed'], ["#foreground", 'invisible']]]
+        this.foreVisible = this.foreVisible === 0 ? 1 : 0;
+        $(temp[this.foreVisible][0][0]).classList.remove(temp[this.foreVisible][0][1]);
+        $(temp[this.foreVisible][1][0]).classList.add(temp[this.foreVisible][1][1]);
     };
 
-    floorToggle() {
+    floorToggle(bool) {
         this.floorVisible = !this.floorVisible;
 
-        if (this.floorVisible === false){
+        if (!bool && this.floorVisible === false){
             this.danceSwitcher(0);
             this.danceFloor.classList.add('invisible');
 
             this.floors.classList.add('invisible');
-            $("#danceButton").setAttribute("class", "deactivate");
-            $("#multiplierButton").setAttribute("class", "deactivate");
-        } else {
+            $("#backgroundButton").classList.remove('pressed');
+            $("#multiplierButton, #danceButton").setAttribute("class", "deactivate");}
+        else {
             this.floors.classList.remove('invisible');
-            $("#danceButton").setAttribute("class", "");
-            $("#multiplierButton").setAttribute("class", "");
+            $("#backgroundButton").classList.add('pressed');
+            $("#multiplierButton, #danceButton").setAttribute("class", "");
         }
-        $("#backgroundButton").classList.toggle('pressed');
     };
 
     danceSwitcher(a) {
@@ -137,12 +120,11 @@ const floorRefactor = class floor {
             } else if (a === 2) {
                 $("#danceButton").setAttribute("class", " ");
                 $("#multiplierButton").setAttribute("class", "pressed");
-            }
-        } else {
+            }}
+        else {
             a = 0;
             this.danceFloor.classList.add('invisible');
-            $("#danceButton").setAttribute("class", "");
-            $("#multiplierButton").setAttribute("class", "");
+            $("#danceButton, #multiplierButton").setAttribute("class", "");
         }
 
         if (this.previousType[0] !== a && a !== 0) {
@@ -160,9 +142,7 @@ const floorRefactor = class floor {
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor1.png')`,
             `url('UI_Libraries/${this.floorTileSets[e][i][0]}${this.floorArr[0]}_Floor2.png')`];
         this.danceFloor.style.backgroundImage = this.danceUrls[this.floorBinary];
-
         $("#floorDebug").textContent = `${this.currentFloor} ${this.floorTileSets[e][i][0]}${this.danceType}`
-
     };
 
     floorFlip() {

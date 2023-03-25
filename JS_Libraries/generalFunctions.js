@@ -7,12 +7,8 @@ const
     },
 
     urlRefresh = () => {
-        for (let key in itemArray) {
-            itemArray[key].urlUpdate();
-        }
-        for (let i = 0; i < consumableData.length - itemArray.length; i++) {
-            consumableData[i + itemArray.length].urlUpdate();
-        }
+        itemArray.map(x => x.urlUpdate())
+        consumableData.map(x => x.urlUpdate());
         specialData.urlUpdate();
         shieldData.urlUpdate();
         currentCharacter.urlUpdate();
@@ -102,11 +98,6 @@ const
 
     arrayShift = (e) => {
         e.unshift(e.pop());
-    },
-
-    merge = (defaultData, newData, fallback) => {
-        return newData !== undefined ? newData.valueOf() :
-            defaultData !== undefined ? defaultData.valueOf() : fallback;
     },
 
     scale = (a) => {
