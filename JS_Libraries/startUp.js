@@ -61,24 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
     bpmUpdate();
     scale();
 
-    for (let key in itemData) {
-        let urlBar = $(`#${itemData[key].name}Url`)
+    itemData.map(x => {
+        let urlBar = $(`#${x.name}Url`)
 
-        if(itemData[key]?.url){
+        if(x?.url){
             let urlCheck = new Image()
-            urlCheck.src = itemData[key].url + ".png";
+            urlCheck.src = x.url + ".png";
             urlCheck.onerror = () => {
                 urlBar.classList.add("invalid");
                 urlBar.value = "";
                 urlBar.placeholder = "Invalid itemsData.js URL";
                 setTimeout(() => {
-                    $(`#${itemData[key].name}Url`).classList.remove("invalid");
+                    $(`#${x.name}Url`).classList.remove("invalid");
                 }, 2000);
             };
         } else {
             urlBar.placeholder = "No itemsData.js URL";
         }
-    }
+    })
 
     delete itemData;
 
@@ -104,12 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         a.insertBefore(nav, a.firstChild);
     });
 
-    $("#bpmSlider").oninput = (e) => bpmUpdate(e);
+    $("#bpmSlider").oninput = (e) =>    bpmUpdate(e);
     $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
-    $("#scaleSlider").oninput = (e) => scale(e);
+    $("#scaleSlider").oninput = (e) =>  scale(e);
 
-    $all(".scrollArea").forEach((e) => {e.onwheel = (e) => scrollWheel(e);})
-    $all("#urlData input").forEach((e) => {e.onkeydown = (a) => search(a,e);});
+    $all(".scrollArea").forEach((e) => {    e.onwheel = (e) =>      scrollWheel(e);})
+    $all("#urlData input").forEach((e) => { e.onkeydown = (a) =>    search(a,e);});
 
     $("#barDebug").textContent = floatInt;
     $("#beatDebug").textContent = frame;
