@@ -18,6 +18,15 @@ input[type="range" i] {
 e:hover {
     cursor: url('UI_Libraries/hover_cursor.png'),   auto!important;}
 
+/* TODO: TABLE RENDERING */
+
+tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
+    background-image:   url("UI_Libraries/border_Top.png");}
+tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
+    background-image:   url("UI_Libraries/border_Left.png");}
+tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
+    background-image: url("UI_Libraries/border_corner1.png");}
+
 /* TODO: RENDER CSS & SCALING */
 
 #playerModel,

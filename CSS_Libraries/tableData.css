@@ -37,11 +37,9 @@ th {
 
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
     width:      100%;
-    background-image:   url("/UI_Libraries/border_Top.png");
     background-repeat:  repeat-x;}
 
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
-    background-image:   url("/UI_Libraries/border_Left.png");
     background-repeat:  repeat-y;}
 
 tbody > tr:last-of-type > th:nth-child(2) {     transform: scale(100%, -100%);}
@@ -54,8 +52,7 @@ tbody > tr:not(:nth-child(2)) > th:last-of-type {
 
 tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
     height:     22px;
-    display:    block;
-    background-image: url("/UI_Libraries/border_corner1.png");}
+    display:    block;}
 
 tbody > tr:first-of-type > th:first-of-type {   transform: rotate(0deg  ); margin: 0 -3px -3px 0;}
 tbody > tr:first-of-type > th:last-of-type  {   transform: rotate(90deg ); margin: 0 0 -3px -3px;}
