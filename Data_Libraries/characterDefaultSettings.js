@@ -1,3 +1,4 @@
+
 const defaultData = {
     settings: {
         resolution: {
@@ -9,54 +10,67 @@ const defaultData = {
         floatSequence: false,
         fileUrl: "",
         head: true,
-        amp: true},
+        amp: true
+    },
     hat: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false},
-        sequence: [1, 2, 3, 4]},
+            flip: false
+        },
+        sequence: [1, 2, 3, 4]
+    },
     weapon: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
             flip: false},
-        sequence: [1, 2, 3, 4]},
+        sequence: [1, 2, 3, 4]
+    },
     ring: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false},
-        sequence: [1, 2, 3, 4]},
+            flip: false
+        },
+        sequence: [1, 2, 3, 4]
+    },
     boots: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
-            flip: false},
-        sequence: [1, 2, 3, 4]},
+            flip: false
+        },
+        sequence: [1, 2, 3, 4]
+    },
     charm: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 2],
             flip: false},
-        sequence: [1, 2, 3, 4]},
+        sequence: [1, 2, 3, 4]
+    },
     shovel: {
         offset: {
             top: 0, left: 0,
             sequence: [-1, 0, 1, 0],
             flip: false},
-        sequence: [1, 2, 3, 4]},
+        sequence: [1, 2, 3, 4]
+    },
     torch: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 4],
-            flip: false},
-        sequence: [1, 2, 3, 4]},
+            flip: false
+        },
+        sequence: [1, 2, 3, 4]
+    },
     hip: {
         offset: {
             top: 0, left: 0,
             sequence: [1, 2, 3, 4],
-            flip: false},
+            flip: false
+        },
         sequence: [1, 2, 3, 4]
     },
     special: {
@@ -69,12 +83,14 @@ const defaultData = {
             top: 0, left: 0,
             sequence: [1, 1, 1, 1],
             float: false,
-            fixed: false},
+            fixed: false
+        },
         sequence: [1, 2, 3, 4],
         transform: {
             opacity: 1,
             scaleX: 1,
-            scaleY: 1},
+            scaleY: 1
+        },
         fileUrl: ""
     },
     clothingData: {

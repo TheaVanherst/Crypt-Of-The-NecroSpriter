@@ -3,6 +3,8 @@
 
 body {
     cursor: url('UI_Libraries/default_cursor.png'), auto;}
+a {
+    cursor: url('UI_Libraries/text_cursor.png'),    auto!important;}
 input[type=text] {
     cursor: url('UI_Libraries/text_cursor.png'),    auto!important;}
 

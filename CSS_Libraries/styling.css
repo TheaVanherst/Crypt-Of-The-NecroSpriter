@@ -19,6 +19,10 @@ body {
 img {
     font-size: 11px!important;}
 
+a { text-decoration: 2px underline;
+    color: #b700ff;}
+u { text-decoration: 2px underline;}
+
 p {
     padding:    0;
     margin:     0;

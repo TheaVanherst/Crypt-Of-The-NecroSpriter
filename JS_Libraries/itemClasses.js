@@ -36,8 +36,12 @@ const itemRefactor = class items {
         else {
             this.button.classList.remove("deactivate");}
 
-        this.animationSequence =    characterData[character][this.name]?.sequence ?? defaultVerticalOffsets[this.name]?.sequence ?? [1,2,3,4]
-        this.verticalSequence =     characterData[character][this.name]?.offset?.sequence ?? defaultVerticalOffsets[this.name]?.offset?.sequence ?? [0,0,0,0];
+        this.animationSequence =    characterData[character][this.name]?.sequence ??
+                                        defaultVerticalOffsets[this.name]?.sequence ??
+                                            [1,2,3,4]
+        this.verticalSequence =     characterData[character][this.name]?.offset?.sequence ??
+                                        defaultVerticalOffsets[this.name]?.offset?.sequence ??
+                                            [0,0,0,0];
 
         let flipOffset = 0;
         if(characterData[character][this.name]?.flip === true){
