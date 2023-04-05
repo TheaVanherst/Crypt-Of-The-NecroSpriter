@@ -6,20 +6,24 @@ let characterRefactor = class setup {
 
     frameArray = [];
 
-    height; width; head;
+    height;
+    width;
+    head;
     characterUrlArray = [];
 
     constructor(amp, clothing, character) {
-        this.clothingData = [15,8];
+        let clothingSetLengths = characterData.map(x => x?.settings?.resolution?.rows ?? 14);
+        this.clothingSets = Math.max(...clothingSetLengths);
+        let clothingDivisional = Math.ceil((this.clothingSets / 2));
 
-        for (let e = 0; e < Math.ceil(this.clothingData[0] / this.clothingData[1]); e++) {
+        for (let e = 0; e < Math.ceil(this.clothingSets / clothingDivisional); e++) {
             let row = createButton("div");
                 row.classList.add("flex");
 
-            for (let i = 0; i < this.clothingData[1]; i++) {
-                let cur = (this.clothingData[1] * e) + i;
-                if (cur < this.clothingData[0]) {
-                    let buttonElem = createButton("e", cur + 1, "clothing" + cur);
+            for (let i = 0; i < clothingDivisional; i++) {
+                let cur = (clothingDivisional * e) + i;
+                if (cur < this.clothingSets) {
+                    const buttonElem = createButton("e", cur + 1, "clothing" + cur);
                         buttonElem.classList.add("tog");
                         buttonElem.classList.add('flippant');
                         buttonElem.onclick = () => {
@@ -32,31 +36,30 @@ let characterRefactor = class setup {
         }
 
         for (let i = 0; i < dlcTypes.length; i++) {
-            let dlcContainer = createButton("div",undefined,dlcTypes[i]);
-            let titleElement = createButton("d", dlcTypes[i]);
+            const dlcContainer = createButton("div",undefined,dlcTypes[i]);
+            const titleElement = createButton("d", dlcTypes[i]);
                 dlcContainer.appendChild(titleElement);
             $('#characterSelect').appendChild(dlcContainer);
         }
 
         let currentRow = 0, currentCol = 0;
-        let dlcContainer;
         for (let i in characterData) { // generates character buttons
-            dlcContainer = $('#characterSelect').children[characterData[i].dlc];
+            const dlcContainer = $('#characterSelect').children[characterData[i].dlc];
 
             if(!dlcContainer.children[currentRow]) { // checks if new row.
                 currentRow = 0; currentCol = 0;
             }
 
             if (currentCol % 2 === 0){ // generates button rows
-                let rowContainer = createButton("div");
+                const rowContainer = createButton("div");
                     rowContainer.classList.add("flex");
                 dlcContainer.appendChild(rowContainer);
                 currentRow += 1;
             }
 
-            let char = characterData[i].name;
+            const char = characterData[i].name;
 
-            let buttonElem = createButton('e', char, char);
+            const buttonElem = createButton('e', char, char);
                 buttonElem.classList.add('tog');
             dlcContainer.children[currentRow].appendChild(buttonElem)
                 .onclick = () => {
@@ -69,7 +72,7 @@ let characterRefactor = class setup {
         $all("#characterUrl").forEach((e) => {
             e.onkeydown = (e) => {
                 if(e.key === 'Enter') {
-                    let item = e.target.value,
+                    const item = e.target.value,
                         image = new Image();
                     image.src = item + (currentCharacter.dlc !== 2 ? "_armor_body.png" : "_body.png");
                     image.onload = () => {
@@ -94,7 +97,7 @@ let characterRefactor = class setup {
             character = 0;
         }
 
-        $("#" + this.name)?.classList.remove("pressed");
+        $(`#${this.name}`)?.classList.remove("pressed");
 
         this.id =   character;
         this.name = characterData[this.id].name;
@@ -134,8 +137,7 @@ let characterRefactor = class setup {
         let returnString = "";
         Object.entries(characterData[this.id])
             .forEach(([key, value]) => {
-                let data = JSON.stringify(value);
-                returnString += key + "  [" + data + "]";
+                returnString += `${key}  [${JSON.stringify(value)}]`;
             });
         $("#charDebug").innerText = returnString;
     };
@@ -143,7 +145,7 @@ let characterRefactor = class setup {
     floatOffsets = ["0px", "0px", "0px", "0px", "0px", "0px"]
 
     #floatChecks() {
-        let bodyOffset = characterData[this.name]?.settings?.offset?.body ?? 0;
+        const bodyOffset = characterData[this.name]?.settings?.offset?.body ?? 0;
 
         this.floatOffsets = floatOffsets.map(x =>
             `${-(x + ((24 + bodyOffset) - this.height))}px 0px 0px ${Math.floor((24 - this.width) / 2)}px`);
@@ -199,13 +201,13 @@ let characterRefactor = class setup {
     clothingCached = false;
 
     #clothingChecks() {
-        let rows = characterData[this.id]?.settings?.resolution?.rows ?? 14;
-        for (let i = 0; i < this.clothingData[0]; i++) {
+        const rows = characterData[this.id]?.settings?.resolution?.rows ?? 14;
+        for (let i = 0; i < this.clothingSets; i++) {
             if(i < rows){
-                $(`#clothing`+i).classList.remove("deactivate");
+                $(`#clothing${i}`).classList.remove("deactivate");
             } else {
-                $(`#clothing`+i).classList.remove("pressed");
-                $(`#clothing`+i).classList.add("deactivate");
+                $(`#clothing${i}`).classList.remove("pressed");
+                $(`#clothing${i}`).classList.add("deactivate");
             }
         }
 
@@ -218,8 +220,7 @@ let characterRefactor = class setup {
     };
 
     uniqueChecks() {
-        let uniqueClothingData = characterData[this.id]?.clothingData?.[this.clothingSet] ?? undefined;
-        console.log(characterData[this.id]?.clothingData, this.clothingSet);
+        const uniqueClothingData = characterData[this.id]?.clothingData?.[this.clothingSet] ?? undefined;
 
         if (!!uniqueClothingData){
             uniqueClothingData?.floatSequence ? this.#floatChecks() : this.#floatDisable(this.id);
@@ -260,24 +261,24 @@ let characterRefactor = class setup {
     };
 
     animate() {
-        this.bodyElement.style.objectPosition = this.frameArray[frame] + this.clothingMulti;
-        this.headElement.style.objectPosition = this.frameArray[frame] + '0';
-        this.playerElement.style.margin =       this.floatOffsets[floatInt];
+        this.bodyElement.style.objectPosition =     this.frameArray[frame] + this.clothingMulti;
+        this.headElement.style.objectPosition =     `${this.frameArray[frame]}0`;
+        this.playerElement.style.margin =           this.floatOffsets[floatInt];
     };
 
     urlUpdate(url) {
         url = url ?? this.characterUrlArray[this.id]?.[1] ?? characterData[this.id]?.settings?.fileUrl;
 
-        let srcLink = (this.dlc !== 2 ? ["_heads","_armor_body"] : ["_head","_body"]).map(i => i + ".png?" + new Date().getTime());
+        const srcLink = (this.dlc !== 2 ? ["_heads","_armor_body"] : ["_head","_body"]).map(i => `${i}.png?${new Date().getTime()}`);
         this.characterUrlArray[this.id] = [characterData[this.id].name,url];
 
-        this.head ? this.headElement.src = url + srcLink[0] : null;
-        this.bodyElement.src = url + srcLink[1];
-        this.src = url + ".png";
+        this.head ? this.headElement.src =  url + srcLink[0] : null;
+        this.bodyElement.src =              url + srcLink[1];
+        this.src =                          url + ".png";
 
-        let charUrl = $("#characterUrl");
-            charUrl.placeholder = url;
-            charUrl.value = "";
+        let charUrl =               $("#characterUrl");
+            charUrl.placeholder =   url;
+            charUrl.value =         "";
     };
 
     ampToggle(bool) {
@@ -294,12 +295,12 @@ let characterRefactor = class setup {
     };
 
     ampFrameUpdate() {
-        let ampTog = this.ampTog ? 1 : 0,
-            ampArr = [[0,0,0,0],[1,1,2,3]],
-            ampMultiplier = characterData[this.id]?.settings?.ampMultiplier ?? 1;
+        let ampTog =            this.ampTog ? 1 : 0,
+            ampArr =            [[0,0,0,0],[1,1,2,3]],
+            ampMultiplier =     characterData[this.id]?.settings?.ampMultiplier ?? 1;
 
         for (let i = 0; i < 4; i++) {
-            this.frameArray[i] = -(i + (ampMultiplier * (4 * ampArr[ampTog][i]))) * this.width + "px ";}
+            this.frameArray[i] = `${-(i + (ampMultiplier * (4 * ampArr[ampTog][i]))) * this.width}px `;}
 
         this.animate();
     };

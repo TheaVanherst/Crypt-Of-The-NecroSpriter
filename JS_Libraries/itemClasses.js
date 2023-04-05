@@ -10,7 +10,6 @@ const itemRefactor = class items {
 
     constructor(item, character) {
         this.name =         itemData[item].name;
-        this.id =           item;
 
         this.ogUrl =        itemData[item].url;
         this.src =          this.ogUrl + ".png";
@@ -91,7 +90,6 @@ const equipmentOffsets = [
 const consumableRefactor = class items {
     constructor(item) {
         this.name =         itemData[item].name;
-        this.id =           item;
 
         this.ogUrl =        itemData[item]?.url;
         this.src =          this.ogUrl;
@@ -99,11 +97,10 @@ const consumableRefactor = class items {
         this.element =      $(`#${this.name}`);
         this.element.src =  `${this.src}?${new Date().getTime()}`;
 
-        let button =        $((`#${this.name}Button`));
-        itemData[item].bool ? button.classList.add('pressed') : this.element.classList.add("invisible");
+        itemData[item].bool ? $(`#${this.name}Button`).classList.add('pressed') : this.element.classList.add("invisible");
 
-        button.onclick = () => {
-            button.classList.toggle('pressed');
+        $(`#${this.name}Button`).onclick = () => {
+            $(`#${this.name}Button`).classList.toggle('pressed');
             this.element.classList.toggle('invisible');
             this.element.src = `${this.src}?${new Date().getTime()}`;}
 
@@ -128,23 +125,22 @@ const consumableRefactor = class items {
     };
 
     urlUpdate(url, date){
-        date =          date ?? new Date().getTime();
-        let urlBar =    $((`#${this.name}Url`))
+        date = date ?? new Date().getTime();
 
         if(url !== undefined) {
             this.ogUrl =            url;
-            urlBar.placeholder =    url;
-            urlBar.value =          "";
+            $(`#${this.name}Url`).placeholder =    url;
+            $(`#${this.name}Url`).value =          "";
 
             this.src =              `${url}.png`;
             this.element.src =      this.src;
         } else if (!!this.ogUrl) {
             this.element.src =      `${this.ogUrl}.png?${date}`;
-            urlBar.placeholder =    this.ogUrl;
-            urlBar.value =          "";
+            $(`#${this.name}Url`).placeholder =    this.ogUrl;
+            $(`#${this.name}Url`).value =          "";
         } else {
-            urlBar.placeholder =    "No data";
-            urlBar.value =          "";
+            $(`#${this.name}Url`).placeholder =    "No data";
+            $(`#${this.name}Url`).value =          "";
         }
 
         this.#offsetAdjustment();
@@ -217,19 +213,18 @@ const specialRefactor = class items {
 
     urlUpdate(src) {
         src = src ?? characterData[currentCharacter.id]?.[this.name]?.fileUrl;
-        let urlBar = $("#specialUrl");
 
         if (src) {
             this.src =              `${src}.png?`;
 
-            urlBar.placeholder =    src;
-            urlBar.value =          "";
-            urlBar.classList.remove("deactivate");
+            $("#specialUrl").placeholder =    src;
+            $("#specialUrl").value =          "";
+            $("#specialUrl").classList.remove("deactivate");
             this.element.src =      `${src}.png?${new Date().getTime()}`;}
         else {
-            urlBar.placeholder =    "Not Applicable";
+            $("#specialUrl").placeholder =    "Not Applicable";
 
-            urlBar.classList.add("deactivate");
+            $("#specialUrl").classList.add("deactivate");
             this.element.removeAttribute('src');}
     };
 };
