@@ -559,7 +559,7 @@ const
                     body:   1
                 },
                 ampMultiplier:  2,
-                fileUrl:        "characters/Klarinetta"
+                fileUrl:        "characters/klarinetta"
             },
             hat: {
                 offset: {
@@ -638,7 +638,7 @@ const
                     height: 27,
                     rows:   15
                 },
-                fileUrl: "characters/Vahn"
+                fileUrl: "characters/vahn"
             },
             hat: {
                 offset: {
@@ -736,7 +736,7 @@ const
                     body:   1
                 },
                 ampMultiplier:  2,
-                fileUrl:        "characters/Yumi"
+                fileUrl:        "characters/yumi"
             },
             hat: {
                 offset: {
@@ -806,7 +806,7 @@ const
                 fileUrl: "items/weapon_greatHammer"
             },
         },{
-            name: "YumiClone",
+            name: "ShadowYumi",
             dlc: 3,
             settings: {
                 resolution: {
@@ -818,7 +818,7 @@ const
                 offset: {
                     body:   1
                 },
-                fileUrl:    "characters/clone_yumi"
+                fileUrl:    "characters/shadow_yumi"
             },
             clothingData: {
                 0: {
