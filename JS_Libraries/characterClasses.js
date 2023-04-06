@@ -108,7 +108,6 @@ let characterRefactor = class setup {
         this.width =  characterData[this.id]?.settings?.resolution?.width ?? 24;
         this.height = characterData[this.id]?.settings?.resolution?.height ?? 24;
 
-        this.#bodyOffsets();
         this.#clothingChecks();
 
         this.amp = characterData[this.id]?.settings?.amp ?? true;
@@ -130,6 +129,8 @@ let characterRefactor = class setup {
         $("#clothingDebug").textContent =   this.clothingSet + 1;
 
         this.uniqueChecks();
+        this.#bodyOffsets();
+
         this.#debugUpdate();
         this.flip();
         this.animate();
@@ -244,19 +245,20 @@ let characterRefactor = class setup {
             for (let i in this.uniqueClothing) {
                 $((`#${this.uniqueClothing[i]}Button`)).classList.remove("deactivate");
             }
-            this.uniqueClothing = [];
-            this.clothingCached = false;
+            this.uniqueClothing =   [];
+            this.clothingCached =   false;
         }
     }
 
     clothingUpdate(clothing) {
-        this.clothingSet = clothing;
-        this.clothingMulti = -(this.height * clothing) + 'px';
+        this.clothingSet =      clothing;
+        this.clothingMulti =    -(this.height * clothing) + 'px';
         
         $('#clothing .pressed')?.classList?.toggle('pressed');
         $(`#clothing${this.clothingSet}`).classList.toggle('pressed');
 
         this.uniqueChecks();
+        this.#bodyOffsets();
 
         $("#clothingDebug").textContent = clothing;
         this.animate();

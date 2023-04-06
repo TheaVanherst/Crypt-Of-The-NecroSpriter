@@ -511,7 +511,9 @@ const
                 },
                 fileUrl:    "characters/chaunter",
                 bodyExt:    "_body",
-                amp:        false
+
+                head:   false,
+                amp:    false
             },
             hat: {
                 bool:   false
@@ -552,7 +554,6 @@ const
             },
             clothingData: {
                 0: {
-                    head:           false,
                     floatSequence:  true
                 }
             }
@@ -808,15 +809,15 @@ const
                 },
                 fileUrl:    "characters/clone_vahn",
                 bodyExt:    "",
-                amp:        false,
+
+                head:   false,
+                amp:    false,
             },
             clothingData: {
                 0: {
-                    head: false,
                     settings: clear,
                 },
                 1: {
-                    head: false,
                     settings: clear,
                 }
             }
@@ -835,15 +836,15 @@ const
                 },
                 fileUrl:    "characters/clone_yumi",
                 bodyExt:    "",
-                amp:        false,
+
+                head:   false,
+                amp:    false,
             },
             clothingData: {
                 0: {
-                    head:       false,
                     settings:   clear,
                 },
                 1: {
-                    head:       false,
                     settings:   clear,
                 }
             }
