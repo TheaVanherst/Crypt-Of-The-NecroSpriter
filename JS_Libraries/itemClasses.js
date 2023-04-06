@@ -1,8 +1,18 @@
+
 const
     defaultVerticalOffsets = {
-        torch: {sequence: [1, 4, 3, 2]},
-        charm: {sequence: [1, 2, 3, 2]},
-        shovel: {offset:{sequence: [2, 1, 0, 1]}}};
+        torch: {
+            sequence: [1, 4, 3, 2]
+        },
+        charm: {
+            sequence: [1, 2, 3, 2]
+        },
+        shovel: {
+            offset:{
+                sequence: [2, 1, 0, 1]
+            }
+        }
+    };
 
 const itemRefactor = class items {
     width = 24;
@@ -135,12 +145,12 @@ const consumableRefactor = class items {
             this.src =              `${url}.png`;
             this.element.src =      this.src;
         } else if (!!this.ogUrl) {
-            this.element.src =      `${this.ogUrl}.png?${date}`;
-            $(`#${this.name}Url`).placeholder =    this.ogUrl;
-            $(`#${this.name}Url`).value =          "";
+            this.element.src =                      `${this.ogUrl}.png?${date}`;
+            $(`#${this.name}Url`).placeholder =     this.ogUrl;
+            $(`#${this.name}Url`).value =           "";
         } else {
-            $(`#${this.name}Url`).placeholder =    "No data";
-            $(`#${this.name}Url`).value =          "";
+            $(`#${this.name}Url`).placeholder =     "No data";
+            $(`#${this.name}Url`).value =           "";
         }
 
         this.#offsetAdjustment();

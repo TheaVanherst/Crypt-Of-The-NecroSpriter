@@ -36,7 +36,7 @@ th {
     padding:    0;}
 
 tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
-    width:      100%;
+    width:              100%;
     background-repeat:  repeat-x;}
 
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
@@ -88,8 +88,7 @@ tbody > tr > th > div {
     max-width:      min-content;
     white-space:    nowrap;}
 .navigation e {
-    margin-left: 10px;
-}
+    margin-left: 10px;}
 
 #crop {
     image-rendering:    -moz-crisp-edges;

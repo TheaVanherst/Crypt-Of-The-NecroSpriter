@@ -721,5 +721,89 @@ const
                     ],
                 },
             },
-        }
+        },
+        { // same as Klarinetta.
+            name: "Yumi",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      26,
+                    height:     30,
+                    rows:       1,
+                    columns:    32
+                },
+                offset: {
+                    body:   1
+                },
+                ampMultiplier:  2,
+                fileUrl:        "characters/Yumi"
+            },
+            hat: {
+                offset: {
+                    top:    1,
+                    left:   1
+                },
+                sequence:   [1, 1, 2, 2]
+            },
+            weapon: {
+                bool: false
+            },
+            ring: {
+                offset: {
+                    top:    3,
+                    left:   2
+                }
+            },
+            boots: {
+                offset: {
+                    top:    5,
+                    left:   1
+                }
+            },
+            charm: {
+                offset: {
+                    top:        2,
+                    left:       1,
+                    sequence:   [1, 2, 2, 1]
+                }
+            },
+            shovel: {
+                offset: {
+                    top:    3,
+                    left:   1
+                }
+            },
+            torch: {
+                offset: {
+                    top:    8,
+                    left:   4
+                },
+                sequence:   [1, 4, 3, 2]
+            },
+            hip: {
+                offset: {
+                    top:    2,
+                    left:   1
+                }
+            },
+            special: {
+                bool:       true,
+                zIndex:     10,
+                resolution: {
+                    height: 28,
+                    width:  28
+                },
+                displacement: {
+                    top:        19,
+                    left:       13,
+                    sequence:   [1, 1, 1, 2]
+                },
+                sequence:       [1, 1, 1, 1],
+                transform: {
+                    scaleX:     -1,
+                    scaleY:     -1
+                },
+                fileUrl: "items/weapon_greatHammer"
+            },
+        },
     ]

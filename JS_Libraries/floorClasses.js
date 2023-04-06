@@ -1,3 +1,4 @@
+
 const floorRefactor = class floor {
     danceType = 1;
     currentFloor = [];
@@ -5,22 +6,23 @@ const floorRefactor = class floor {
 
     floorTileSets = [
         [["zone1", "zone1"], ["zone2", "zone2"], ["zone3_1", "zone3_2"]],
-        [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_1"]]];
+        [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_1"]]
+    ];
     overlayTileSets = [
         [["zone1", "zone1_shop"], ["zone2", "zone2_Alt"], ["zone3_Cold", "zone3_Hot"]],
-        [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]];
+        [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]
+    ];
 
     floorBinary = 0;
     floorArr = ["_NoMP", ""];
 
-    buttonToggle = [$("#danceButton"), $("#multiplierButton")]
+    constructor(zoneArea, danceType) {
 
-    constructor(zoneArea, danceType, floorVisibility, foregroundVisibility) {
+        this.danceFloor =   $("#danceFloor");
+        this.floors =       $("#floor");
+        this.background =   $('#backgrounds');
+        this.foreground =   $("#foreground");
 
-        this.danceFloor = $("#danceFloor");
-        this.floors = $("#floor");
-        this.background = $('#backgrounds');
-        this.foreground = $("#foreground");
         this.floorToggle(true);
         this.foregroundToggle(true);
 
@@ -34,7 +36,7 @@ const floorRefactor = class floor {
 
                 if (this.floorTileSets[e][i][1]) {
                     let hover = createButton("f")
-                        hover.style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
+                        hover.style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[e][i][0]}_Floor.png')`;
                     let title = createButton("p", this.floorTileSets[e][i][0])
                     hover.appendChild(title);
                     child.appendChild(hover);
@@ -42,7 +44,7 @@ const floorRefactor = class floor {
 
                 child.appendChild(title);
 
-                child.style.backgroundImage = "url('UI_Libraries/" + this.floorTileSets[e][i][0] + "_Floor.png')";
+                child.style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[e][i][0]}_Floor.png')`;
                 this.background.children[e].appendChild(child).onclick = () => {
                     this.backgroundUpdate(e, i);
                 }
@@ -53,7 +55,11 @@ const floorRefactor = class floor {
         this.currentFloor = this.previousType = [`${b}`,`${c}`];
         this.backgroundUpdate(b, c);
 
-        this.buttonToggle[this.danceType - 1].classList.add("pressed");
+        if (this.danceType - 1 === 0) {
+            $("#danceButton").classList.add("pressed");
+        } else if (this.danceType - 1 === 1){
+            $("#multiplierButton").classList.add("pressed");
+        }
     };
 
     backgroundUpdate(e, i) {
