@@ -500,7 +500,7 @@ const
                     rows:       1,
                     columns:    9
                 },
-                fileUrl:    "characters/Chaunter",
+                fileUrl:    "characters/chaunter",
                 bodyExt:    "_body",
                 amp:        false
             },
