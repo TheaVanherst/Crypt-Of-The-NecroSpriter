@@ -823,7 +823,7 @@ const
                 offset: {
                     body:   1
                 },
-                fileUrl:    "characters/shadow_vahn",
+                fileUrl:    "characters/clone_vahn",
                 bodyExt:    "",
                 amp:        false,
             },
@@ -846,7 +846,7 @@ const
                 offset: {
                     body:   1
                 },
-                fileUrl:    "characters/shadow_yumi",
+                fileUrl:    "characters/clone_yumi",
                 bodyExt:    "",
                 amp:        false,
             },
