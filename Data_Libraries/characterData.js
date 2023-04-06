@@ -805,5 +805,26 @@ const
                 },
                 fileUrl: "items/weapon_greatHammer"
             },
-        },
+        },{
+            name: "YumiClone",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      26,
+                    height:     30,
+                    rows:       2,
+                    columns:    4
+                },
+                offset: {
+                    body:   1
+                },
+                fileUrl:    "characters/clone_yumi"
+            },
+            clothingData: {
+                0: {
+                    head: false,},
+                1: {
+                    head: false,}
+            }
+        }
     ]

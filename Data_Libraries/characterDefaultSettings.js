@@ -13,7 +13,7 @@ const defaultData = {
         },
         ampMultiplier: 1,
         floatSequence: false,
-        fileUrl: "",
+        fileUrl: "", // don't use spaces!!!
         head: true,
         amp: true
     },
