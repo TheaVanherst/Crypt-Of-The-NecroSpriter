@@ -101,7 +101,9 @@ let characterRefactor = class setup {
 
         this.id =   character;
         this.name = characterData[this.id].name;
-        this.dlc =  characterData[this.id].dlc;
+
+        this.headExt = characterData[this.id].settings.headExt ?? "_heads";
+        this.bodyExt = characterData[this.id].settings.bodyExt ?? "_armor_body";
 
         this.width =  characterData[this.id]?.settings?.resolution?.width ?? 24;
         this.height = characterData[this.id]?.settings?.resolution?.height ?? 24;
@@ -269,11 +271,10 @@ let characterRefactor = class setup {
     urlUpdate(url) {
         url = url ?? this.characterUrlArray[this.id]?.[1] ?? characterData[this.id]?.settings?.fileUrl;
 
-        const srcLink = (this.dlc !== 2 ? ["_heads","_armor_body"] : ["_head","_body"]).map(i => `${i}.png?${new Date().getTime()}`);
         this.characterUrlArray[this.id] = [characterData[this.id].name,url];
 
-        this.head ? this.headElement.src =  url + srcLink[0] : null;
-        this.bodyElement.src =              url + srcLink[1];
+        this.head ? this.headElement.src =  `${url}${this.headExt}.png?${new Date().getTime()}` : null;
+        this.bodyElement.src =              `${url}${this.bodyExt}.png?${new Date().getTime()}`;
         this.src =                          url + ".png";
 
         let charUrl =               $("#characterUrl");

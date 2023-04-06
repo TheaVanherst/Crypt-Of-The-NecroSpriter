@@ -45,24 +45,33 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
 - Scaling feature, with a slider to change the resolution size of the left hand side preview.
 - Two different render modes, linear and the more accurate in-game beat driven render.
 
-<pre>INSTRUCTIONS:</pre>
-
-To test your animations, replace the sprite-sheets in the 'Characters' folder, and click the refresh icon under the render preview.
-Refreshing the page will do the same thing, although you may reset custom directory entries you may have inserted for that character as no cookie system is currently present in the current version of the software.
-
-Feel free to insert new character sheets or items into the folder you want to associate the directory to. If you're using already existing spritesheets in the folder, you can just use the character selector to change to the assosiated spritesheet.
-
-You can also change them using the URL directory by just typing the directory it's in and the file name + format.
-Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
+<pre>DEMO:</pre>
 
 <picture>
   <img alt="directory changing" src="./DEMO_Images/urlchanger.gif">
 </picture>
 
-Crypt of the Necrospriter also features a playable version of Vahn which replaces Nocturna, including all Armour sets & her bat transformation.
-She was drawn and tested using the software as a proof of concept, and available on the [Steam Workshop][1].
+Crypt of the Necrospriter also features a playable version of Vahn as Nocturna, and Yumi as Klarinetta, including all Armour sets & transformation types.
+Both characters were drawn and tested using the software as a proof of concept - Available on the Steam Workshop: [Vahn as Nocturna][1].
 
 [1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
+
+<pre>INSTRUCTIONS:</pre>
+
+To launch, double click `main.html` and open it through your preferred browser.
+
+To test your animations, replace the sprite-sheets in the `/characters` folder, and click the refresh icon under the render preview.<br>
+Refreshing the page will do the same thing, although you may reset custom directory entries you may have inserted for that character as no cookie system is currently present in the current version of the software.
+
+To change the file name of the associated character, `/Data_Libraries/characterData.js` contains all character related data, including associated image data.<br>
+You can also change them using the URL directory by just typing the directory it's in and the file name + format.<br>
+File urls are assigned by `fileUrl: "{url}"` in the Settings object, with the extensions of each sheet (body & head) being assigned via. `headExt:` and `bodyExt:` respectively.<br>
+Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.<br>
+If you require examples of usage, refer to `/Data_Libraries/characterDefaultSettings.js`. This sheet contains all the available datatype that can be associated to characters.<br>
+
+To add a character, add an object on the chain of characters in `/Data_Libraries/characterData.js`, and it'll be added automatically and assigned to the associated DLC.<br>
+DLCs are assigned via. `dlc: {number}`, and the name will be fetched via `dlcTypes` at the top of the sheet. It is generally recommended to keep them associated with `dlc: 3`.<br>
+Note: Adding a character as an object via. `/Data_Libraries/characterData.js` REQUIRES a page refresh to update.
 
 <pre>NOTES:</pre>
 

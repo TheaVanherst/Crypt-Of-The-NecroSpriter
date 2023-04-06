@@ -26,7 +26,7 @@ const
             name:   "Cadence",
             dlc:    0,
             settings: {
-                fileUrl: "characters/player1"
+                fileUrl:    "characters/player1",
             },
             shovel: {
                 offset: {
@@ -38,7 +38,7 @@ const
             name:   "Melody",
             dlc:    0,
             settings: {
-                fileUrl:    "characters/char1"
+                fileUrl:    "characters/char1",
             },
             weapon: {
                 bool:   false
@@ -53,7 +53,7 @@ const
             name:   "Aria",
             dlc:    0,
             settings: {
-                fileUrl: "characters/char2"
+                fileUrl: "characters/char2",
             }
         },
         {
@@ -69,7 +69,7 @@ const
                     head:   1,
                     body:   4
                 },
-                fileUrl: "characters/char3"
+                fileUrl: "characters/char3",
             },
             hat: {
                 offset: {
@@ -130,7 +130,7 @@ const
                     width:  33,
                     height: 28
                 },
-                fileUrl: "characters/char4"
+                fileUrl: "characters/char4",
             },
             hat: {
                 bool:   false
@@ -178,7 +178,7 @@ const
             name:   "Monk",
             dlc:    0,
             settings: {
-                fileUrl:    "characters/char5"
+                fileUrl:    "characters/char5",
             }
         },
         {
@@ -188,7 +188,7 @@ const
                 offset: {
                     head:   4
                 },
-                fileUrl:    "characters/char6"
+                fileUrl:    "characters/char6",
             }
         },
         {
@@ -199,7 +199,7 @@ const
                     width:  33,
                     height: 30
                 },
-                fileUrl:    "characters/char7"
+                fileUrl:    "characters/char7",
             },
             hat: {
                 bool:   false
@@ -251,14 +251,14 @@ const
             name:   "Bolt",
             dlc:    0,
             settings: {
-                fileUrl: "characters/char8"
+                fileUrl: "characters/char8",
             }
         },
         {
             name:   "Bard",
             dlc:    0,
             settings: {
-                fileUrl: "characters/char9"
+                fileUrl: "characters/char9",
             }
         },
         {
@@ -268,7 +268,7 @@ const
                 offset: {
                     head:   1
                 },
-                fileUrl: "characters/char14"
+                fileUrl: "characters/char14",
             },
             special: {
                 bool:       true,
@@ -302,7 +302,7 @@ const
                     height: 27,
                     rows:   15
                 },
-                fileUrl: "characters/char10"
+                fileUrl: "characters/char10",
             },
             hat: {
                 offset: {
@@ -424,7 +424,9 @@ const
                     width:  25,
                     height: 28
                 },
-                fileUrl:    "characters/Suzu"
+                fileUrl:    "characters/Suzu",
+                headExt:    "_head",
+                bodyExt:    "_body",
             },
             hat: {
                 offset: {
@@ -499,6 +501,7 @@ const
                     columns:    9
                 },
                 fileUrl:    "characters/Chaunter",
+                bodyExt:    "_body",
                 amp:        false
             },
             hat: {
@@ -559,7 +562,9 @@ const
                     body:   1
                 },
                 ampMultiplier:  2,
-                fileUrl:        "characters/klarinetta"
+                fileUrl:        "characters/klarinetta",
+                headExt:        "_head",
+                bodyExt:        "_body",
             },
             hat: {
                 offset: {
@@ -818,7 +823,9 @@ const
                 offset: {
                     body:   1
                 },
-                fileUrl:    "characters/shadow_yumi"
+                fileUrl:    "characters/shadow_yumi",
+                bodyExt:    "",
+                amp:        false,
             },
             clothingData: {
                 0: {

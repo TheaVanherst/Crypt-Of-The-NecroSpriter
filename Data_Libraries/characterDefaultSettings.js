@@ -12,10 +12,11 @@ const defaultData = {
             body: 0
         },
         ampMultiplier: 1,
-        floatSequence: false,
-        fileUrl: "", // don't use spaces!!!
-        head: true,
-        amp: true
+        amp: true,
+
+        fileUrl:    "", // don't use spaces!!!
+        headExt:    "_heads",
+        bodyExt:    "_armor_body",
     },
     hat: {
         offset: {

@@ -1,0 +1,138 @@
+
+/* TODO: CUSTOM CURSORS */
+
+body {
+    cursor: url('../UI_Libraries/default_cursor.png'), auto;}
+a {
+    cursor: url('../UI_Libraries/text_cursor.png'),    auto!important;}
+input[type=text] {
+    cursor: url('../UI_Libraries/text_cursor.png'),    auto!important;}
+
+.slider,
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
+    cursor: url('../UI_Libraries/grab_cursor.png'),    auto!important;}
+input[type="range" i] {
+    cursor: url('../UI_Libraries/grab_cursor.png'), default !important;}
+
+e:hover {
+    cursor: url('../UI_Libraries/hover_cursor.png'),   auto!important;}
+
+/* TODO: TABLE RENDERING */
+
+tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
+    background-image:   url("../UI_Libraries/border_Top.png");}
+tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
+    background-image:   url("../UI_Libraries/border_Left.png");}
+tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
+    background-image: url("../UI_Libraries/border_corner1.png");}
+
+/* TODO: RENDER CSS & SCALING */
+
+#playerModel,
+#playerModel > *,
+#playerModel > * > *,
+#shadow {
+    position:       absolute;}
+
+#transform {
+    top:    50%;
+    left:   50%;
+    margin: 0 0 0 -1px;
+    position:   relative;}
+
+#playerModel,
+#shadow,
+#transform {
+    width:              24px;
+    height:             24px!important;}
+
+#floor,
+#danceFloor,
+#foreground {
+    top:    50%;
+    left:   50%;
+    -ms-transform:  translate(-50%, -50%);
+    transform:      translate(-50%, -50%);
+
+    width:  216px;
+    height: 168px;
+
+    position:           absolute;}
+#floor,
+#danceFloor {
+    margin:     7px 0 0 0;
+    object-fit: none;}
+#foreground {
+    margin:    -8px 0 0 0;}
+
+#shadow {
+    margin:     2px 0 0 0;}
+#playerModel {
+    z-index:    2;
+    height:     24px!important;}
+
+.mirror {
+    -ms-transform:  scaleX(-1)!important;
+    transform:      scaleX(-1)!important;}
+
+#head, #body {
+    object-fit: none;}
+
+/* TODO: CONSUMABLES & CHARACTER EQUIPMENT */
+
+#hat,#weapon,#ring, #boots,
+#torch, #charm, #hip, #shovel {
+    width:      24px;
+    height:     24px;
+    object-fit: none;}
+#shovel {
+    left:   1px; }
+
+#consumables,
+#spell, #equipment, #item {
+    position: absolute;}
+
+#consumables {
+    top:    8px; }
+#spell {
+    left:   22px; }
+#equipment {
+    margin:-8px 0 0 0;
+    left:   7px; }
+#item {
+    left:  -7px; }
+
+#special {
+    position:   absolute;
+    object-fit: none;
+    z-index:    10;
+
+    object-position:    0 0;}
+
+#shield {
+    width:  24px;
+    height: 24px;
+    top:    4px;
+
+    object-fit: none;
+    position:   absolute;}
+#shield.up {
+    margin:             -9px 0 0 0;
+    z-index:            0;
+    object-position:   -72px 0;}
+#shield.right {
+    margin:             -2px 0 0 16px;
+    z-index:            10;
+    object-position:    0 0;}
+#shield.down {
+    margin:             9px 0 0 0;
+    z-index:            20;
+    object-position:   -24px 0;}
+
+@keyframes bounce {
+    0%,30%, 100% {transform: translateY(0);}
+    5% {transform: translateY(-10px);}
+    15% {transform: translateY(-13px);}
+    25% {transform: translateY(-10px);}
+}
