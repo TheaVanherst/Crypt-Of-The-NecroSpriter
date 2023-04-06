@@ -424,7 +424,7 @@ const
                     width:  25,
                     height: 28
                 },
-                fileUrl:    "characters/Suzu",
+                fileUrl:    "characters/suzu",
                 headExt:    "_head",
                 bodyExt:    "_body",
             },
