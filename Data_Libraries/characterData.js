@@ -1,51 +1,59 @@
 
 const
-    dlcTypes = [ // preset DLC names
+    dlcTypes =
+        [ // preset DLC names
             "Base Game",
             "Amplified",
             "Synchrony",
             "Custom"
         ],
-    aniOffsets = [ // animation offsets
-        [
-            1,1,1,
-            2,2,2,2,2,2,2,
-            3,3,3,3,3,3,3,3,3,
-            4,4,4,4,4,4,
-        ],[
-            1, 2, 3, 4,
-        ]
-    ],
-    floatOffsets = [ // preset character float offsets
-        8,9,10,11,10,9
-    ];
+    aniOffsets =
+        [ // animation offsets
+            [
+                1,1,1,
+                2,2,2,2,2,2,2,
+                3,3,3,3,3,3,3,3,3,
+                4,4,4,4,4,4,
+            ],[
+                1, 2, 3, 4,
+            ]
+        ],
+    floatOffsets =
+        [ // preset character float offsets
+            8,9,10,11,10,9
+        ];
 
-const clear =
-    [{
-        name: "hat",
-        bool: false
-    },{
-        name: "weapon",
-        bool: false
-    },{
-        name: "ring",
-        bool: false
-    },{
-        name: "boots",
-        bool: false
-    },{
-        name: "charm",
-        bool: false
-    },{
-        name: "shovel",
-        bool: false
-    },{
-        name: "torch",
-        bool: false
-    },{
-        name: "hip",
-        bool: false
-    }]
+// TODO: preset object calls
+
+const
+    clear = // this prevents equipables on character switch / clothing switch
+        [{
+            name: "hat",
+            bool: false
+        },{
+            name: "weapon",
+            bool: false
+        },{
+            name: "ring",
+            bool: false
+        },{
+            name: "boots",
+            bool: false
+        },{
+            name: "charm",
+            bool: false
+        },{
+            name: "shovel",
+            bool: false
+        },{
+            name: "torch",
+            bool: false
+        },{
+            name: "hip",
+            bool: false
+        }];
+
+// TODO: character data
 
 const
     characterData = [
