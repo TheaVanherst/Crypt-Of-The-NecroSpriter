@@ -110,7 +110,6 @@ let characterRefactor = class setup {
 
         this.#bodyOffsets();
         this.#clothingChecks();
-        this.uniqueChecks();
 
         this.amp = characterData[this.id]?.settings?.amp ?? true;
         this.ampToggle();
@@ -130,6 +129,7 @@ let characterRefactor = class setup {
         $("#characterDebug").textContent =  `${this.name} `;
         $("#clothingDebug").textContent =   this.clothingSet + 1;
 
+        this.uniqueChecks();
         this.#debugUpdate();
         this.flip();
         this.animate();

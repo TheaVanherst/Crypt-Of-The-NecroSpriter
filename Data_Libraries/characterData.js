@@ -20,6 +20,33 @@ const
         8,9,10,11,10,9
     ];
 
+const clear =
+    [{
+        name: "hat",
+        bool: false
+    },{
+        name: "weapon",
+        bool: false
+    },{
+        name: "ring",
+        bool: false
+    },{
+        name: "boots",
+        bool: false
+    },{
+        name: "charm",
+        bool: false
+    },{
+        name: "shovel",
+        bool: false
+    },{
+        name: "torch",
+        bool: false
+    },{
+        name: "hip",
+        bool: false
+    }]
+
 const
     characterData = [
         {
@@ -355,33 +382,7 @@ const
             clothingData: {
                 14: {
                     head:   false,
-                    settings: [
-                        {
-                            name:   "hat",
-                            bool:   false,
-                        },{
-                            name:   "weapon",
-                            bool:   false
-                        },{
-                            name:   "ring",
-                            bool:   false
-                        },{
-                            name:   "boots",
-                            bool:   false
-                        },{
-                            name:   "charm",
-                            bool:   false
-                        },{
-                            name:   "shovel",
-                            bool:   false
-                        },{
-                            name:   "torch",
-                            bool:   false
-                        },{
-                            name:   "hip",
-                            bool:   false
-                        }
-                    ],
+                    settings: clear,
                     floatSequence: true
                 },
             },
@@ -697,33 +698,7 @@ const
                 14: {
                     head:           false,
                     floatSequence:  true,
-                    settings: [
-                        {
-                            name: "hat",
-                            bool: false
-                        },{
-                            name: "weapon",
-                            bool: false
-                        },{
-                            name: "ring",
-                            bool: false
-                        },{
-                            name: "boots",
-                            bool: false
-                        },{
-                            name: "charm",
-                            bool: false
-                        },{
-                            name: "shovel",
-                            bool: false
-                        },{
-                            name: "torch",
-                            bool: false
-                        },{
-                            name: "hip",
-                            bool: false
-                        }
-                    ],
+                    settings: clear,
                 },
             },
         },
@@ -829,9 +804,13 @@ const
             },
             clothingData: {
                 0: {
-                    head: false,},
+                    head: false,
+                    settings: clear,
+                },
                 1: {
-                    head: false,}
+                    head: false,
+                    settings: clear,
+                }
             }
         },{
             name: "AltYumi",
@@ -852,9 +831,13 @@ const
             },
             clothingData: {
                 0: {
-                    head: false,},
+                    head:       false,
+                    settings:   clear,
+                },
                 1: {
-                    head: false,}
+                    head:       false,
+                    settings:   clear,
+                }
             }
         }
     ]
