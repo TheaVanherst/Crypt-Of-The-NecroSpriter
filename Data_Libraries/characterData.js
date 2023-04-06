@@ -811,7 +811,30 @@ const
                 fileUrl: "items/weapon_greatHammer"
             },
         },{
-            name: "ShadowYumi",
+            name: "AltVahn",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      21,
+                    height:     27,
+                    rows:       2,
+                    columns:    4
+                },
+                offset: {
+                    body:   1
+                },
+                fileUrl:    "characters/shadow_vahn",
+                bodyExt:    "",
+                amp:        false,
+            },
+            clothingData: {
+                0: {
+                    head: false,},
+                1: {
+                    head: false,}
+            }
+        },{
+            name: "AltYumi",
             dlc: 3,
             settings: {
                 resolution: {

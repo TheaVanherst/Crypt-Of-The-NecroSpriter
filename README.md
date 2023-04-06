@@ -58,7 +58,8 @@ Both characters were drawn and tested using the software as a proof of concept -
 
 <pre>INSTRUCTIONS:</pre>
 
-To launch, double click `main.html` and open it through your preferred browser.
+To launch, double click `main.html` and open it through your preferred browser.<br>
+Updating spritesheets will require your own external software. Edited sheets can be updated via. the refresh button at the bottom right of the render view.
 
 To test your animations, replace the sprite-sheets in the `/characters` folder, and click the refresh icon under the render preview.<br>
 Refreshing the page will do the same thing, although you may reset custom directory entries you may have inserted for that character as no cookie system is currently present in the current version of the software.

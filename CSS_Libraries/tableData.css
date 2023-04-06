@@ -103,6 +103,8 @@ tbody > tr > th > div {
     height:     90px;}
 #charDebug {
     word-wrap:  break-word;
+    max-height: 420px;
+    overflow: scroll;
     width:      var(--debugBoxWidth);
     min-width:  -moz-available;
     min-width:  -webkit-fill-available;}

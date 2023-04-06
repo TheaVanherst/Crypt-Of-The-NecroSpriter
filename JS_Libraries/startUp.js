@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $("#bpmSlider").oninput = (e) =>    bpmUpdate(e);
     $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
-    $("#scaleSlider").oninput = (e) =>  scale(e);
+    $("#scaleSlider").oninput = () =>   scale();
 
     $all(".scrollArea").forEach((e) => {    e.onwheel = (e) =>      scrollWheel(e);})
     $all("#urlData input").forEach((e) => { e.onkeydown = (a) =>    search(a,e);});
