@@ -109,7 +109,7 @@ const floorRefactor = class floor {
 
             if(!!$(`#zone${r}${c} f`)) { // checks if embedded f element exists (if toggleable)
                 $(`#zone${r}${c} f`).style.backgroundImage = `url('UI_Libraries/${this.floorTileSets[r][c][0][this.tileSet]}_Floor.png')`;
-                $(`#zone${r}${c} f p`).innerText = this.floorTileSets[r][c][0][this.tileSet];
+                $(`#zone${r}${c} f p`).innerText = this.overlayTileSets[r][c][0];
             }
         }
         else { // this switches between the floors if contained in array
@@ -131,12 +131,12 @@ const floorRefactor = class floor {
 
         // sets current visible floor preview
         $("#zone" + e + i).style.backgroundImage =  `url('UI_Libraries/${this.floorTileSets[e][i][0][0]}_Floor.png')`;
-        $("#zone" + e + i + " > p").innerText =     this.floorTileSets[e][i][0][this.tileSet];
+        $("#zone" + e + i + " > p").innerText =     this.overlayTileSets[e][i][0];
 
         // toggle preview change
         if (this.floorTileSets[e][i]?.[1]?.[this.tileSet]) {  // checks if embedded f element exists (if toggleable)
             $("#zone" + e + i + " f").style.backgroundImage =   `url('UI_Libraries/${this.floorTileSets[e][i][1][this.tileSet]}_Floor.png')`;
-            $("#zone" + e + i + " f p").innerText =             this.overlayTileSets[e][i][1];
+            $("#zone" + e + i + " f p").innerText =             this.overlayTileSets[e][i][0];
         }
 
         this.danceUpdate();
