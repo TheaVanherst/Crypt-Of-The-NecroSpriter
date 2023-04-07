@@ -86,7 +86,10 @@ const floorRefactor = class floor {
 
         // sets currently active button (sets floor)
         this.backgroundUpdate(b, c);
-        $("#flipDebug").textContent = this.floorBinary;
+
+        // debug startup
+        this.debugFlip.textContent = this.floorBinary;
+        this.debugFloor.textContent = `${this.currentFloor} | ${this.overlayTileSets[this.currentFloor[0]][this.currentFloor[1]][0]}${this.danceType}`
     };
 
     verifyFloorCheck() {
@@ -204,12 +207,12 @@ const floorRefactor = class floor {
                            `url('UI_Libraries/${this.floorTileSets[this.currentFloor[0]][this.currentFloor[1]][0][this.tileSet]}_Floor2.png')`];
         this.danceFloor.style.backgroundImage = this.danceUrls[this.floorBinary];
 
-        this.debugFlip.textContent = `${this.currentFloor} | ${this.overlayTileSets[this.currentFloor[0]][this.currentFloor[1]][0]}${this.danceType}`
+        this.debugFloor.textContent = `${this.currentFloor} | ${this.overlayTileSets[this.currentFloor[0]][this.currentFloor[1]][0]}${this.danceType}`
     };
 
     floorFlip() {
         this.floorBinary ^= 1;
         this.danceFloor.style.backgroundImage = this.danceUrls[this.floorBinary];
-        this.debugFloor.textContent =           this.floorBinary
+        this.debugFlip.textContent =           this.floorBinary
     };
 }
