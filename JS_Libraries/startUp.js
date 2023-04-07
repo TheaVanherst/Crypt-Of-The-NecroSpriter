@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentCharacter = new characterRefactor(false, 4, startCharacter); //AMP mode / clothing set / def char
 
     $("#crop").style.backgroundColor = "darkslategray"; //background colour.
-    floorData = new floorRefactor(0,1, true, true);
+    floorData = new floorRefactor(0);
     //floor you want [0-5], dance mode [0-2], true or false for visibility states.
     // floor types [0-5] : Zone 1, Zone 2, Zone 3 (COLD), Zone 4, Zone 5, Boss (1)
 

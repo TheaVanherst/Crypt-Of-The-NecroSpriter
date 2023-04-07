@@ -265,6 +265,8 @@ input[type=range]::-moz-range-thumb {
 #debug {
     line-height: calc(100% + 3px);
     display:    inline-block;}
+#floorDebug, #flipDebug {
+    color: gray;}
 
 .slider {
     width:      100%;

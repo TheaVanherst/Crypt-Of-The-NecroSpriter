@@ -99,24 +99,22 @@ let characterRefactor = class setup {
 
         $(`#${this.name}`)?.classList.remove("pressed");
 
-        this.id =   character;
-        this.name = characterData[this.id].name;
+        this.id =       character;
+        this.name =     characterData[this.id].name;
 
-        this.headExt = characterData[this.id].settings.headExt ?? "_heads";
-        this.bodyExt = characterData[this.id].settings.bodyExt ?? "_armor_body";
+        this.headExt =  characterData[this.id].settings.headExt ?? "_heads";
+        this.bodyExt =  characterData[this.id].settings.bodyExt ?? "_armor_body";
 
-        this.width =  characterData[this.id]?.settings?.resolution?.width ?? 24;
-        this.height = characterData[this.id]?.settings?.resolution?.height ?? 24;
+        this.width =    characterData[this.id]?.settings?.resolution?.width ??  24;
+        this.height =   characterData[this.id]?.settings?.resolution?.height ?? 24;
 
         this.#clothingChecks();
 
         this.amp = characterData[this.id]?.settings?.amp ?? true;
         this.ampToggle();
 
-        this.headElement.style.height =     this.height + "px";
-        this.bodyElement.style.height =     this.height + "px";
-        this.headElement.style.width =      this.width + "px";
-        this.bodyElement.style.width =      this.width + "px";
+        this.headElement.style.height = this.bodyElement.style.height = this.height + "px";
+        this.headElement.style.width =  this.bodyElement.style.width =  this.width +  "px";
 
         $("#consumables").style.marginTop = `${Math.ceil((24 - this.height) / 2) - 5}px`;
         $("#shield").style.left =           `${Math.floor(-(24 - (this.width)) / 2)}px`;
@@ -140,7 +138,7 @@ let characterRefactor = class setup {
         let returnString = "";
         Object.entries(characterData[this.id])
             .forEach(([key, value]) => {
-                returnString += `${key}  [${JSON.stringify(value)}]`;
+                returnString += `${key} [${JSON.stringify(value)}]`;
             });
         $("#charDebug").innerText = returnString;
     };
@@ -148,7 +146,7 @@ let characterRefactor = class setup {
     floatOffsets = ["0px", "0px", "0px", "0px", "0px", "0px"]
 
     #floatChecks() {
-        const bodyOffset = characterData[this.name]?.settings?.offset?.body ?? 0;
+        const bodyOffset =  characterData[this.name]?.settings?.offset?.body ?? 0;
 
         this.floatOffsets = floatOffsets.map(x =>
             `${-(x + ((24 + bodyOffset) - this.height))}px 0px 0px ${Math.floor((24 - this.width) / 2)}px`);
@@ -159,8 +157,8 @@ let characterRefactor = class setup {
     };
 
     #floatDisable(){
-        this.bodyOffset = characterData[this.id]?.settings?.offset?.body ?? 0;
-        this.floatOffsets = this.floatOffsets.map(() =>
+        this.bodyOffset =       characterData[this.id]?.settings?.offset?.body ?? 0;
+        this.floatOffsets =     this.floatOffsets.map(() =>
             `${((24 + this.bodyOffset) - this.height)}px 0px 0px ${Math.ceil((24 - this.width) / 2)}px`);
     };
 
@@ -230,9 +228,9 @@ let characterRefactor = class setup {
             uniqueClothingData?.head === false ? this.headElement.classList.add("invisible") : this.headElement.classList.remove("invisible");
 
             for (let i in uniqueClothingData?.settings) {
-                if ($((`#${uniqueClothingData.settings[i].name}Button`)).hasAttribute("class","active") && uniqueClothingData.settings[i].bool === false) {
-                    $((`#${uniqueClothingData.settings[i].name}Button`)).setAttribute("class","deactivate");
-                    $((`#${uniqueClothingData.settings[i].name}`)).classList.add('invisible');
+                if ($(`#${uniqueClothingData.settings[i].name}Button`).hasAttribute("class", "active") && uniqueClothingData.settings[i].bool === false) {
+                    $(`#${uniqueClothingData.settings[i].name}Button`).setAttribute("class","deactivate");
+                    $(`#${uniqueClothingData.settings[i].name}`).classList.add('invisible');
                     this.uniqueClothing[i] = uniqueClothingData.settings[i].name;
                 }
             }

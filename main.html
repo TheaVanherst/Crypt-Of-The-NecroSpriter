@@ -21,29 +21,32 @@
                             <d>Render View</d>
                             <div id="crop" class="scrollArea">
                                 <div id="transform">
-                                    <div class="inline" id="floor"></div>
-                                    <div class="inline" id="danceFloor"></div>
-                                    <img id="shadow" alt="shadow" src="UI_Libraries/shadow.png">
-                                    <img id="foreground" alt="foreground" src="">
-                                    <div id="playerModel">
-                                        <img id="special" alt="Special" src="">
-                                        <img id="shield" alt="shield" src="" class="invisible">
+                                    <div class="inline"             id="floor"></div>
+                                    <div class="inline invisible"   id="danceFloor"></div>
 
-                                        <img id="shovel" alt="shovel" src="">
-                                        <img id="body" alt="body" src="">
-                                        <img id="charm" alt="charm" src="">
-                                        <img id="hip" alt="hip" src="">
-                                        <img id="head" alt="head" src="">
-                                        <img id="hat" alt="hat" src="">
-                                        <img id="boots" alt="boots" src="">
-                                        <img id="weapon" alt="weapon" src="">
-                                        <img id="torch" alt="torch" src="">
-                                        <img id="ring" alt="ring" src="">
+                                    <img id="shadow"        alt="shadow"        src="UI_Libraries/shadow.png">
+                                    <img id="foreground"    alt="foreground"    src="">
+
+                                    <div id="playerModel">
+                                        <img id="special"   alt="Special"   src="">
+                                        <img id="shield"    alt="shield"    src="">
+                                        <img id="shovel"    alt="shovel"    src="">
+                                        <img id="body"      alt="body"      src="">
+                                        <img id="charm"     alt="charm"     src="">
+                                        <img id="hip"       alt="hip"       src="">
+                                        <img id="head"      alt="head"      src="">
+                                        <img id="hat"       alt="hat"       src="">
+                                        <img id="boots"     alt="boots"     src="">
+                                        <img id="weapon"    alt="weapon"    src="">
+                                        <img id="torch"     alt="torch"     src="">
+                                        <img id="ring"      alt="ring"      src="">
                                     </div>
+
                                     <div id="consumables" class="inline">
-                                        <img id="item" alt="item" src="">
+                                        <img id="item"      alt="item"      src="">
                                         <img id="equipment" alt="equipment" src="">
-                                        <img id="spell" alt="spell" src=""></div>
+                                        <img id="spell"     alt="spell"     src="">
+                                    </div>
                                 </div>
                             </div>
 
@@ -51,10 +54,10 @@
                                 <d>Animation settings</d>
                                 <div>
                                     <div class="flex">
-                                        <e id="danceButton"      onclick="floorData.danceSwitcher(1);       "> Dance Floor </e>
-                                        <e id="multiplierButton" onclick="floorData.danceSwitcher(2);       "> Multiplier  </e>
-                                        <e id="backgroundButton" onclick="floorData.floorToggle();          "> background  </e>
-                                        <e id="foregroundButton" onclick="floorData.foregroundToggle();     "> Foreground  </e>
+                                        <e id="multiplierButton"    onclick="floorData.danceSwitcher(2);  "> Multiplier  </e>
+                                        <e id="danceButton"         onclick="floorData.danceSwitcher(1);  "> Dance Floor </e>
+                                        <e id="backgroundButton"    onclick="floorData.floorToggle();     "> background  </e>
+                                        <e id="foregroundButton"    onclick="floorData.foregroundToggle();"> Foreground  </e>
                                     </div>
                                     <div class="buttons">
                                         <e onclick="elapsed--; playToggle(false);"> Prev </e>
@@ -92,7 +95,7 @@
                             <div class="inline" id="debug">
                                 <ln>Beat: <l id="beatDebug"></l> Bar: <l id="barDebug"></l> Frm: <l id="elapsedDebug"></l></ln>
                                 <ln>Char: <p id="characterDebug"></p>: <l id="clothingDebug"></l></ln>
-                                <ln>Flr: <p id="floorDebug"></p>: <l id="flipDebug"></l></ln>
+                                <ln><p id="floorDebug"></p> <l id="flipDebug"></l></ln>
                             </div>
                         </div>
                     </th>
@@ -122,7 +125,7 @@
                             <d>Compatible Tracks:</d>
                             <div class="innerTable" id="trackContainer"></div>
 
-                            <d>Background</d>
+                            <d>Foreground / Floors</d>
                             <div id="backgrounds"></div>
                         </div>
                     </th>
