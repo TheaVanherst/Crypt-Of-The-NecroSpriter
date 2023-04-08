@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="CSS_Libraries/tableData.css">
         <link rel="stylesheet" href="CSS_Libraries/playerData.css">
 
-        <link rel="icon" type="image/png" href="UI_Libraries/skull_small.png">
+        <link rel="icon" type="image/png" href="UI_Libraries/skull_Small.png">
         <title>Crypt of the NecroSpriter</title>
     </head>
 
@@ -95,9 +95,31 @@
                                 <img class="bpm" src="UI_Libraries/heart.png" alt="Beat6">
                             </div>
                             <div class="inline" id="debug">
-                                <ln>Beat: <l id="beatDebug"></l> Bar: <l id="barDebug"></l> Frm: <l id="elapsedDebug"></l></ln>
-                                <ln>Char: <p id="characterDebug"></p>: <l id="clothingDebug"></l></ln>
-                                <ln><p id="floorDebug"></p> <l id="flipDebug"></l></ln>
+                                <ln>
+                                    Beat:
+                                        <l id="beatDebug">
+                                            U   </l>
+                                    Bar:
+                                        <l id="barDebug">
+                                            U   </l>
+                                    Frm:
+                                        <l id="elapsedDebug">
+                                            U   </l>
+                                </ln>
+                                <ln>
+                                    Char:
+                                        <p id="characterDebug">
+                                            Undefined   </p>
+                                    :
+                                        <l id="clothingDebug">
+                                            UDF         </l>
+                                </ln>
+                                <ln>
+                                    <p id="floorDebug">
+                                        UDF             </p>
+                                    <l id="flipDebug">
+                                        UDF             </l>
+                                </ln>
                             </div>
                         </div>
                     </th>
@@ -114,20 +136,26 @@
                     <th></th>
                     <th>
                         <div>
-                            <d>Main Render Settings</d>
+                            <d> Main Render Settings        </d>
                             <div id="bpmContainer">
-                                <d>Animation Speed (BPM)</d>
+                                <d> Animation Speed (BPM)   </d>
                                 <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
                                 <div>
-                                    <p>100</p>
-                                    <p class="rightFloat">190</p>
+                                    <p> 100 </p>
+                                    <p class="rightFloat">
+                                        190 </p>
                                 </div>
-                                current BPM: <t id="bpm"></t>
+                                current BPM:
+                                <t id="bpm">
+                                    Undefined BPM.
+                                </t>
                             </div>
-                            <d>Compatible Tracks:</d>
-                            <div class="innerTable" id="trackContainer"></div>
+                            <d> Compatible Tracks:          </d>
+                            <div class="innerTable" id="trackContainer">
+                                Undefined song list object.
+                            </div>
 
-                            <d>Foreground / Floors</d>
+                            <d> Foreground / Floors         </d>
                             <div id="backgrounds"></div>
                         </div>
                     </th>
@@ -142,36 +170,49 @@
                     <th></th>
                     <th>
                         <div>
-                            <d>Equipables & Consumables</d>
-                            <d>Clothing</d>
+                            <d> Equipables & Consumables    </d>
+                            <d> Clothing                    </d>
                             <div id="clothing"></div>
 
-                            <d>Armour / Weapon Slots</d>
+                            <d> Armour / Weapon Slots       </d>
                             <div id="equipmentSlots">
                                 <div class="flex">
-                                    <e class="flippant" id="hatButton">Helmet</e>
-                                    <e class="flippant" id="weaponButton">Weapon</e>
-                                    <e class="flippant" id="ringButton">Ring</e>
-                                    <e class="flippant" id="bootsButton">Boots</e>
+                                    <e class="flippant" id="hatButton">
+                                        Helmet      </e>
+                                    <e class="flippant" id="weaponButton">
+                                        Weapon      </e>
+                                    <e class="flippant" id="ringButton">
+                                        Ring        </e>
+                                    <e class="flippant" id="bootsButton">
+                                        Boots       </e>
                                 </div>
                                 <div class="flex">
-                                    <e class="flippant" id="spellButton">Spell</e>
-                                    <e class="flippant" id="itemButton">Item</e>
-                                    <e class="flippant" id="equipmentButton">equipment</e>
-                                    <e class="flippant" id="charmButton">Charm</e>
+                                    <e class="flippant" id="spellButton">
+                                        Spell       </e>
+                                    <e class="flippant" id="itemButton">
+                                        Item        </e>
+                                    <e class="flippant" id="equipmentButton">
+                                        equipment   </e>
+                                    <e class="flippant" id="charmButton">
+                                        Charm       </e>
                                 </div>
                             </div>
 
-                            <d>Tools & Misc</d>
+                            <d> Tools & Misc                </d>
                             <div class="flex" id="consumableSlots">
-                                <e class="flippant" id="shovelButton">Shovel</e>
-                                <e class="flippant" id="torchButton">Torch</e>
-                                <e class="flippant" id="hipButton">Hip</e>
-                                <e class="flippant" id="specialButton">Special</e>
+                                <e class="flippant" id="shovelButton">
+                                    Shovel      </e>
+                                <e class="flippant" id="torchButton">
+                                    Torch       </e>
+                                <e class="flippant" id="hipButton">
+                                    Hip         </e>
+                                <e class="flippant" id="specialButton">
+                                    Special     </e>
                             </div>
-                            <d>shield Controller</d>
+                            <d> shield Controller           </d>
                             <div class="flex" id="shieldSettings">
-                                <e id="shieldButton">Shield</e>
+                                <e id="shieldButton">
+                                    Shield      </e>
                             </div>
                         </div>
                     </th>
@@ -188,20 +229,33 @@
                     <th></th>
                     <th>
                         <div id="urlData">
-                            <d>URL Directory Data</d>
-                            <d>Helmet</d><input type="text" id="hatUrl">
-                            <d>Weapon</d><input type="text" id="weaponUrl">
-                            <d>Ring</d><input type="text" id="ringUrl">
-                            <d>Boots</d><input type="text" id="bootsUrl">
-                            <d>Spell</d><input type="text" id="spellUrl">
-                            <d>Item</d><input type="text" id="itemUrl">
-                            <d>Equipment</d><input type="text" id="equipmentUrl">
-                            <d>Charm</d><input type="text" id="charmUrl">
-                            <d>Shovel</d><input type="text" id="shovelUrl">
-                            <d>Torch</d><input type="text" id="torchUrl">
-                            <d>Hip</d><input type="text" id="hipUrl">
-                            <d>Special</d><input class="flippant" type="text" id="specialUrl">
-                            <d>Shield</d><input type="text" id="shieldUrl">
+                            <d> URL Directory Data </d>
+                            <d> Helmet      </d>
+                                <input type="text" id="hatUrl">
+                            <d> Weapon      </d>
+                                <input type="text" id="weaponUrl">
+                            <d> Ring        </d>
+                                <input type="text" id="ringUrl">
+                            <d> Boots       </d>
+                                <input type="text" id="bootsUrl">
+                            <d> Spell       </d>
+                                <input type="text" id="spellUrl">
+                            <d> Item        </d>
+                                <input type="text" id="itemUrl">
+                            <d> Equipment   </d>
+                                <input type="text" id="equipmentUrl">
+                            <d> Charm       </d>
+                                <input type="text" id="charmUrl">
+                            <d> Shovel      </d>
+                                <input type="text" id="shovelUrl">
+                            <d> Torch       </d>
+                                <input type="text" id="torchUrl">
+                            <d> Hip         </d>
+                                <input type="text" id="hipUrl">
+                            <d> Special     </d>
+                                <input class="flippant" type="text" id="specialUrl">
+                            <d> Shield      </d>
+                                <input type="text" id="shieldUrl">
                         </div>
                     </th>
                     <th></th>
@@ -217,11 +271,11 @@
                     <th>
                         <div>
                             <div id="logo">
-                                <img src="UI_Libraries/logo_small.png" alt="Crypt of the Necrospriter">
+                                <img src="UI_Libraries/ctns_Logo.png" alt="Crypt of the Necrospriter">
                             </div>
                             <div>
                                 <div>
-                                    <d>Character URL</d>
+                                    <d> Character URL </d>
                                     <input type="text" id="characterUrl">
                                 </div>
                             </div>
@@ -240,14 +294,17 @@
                     <th></th>
                     <th>
                         <div class="scrollArea">
-                            <d>Scale [Pixel ratio]</d>
+                            <d> Scale [Pixel ratio] </d>
                             <div>
                                 <input type="range" min="4" max="12" step="1" class="slider" id="scaleSlider">
                                 <div>
-                                    <p>1:4</p>
-                                    <p class="rightFloat">1:12</p>
+                                    <p> 1:4     </p>
+                                    <p class="rightFloat">
+                                        1:12    </p>
                                 </div>
-                                current scale: <p id="scale">N/a</p>
+                                current scale:
+                                <p id="scale">
+                                        N/a     </p>
                             </div>
                         </div>
                     </th>
@@ -261,12 +318,16 @@
                     <th></th>
                     <th>
                         <div>
-                            <d>Advanced Options</d>
+                            <d> Advanced Options    </d>
                             <div class="flex">
-                                <e id="navTog" onclick="navToggle()">Nav Controls</e>
+                                <e id="navTog" onclick="navToggle()">
+                                    Nav Controls    </e>
                             </div>
-                            <d>Debug prompt</d>
-                            <div class="innerTable" id="charDebug"></div>
+
+                            <d> Debug prompt        </d>
+                            <div class="innerTable" id="charDebug">
+                                Error compiling character object.
+                            </div>
                         </div>
                     </th>
                     <th></th>
@@ -279,8 +340,12 @@
                     <th></th>
                     <th>
                         <div>
-                            <p>Created by <a target="_blank" href="https://twitter.com/TheaVanherst">Thea Vanherst</a></p><br>
-                            <p>All updates are available on <a target="_blank" href="https://github.com/TheaVanherst/Crypt-Of-The-NecroSpriter">Github</a></p><br>
+                            <p> Created by
+                                <a target="_blank" href="https://twitter.com/TheaVanherst">Thea Vanherst</a>
+                            </p><br>
+                            <p> All updates are available on
+                                <a target="_blank" href="https://github.com/TheaVanherst/Crypt-Of-The-NecroSpriter">Github</a>
+                            </p><br>
                         </div>
                     </th>
                     <th></th>
@@ -288,7 +353,7 @@
                 <tr><th></th><th></th><th></th></tr>
             </table>
             <div>
-                <p>Release <u>20230408</u> CTNS.Master:1.3.7</p>
+                <p>Release <u>20230408</u> CTNS.Master:1.3.7_0</p>
             </div>
         </panel>
     </body>

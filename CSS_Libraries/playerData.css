@@ -2,21 +2,21 @@
 /* TODO: CUSTOM CURSORS */
 
 body {
-    cursor: url('../UI_Libraries/default_cursor.png'), auto;}
+    cursor: url('../UI_Libraries/default_Cursor.png'), auto;}
 a {
-    cursor: url('../UI_Libraries/text_cursor.png'),    auto!important;}
+    cursor: url('../UI_Libraries/text_Cursor.png'),    auto!important;}
 input[type=text] {
-    cursor: url('../UI_Libraries/text_cursor.png'),    auto!important;}
+    cursor: url('../UI_Libraries/text_Cursor.png'),    auto!important;}
 
 .slider,
 .slider::-webkit-slider-thumb,
 .slider::-moz-range-thumb {
-    cursor: url('../UI_Libraries/grab_cursor.png'),    auto!important;}
+    cursor: url('../UI_Libraries/grab_Cursor.png'),    auto!important;}
 input[type="range" i] {
-    cursor: url('../UI_Libraries/grab_cursor.png'), default !important;}
+    cursor: url('../UI_Libraries/grab_Cursor.png'), default !important;}
 
 e:hover {
-    cursor: url('../UI_Libraries/hover_cursor.png'),   auto!important;}
+    cursor: url('../UI_Libraries/hover_Cursor.png'),   auto!important;}
 
 /* TODO: TABLE RENDERING */
 
@@ -25,7 +25,7 @@ tbody > tr:not(:nth-child(2)) > th:nth-child(2) {
 tbody > tr:nth-child(2) > th:not(:nth-child(2)) {
     background-image:   url("../UI_Libraries/border_Left.png");}
 tbody > tr:not(:nth-child(2)) > th:not(:nth-child(2)) {
-    background-image: url("../UI_Libraries/border_corner1.png");}
+    background-image: url("../UI_Libraries/border_Corner.png");}
 
 /* TODO: RENDER CSS & SCALING */
 
