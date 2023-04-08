@@ -9,11 +9,11 @@
 /* TODO: General refactoring */
 
 body {
-    font-size:  0;}
+    font-size:      0;}
 panel {
     vertical-align: top;
-    display:    inline-block;
-    position:   relative;
+    display:        inline-block;
+    position:       relative;
 
     font-size:  14px;
     padding:    0 10px 0 0;}
@@ -102,17 +102,17 @@ tbody > tr > th > div {
 #trackContainer {
     height:     90px;}
 #charDebug {
-    word-wrap:  break-word;
-    max-height: 420px;
-    overflow: scroll;
-    width:      var(--debugBoxWidth);
-    min-width:  -moz-available;
-    min-width:  -webkit-fill-available;}
+    word-wrap:      break-word;
+    max-height:     420px;
+    overflow:       scroll;
+
+    width:          var(--debugBoxWidth);
+    min-width:      -moz-available;
+    min-width:      -webkit-fill-available;}
 #debugTable {
     height: min-content;
     transition:
-        opacity 1s cubic-bezier(.05, .69, .14, 1)
-        height 1s cubic-bezier(.05, .69, .14, 1);
+        opacity 1s cubic-bezier(.05, .69, .14, 1);
 }
 
 #debugTable .flex e:only-child {

@@ -1,49 +1,47 @@
 const
-    createButton = (css,text,id) => {
-        let item = (document.createElement(css));
-        if(text !== "" && text !== undefined){item.textContent = text;}
-        if(id !== "" && id !== undefined){item.id = id;}
-        return item;
-    },
-
     urlRefresh = () => {
         itemArray.map(x => x.urlUpdate())
         consumableData.map(x => x.urlUpdate());
+
         specialData.urlUpdate();
         shieldData.urlUpdate();
         currentCharacter.urlUpdate();
     },
 
     bpmUpdate = (e) => {
-        let newBPM
-        if (e?.deltaY) {
-            e.preventDefault();
-            let value = $("#bpmSlider").value;
+        let newBPM;
 
-            newBPM = parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt(value)
-            newBPM = newBPM > 190 ? 190 : newBPM < 100 ? 100 : newBPM;
+        if (e?.deltaY) {
+            e.preventDefault(); // prevents zoom
+
+            newBPM =    parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt($("#bpmSlider").value)
+            newBPM =    newBPM > 190 ? 190 : newBPM < 100 ? 100 : newBPM;
 
             $("#bpmSlider").value = newBPM;
-        } else {
-            newBPM = $("#bpmSlider").value;
+        }
+        else {
+            newBPM =    $("#bpmSlider").value;
         }
 
         $('#bpm').textContent = newBPM;
 
-        let trackContainer = $('#trackContainer');
-        trackContainer.innerHTML = '';
+        let trackContainer =            $('#trackContainer');
+            trackContainer.innerHTML =  '';
 
         let step = ((newBPM - (100 - 5)) / 5) - 1;
         for (let i = 0; i < songList[step].length; i++) {
 
-            let item = document.createElement('t');
-                item.textContent = songList[step][i];
-            let br = document.createElement('br');
+            let item =              document.createElement('t');
+                item.textContent =  songList[step][i];
+            let br =                document.createElement('br');
 
-            trackContainer.appendChild(item).appendChild(br);
+            trackContainer
+                .appendChild(item)
+                .appendChild(br);
         }
-        arrayDivisional = 1000 / aniOffsets[0].length;
-        bpm = 60 / newBPM;
+
+        arrayDivisional =   1000 / aniOffsets[0].length;
+        bpm =               60 / newBPM;
     },
 
     search = (e) => {
@@ -52,30 +50,34 @@ const
 
             let url = e.target.value,
                 idStrip = (e.target.id).replace("Url","");
-
             image.src = url + ".png";
-            console.log(`RETURN URL: ${idStrip}`);
+
+            console.log(`RETURN URL: ${idStrip}`); // debug
 
             image.onload = () => {
                 for (let i = 0; i < itemArray.length; i++) {
                     if(itemArray[i].name === idStrip){
                         itemArray[i].urlUpdate(url);
-                        return;}
+                        return;
+                    }
                 }
                 for (let i = itemArray.length + 1; i < consumableData.length; i++) {
                     if(consumableData[i].name === idStrip){
                         consumableData[i].urlUpdate(url);
-                        return;}
+                        return;
+                    }
                 }
 
-                if(idStrip === "special"){
+                if (idStrip === "special") {
                     specialData.urlUpdate(url);
-                    return;}
-                if(idStrip === "shield"){
+                    return;
+                }
+                else if (idStrip === "shield") {
                     shieldData.urlUpdate(url);
-                    return;}
+                    return;
+                }
 
-                console.log("Item look-up failed.")
+                console.log("Item look-up failed.");
             };
 
             image.onerror = () => {
@@ -85,15 +87,15 @@ const
     },
 
     targetTimeout = (e) => {
-        let placeholder = e.target.placeholder;
-        e.target.value = "";
-        e.target.placeholder = "Not a valid directory";
-        e.target.classList.add("invalid");
+        let placeholder =       e.target.placeholder;       // grabs fallback
+        e.target.placeholder =  "Not a valid directory";    // warns of invalid directory
+        e.target.value =        "";                         // clear value
+        e.target.classList.add("invalid");                  // flashing animation
 
         setTimeout(function () {
-            e.target.classList.remove("invalid");
-            e.target.placeholder = placeholder;
-        }, 1953);
+            e.target.classList.remove("invalid");     // removes animation
+            e.target.placeholder = placeholder;             // reverts back to previous text
+        }, 1953);                                    // GOD SAVE THE QUEEN.
     },
 
     arrayShift = (e) => {
@@ -102,30 +104,34 @@ const
 
     scale = (a) => {
         let scaleRes
-        if(!a){
-            scaleRes = $("#scaleSlider").value;
-        } else {
-            scaleRes = a > 12 ? 12 : a < 4 ? 4 : a;
+        if(!(!!a)){
+            scaleRes =  $("#scaleSlider").value;
+        }
+        else {
+            scaleRes =  a > 12 ? 12 : a < 4 ? 4 : a;
         }
 
         $("#transform").style.transform = `scale(${scaleRes})`;
 
-        $("#scaleSlider").value = scaleRes;
+        $("#scaleSlider").value =        scaleRes;
         $('#scale').textContent = "1:" + scaleRes;
     },
 
     navToggle = () => {
-        $all(".navigation").forEach((e) => {e.classList.toggle('invisible')})
-        $("#navTog").classList.toggle('pressed')
+        $all(".navigation").forEach(e => {
+            e.classList.toggle('invisible')
+        });
+        $("#navTog").classList.toggle('pressed');
     }
 
     moveChoiceTo = (elem_choice, direction) => {
-        let span = elem_choice.parentNode.parentNode,
-            td = span.parentNode;
+        let span =  elem_choice.parentNode.parentNode,
+            td =    span.parentNode;
 
         if (direction === -1 && span.previousElementSibling) {
             td.insertBefore(span, span.previousElementSibling);
-        } else if (direction === 1 && span.nextElementSibling) {
+        }
+        else if (direction === 1 && span.nextElementSibling) {
             td.insertBefore(span, span.nextElementSibling.nextElementSibling)
         }
     };

@@ -21,8 +21,8 @@
                             <d>Render View</d>
                             <div id="crop" class="scrollArea">
                                 <div id="transform">
-                                    <div class="inline"             id="floor"></div>
-                                    <div class="inline invisible"   id="danceFloor"></div>
+                                    <div class="inline"     id="floor"></div>
+                                    <div class="inline"     id="danceFloor"></div>
 
                                     <img id="shadow"        alt="shadow"        src="UI_Libraries/shadow.png">
                                     <img id="foreground"    alt="foreground"    src="">
@@ -54,20 +54,22 @@
                                 <d>Animation settings</d>
                                 <div>
                                     <div class="flex">
-                                        <e id="multiplierButton"    onclick="floorData.danceSwitcher(2);  "> Multiplier  </e>
-                                        <e id="danceButton"         onclick="floorData.danceSwitcher(1);  "> Dance Floor </e>
-                                        <e id="backgroundButton"    onclick="floorData.floorToggle();     "> background  </e>
-                                        <e id="foregroundButton"    onclick="floorData.foregroundToggle();"> Foreground  </e>
+                                        <e id="multiplierButton"    onclick="environmentData.danceSwitcher(2);  "> Multiplier  </e>
+                                        <e id="danceButton"         onclick="environmentData.danceSwitcher(1);  "> Dance Floor </e>
+                                        <e id="backgroundButton"    onclick="environmentData.backgroundToggle();"> background  </e>
+                                        <e id="foregroundButton"    onclick="environmentData.foregroundToggle();"> Foreground  </e>
                                     </div>
                                     <div class="buttons">
                                         <e onclick="elapsed--; playToggle(false);"> Prev </e>
                                         <e onclick="playToggle(true)" id="playTog"> Play </e>
                                         <e onclick="elapsed++; playToggle(false);"> Next </e>
-                                        <e id="mirror" onclick="currentCharacter.flip(true);"> Mirror </e>
-                                        <e id="amplifiedButton"  onclick="currentCharacter.ampToggle(true); "> AMPLIFIED </e>
-                                        <e id="aniType" onclick="currentCharacter.frameType()">Ren. Type</e>
-                                        <e id="refreshButton" onclick="urlRefresh()" class="rightFloat">
-                                            <img id="refresh" src="UI_Libraries/refresh_Arrow.png" alt="refresh"></e>
+
+                                        <e id="mirror"              onclick="currentCharacter.flip(true);">        Mirror      </e>
+                                        <e id="amplifiedButton"     onclick="currentCharacter.ampToggle(true); ">  AMPLIFIED   </e>
+                                        <e id="aniType"             onclick="currentCharacter.frameType()">        Ren. Type   </e>
+                                        <e id="refreshButton"       onclick="urlRefresh()" class="rightFloat">
+                                            <img id="refresh" src="UI_Libraries/refresh_Arrow.png" alt="refresh">
+                                        </e>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +288,7 @@
                 <tr><th></th><th></th><th></th></tr>
             </table>
             <div>
-                <p>Release <u>20230407</u> CTNS.Master:1.3.6.2</p>
+                <p>Release <u>20230408</u> CTNS.Master:1.3.7</p>
             </div>
         </panel>
     </body>
@@ -297,15 +299,20 @@
             $all = document.querySelectorAll.bind(document);
     </script>
 
-    <script type="text/javascript" src="Data_Libraries/characterData.js"></script>
-    <script type="text/javascript" src="Data_Libraries/itemData.js"></script>
+    <!-- character data initializing -->
+    <script type="text/javascript" src="Data_Libraries/characterData.js">   </script>
+    <script type="text/javascript" src="Data_Libraries/itemData.js">        </script>
 
-    <script type="text/javascript" src="JS_Libraries/animationCalls.js"></script>
-    <script type="text/javascript" src="JS_Libraries/generalFunctions.js"></script>
+    <!-- animation rendering & function handling -->
+    <script type="text/javascript" src="JS_Libraries/animationCalls.js">    </script>
+    <script type="text/javascript" src="JS_Libraries/generalFunctions.js">  </script>
 
-    <script type="text/javascript" src="JS_Libraries/characterClasses.js"></script>
-    <script type="text/javascript" src="JS_Libraries/itemClasses.js"></script>
-    <script type="text/javascript" src="JS_Libraries/floorClasses.js"></script>
+    <!-- character / asset creation -->
+    <script type="text/javascript" src="JS_Libraries/characterClasses.js">  </script>
+    <script type="text/javascript" src="JS_Libraries/equipableClasses.js">  </script>
+    <script type="text/javascript" src="JS_Libraries/enviromentClasses.js"> </script>
 
-    <script type="text/javascript" src="JS_Libraries/startUp.js"></script>
+    <!-- start up / final initializing -->
+    <script type="text/javascript" src="Data_Libraries/settings.js">        </script>
+    <script type="text/javascript" src="JS_Libraries/startUpScripts.js">    </script>
 </html>

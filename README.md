@@ -1,21 +1,26 @@
 <pre><p align="center">
-██████╗██████╗ ██╗   ██╗██████╗ ████████╗
-██╔════╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
-██║     ██████╔╝ ╚████╔╝ ██████╔╝   ██║   
-██║     ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║   
-╚██████╗██║  ██║   ██║   ██║        ██║   
- ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝   
-┌─┐┌─┐  ┌┬┐┬ ┬┌─┐
-│ │├┤    │ ├─┤├┤ 
-└─┘└     ┴ ┴ ┴└─┘
-███╗   ██╗███████╗ ██████╗██████╗  ██████╗ ███████╗██████╗ ██████╗ ██╗████████╗███████╗██████╗ 
-████╗  ██║██╔════╝██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗██╔══██╗██║╚══██╔══╝██╔════╝██╔══██╗
-██╔██╗ ██║█████╗  ██║     ██████╔╝██║   ██║███████╗██████╔╝██████╔╝██║   ██║   █████╗  ██████╔╝
-██║╚██╗██║██╔══╝  ██║     ██╔══██╗██║   ██║╚════██║██╔═══╝ ██╔══██╗██║   ██║   ██╔══╝  ██╔══██╗
-██║ ╚████║███████╗╚██████╗██║  ██║╚██████╔╝███████║██║     ██║  ██║██║   ██║   ███████╗██║  ██║
-╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   
+  ██████╗██████╗ ██╗   ██╗██████╗ ████████╗
+  ██╔════╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
+  ██║     ██████╔╝ ╚████╔╝ ██████╔╝   ██║   
+  ██║     ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║   
+  ╚██████╗██║  ██║   ██║   ██║        ██║   
+   ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝   
+  ┌─┐┌─┐  ┌┬┐┬ ┬┌─┐
+  │ │├┤    │ ├─┤├┤ 
+  └─┘└     ┴ ┴ ┴└─┘
+  ███╗   ██╗███████╗ ██████╗██████╗  ██████╗ ███████╗██████╗ ██████╗ ██╗████████╗███████╗██████╗ 
+  ████╗  ██║██╔════╝██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗██╔══██╗██║╚══██╔══╝██╔════╝██╔══██╗
+  ██╔██╗ ██║█████╗  ██║     ██████╔╝██║   ██║███████╗██████╔╝██████╔╝██║   ██║   █████╗  ██████╔╝
+  ██║╚██╗██║██╔══╝  ██║     ██╔══██╗██║   ██║╚════██║██╔═══╝ ██╔══██╗██║   ██║   ██╔══╝  ██╔══██╗
+  ██║ ╚████║███████╗╚██████╗██║  ██║╚██████╔╝███████║██║     ██║  ██║██║   ██║   ███████╗██║  ██║
+  ╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
 </p></pre>
-A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
+<p align="center">
+  A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
+  You can test the software via. the [online demo][1].
+</p>
+
+[2]: https://theavanherst.github.io/Crypt-Of-The-NecroSpriter/main.html
 
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
@@ -56,6 +61,7 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
   - A list of tracks featured in the game at each BPM step of 5, including bosses.
 - Scaling feature, with a slider to change the resolution size of the left hand side preview.
 - Two different render modes, linear and the more accurate in-game beat driven render.
+- Custom window positioning via. the navigation controls
 
 <pre>DEMO:</pre>
 
@@ -64,27 +70,31 @@ A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
 </picture>
 
 Crypt of the Necrospriter also features a playable version of Vahn as Nocturna, and Yumi as Klarinetta, including all Armour sets & transformation types.
-Both characters were drawn and tested using the software as a proof of concept - Available on the Steam Workshop: [Vahn as Nocturna][1].
+Both characters were drawn and tested using the software as a proof of concept - Available on the Steam Workshop: [Vahn as Nocturna][1] & [Yumi as Clarinetta][3]
 
 [1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
+[3]: https://steamcommunity.com/sharedfiles/filedetails/?id=2959125647
 
 <pre>INSTRUCTIONS:</pre>
 
-To launch, double click `main.html` and open it through your preferred browser.<br>
+<b><u>Launch</u></b><br>
+double click `main.html` and open it through your preferred browser.<br>
 Updating spritesheets will require your own external software. Edited sheets can be updated via. the refresh button at the bottom right of the render view.
 
-To test your animations, replace the sprite-sheets in the `/characters` folder, and click the refresh icon under the render preview.<br>
-You can also do the same thing by changing the URL via. the URL changer of the associated item and using the refresh button under the renderer to update the live preview. <br>
-Refreshing the page will clear any custom inserted urls as no cookie system is currently present in the current version of the software.
+<b><u>Start-up</u></b><br>
+Start up settings can be adjusted in `/Data_Libraries/settings.js`, and contains startup data such as environment visibility & character settings.<br>
+Information regarding the settings will be included as general documentation.<br>
+These settings can be adjusted with NotePad, as long as it retains it's `.js` file format.
 
+<b><u>Animation Testing</u></b><br>
+Sprite-sheets are fully replaceable and interchangeable via the `/characters` folder - swap the associated character sheet and click the refresh icon under the render preview.
+You can also do the same thing by changing the URL via. the URL changer of the associated item and using the refresh button under the renderer to update the live preview.<br>
+Refreshing the page will clear any custom inserted urls as no cookie system is currently present in the current version of the software.<br>
+
+<b><u>Character Data</u></b><br>
 To change the file name of the associated character, `/Data_Libraries/characterData.js` contains all character related data, including associated image data.
 File urls are assigned by `fileUrl: "{url}"` in the Settings object, with the extensions of each sheet (body & head) being assigned via. `headExt:` and `bodyExt:` respectively.<br>
-Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.
-If you require examples of usage, refer to `/Data_Libraries/characterDefaultSettings.js`. This sheet contains all the available datatype that can be associated to characters.<br>
-
-To add a character, add an object on the chain of characters in `/Data_Libraries/characterData.js` and it'll be added automatically and assigned to the associated DLC.
-DLCs are assigned via. `dlc: {number}`, and the name will be fetched via `dlcTypes` at the top of the sheet. It is generally recommended to keep them associated with `dlc: 3` for clarity.<br>
-Note: Adding a character as an object via. `/Data_Libraries/characterData.js` REQUIRES a page refresh to update.
+Examples of how to specify the directory are displayed in the text-boxes beforehand as an example. Eg; `"file root"/"imagename"."format"`.<br>
 
 <picture>
   <img alt="asset design and updating" src="./DEMO_Images/weapon_Update_Demo.gif">
@@ -94,16 +104,29 @@ Similar to character sheets, item directories on launch are determined by `'JS_L
 Any invalid urls will be detected on page-start up and notify you after page initialization.
 Changing the boolean values in the itemData.js file will change their default visibility.
 
+To add a character, add an object on the chain of characters in `/Data_Libraries/characterData.js` and it'll be added automatically and assigned to the associated DLC.
+DLCs are assigned via. `dlc: {number}`, and the name will be fetched via `dlcTypes` at the top of the sheet. It is generally recommended to keep them associated with `dlc: 3` for clarity.<br>
+Note: Adding a character as an object via. `/Data_Libraries/characterData.js` <u><i>requires</i></u> a page refresh to update.
+
+If you wish to make adjustments to the sprite-sheet such as width / high per sprite, it can be adjusted via the settings under `resolution`. These all can be found in `characterDefaultSettings`.<br>
+A character's animation cycle is (as of right now) limited to 4 frames per second - hence the `ampMultiplier` setting which uses a multiplier offset for character sheets that have different variants depending on the angle they are facing.
+As a result, `ampMultiplier` is just an offset to the basic 4 frames, and is used as a multiplier - these can be seen by Klarinetta in `characterData`.<br>
+
+If you require additional examples of dataset usage, refer to `/Data_Libraries/characterDefaultSettings.js`.<br>
+This sheet contains all the available datatype that can be associated to characters.<br>
+
 <pre>NOTES:</pre>
 
 - Hovering the cursor over the render window and scrolling has the same functionality as the scale slider.
 - The BPM is slightly inaccurate and isn't a 100% accurate representation of the BPM as displayed.
+- Character animation cycles are limited to 4 frames.
 
 <pre>UPCOMING:</pre>
 
 - Debug information user interface [?]
 - BPM timer rework [?]
-- Input for custom floor URL [?]
+- Input for custom floor URL [?] / redesign floor initializing to an object sheet.
+- Redesign the character frame cap from 4, and assign it on a character to character basis.
 
 If you need any assistance in using the tool, designing sprites or have any
 recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).

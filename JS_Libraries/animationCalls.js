@@ -1,18 +1,17 @@
 
-let start = new Date().getTime(),
-    bpm,
-
-    elapsed = 0,
-    frame = 0,
-    floatInt = 0,
-    arrayDivisional,
-
+let start =     new Date().getTime(),
     playTog = false;
+
+let bpm =       0,
+    elapsed =   0,
+    frame =     0,
+    floatInt =  0,
+    arrayDivisional;
 
 window.setInterval(() => {
     if (playTog) {
-        frame = aniOffsets[0][elapsed];
-        elapsed = Math.floor((new Date().getTime() - start) / bpm / arrayDivisional);
+        frame =     aniOffsets[0][elapsed];
+        elapsed =   Math.floor((new Date().getTime() - start) / bpm / arrayDivisional);
         animationPush();
     }
 }, bpm);
@@ -35,11 +34,11 @@ const
         if (elapsed >= aniOffsets[0].length) {
             elapsed = 0;
             start = new Date().getTime();
-            floorData.floorFlip();
+            environmentData.floorFlip();
             floatPush(floatInt > 4, 0, +1);}
         else if (elapsed < 0) {
             elapsed = 3;
-            floorData.floorFlip();
+            environmentData.floorFlip();
             floatPush(floatInt < 1,  5, -1);
         }
 
@@ -47,12 +46,13 @@ const
             -currentCharacter.floatOffsets[floatInt] + "px 0 0 " +
             Math.floor((24 - currentCharacter.width) / 2) + "px";
 
-        frame = aniOffsets[0][elapsed] - 1;
-        $("#beatDebug").textContent = frame;
-        $("#elapsedDebug").textContent = elapsed;
+        frame =                             aniOffsets[0][elapsed] - 1;
+        $("#beatDebug").textContent =       frame;
+        $("#elapsedDebug").textContent =    elapsed;
 
         currentCharacter.animate();
         specialData.animate();
+
         for (let key in itemArray) {
             itemArray[key].animate();
         }
