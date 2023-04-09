@@ -17,10 +17,10 @@
 </p></pre>
 <p align="center">
   A Javascript Crypt Of The Necromancer Sprite-sheet Renderer <br>
-  You can test the software via. the [online demo][1].
+  You can test the software via: [the online demo][1]
 </p>
 
-[2]: https://theavanherst.github.io/Crypt-Of-The-NecroSpriter/main.html
+[1]: https://theavanherst.github.io/Crypt-Of-The-NecroSpriter/main.html
 
 <pre>FEATURES:</pre>
 * A fully featured character selector from the base game, Amplified DLC and the Synchrony DLC.
@@ -70,9 +70,9 @@
 </picture>
 
 Crypt of the Necrospriter also features a playable version of Vahn as Nocturna, and Yumi as Klarinetta, including all Armour sets & transformation types.
-Both characters were drawn and tested using the software as a proof of concept - Available on the Steam Workshop: [Vahn as Nocturna][1] & [Yumi as Clarinetta][3]
+Both characters were drawn and tested using the software as a proof of concept - Available on the Steam Workshop: [Vahn as Nocturna][2] & [Yumi as Clarinetta][3].
 
-[1]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
+[2]: https://steamcommunity.com/sharedfiles/filedetails/?id=2893560157
 [3]: https://steamcommunity.com/sharedfiles/filedetails/?id=2959125647
 
 <pre>INSTRUCTIONS:</pre>
