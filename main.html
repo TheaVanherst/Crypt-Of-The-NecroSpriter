@@ -3,8 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="CSS_Libraries/styling.css">
+
+        <link rel="stylesheet" href="CSS_Libraries/renderData.css">
+        <!-- table setup -->
         <link rel="stylesheet" href="CSS_Libraries/tableData.css">
-        <link rel="stylesheet" href="CSS_Libraries/playerData.css">
+        <link rel="stylesheet" href="CSS_Libraries/tableSpecific.css">
 
         <link rel="icon" type="image/png" href="UI_Libraries/skull_Small.png">
         <title>Crypt of the NecroSpriter</title>
@@ -85,7 +88,7 @@
                 <tr>
                     <th></th>
                     <th>
-                        <div class="inline">
+                        <div>
                             <div class="inline" id="bpmCounter">
                                 <img class="bpm" src="UI_Libraries/heart.png" alt="Beat1">
                                 <img class="bpm" src="UI_Libraries/heart.png" alt="Beat2">
@@ -97,28 +100,28 @@
                             <div class="inline" id="debug">
                                 <ln>
                                     Beat:
-                                        <l id="beatDebug">
-                                            U   </l>
+                                        <p id="beatDebug">
+                                            U           </p>
                                     Bar:
-                                        <l id="barDebug">
-                                            U   </l>
+                                        <p id="barDebug">
+                                            U           </p>
                                     Frm:
-                                        <l id="elapsedDebug">
-                                            U   </l>
+                                        <p id="elapsedDebug">
+                                            U           </p>
                                 </ln>
                                 <ln>
                                     Char:
                                         <p id="characterDebug">
                                             Undefined   </p>
                                     :
-                                        <l id="clothingDebug">
-                                            UDF         </l>
+                                        <p id="clothingDebug">
+                                            UDF         </p>
                                 </ln>
                                 <ln>
                                     <p id="floorDebug">
                                         UDF             </p>
-                                    <l id="flipDebug">
-                                        UDF             </l>
+                                    <p id="flipDebug">
+                                        UDF             </p>
                                 </ln>
                             </div>
                         </div>
@@ -136,10 +139,10 @@
                     <th></th>
                     <th>
                         <div>
-                            <d> Main Render Settings        </d>
+                            <d> Environment Settings        </d>
                             <div id="bpmContainer">
                                 <d> Animation Speed (BPM)   </d>
-                                <input type="range" min="100" max="190" step="5" class="slider" id="bpmSlider">
+                                <input type="range" min="100" max="190" step="5" id="bpmSlider">
                                 <div>
                                     <p> 100 </p>
                                     <p class="rightFloat">
@@ -296,7 +299,7 @@
                         <div class="scrollArea">
                             <d> Scale [Pixel ratio] </d>
                             <div>
-                                <input type="range" min="4" max="12" step="1" class="slider" id="scaleSlider">
+                                <input type="range" min="4" max="12" step="1" id="scaleSlider">
                                 <div>
                                     <p> 1:4     </p>
                                     <p class="rightFloat">
@@ -319,7 +322,7 @@
                     <th>
                         <div>
                             <d> Advanced Options    </d>
-                            <div class="flex">
+                            <div class="">
                                 <e id="navTog" onclick="navToggle()">
                                     Nav Controls    </e>
                             </div>

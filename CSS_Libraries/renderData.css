@@ -1,0 +1,174 @@
+
+/* TODO: ============== */
+/* TODO: CHARACTER DATA */
+/* TODO: ============== */
+
+/* character rendering */
+
+#crop {
+    image-rendering:    -moz-crisp-edges;
+    image-rendering:    pixelated;
+    overflow:           hidden;
+
+    height:     534px;
+    width:      calc(100% - 4px);
+    border:     2px solid rgba(255,255,255,0.5);}
+
+/* character transformation */
+
+#playerModel,
+#playerModel > *,
+#playerModel > * > * {
+    position:   absolute;
+}
+#playerModel,
+#transform {
+    width:  24px;
+    height: 24px!important;
+}
+
+#transform {
+    top:        50%;
+    left:       50%;
+
+    margin:     0 0 0 -1px;
+    position:   relative;
+}
+
+/* body data */
+
+#playerModel {
+    z-index:    2;
+    height:     24px!important;
+}
+#head, #body {
+    object-fit: none;
+}
+#shadow {
+    position:   absolute;
+    width:      24px;
+    height:     24px!important;
+    margin:     2px 0 0 0;
+}
+
+/* character toggle classes */
+
+.mirror {
+    -ms-transform:  scaleX(-1)!important;
+    transform:      scaleX(-1)!important;}
+.flip {
+    transform:      scaleX(-1)!important;}
+.invisible {
+    display:        none !important;}
+
+/* TODO: =============== */
+/* TODO: ENVIROMENT DATA */
+/* TODO: =============== */
+
+#floor,
+#danceFloor,
+#foreground {
+    top:    50%;
+    left:   50%;
+    width:  216px;
+    height: 168px;
+
+    -ms-transform:  translate(-50%, -50%);
+    transform:      translate(-50%, -50%);
+    position:       absolute;}
+#floor,
+#danceFloor {
+    margin:     7px 0 0 0;
+    object-fit: none;}
+#foreground {
+    margin:    -8px 0 0 0;
+}
+
+/* TODO: ================================= */
+/* TODO: CONSUMABLES & CHARACTER EQUIPMENT */
+/* TODO: ================================= */
+
+/* equipables items */
+
+#hat,   #weapon,
+#ring,  #boots,
+#torch, #charm,
+#hip,   #shovel {
+    width:      24px;
+    height:     24px;
+    object-fit: none;}
+#shovel {
+    left:       1px; }
+
+/* consumable items */
+
+#consumables,   #spell,
+#equipment,     #item {
+    position:   absolute;}
+#consumables {
+    top:        8px;    }
+#spell {
+    left:       22px;   }
+#equipment {
+    margin:    -8px 0 0 0;
+    left:       7px;    }
+#item {
+    left:      -7px;    }
+
+/* character specific items */
+
+#special {
+    position:   absolute;
+    object-fit: none;
+    z-index:    10;
+
+    object-position:    0 0;}
+
+/* shield items */
+
+#shield {
+    width:      24px;
+    height:     24px;
+    top:        4px;
+
+    object-fit: none;
+    position:   absolute;
+}
+
+/* shield directional classes */
+
+#shield.up {
+    margin:            -9px 0 0 0;
+    z-index:            0;
+    object-position:   -72px 0;
+}
+#shield.right {
+    margin:            -2px 0 0 16px;
+    z-index:            10;
+    object-position:    0 0;
+}
+#shield.down {
+    margin:             9px 0 0 0;
+    z-index:            20;
+    object-position:   -24px 0;
+}
+
+/* TODO: ====================== */
+/* TODO: RENDER WINDOW SETTINGS */
+/* TODO: ====================== */
+
+/* refresh button */
+
+#refreshButton > img {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+
+    width:      14px;
+    height:     14px;
+    top:        2px;
+    position:   relative;
+}
+#refreshButton:active > img {
+    /* inverts button image on press */
+    filter:     invert(1);
+}

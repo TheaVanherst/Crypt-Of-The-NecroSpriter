@@ -1,0 +1,164 @@
+
+/* TODO: ============================ */
+/* TODO: RENDER WINDOW DEBUG ELEMENTS */
+/* TODO: ============================ */
+/* col 1 */
+
+#debug {
+	line-height:    calc(100% + 3px);
+	display:        inline-block;
+}
+
+#debug p { /* forces max width for debug elements */
+	overflow:   visible;
+	width:      10px;
+}
+
+/* specific changes */
+
+#floorDebug {
+	color:          gray;}
+#flipDebug {
+	color:          gray;}
+
+/* TODO: BPM feed */
+
+#refreshButton > * {
+	image-rendering: -moz-crisp-edges;
+	image-rendering: pixelated;
+
+	width:      14px;
+	height:     14px;
+	top:        2px;
+	position:   relative;
+}
+
+/* TODO: BPM FEED */
+
+#bpmCounter {
+	padding:    0 5px 0 5px;
+}
+.bpm {
+	image-rendering:    -moz-crisp-edges;
+	image-rendering:    pixelated;
+
+	margin:     0 0 0 5px;
+	width:      48px;}
+.bpm:first-child {
+	margin:     0;
+}
+
+.beat {
+	-webkit-animation:  scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
+	animation:          scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
+}
+
+/* HEART PUMP ANIMATION */
+
+@-webkit-keyframes scale-up-center{
+	0%{     transform:      scale(1.5);}
+	100%{   transform:      scale(1);}
+}
+@keyframes scale-up-center{
+	0%{     transform:      scale(1.5);}
+	100%{   transform:      scale(1);}
+}
+
+/* TODO: ==================== */
+/* TODO: ENVIRONMENT ELEMENTS */
+/* TODO: ==================== */
+/* col 2 */
+
+#trackContainer {
+	height:     90px;}
+
+/* TODO: BACKGROUND SELECTION */
+
+#backgrounds > div { /* row gen */
+	gap:        10px;
+	display:    flex;
+}
+
+/* background selection options */
+
+#backgrounds e {
+	image-rendering:    -moz-crisp-edges;
+	image-rendering:    pixelated;
+	background-size:    cover;
+	overflow:           hidden;
+
+	padding:    0;
+	width:      33%;
+	height:     46px !important;}
+
+/* text variation */
+
+#backgrounds e p {
+	padding:            0 7px 2px 5px}
+#backgrounds e.pressed p {
+	background-color:   #fff;}
+#backgrounds e:hover {
+	background-color:   #696969FF;}
+#backgrounds e:hover p {
+	background-color:   #696969FF;}
+#backgrounds e:active p {
+	color:              #fff;
+	background-color:   #696969FF;}
+
+/* TODO: background preview elements */
+
+#backgrounds e f {
+	display:    none;
+	position:   absolute;
+
+	height:     inherit;
+	width:      calc(33% - 10px);
+
+	background-size:    cover;}
+#backgrounds e:hover f { /* displays on hover */
+	display:    block;
+}
+
+/* TODO: ====================== */
+/* TODO: URL DIRECTORY ELEMENTS */
+/* TODO: ====================== */
+/* col 3 */
+
+#logo {
+	justify-content: center;
+	text-align:     center;
+	display:        flex;
+}
+
+/* TODO: ===================== */
+/* TODO: NAVIGATION CONTROLLER */
+/* TODO: ===================== */
+/* col 5 */
+
+#debugTable {
+	height: min-content;
+	transition:
+			opacity 1s cubic-bezier(.05, .69, .14, 1);
+}
+
+#charDebug {
+	word-wrap:      break-word;
+	max-height:     420px;
+	overflow:       scroll;
+
+	width:          245px;
+	min-width:      -moz-available;
+	min-width:      -webkit-fill-available;
+}
+
+/* TODO: TABLE CONTROLLER */
+
+.navigation {
+	padding:        10px 18px 0 18px;
+	margin:         0 0 0 auto;
+	max-width:      min-content;
+	white-space:    nowrap;
+}
+.navigation e {
+	margin-left: 10px;
+}

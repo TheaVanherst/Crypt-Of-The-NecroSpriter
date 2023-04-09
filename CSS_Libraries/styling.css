@@ -4,39 +4,36 @@
 /* TODO: WINDOW SIZE SETTINGS */
 
 body {
-    margin:     0;
-    padding:    0 0 10px 10px;
+    margin:         0;
+    padding:        0 0 10px 10px;
 
-    background: black;
-    color:      white;
+    color:              white;
+    font-family:        'Silkscreen', cursive;
+    letter-spacing:    -2px;
+    font-size:          0;
 
-    font-family:    'Silkscreen', cursive;
-    letter-spacing: -2px;
-    font-size:      14px;}
+    background:     black;
+    cursor:         url('../UI_Libraries/default_Cursor.png'), auto;
+}
 
 /* TODO: General streamline formatting */
 
-img {
-    font-size: 11px!important;}
+img {   /* alt text settings */
+    font-size:  11px!important;          }
 
-a { text-decoration: 2px underline;
-    color: #b700ff;}
-u { text-decoration: 2px underline;}
+/* text generics */
 
-p {
-    padding:    0;
-    margin:     0;
-    display:    inline-block;}
+a { cursor:             url('../UI_Libraries/text_Cursor.png'), auto!important;
+    text-decoration:    2px underline;
+    color:              #b700ff;        }
+u { text-decoration:    2px underline;  }
+p { padding:            0;
+    margin:             0;
+    display:            inline-block;   }
 
 /* TODO: UNIQUE ATTRIBUTE ASSIGNING */
 
-l { /* forces max width for debug elements */
-    display:    inline-block;
-    position:   relative;
-    overflow:   visible;
-    width:      10px;}
-
-d {
+d { /* titles */
     line-height: 100%;
     display:    block;
     margin:     10px 0 5px 0;}
@@ -45,25 +42,29 @@ d:first-of-type {
 d:only-of-type {
     margin:     0 0 5px 0;}
 
+ln { /* forces new line with text if contained in */
+    display:    block;}
 
 /* TODO: General styling fixes */
 
 div + div:not(.inline) { /* forces inline with other div elements */
     padding:    10px 0 0 0;}
 .inline {
-    display: inline-block;
-    white-space: nowrap;
+    display:        inline-block;
+    white-space:    nowrap;
 }
-
-ln { /* forces new line with text if contained in */
-    display:    block;}
 
 .rightFloat {
     float:      right}
 .centerFloat {
     text-align: center;}
 
+/* TODO: ========== */
 /* TODO: BUTTON CSS */
+/* TODO: ========== */
+
+/* TODO: GENERICS */
+/* generic button setup */
 
 e {
     padding:    5px 8px;
@@ -72,27 +73,24 @@ e {
     color:      #fff;
     border:     solid 2px #fff;
     background: #000;}
-
 e:hover {
+    cursor:     url('../UI_Libraries/hover_Cursor.png'),   auto!important;
     color:      #000;
     border:     solid 2px #000;
     background: #c4c4c4;}
 e:active {
     color:      #fff;
     background: #696969FF;}
+e:active > img {
+    filter:     invert(1);
+}
+
+/* generic class states */
 
 .pressed {
     color:      #000;
     background: #fff;
-    border:     solid 2px #fff}
-e.pressed:hover {
-    color:      #fff;
-    border:     solid 2px #fff}
-e.pressed:not(.tog):active {
-    border:     solid 2px #000}
-
-e.tog.pressed:hover {
-    background: #c4c4c4;}
+    border:     solid 2px #fff;}
 
 .deactivate {
     border:     solid 2px #696969FF;
@@ -102,22 +100,26 @@ e.tog.pressed:hover {
     animation:  deblink 0.5s ease-out;
 
     pointer-events: none!important;}
-e.flippant:not(.deactivate) {
+.flippant:not(.deactivate) {
     animation:  reblink 0.5s ease-out;}
 
-/* TODO: UNIQUE BUTTON CLASSES */
-
-/* toggle classes */
-
-.flip {
-    transform:  scaleX(-1);}
-.invisible {
-    display:    none !important}
-.toggle {
-    opacity:    0;}
 .invalid {
     background: black!important;
+    color:      red!important;
     animation:  blinker 0.5s linear infinite;}
+
+/* TODO: PRESSED STATES */
+
+e.pressed:hover {
+    color:      #fff;
+    border:     solid 2px #fff;}
+e.pressed:not(.tog):active {
+    border:     solid 2px #000;}
+e.pressed > img {
+    filter:     invert(1);
+}
+
+/* TODO: BUTTON GRID SETS */
 
 /* flex button grid */
 
@@ -132,203 +134,118 @@ e.flippant:not(.deactivate) {
     flex:       content;
     text-align: center;}
 
-.flexGrid {
-    min-width:  100%;
-    display:    grid;
-    gap:        10px;
-    flex-wrap:  wrap;}
+/* generic adaptable grid */
 
 .buttons {
     font-size:  0;}
 .buttons > e {
     margin:     0 10px 0 0;
-    font-size:  14px;}
+    font-size:  14px;
+}
 .buttons > .rightFloat {
-    margin:     0;}
+    margin:     0;
+}
+
+/* TODO: =========== */
+/* TODO: INPUT TYPES */
+/* TODO: =========== */
 
 /* TODO: URL CONTAINERS */
 
 input[type=text] {
-    padding:    3px 10px 5px 10px;
-    display:    inline-block;
+    padding:        3px 10px 5px 10px;
+    display:        inline-block;
 
-    width:      var(--textBoxWidth);
-    min-width:  -moz-available;
-    min-width:  -webkit-fill-available;
+    width:          152px;
+    min-width:      -moz-available;
+    min-width:      -webkit-fill-available;
 
-    color:      #fff;
-    border:     solid 2px #fff;
-    background: #000;
+    border:         solid 2px #fff;
+    background:     #000;
+    cursor:         url('../UI_Libraries/text_Cursor.png'), auto!important;
 
+    color:          #fff;
     font-family:    'Silkscreen', cursive;
-    letter-spacing: -2px; }
-
+    letter-spacing: -2px;
+}
 input[type=text]:focus {
     outline-style:  none;
-
     background:     #fff;
-    color:          #000;}
-
+    color:          #000;
+}
 input[type=text]:active {
     outline-style:  none;
+    color:          #fff;
+    background:     #696969FF;
+}
 
-    color:      #fff;
-    background: #696969FF;}
+/* TODO: CLASS & ANIMATION TOGGLES */
 
 input[type=text].invalid {
     color:          white;
-    background:     darkred;}
+    background:     darkred;
+}
 input[type="text"].flippant:not(.deactivate):not(.invalid) {
-    animation:  reblink 0.5s ease-out;}
+    animation:      reblink 0.5s ease-out;
+}
 input[type="text"].deactivate {
-    border:     solid 2px #696969FF;}
+    border:         solid 2px #696969FF;
+}
 
 /* TODO: SCALING DATA */
+/* range track */
 
-input[type=range] {
-    -webkit-appearance: none;
-    background: #fff;
-    height:     3px;}
+input[type="range"],                                    /* Default */
+input[type="range"]::-moz-range-track,                  /* Firefox */
+input[type="range"]::-webkit-slider-runnable-track {    /* Chrome, Safari, Edge */
+    height:         3px;
+    width:          100%;
 
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance:         none;
+    background:     #fff;
+    cursor:         url('../UI_Libraries/grab_Cursor.png'), auto;
 
-    width:      12px;
-    height:     28px;
-    border-radius:  0;
-    background:     #000;
-    border:         2px solid #fff;}
-
-input[type=range]::-moz-range-thumb {
-    width:      8px;
-    height:     24px;
-    border-radius:  0;
-    background:     #000;
-    border:         2px solid #fff;}
-
-/* TODO: BACKGROUND BUTTONS */
-
-#backgrounds > div {
-    gap:        10px;
-    display:    flex;}
-
-#backgrounds e {
-    image-rendering:    -moz-crisp-edges;
-    image-rendering:    pixelated;
-    background-size:    cover;
-    overflow:           hidden;
-
-    padding:    0;
-    width:      33%;
-    height:     46px !important;}
-
-#backgrounds e f {
-    display:    none;
-    position:   absolute;
-
-    height:     inherit;
-    width:      calc(33% - 10px);
-
-    background-size:    cover;}
-#backgrounds e:hover f {
-    display:    block;}
-
-#backgrounds e p {
-    padding: 0 7px 2px 5px}
-#backgrounds e.pressed p {
-    background-color: #fff;}
-
-#backgrounds e:hover {
-    background-color: #696969FF;}
-#backgrounds e:hover p {
-    background-color: #696969FF;}
-#backgrounds e:active p {
-    color:      #fff;
-    background: #696969FF;}
-
-/* refresh button */
-
-#refreshButton > * {
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
-
-    width:      14px;
-    height:     14px;
-    top:        2px;
-    position:   relative;}
-#refreshButton:active > * {
-    filter:     invert(1);}
-
-/* TODO: DEBUG SIZE SETTINGS */
-
-#debug {
-    line-height: calc(100% + 3px);
-    display:    inline-block;}
-#floorDebug, #flipDebug {
-    color: gray;}
-
-.slider {
-    width:      100%;
-    width:      -webkit-fill-available;}
-
-/* TODO: BPM FEED */
-
-#bpmCounter {
-    padding:    0 5px 0 5px;}
-.bpm {
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
-    margin:     0 0 0 5px;
-    width:      48px;}
-.bpm:first-child {
-    margin:     0}
-
-.bpm > img {
-    position:   absolute;
-    width:      inherit;
-    height:     inherit}
-
-.beat {
-    transform:  scale(1.5);
-    -webkit-animation:  scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both;
-    animation:          scale-up-center .4s cubic-bezier(.39,.575,.565,1.000) both}
-
-/* TODO: ANIMATIONS*/
-
-@-webkit-keyframes scale-up-center{
-    0%{
-        transform:          scale(1.5);}
-    100%{
-        transform:          scale(1);}
-}
-@keyframes scale-up-center{
-    0%{
-        transform:          scale(1.5);}
-    100%{
-        transform:          scale(1);}
+    -webkit-appearance:     none;                       /* Chrome, Safari, Edge specific */
+    width:                  -webkit-fill-available;     /* Firefox specific */
 }
 
+/* range thumb */
+
+input[type="range" i]::-moz-range-thumb,
+input[type="range" i]::-webkit-slider-thumb {
+    appearance:     none;
+    border-radius:  0;
+    background:     #000;
+    border:         2px solid #fff;
+}
+
+input[type="range" i]::-moz-range-thumb {                 /* Firefox */
+    width:          8px;
+    height:         24px;}
+input[type="range" i]::-webkit-slider-thumb {             /* Chrome, Safari, Edge */
+    width:          12px;
+    height:         28px;
+    -webkit-appearance: none;
+}
+
+/* TODO: ======================= */
+/* TODO: GENERIC ANIMATION SETUP */
+/* TODO: ======================= */
+
+/* warning / error */
 @keyframes blinker {
-    from, to {
-        border-color:   darkred;
-        color:          red;}
-    49% {
-        border-color:   darkred;}
-    50% {
-        border-color:   red;}
-}
+    0% {    border-color:   darkred;}
+    49% {   border-color:   darkred;}
+    50% {   border-color:   red;}
+    100% {  border-color:   darkred;}}
 
+/* element disable */
 @keyframes deblink {
-    0%  {
-        border:     2px solid darkred;
-        color:      red;}
-}
+    0% {    border:         2px solid darkred;
+            color:          red;}}
+
+/* element enable */
 @keyframes reblink {
-    0%  {
-        border:     2px solid green;
-        color:      lawngreen;}
-    20%  {
-        border:     2px solid green;
-        color:      palegreen;}
-}
+    0%  {   border:         2px solid green;
+            color:          lawngreen;}
+    20%  {  border:         2px solid green;
+            color:          palegreen;}}

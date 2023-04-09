@@ -4,8 +4,8 @@ let currentCharacter;
 // environment data storage
 let environmentData;
 // character equipable data storage
-let itemArray = [],
-    consumableData = [],
+let itemArray =         [],
+    consumableData =    [],
     specialData,
     shieldData;
 
