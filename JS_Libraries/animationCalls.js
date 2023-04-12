@@ -18,7 +18,7 @@ window.setInterval(() => {
 
 const
     floatPush = (bool, check, add) => {
-        $("#bpmCounter").children[floatInt].classList.remove("beat");
+        $("#bpmCounter .beat")?.classList.remove("beat");
 
         floatInt = bool ? check : floatInt + add;
         for (let key in consumableData) {
@@ -32,8 +32,8 @@ const
 
     animationPush = () => {
         if (elapsed >= aniOffsets[0].length) {
-            elapsed = 0;
-            start = new Date().getTime();
+            elapsed =   0;
+            start =     new Date().getTime();
             environmentData.floorFlip();
             floatPush(floatInt > 4, 0, +1);}
         else if (elapsed < 0) {
