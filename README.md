@@ -134,4 +134,6 @@ This sheet contains all the available datatype that can be associated to charact
 - Redesign the character frame cap from 4, and assign it on a character to character basis.
 
 If you need any assistance in using the tool, designing sprites or have any
-recommendations for the sprite renderer - contact me via Twitter (@TheaVanherst) or on discord (TheaVanherst#1953).
+recommendations for the sprite renderer - contact me via [twitter][4] or on discord (TheaVanherst#1953), to which you can also contact me in my personal [Discord server][5]
+
+[5]: https://discord.gg/uGK8yXfPKp
