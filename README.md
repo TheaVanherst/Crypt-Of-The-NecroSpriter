@@ -17,11 +17,12 @@
 A Javascript Crypt Of The Necromancer Sprite-sheet Renderer
 </p></pre>
 
-If you can test the software before downloading, and sample creations designed by Thea, you can try it out via the [online demo][1].<br>
+If you can test the software before downloading, you can try it out via the [online demo][1].<br>
 
 <pre>SUPPORT THE PROJECT:</pre>
 All I request is that you feature a link to the github / online demo if you end up using the software.<br>
-I would love to see other people's creations using the software, and wish to feature them on social media, so please [@me on twitter][4]!
+I'm super interested in what other people create using this project and want to support fellow community members - 
+So please, I would love to see them via [Twitter][4]. I would be more than happy to repost and share your content.
 
 [1]: https://theavanherst.github.io/Crypt-Of-The-NecroSpriter/main.html
 [4]: https://twitter.com/TheaVanherst
