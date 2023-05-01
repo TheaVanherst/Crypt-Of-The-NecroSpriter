@@ -174,15 +174,18 @@ const specialRefactor = class items {
     floatOffsets = [];
 
     constructor(character) {
-        this.element =      $((`#${this.name}`));
-        this.button =       $((`#${this.name}Button`));
+        this.element =      $(`#${this.name}`);
+        this.button =       $(`#${this.name}Button`);
 
         this.button.onclick = () => {
             this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
             this.urlUpdate()
-            this.element.src = `${this.src}?${new Date().getTime()}`;}
+            this.element.src = `${this.src}?${new Date().getTime()}`;
+        }
+
         this.characterChange(character);
+        this.element.classList.add("invisible")
     };
 
     characterChange(character) {
