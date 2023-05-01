@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // render setup (This is garbage, too bad!)
     currentCharacter.frameLinear = settings.dynamicRenderDefault;
+    currentCharacter.frameLinear = settings.dynamicRenderDefault;
     $("#fTypeDebug").textContent = !settings.dynamicRenderDefault ? "Lin" : "Dyn";
     if (settings.dynamicRenderDefault) aniOffsets.unshift(aniOffsets.pop());
 

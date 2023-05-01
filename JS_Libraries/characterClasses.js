@@ -182,7 +182,7 @@ let characterRefactor = class setup {
         arrayDivisional = 1000 / aniOffsets[0].length;    // precalcs for frame divisional render calc
 
         // dumb way to indicate frame render types via debug.
-        $("#fTypeDebug").textContent = !this.frameLinear ? "Lin" : "Dyn";
+        $("#fTypeDebug").textContent = this.frameLinear ? "Lin" : "Dyn";
         this.frameLinear = !this.frameLinear;
     };
 
