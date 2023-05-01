@@ -21,7 +21,7 @@ const floorRefactor = class floor {
     ]
 
     overlayTileSets = [
-        [["zone1", "zone1_shop"], ["zone2", "zone2_Alt"], ["zone3_Cold", "zone3_Hot"]],
+        [["zone1", "zone1_shop"], ["zone2", "zone2_Alt"], ["zone3_C", "zone3_H"]],
         [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]
     ];
 
