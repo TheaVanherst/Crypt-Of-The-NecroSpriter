@@ -115,17 +115,23 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
+    // render setup (This is garbage, too bad!)
+    currentCharacter.frameLinear = settings.dynamicRenderDefault;
+    $("#fTypeDebug").textContent = !settings.dynamicRenderDefault ? "Lin" : "Dyn";
+    if (settings.dynamicRenderDefault) aniOffsets.unshift(aniOffsets.pop());
+
     // general settings initializing
     $("#bpmSlider").value =     settings.defaultBPM;
     $("#scaleSlider").value =   settings.defaultScale;
 
+    // required initialization
     bpmUpdate();
     scale();
 
+    // input initializing
     $("#bpmSlider").oninput = (e) =>    bpmUpdate(e);
     $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
     $("#scaleSlider").oninput = () =>   scale();
-
     // scroll functionality
     $all(".scrollArea").forEach((e) => {    e.onwheel = (e) =>      scrollWheel(e);})
     $all("#urlData input").forEach((e) => { e.onkeydown = (a) =>    search(a,e);});

@@ -174,10 +174,16 @@ let characterRefactor = class setup {
         }
     };
 
+    frameLinear = true;
+
     frameType() {
-        $("#aniType").classList.toggle('pressed');
-        aniOffsets.unshift(aniOffsets.pop());
-        arrayDivisional = 1000 / aniOffsets[0].length;
+        $("#aniType").classList.toggle('pressed', this.frameLinear);  // button tog
+        aniOffsets.unshift(aniOffsets.pop());             // flips array set
+        arrayDivisional = 1000 / aniOffsets[0].length;    // precalcs for frame divisional render calc
+
+        // dumb way to indicate frame render types via debug.
+        $("#fTypeDebug").textContent = !this.frameLinear ? "Lin" : "Dyn";
+        this.frameLinear = !this.frameLinear;
     };
 
     #bodyOffsets() {

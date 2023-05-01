@@ -8,21 +8,48 @@
         backgroundVisible:  true,
         danceFloorVisible:  true,
         multiplierMode:     false,
-        backgroundColor:    "darkslategray",        //background colour visible when disabling floor visibility.
+        backgroundColor:    "darkslategray",
+            //background colour visible when disabling floor visibility.
 
         // character settings
-        defaultCharacter:   0,
-        defaultClothing:    4,
-        amplifiedSetting:   false,                  // character amplification toggle on start-up.
+        defaultCharacter:   18,
+        defaultClothing:    0,
+        amplifiedSetting:   false,
+            // character amplification toggle on start-up.
 
         // general settings
-        defaultBPM:     130,                        // start-up bpm (Animation speed)
-        defaultScale:   4,                          // start-up scale (zoom)
+        defaultBPM:     130,
+            // start-up bpm (Animation speed)
+        defaultScale:   4,
+            // start-up scale (zoom)
 
         // shield settings
         shieldPosition:     "right",
         shieldVisibility:   false,
+
+        // advanced render settings
+        dynamicRenderDefault: false,
+            // renders according to in-game speed if true
     }
+
+const aniOffsets =
+        [ // animation frame offsets
+            [   // default frame type [linear]
+                // (better to test animations with, and runs on the current beat)
+                1, 2, 3, 4,
+            ], [
+                // alternate frame type
+                // (test what frame rendering looks like in game)
+                1,1,1,
+                2,2,2,2,2,2,2,
+                3,3,3,3,3,3,3,3,3,
+                4,4,4,4,4,4,
+            ]
+        ],
+        floatOffsets =
+            [ // preset character float offsets
+                8,9,10,11,10,9
+            ];
 
 const songList =
     [

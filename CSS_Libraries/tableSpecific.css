@@ -9,17 +9,14 @@
 	display:        inline-block;
 }
 
-#debug p { /* forces max width for debug elements */
-	overflow:   visible;
+.fw { /* forces max width for debug elements */
 	width:      10px;
+	overflow:   visible;
 }
 
-/* specific changes */
-
-#floorDebug {
-	color:          gray;}
-#flipDebug {
-	color:          gray;}
+.faded {
+	color: gray;
+}
 
 /* TODO: BPM feed */
 

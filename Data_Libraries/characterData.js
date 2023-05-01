@@ -6,21 +6,6 @@ const
             "Amplified",
             "Synchrony",
             "Custom"
-        ],
-    aniOffsets =
-        [ // animation offsets
-            [
-                1,1,1,
-                2,2,2,2,2,2,2,
-                3,3,3,3,3,3,3,3,3,
-                4,4,4,4,4,4,
-            ],[
-                1, 2, 3, 4,
-            ]
-        ],
-    floatOffsets =
-        [ // preset character float offsets
-            8,9,10,11,10,9
         ];
 
 // TODO: preset object calls
@@ -711,6 +696,34 @@ const
                 },
             },
         },
+        {
+            name: "AltVahn",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      21,
+                    height:     27,
+                    rows:       2,
+                    columns:    4
+                },
+                offset: {
+                    body:   1
+                },
+                fileUrl:    "characters/clone_vahn",
+                bodyExt:    "",
+
+                head:   false,
+                amp:    false,
+            },
+            clothingData: {
+                0: {
+                    settings: clear,
+                },
+                1: {
+                    settings: clear,
+                }
+            }
+        },
         { // same as Klarinetta.
             name: "Yumi",
             dlc: 3,
@@ -794,34 +807,8 @@ const
                 },
                 fileUrl: "items/weapon_greatHammer"
             },
-        },{
-            name: "AltVahn",
-            dlc: 3,
-            settings: {
-                resolution: {
-                    width:      21,
-                    height:     27,
-                    rows:       2,
-                    columns:    4
-                },
-                offset: {
-                    body:   1
-                },
-                fileUrl:    "characters/clone_vahn",
-                bodyExt:    "",
-
-                head:   false,
-                amp:    false,
-            },
-            clothingData: {
-                0: {
-                    settings: clear,
-                },
-                1: {
-                    settings: clear,
-                }
-            }
-        },{
+        },
+        {
             name: "AltYumi",
             dlc: 3,
             settings: {
@@ -848,5 +835,79 @@ const
                     settings:   clear,
                 }
             }
-        }
+        },
+        {
+            name:   "Izabela",
+            dlc:    3,
+            settings: {
+                resolution: {
+                    width:  25,
+                    height: 28
+                },
+                fileUrl:    "characters/izabela",
+                headExt:    "_head",
+                bodyExt:    "_body",
+            },
+            hat: {
+                offset: {
+                    top:    2,
+                    left:   2
+                }
+            },
+            weapon: {
+                bool: false
+            },
+            ring: {
+                offset: {
+                    top:    2,
+                    left:   2
+                }
+            },
+            boots: {
+                offset: {
+                    top:    4,
+                    left:   1
+                }
+            },
+            charm: {
+                offset: {
+                    top:    3,
+                    left:   2
+                }
+            },
+            shovel: {
+                offset: {
+                    top:    3,
+                    left:   1
+                }
+            },
+            torch: {
+                offset: {
+                    top:    4,
+                    left:   2
+                }
+            },
+            hip: {
+                offset: {
+                    top:    2,
+                    left:   2
+                }
+            },
+            special: {
+                bool:   true,
+                resolution: {
+                    height:     24,
+                    width:      24
+                },
+                displacement: {
+                    top:        4,
+                    left:       2,
+                    sequence:   [1, 1, 1, 2]
+                },
+                offset: {
+                    sequence:   [1, 2, 3, 4]
+                },
+                fileUrl: "items/weapon_lance"
+            }
+        },
     ]
