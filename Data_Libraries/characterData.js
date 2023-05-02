@@ -697,7 +697,7 @@ const
             },
         },
         {
-            name: "AltVahn",
+            name: "Alt_Vahn",
             dlc: 3,
             settings: {
                 resolution: {
@@ -809,7 +809,7 @@ const
             },
         },
         {
-            name: "AltYumi",
+            name: "Alt_Yumi",
             dlc: 3,
             settings: {
                 resolution: {
@@ -900,14 +900,35 @@ const
                     width:      24
                 },
                 displacement: {
-                    top:        4,
+                    top:        3,
                     left:       2,
-                    sequence:   [1, 1, 1, 2]
                 },
-                offset: {
-                    sequence:   [1, 2, 3, 4]
+                fileUrl: "items/weapon_rozsa"
+            }
+        },
+        {
+            name: "Alt_Izabela",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      25,
+                    height:     28,
+                    rows:       2,
+                    columns:    4
                 },
-                fileUrl: "items/weapon_lance"
+                fileUrl:    "characters/clone_izabela",
+                bodyExt:    "",
+
+                head:   false,
+                amp:    false,
+            },
+            clothingData: {
+                0: {
+                    settings:   clear,
+                },
+                1: {
+                    settings:   clear,
+                }
             }
         },
     ]
