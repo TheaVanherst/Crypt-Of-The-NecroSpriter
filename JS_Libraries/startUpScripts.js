@@ -116,10 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // render setup (This is garbage, too bad!)
-    currentCharacter.frameLinear = settings.dynamicRenderDefault;
-    currentCharacter.frameLinear = settings.dynamicRenderDefault;
+    currentCharacter.frameLinear =  settings.dynamicRenderDefault;
+    currentCharacter.frameLinear =  settings.dynamicRenderDefault;
     $("#fTypeDebug").textContent = !settings.dynamicRenderDefault ? "Lin" : "Dyn";
-    if (settings.dynamicRenderDefault) aniOffsets.unshift(aniOffsets.pop());
+    if (settings.dynamicRenderDefault)
+        aniOffsets.unshift(aniOffsets.pop());
 
     // general settings initializing
     $("#bpmSlider").value =     settings.defaultBPM;
@@ -130,12 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
     scale();
 
     // input initializing
-    $("#bpmSlider").oninput = (e) =>    bpmUpdate(e);
-    $("#bpmContainer").onwheel = (e) => bpmUpdate(e);
+    $("#bpmSlider").oninput = e =>      bpmUpdate(e);
+    $("#bpmContainer").onwheel = e =>   bpmUpdate(e);
     $("#scaleSlider").oninput = () =>   scale();
     // scroll functionality
-    $all(".scrollArea").forEach((e) => {    e.onwheel = (e) =>      scrollWheel(e);})
-    $all("#urlData input").forEach((e) => { e.onkeydown = (a) =>    search(a,e);});
+    $all(".scrollArea").forEach(
+        e => e.onwheel = e =>   scrollWheel(e)
+    );
+    $all("#urlData input").forEach(
+        e => e.onkeydown = a => search(a,e)
+    );
 
     // debug setting
     $("#barDebug").textContent =        floatInt;

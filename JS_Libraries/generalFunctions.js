@@ -14,7 +14,7 @@ const
         if (e?.deltaY) {
             e.preventDefault(); // prevents zoom
 
-            newBPM =    parseInt((e.deltaY || -(e.deltaY)) > 0 ? -5 : 5) + parseInt($("#bpmSlider").value)
+            newBPM =    parseInt(e.deltaY || -(e.deltaY) > 0 ? -5 : 5) + parseInt($("#bpmSlider").value)
             newBPM =    newBPM > 190 ? 190 : newBPM < 100 ? 100 : newBPM;
 
             $("#bpmSlider").value = newBPM;

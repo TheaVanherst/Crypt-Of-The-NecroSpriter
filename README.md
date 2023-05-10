@@ -87,7 +87,7 @@ double click `main.html` and open it through your preferred browser.<br>
 Updating spritesheets will require your own external software. Edited sheets can be updated via. the refresh button at the bottom right of the render view.
 
 <u>**Start-up**</u><br>
-Start up settings can be adjusted in `/Data_Libraries/settings.js`, and contains startup data such as environment visibility & character settings.<br>
+Start up settings can be adjusted in `/settings.js`, and contains startup data such as environment visibility & character settings.<br>
 Information regarding the settings will be included as general documentation.<br>
 These settings can be adjusted with NotePad, as long as it retains it's `.js` file format.
 

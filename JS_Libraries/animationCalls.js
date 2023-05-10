@@ -8,10 +8,10 @@ let bpm =       0,
     floatInt =  0,
     arrayDivisional;
 
-window.setInterval(() => {
+window.setInterval(() => { // this is all bad.
     if (playTog) {
         frame =     aniOffsets[0][elapsed];
-        elapsed =   Math.floor((new Date().getTime() - start) / bpm / arrayDivisional);
+        elapsed =   Math.floor((Date.now() - start) / bpm / arrayDivisional);
         animationPush();
     }
 }, bpm);
@@ -32,10 +32,13 @@ const
 
     animationPush = () => {
         if (elapsed >= aniOffsets[0].length) {
+
             elapsed =   0;
-            start =     new Date().getTime();
+            start =     Date.now();
+
             environmentData.floorFlip();
-            floatPush(floatInt > 4, 0, +1);}
+            floatPush(floatInt > 4, 0, +1);
+        }
         else if (elapsed < 0) {
             elapsed = 3;
             environmentData.floorFlip();

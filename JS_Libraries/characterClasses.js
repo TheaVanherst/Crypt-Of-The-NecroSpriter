@@ -177,7 +177,7 @@ let characterRefactor = class setup {
     frameLinear = true;
 
     frameType() {
-        $("#aniType").classList.toggle('pressed', this.frameLinear);  // button tog
+        $("#aniType").classList.toggle('pressed', !this.frameLinear);  // button tog
         aniOffsets.unshift(aniOffsets.pop());             // flips array set
         arrayDivisional = 1000 / aniOffsets[0].length;    // precalcs for frame divisional render calc
 
