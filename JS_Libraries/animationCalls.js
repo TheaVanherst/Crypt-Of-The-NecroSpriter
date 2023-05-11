@@ -61,14 +61,6 @@ const
         }
     },
 
-    scrollWheel = (e) => {
-        if (e.deltaY) {
-            e.preventDefault();
-            let value = $("#scaleSlider").value
-            scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(value));
-        }
-    };
-
     playToggle = (bool) => {
         if (bool) {
             playTog ^= true;

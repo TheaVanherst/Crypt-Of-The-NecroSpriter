@@ -96,6 +96,8 @@ Sprite-sheets are fully replaceable and interchangeable via the `/characters` fo
 You can also do the same thing by changing the URL via. the URL changer of the associated item and using the refresh button under the renderer to update the live preview.<br>
 Refreshing the page will clear any custom inserted urls as no cookie system is currently present in the current version of the software.<br>
 
+If you want to revert changes to a character sheet, all sheets have a backup via. `/characters_Backup`.
+
 <u>**Character Data**</u><br>
 To change the file name of the associated character, `/Data_Libraries/characterData.js` contains all character related data, including associated image data.
 File urls are assigned by `fileUrl: "{url}"` in the Settings object, with the extensions of each sheet (body & head) being assigned via. `headExt:` and `bodyExt:` respectively.<br>
@@ -118,7 +120,7 @@ If you wish to make adjustments to the sprite-sheet such as width / high per spr
 A character's animation cycle is (as of right now) limited to 4 frames per second - hence the `ampMultiplier` setting which uses a multiplier offset for character sheets that have different variants depending on the angle they are facing.
 As a result, `ampMultiplier` is just an offset to the basic 4 frames, and is used as a multiplier - these can be seen by Klarinetta in `characterData`.<br>
 
-If you require additional examples of dataset usage, refer to `/Data_Libraries/characterDefaultSettings.js`.<br>
+If you require additional examples of dataset usage, refer to `/data_Libraries/characterDefaultSettings.js`.<br>
 This sheet contains all the available datatype that can be associated to characters.<br>
 
 <pre>NOTES:</pre>
@@ -126,6 +128,7 @@ This sheet contains all the available datatype that can be associated to charact
 - Hovering the cursor over the render window and scrolling has the same functionality as the scale slider.
 - The BPM is slightly inaccurate and isn't a 100% accurate representation of the BPM as displayed.
 - Character animation cycles are limited to 4 frames.
+- All data relating to code has capitalized folder names and are unimportant for general usage.
 
 <pre>UPCOMING:</pre>
 

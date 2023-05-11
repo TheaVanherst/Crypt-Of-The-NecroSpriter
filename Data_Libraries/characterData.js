@@ -291,7 +291,6 @@ const
                 fileUrl: "characters/char14",
             },
             special: {
-                bool:       true,
                 resolution: {
                     height: 23,
                     width:  17
@@ -468,18 +467,13 @@ const
                 }
             },
             special: {
-                bool:   true,
                 resolution: {
                     height:     24,
                     width:      24
                 },
                 displacement: {
-                    top:        4,
+                    top:        3,
                     left:       2,
-                    sequence:   [1, 1, 1, 2]
-                },
-                offset: {
-                    sequence:   [1, 2, 3, 4]
                 },
                 fileUrl: "items/weapon_lance"
             }
@@ -522,7 +516,6 @@ const
                 bool:   false
             },
             special: {
-                bool:   true,
                 zIndex: 0,
                 resolution: {
                     height: 27,
@@ -610,7 +603,6 @@ const
                 }
             },
             special: {
-                bool:       true,
                 zIndex:     10,
                 resolution: {
                     height: 28,
@@ -789,7 +781,6 @@ const
                 }
             },
             special: {
-                bool:       true,
                 zIndex:     10,
                 resolution: {
                     height: 28,
@@ -894,7 +885,6 @@ const
                 }
             },
             special: {
-                bool:   true,
                 resolution: {
                     height:     24,
                     width:      24

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     itemData.map(x => {
         let urlBar = $(`#${x.name}Url`)
 
-        if(x?.url){
+        if (x?.url) {
             let urlCheck = new Image()
             urlCheck.src = x.url + ".png";
             urlCheck.onerror = () => {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // script generation for movement
-    $all("panel").forEach((a) => {
+    $all("panel").forEach(a => {
 
         // navigation generation above table sets
         const
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const
             pre =           document.createElement("a");
             pre.href =      'javascript:void(0)';
-            pre.onclick = (e) => {
+            pre.onclick = e => {
                 return moveChoiceTo(e.target.parentElement, -1);
             }
         const
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const
             nex =           document.createElement("ea");
             nex.href =      'javascript:void(0)';
-            nex.onclick = (e) => {
+            nex.onclick = e => {
                 return moveChoiceTo(e.target.parentElement, 1);
             }
         const

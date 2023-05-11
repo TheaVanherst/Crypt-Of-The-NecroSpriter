@@ -85,8 +85,8 @@ let characterRefactor = class setup {
             currentCol++;
         }
 
-        $all("#characterUrl").forEach((e) => {
-            e.onkeydown = (e) => {
+        $all("#characterUrl").forEach(e => {
+            e.onkeydown = e => {
                 if(e.key === 'Enter') {
                     const item =    e.target.value,
                         image =     new Image();
@@ -129,8 +129,8 @@ let characterRefactor = class setup {
 
         this.#clothingChecks();
 
-        this.headElement.style.height =     this.bodyElement.style.height = this.height + "px";
-        this.headElement.style.width =      this.bodyElement.style.width =  this.width +  "px";
+        this.headElement.style.height =     this.bodyElement.style.height = `${this.height}px`;
+        this.headElement.style.width =      this.bodyElement.style.width =  `${this.width}px`;
 
         $("#consumables").style.marginTop = `${Math.ceil((24 - this.height) / 2) - 5}px`;
         $("#shield").style.left =           `${Math.floor(-(24 - (this.width)) / 2)}px`;
@@ -278,7 +278,7 @@ let characterRefactor = class setup {
             this.headElement.classList.remove("invisible");
 
             for (let i in this.uniqueClothing) {
-                $((`#${this.uniqueClothing[i]}Button`)).classList.remove("deactivate");
+                $(`#${this.uniqueClothing[i]}Button`).classList.remove("deactivate");
             }
             this.uniqueClothing =   [];
             this.clothingCached =   false;
@@ -287,7 +287,7 @@ let characterRefactor = class setup {
 
     clothingUpdate(clothing) {
         this.clothingSet =      clothing;
-        this.clothingMulti =    -(this.height * clothing) + 'px';
+        this.clothingMulti =    `${-(this.height * clothing)}px`;
         
         $('#clothing .pressed')?.classList?.toggle('pressed');
         $(`#clothing${this.clothingSet}`).classList.toggle('pressed');
@@ -316,7 +316,7 @@ let characterRefactor = class setup {
         if (this.head)
             this.headElement.src =  `${url}${this.headExt}.png?${new Date().getTime()}`;
         this.bodyElement.src =      `${url}${this.bodyExt}.png?${new Date().getTime()}`;
-        this.src =                  url + ".png";
+        this.src =                  `${url}.png`;
 
         let charUrl =               $("#characterUrl");
             charUrl.placeholder =   url;

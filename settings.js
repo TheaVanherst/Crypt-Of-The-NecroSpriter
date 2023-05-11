@@ -12,7 +12,7 @@
             //background colour visible when disabling floor visibility.
 
         // character settings
-        defaultCharacter:   22,
+        defaultCharacter:   0,
         defaultClothing:    0,
         amplifiedSetting:   false,
             // character amplification toggle on start-up.

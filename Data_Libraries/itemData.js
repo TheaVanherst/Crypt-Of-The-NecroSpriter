@@ -1,4 +1,19 @@
 
+const
+    defaultVerticalOffsets = {
+        torch: {
+            sequence: [1, 4, 3, 2]
+        },
+        charm: {
+            sequence: [1, 2, 3, 2]
+        },
+        shovel: {
+            offset:{
+                sequence: [2, 1, 0, 1]
+            }
+        }
+    };
+
     itemData = [
         {
             name : "hat",

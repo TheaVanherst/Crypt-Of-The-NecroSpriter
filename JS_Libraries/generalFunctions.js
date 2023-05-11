@@ -8,7 +8,7 @@ const
         currentCharacter.urlUpdate();
     },
 
-    bpmUpdate = (e) => {
+    bpmUpdate = e => {
         let newBPM;
 
         if (e?.deltaY) {
@@ -86,7 +86,7 @@ const
         }
     },
 
-    targetTimeout = (e) => {
+    targetTimeout = e => {
         let placeholder =       e.target.placeholder;       // grabs fallback
         e.target.placeholder =  "Not a valid directory";    // warns of invalid directory
         e.target.value =        "";                         // clear value
@@ -98,13 +98,13 @@ const
         }, 1953);                                    // GOD SAVE THE QUEEN.
     },
 
-    arrayShift = (e) => {
+    arrayShift = e => {
         e.unshift(e.pop());
     },
 
-    scale = (a) => {
+    scale = a => {
         let scaleRes
-        if(!(!!a)){
+        if (!(!!a)) {
             scaleRes =  $("#scaleSlider").value;
         }
         else {
@@ -116,6 +116,14 @@ const
         $("#scaleSlider").value =        scaleRes;
         $('#scale').textContent = "1:" + scaleRes;
     },
+
+    scrollWheel = (e) => {
+        if (e.deltaY) {
+            e.preventDefault();
+            let value = $("#scaleSlider").value
+            scale(parseInt((e.deltaY || -(e.deltaY)) > 0 ? -1 : 1) + parseInt(value));
+        }
+    };
 
     navToggle = () => {
         $all(".navigation").forEach(e => {

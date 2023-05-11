@@ -1,19 +1,4 @@
 
-const
-    defaultVerticalOffsets = {
-        torch: {
-            sequence: [1, 4, 3, 2]
-        },
-        charm: {
-            sequence: [1, 2, 3, 2]
-        },
-        shovel: {
-            offset:{
-                sequence: [2, 1, 0, 1]
-            }
-        }
-    };
-
 const itemRefactor = class items {
     width = 24;
     height = 24;
@@ -24,9 +9,9 @@ const itemRefactor = class items {
         this.ogUrl =        itemData[item].url;
         this.src =          this.ogUrl + ".png";
 
-        this.element =      $((`#${this.name}`));
+        this.element =      $(`#${this.name}`);
         this.element.src =  this.src;
-        this.button =       $((`#${this.name}Button`));
+        this.button =       $(`#${this.name}Button`);
 
         itemData[item].bool ?
             this.button.classList.add('pressed') :
@@ -134,7 +119,7 @@ const consumableRefactor = class items {
 
     #offsetAdjustment() {
         this.height =       this.element.naturalHeight;
-        let equShift =      equipmentOffsets[Math.floor(Math.random() * 3)].map((x) => x);
+        let equShift =      equipmentOffsets[Math.floor(Math.random() * 3)].map(x => x);
 
         for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
             arrayShift(equShift);
@@ -197,7 +182,7 @@ const specialRefactor = class items {
             for (let i = 0; i < 6; i++){
                 this.floatOffsets[i] =   `${characterData[character]?.[this.name]?.displacement?.top ?? 0}px`;}}
 
-        if (characterData[character]?.[this.name]?.bool) {
+        if (!!characterData[character]?.[this.name]) {
             /* transformation data */
             this.element.style.zIndex =     characterData[character]?.[this.name]?.zIndex ?? 10;
             this.element.style.transform =  characterData[character]?.[this.name]?.transform ?
