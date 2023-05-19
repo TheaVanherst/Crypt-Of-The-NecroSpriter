@@ -8,10 +8,10 @@ let characterRefactor = class setup {
 
     height;
     width;
-    head;
+    headBool;
     characterUrlArray = [];
 
-    constructor(amp, clothing, character) {
+    constructor(clothing, defaultCharacter, amplifiedTog, headVis) {
         let clothingSetLengths =    characterData.map(x => x?.settings?.resolution?.rows ?? 14);
         this.clothingSets =         Math.max(...clothingSetLengths);
         let clothingDivisional =    Math.ceil((this.clothingSets / 2));
@@ -21,19 +21,19 @@ let characterRefactor = class setup {
                 row.classList.add("flex");
 
             for (let i = 0; i < clothingDivisional; i++) {
-                let cur = (clothingDivisional * e) + i;
-                if (cur < this.clothingSets) {
+                let pos = (clothingDivisional * e) + i;
+                if (pos < this.clothingSets) {
                     const
-                        buttonElem =                document.createElement("e")
-                        buttonElem.textContent =    cur + 1;
-                        buttonElem.id =             `clothing${cur}`;
+                        buttonElement =                document.createElement("e")
+                        buttonElement.textContent =    pos + 1;
+                        buttonElement.id =             `clothing${pos}`;
 
-                        buttonElem.classList.add("tog");
-                        buttonElem.classList.add('flippant');
-                        buttonElem.onclick = () => {
-                            this.clothingUpdate(cur);
+                        buttonElement.classList.add("tog");
+                        buttonElement.classList.add('flippant');
+                        buttonElement.onclick = () => {
+                            this.clothingUpdate(pos);
                         };
-                    row.appendChild(buttonElem);
+                    row.appendChild(buttonElement);
                 }
             }
             $('#clothing').appendChild(row);
@@ -69,12 +69,12 @@ let characterRefactor = class setup {
                 currentRow +=   1;
             }
 
-            const char = characterData[i].name;
+            const character = characterData[i].name;
 
             const
                 buttonElem =                document.createElement("e");
-                buttonElem.textContent =    char;
-                buttonElem.id =             char;
+                buttonElem.textContent =    character;
+                buttonElem.id =             character;
                 buttonElem.classList.add('tog');
 
             dlcContainer.children[currentRow].appendChild(buttonElem)
@@ -102,10 +102,11 @@ let characterRefactor = class setup {
         });
 
         this.clothingSet =  clothing;
-        this.ampTog =       amp;
+        this.ampTog =       amplifiedTog;
         this.flipped =      false;
 
-        this.update(character);
+        this.update(defaultCharacter);
+        if (headVis) this.headToggle();
     };
 
     update(character) {
@@ -117,30 +118,30 @@ let characterRefactor = class setup {
 
         this.id =       character;
         this.name =     characterData[this.id].name;
+        $("#characterDebug").textContent =  `${this.name} `;
 
-        this.headExt =  characterData[this.id].settings.headExt ?? "_heads";
-        this.bodyExt =  characterData[this.id].settings.bodyExt ?? "_armor_body";
+        this.headExt =  characterData[this.id].settings.headExt ??  "_heads";
+        this.bodyExt =  characterData[this.id].settings.bodyExt ??  "_armor_body";
 
         this.width =    characterData[this.id]?.settings?.resolution?.width ??  24;
         this.height =   characterData[this.id]?.settings?.resolution?.height ?? 24;
 
-        this.amp =      characterData[this.id]?.settings?.amp ?? true;
+        this.amp =      characterData[this.id]?.settings?.amp ??    true;
         this.ampToggle();
 
-        this.#clothingChecks();
 
         this.headElement.style.height =     this.bodyElement.style.height = `${this.height}px`;
         this.headElement.style.width =      this.bodyElement.style.width =  `${this.width}px`;
 
         $("#consumables").style.marginTop = `${Math.ceil((24 - this.height) / 2) - 5}px`;
         $("#shield").style.left =           `${Math.floor(-(24 - (this.width)) / 2)}px`;
+
+        this.#clothingChecks();
         this.clothingMulti =                `${-this.height * this.clothingSet}px `;
+        $("#clothingDebug").textContent =   this.clothingSet + 1;
 
         itemArray.map(x => x.characterChange(this.id));
         $(`#${this.name}`).classList.add("pressed");
-
-        $("#characterDebug").textContent =  `${this.name} `;
-        $("#clothingDebug").textContent =   this.clothingSet + 1;
 
         this.uniqueChecks();
         this.#bodyOffsets();
@@ -170,7 +171,7 @@ let characterRefactor = class setup {
         else {
             $("#mirror").classList.add("pressed");
             this.playerElement.classList.add("class", "mirror");
-            this.playerElement.style.translate = `${-(Math.floor(24 - this.width))}px 0"`;
+            this.playerElement.style.translate = `${-(Math.floor(24 - this.width))}px 0`;
         }
     };
 
@@ -188,16 +189,18 @@ let characterRefactor = class setup {
 
     #bodyOffsets() {
         if (characterData[this.id].settings?.head === false) {
-            this.head = false;
+            this.headBool = false;
             this.headElement.classList.add("invisible");
+            $("#headToggleButton").setAttribute('class','deactivate');
+            this.headVisibility = false;
         }
         else {
             if (!(characterData[this.id]?.clothingData?.[this.clothingSet]?.head === false)){
-                this.head =                     true;
+                this.headBool =                 true;
                 let headOffset =                -(characterData[this.id]?.settings?.offset?.head ?? 0);
                 this.headElement.style.top =    headOffset + "px";
 
-                this.headElement.classList.remove("invisible");
+                this.headToggle();
             }
         }
 
@@ -209,8 +212,7 @@ let characterRefactor = class setup {
 
     #clothingChecks() {
         const rows =
-            characterData[this.id]?.settings?.resolution?.rows ??
-            14;
+            characterData[this.id]?.settings?.resolution?.rows ?? 14;
 
         for (let i = 0; i < this.clothingSets; i++) {
             if(i < rows){
@@ -258,9 +260,9 @@ let characterRefactor = class setup {
                 this.#floatChecks() :
                 this.#floatDisable(this.id);
 
-            uniqueClothingData?.head === false ?
-                this.headElement.classList.add("invisible") :
-                this.headElement.classList.remove("invisible");
+            this.headElement.classList.add("invisible");
+            $("#headToggleButton").setAttribute('class','deactivate');
+            this.headVisibility = false;
 
             for (let i in uniqueClothingData?.settings) {
                 if (!!$(`#${uniqueClothingData.settings[i].name}Button .active`) &&
@@ -275,7 +277,7 @@ let characterRefactor = class setup {
         }
         else if (this.uniqueClothing !== [] || this.clothingCached) {
             this.#floatDisable(this.id);
-            this.headElement.classList.remove("invisible");
+            this.headToggle();
 
             for (let i in this.uniqueClothing) {
                 $(`#${this.uniqueClothing[i]}Button`).classList.remove("deactivate");
@@ -313,7 +315,7 @@ let characterRefactor = class setup {
 
         this.characterUrlArray[this.id] = [characterData[this.id].name,url];
 
-        if (this.head)
+        if (this.headBool)
             this.headElement.src =  `${url}${this.headExt}.png?${new Date().getTime()}`;
         this.bodyElement.src =      `${url}${this.bodyExt}.png?${new Date().getTime()}`;
         this.src =                  `${url}.png`;
@@ -337,14 +339,24 @@ let characterRefactor = class setup {
         this.ampFrameUpdate();
     };
 
+    headVisibility = true;
+    headToggle() {
+        if (this.headBool) {
+            $("#headToggleButton").classList.remove("deactivate");
+            $("#headToggleButton").classList.toggle("pressed");
+            $("#head").classList.toggle("invisible");
+            this.headVisibility = !this.headVisibility;
+        }
+    };
+
     ampFrameUpdate() {
         let ampTog =            this.ampTog ? 1 : 0,
             ampArr =            [[0,0,0,0],[1,1,2,3]],
-            ampMultiplier =     characterData[this.id]?.settings?.ampMultiplier ??
-                                    1;
+            ampMultiplier =     characterData[this.id]?.settings?.ampMultiplier ?? 1;
 
         for (let i = 0; i < 4; i++) {
-            this.frameArray[i] = `${-(i + (ampMultiplier * (4 * ampArr[ampTog][i]))) * this.width}px `;
+            this.frameArray[i] =
+                `${-(i + (ampMultiplier * (4 * ampArr[ampTog][i]))) * this.width}px `;
         }
 
         this.animate();

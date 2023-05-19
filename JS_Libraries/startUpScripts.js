@@ -12,9 +12,10 @@ let itemArray =         [],
 document.addEventListener('DOMContentLoaded', () => {
 
     currentCharacter = new characterRefactor (
-        settings.amplifiedSetting,
         settings.defaultClothing,
         settings.defaultCharacter,
+        settings.amplifiedSetting,
+        settings.headVisibility
     );
 
     // environment settings

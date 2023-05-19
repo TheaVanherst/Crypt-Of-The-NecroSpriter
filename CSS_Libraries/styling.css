@@ -55,7 +55,7 @@ div + div:not(.inline) { /* forces inline with other div elements */
 }
 
 .rightFloat {
-    float:      right}
+    float:      right;}
 .centerFloat {
     text-align: center;}
 

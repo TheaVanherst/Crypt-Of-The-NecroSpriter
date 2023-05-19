@@ -15,6 +15,7 @@
         defaultCharacter:   0,
         defaultClothing:    0,
         amplifiedSetting:   false,
+        headVisibility:     true,
             // character amplification toggle on start-up.
 
         // general settings

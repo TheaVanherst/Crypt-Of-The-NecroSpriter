@@ -69,7 +69,7 @@
 
                                         <e id="mirror"              onclick="currentCharacter.flip(true);">        Mirror      </e>
                                         <e id="amplifiedButton"     onclick="currentCharacter.ampToggle(true); ">  AMPLIFIED   </e>
-                                        <e id="aniType"             onclick="currentCharacter.frameType()">        Ren. Type   </e>
+                                        <e id="headToggleButton"    onclick="currentCharacter.headToggle()">        Head Toggle   </e>
                                         <e id="refreshButton"       onclick="urlRefresh()" class="rightFloat">
                                             <img id="refresh" src="UI_Libraries/refresh_Arrow.png" alt="refresh">
                                         </e>
@@ -327,6 +327,8 @@
                             <div class="">
                                 <e id="navTog" onclick="navToggle()">
                                     Nav Controls    </e>
+                                <e id="aniType"  onclick="currentCharacter.frameType()">
+                                    Render Type       </e>
                             </div>
 
                             <d> Debug prompt        </d>
@@ -358,7 +360,7 @@
                 <tr><th></th><th></th><th></th></tr>
             </table>
             <div>
-                <p>Release <u>20230511</u> CTNS.Master:1.3.8_7</p>
+                <p>Release <u>20230519</u> CTNS.Master:1.3.9</p>
             </div>
         </panel>
     </body>
