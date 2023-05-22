@@ -301,9 +301,6 @@ const
                     float:  true,
                     fixed:  true
                 },
-                offset: {
-                    sequence: [0, 1, 2, 3]
-                },
                 transform: {
                     opacity:    0.5,
                     scaleX:     1,
@@ -384,7 +381,7 @@ const
             dlc:    1,
             settings: {
                 headOffset: {
-                    top: 1
+                    top: 1,
                 },
                 fileUrl: "characters/char11"
             },
@@ -397,6 +394,21 @@ const
             dlc:    1,
             settings: {
                 fileUrl : "characters/char12"
+            },
+            special: {
+                shadow: {
+                    left: 3,
+                },
+                resolution: {
+                    height: 17,
+                    width:  19,
+                },
+                displacement: {
+                    top:    9,
+                    left:   -21,
+                    fixed:  true,
+                },
+                fileUrl: "items/familiar_lamb"
             }
         },
         {
@@ -897,12 +909,12 @@ const
             }
         },
         {
-            name: "Alt_Izabela",
+            name: "Alt_Test",
             dlc: 3,
             settings: {
                 resolution: {
-                    width:      25,
-                    height:     28,
+                    width:      24,
+                    height:     24,
                     rows:       2,
                     columns:    4
                 },

@@ -129,6 +129,9 @@ let characterRefactor = class setup {
         this.amp =      characterData[this.id]?.settings?.amp ??    true;
         this.ampToggle();
 
+        this.fShadow =  !!characterData[this.id]?.special?.shadow;
+        // this is a fallback to check for a shadow in a more objective state, as I don't have anything to
+        // check the current active character, so it's just dumped here instead.
 
         this.headElement.style.height =     this.bodyElement.style.height = `${this.height}px`;
         this.headElement.style.width =      this.bodyElement.style.width =  `${this.width}px`;

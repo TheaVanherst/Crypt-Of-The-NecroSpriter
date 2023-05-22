@@ -165,8 +165,15 @@ const specialRefactor = class items {
         this.button.onclick = () => {
             this.button.classList.toggle('pressed');
             this.element.classList.toggle('invisible');
+
             this.urlUpdate()
             this.element.src = `${this.src}?${new Date().getTime()}`;
+
+            $('#fShadow').classList.toggle("invisible",
+                !(!!currentCharacter.fShadow && !(this.element.classList.contains("invisible"))));
+                // this is really stinky, too bad!
+            // I don't have any vars to state the current state of the button status, so this has to check,
+            // alongside making sure that I actually have a shadow declaration in the character object.
         }
 
         this.characterChange(character);
@@ -199,6 +206,12 @@ const specialRefactor = class items {
             /* float animation offset sheet */
             this.verticalSequence =        (characterData[character]?.[this.name]?.displacement?.sequence ?? [1,1,1,1]).map(x => `${-x}px`);
 
+            if (!!characterData[character]?.[this.name]?.shadow) {
+                $('#fShadow').style.left = `${
+                    (characterData[character]?.[this.name]?.displacement?.left ?? 0) - 
+                    (characterData[character][this.name].shadow?.left ?? 0)}px`;
+            } // updates familiar shadow placement, only has to update if element exists.
+
             this.animate();
             this.animateFloat();
             this.urlUpdate();
@@ -209,6 +222,7 @@ const specialRefactor = class items {
             this.multiplier = this.verticalSequence = [0,0,0,0];
             this.button.setAttribute("class","deactivate");
             this.element.classList.add("invisible");
+            $('#fShadow').classList.add("invisible");
         }
 
         this.urlUpdate();
