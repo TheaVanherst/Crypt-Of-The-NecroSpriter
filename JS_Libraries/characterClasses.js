@@ -129,7 +129,8 @@ let characterRefactor = class setup {
         this.amp =      characterData[this.id]?.settings?.amp ??    true;
         this.ampToggle();
 
-        this.fShadow =  !!characterData[this.id]?.special?.shadow;
+        $('#fShadow').classList.toggle("invisible",
+            !(!!characterData[this.id]?.special?.shadow && !($(`#special`).classList.contains("invisible"))));
         // this is a fallback to check for a shadow in a more objective state, as I don't have anything to
         // check the current active character, so it's just dumped here instead.
 

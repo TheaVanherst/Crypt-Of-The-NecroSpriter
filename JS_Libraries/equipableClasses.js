@@ -168,12 +168,6 @@ const specialRefactor = class items {
 
             this.urlUpdate()
             this.element.src = `${this.src}?${new Date().getTime()}`;
-
-            $('#fShadow').classList.toggle("invisible",
-                !(!!currentCharacter.fShadow && !(this.element.classList.contains("invisible"))));
-                // this is really stinky, too bad!
-            // I don't have any vars to state the current state of the button status, so this has to check,
-            // alongside making sure that I actually have a shadow declaration in the character object.
         }
 
         this.characterChange(character);

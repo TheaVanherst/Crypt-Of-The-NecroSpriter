@@ -16,12 +16,9 @@ const floorRefactor = class floor {
             [["boss_1","boss_1_NoMP"], ["boss_2","boss_2_NoMP"], ["boss_1","boss_1_NoMP"]]
         ]
     ];
-    buttonOffsetStorage = [ // buttons assosiated with the data above, via. this.tileset
-        "#multiplierButton","#danceButton"
-    ]
 
     overlayTileSets = [
-        [["zone1", "zone1_shop"], ["zone2", "zone2_Alt"], ["zone3_C", "zone3_H"]],
+        [["zone1", "zone1_S"], ["zone2", "zone2_Alt"], ["zone3_C", "zone3_H"]],
         [["zone4"], ["zone5"], ["boss_1", "boss_2", "boss_3"]]
     ];
 
