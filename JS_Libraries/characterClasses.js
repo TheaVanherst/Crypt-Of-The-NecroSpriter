@@ -269,8 +269,9 @@ let characterRefactor = class setup {
             this.headVisibility = false;
 
             for (let i in uniqueClothingData?.settings) {
-                if (!!$(`#${uniqueClothingData.settings[i].name}Button .active`) &&
+                if (!!$(`#${uniqueClothingData.settings[i].name}Button.flippant`) &&
                     uniqueClothingData.settings[i].bool === false) {
+                    console.log("yes")
                         $(`#${uniqueClothingData.settings[i].name}Button`).setAttribute("class","deactivate");
                         $(`#${uniqueClothingData.settings[i].name}`).classList.add('invisible');
                         this.uniqueClothing[i] = uniqueClothingData.settings[i].name;
@@ -285,6 +286,7 @@ let characterRefactor = class setup {
 
             for (let i in this.uniqueClothing) {
                 $(`#${this.uniqueClothing[i]}Button`).classList.remove("deactivate");
+                $(`#${this.uniqueClothing[i]}Button`).classList.add("flippant");
             }
             this.uniqueClothing =   [];
             this.clothingCached =   false;
