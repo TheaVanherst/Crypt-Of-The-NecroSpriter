@@ -349,9 +349,10 @@ let characterRefactor = class setup {
     headToggle() {
         if (this.headBool) {
             $("#headToggleButton").classList.remove("deactivate");
-            $("#headToggleButton").classList.toggle("pressed");
             $("#head").classList.toggle("invisible");
             this.headVisibility = !this.headVisibility;
+        } else {
+            $("#headToggleButton").classList.toggle("pressed");
         }
     };
 
