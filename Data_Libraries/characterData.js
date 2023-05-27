@@ -700,34 +700,6 @@ const
                 },
             },
         },
-        {
-            name: "Alt_Vahn",
-            dlc: 3,
-            settings: {
-                resolution: {
-                    width:      21,
-                    height:     27,
-                    rows:       2,
-                    columns:    4
-                },
-                offset: {
-                    body:   1
-                },
-                fileUrl:    "characters/clone_vahn",
-                bodyExt:    "",
-
-                head:   false,
-                amp:    false,
-            },
-            clothingData: {
-                0: {
-                    settings: clear,
-                },
-                1: {
-                    settings: clear,
-                }
-            }
-        },
         { // same as Klarinetta.
             name: "Yumi",
             dlc: 3,
@@ -812,19 +784,16 @@ const
             },
         },
         {
-            name: "Alt_Yumi",
+            name: "Ogre_Boss",
             dlc: 3,
             settings: {
                 resolution: {
-                    width:      26,
-                    height:     30,
+                    width:      45,
+                    height:     48,
                     rows:       2,
                     columns:    4
                 },
-                offset: {
-                    body:   1
-                },
-                fileUrl:    "characters/clone_yumi",
+                fileUrl:    "characters/ogre",
                 bodyExt:    "",
 
                 head:   false,
@@ -838,87 +807,67 @@ const
                     settings:   clear,
                 }
             }
-        },
-        {
-            name:   "Izabela",
-            dlc:    3,
-            settings: {
-                resolution: {
-                    width:  25,
-                    height: 28
-                },
-                fileUrl:    "characters/izabela",
-                headExt:    "_head",
-                bodyExt:    "_body",
-            },
-            hat: {
-                offset: {
-                    top:    2,
-                    left:   2
-                }
-            },
-            weapon: {
-                bool: false
-            },
-            ring: {
-                offset: {
-                    top:    2,
-                    left:   2
-                }
-            },
-            boots: {
-                offset: {
-                    top:    4,
-                    left:   1
-                }
-            },
-            charm: {
-                offset: {
-                    top:    3,
-                    left:   2
-                }
-            },
-            shovel: {
-                offset: {
-                    top:    3,
-                    left:   1
-                }
-            },
-            torch: {
-                offset: {
-                    top:    4,
-                    left:   2
-                }
-            },
-            hip: {
-                offset: {
-                    top:    2,
-                    left:   2
-                }
-            },
-            special: {
-                resolution: {
-                    height:     24,
-                    width:      24
-                },
-                displacement: {
-                    top:        3,
-                    left:       2,
-                },
-                fileUrl: "items/weapon_rozsa"
-            }
-        },
-        {
-            name: "Alt_Test",
+        },{
+            name: "Bat_boss",
             dlc: 3,
             settings: {
                 resolution: {
-                    width:      24,
+                    width:      36,
                     height:     24,
                     rows:       2,
                     columns:    4
                 },
-                fileUrl:    "characters/clone_izabela",
+                fileUrl:    "characters/bat_miniboss",
+                bodyExt:    "",
+
+                head:   false,
+                amp:    false,
+            },
+            clothingData: {
+                0: {
+                    settings:   clear,
+                    floatSequence:  true
+                },
+                1: {
+                    settings:   clear,
+                    floatSequence:  true
+                }
+            }
+        },{
+            name: "Trainer",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      26,
+                    height:     24,
+                    rows:       2,
+                    columns:    4
+                },
+                fileUrl:    "characters/trainer",
+                bodyExt:    "",
+
+                head:   false,
+                amp:    false,
+            },
+            clothingData: {
+                0: {
+                    settings:   clear,
+                },
+                1: {
+                    settings:   clear,
+                }
+            }
+        },{
+            name: "Shopkeeper",
+            dlc: 3,
+            settings: {
+                resolution: {
+                    width:      47,
+                    height:     38,
+                    rows:       2,
+                    columns:    4
+                },
+                fileUrl:    "characters/shopkeeper",
                 bodyExt:    "",
 
                 head:   false,

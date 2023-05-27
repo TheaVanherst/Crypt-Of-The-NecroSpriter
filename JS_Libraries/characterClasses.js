@@ -269,8 +269,7 @@ let characterRefactor = class setup {
             this.headVisibility = false;
 
             for (let i in uniqueClothingData?.settings) {
-                if (!!$(`#${uniqueClothingData.settings[i].name}Button.flippant`) &&
-                    uniqueClothingData.settings[i].bool === false) {
+                if (uniqueClothingData.settings[i].bool === false) {
                     console.log("yes")
                         $(`#${uniqueClothingData.settings[i].name}Button`).setAttribute("class","deactivate");
                         $(`#${uniqueClothingData.settings[i].name}`).classList.add('invisible');
