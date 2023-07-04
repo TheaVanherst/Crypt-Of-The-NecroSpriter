@@ -149,6 +149,7 @@ let characterRefactor = class setup {
 
         this.uniqueChecks();
         this.#bodyOffsets();
+        this.#headArmourOffset();
 
         // debug update
         let returnString = "";
@@ -230,7 +231,7 @@ let characterRefactor = class setup {
 
         if (this.clothingSet > rows - 1) {
             this.clothingSet = 0;
-            $('#clothing0').classList.toggle('pressed');
+            $('#clothing0').classList.add('pressed');
         }
         else {
             $(`#clothing${this.clothingSet}`).classList.add('pressed');
@@ -301,14 +302,23 @@ let characterRefactor = class setup {
 
         this.uniqueChecks();
         this.#bodyOffsets();
+        this.#headArmourOffset();
 
         $("#clothingDebug").textContent = clothing;
         this.animate();
     };
 
+    headArmourOffset = "0px";
+
+    #headArmourOffset() {
+        this.clothingSet > 5 ?
+            this.headArmourOffset = `${characterData[this.id]?.settings?.resolution?.height ?? 24}px` :
+            this.headArmourOffset = `0px`;
+    }
+
     animate() {
         this.bodyElement.style.objectPosition =     this.frameArray[frame] + this.clothingMulti;
-        this.headElement.style.objectPosition =     `${this.frameArray[frame]}0`;
+        this.headElement.style.objectPosition =     `${this.frameArray[frame]}-${this.headArmourOffset}`;
         this.playerElement.style.margin =           this.floatOffsets[floatInt];
     };
 
