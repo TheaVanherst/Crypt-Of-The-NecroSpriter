@@ -108,7 +108,7 @@ const
             scaleRes =  $("#scaleSlider").value;
         }
         else {
-            scaleRes =  a > 12 ? 12 : a < 4 ? 4 : a;
+            scaleRes =  a > 14 ? 14 : a < 4 ? 4 : a;
         }
 
         $("#transform").style.transform = `scale(${scaleRes})`;

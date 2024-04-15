@@ -10,8 +10,10 @@
     image-rendering:    pixelated;
     overflow:           hidden;
 
-    height:     534px;
-    width:      calc(100% - 4px);
+    height:     606px;
+    width:      527px;
+
+    margin-right: -5px;
     border:     2px solid rgba(255,255,255,0.5);}
 
 /* character transformation */
@@ -30,8 +32,7 @@
 #transform {
     top:        50%;
     left:       50%;
-
-    margin:     0 0 0 -1px;
+    margin:     30px 0 0 -10px; /* fixes 1px width offset */
     position:   relative;
 }
 
@@ -39,7 +40,6 @@
 
 #playerModel {
     z-index:    2;
-    height:     24px!important;
 }
 #head, #body {
     object-fit: none;
@@ -78,10 +78,10 @@
     position:       absolute;}
 #floor,
 #danceFloor {
-    margin:     7px 0 0 0;
+    margin:     8px 0 0 0;
     object-fit: none;}
 #foreground {
-    margin:    -8px 0 0 0;
+    margin:    -6px 0 0 0;
 }
 
 /* TODO: ================================= */

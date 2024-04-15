@@ -12,7 +12,7 @@
             //background colour visible when disabling floor visibility.
 
         // character settings
-        defaultCharacter:   0,
+        defaultCharacter:   18,
         defaultClothing:    0,
         amplifiedSetting:   false,
         headVisibility:     true,
