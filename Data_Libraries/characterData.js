@@ -631,6 +631,22 @@ const
                     scaleY:     -1
                 },
                 fileUrl: "items/weapon_greatsword"
+            },
+        },
+        {
+            name:   "Miku",
+            dlc:    2,
+            settings: {
+                fileUrl:    "characters/hatsune1",
+                headExt:    "_head",
+            },
+            weapon: {
+                bool:   false
+            },
+            ring: {
+                offset: {
+                    left: 1
+                }
             }
         },
         { // all this is the same as nocturna.

@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         settings.headVisibility
     );
 
+    const longestString =
+        songList.reduce((longest, current) => {
+            return current.length > longest.length ? current : longest;
+        }, []).length;
+
+    $("#trackContainer").style.height = `${longestString * 18}px`;
+
     // environment settings
     $("#crop").style.backgroundColor = settings.backgroundColor;
     environmentData = new floorRefactor (
