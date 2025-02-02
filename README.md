@@ -33,9 +33,7 @@ So please, I would love to see them via [Twitter][4]. I would be more than happy
     * 11 base game characters
     * 4 'amplified' DLC characters
     * 3 'Synchrony' DLC characters
-    * 4 Custom characters created by Thea Vanherst as hard coded examples.
-      - 2 Fully featured redesigns of Nocturna & Flarinetta, known as Vahn and Yumi
-      - 2 Shadow / Clone redesigns of Nocturna & Flarinetta respectively.
+    * 6 Various examples, both custom and from in-game to demonstrate various software features.
   - **Custom URL injector** for individual characters  Via. `characters/{image}.png`
     * URLs that are changed during software usage will be stored locally and retained until page refresh.
   - **Character preview** can be flipped to change the character direction.
@@ -65,7 +63,7 @@ So please, I would love to see them via [Twitter][4]. I would be more than happy
   - Render speed slider based on beats per minute, based on tracks featured in that game.
   - A list of tracks featured in the game at each BPM step of 5, including bosses.
 - **Scaling feature**, with a slider to change the resolution size of the left hand side preview.
-- Two different render modes, linear and the more accurate in-game beat driven render.
+- 2 different render methods; Linear, and faithful - which will render the animation pacing differently. (Default is faithful)
 - Custom window positioning via. the navigation controls
 
 <pre>DEMO:</pre>

@@ -76,9 +76,8 @@
     -ms-transform:  translate(-50%, -50%);
     transform:      translate(-50%, -50%);
     position:       absolute;}
-#floor,
-#danceFloor {
-    margin:     8px 0 0 0;
+#floor, #danceFloor {
+    margin:     -15px 0 0 0;
     object-fit: none;}
 #foreground {
     margin:    -6px 0 0 0;
