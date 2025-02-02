@@ -72,5 +72,5 @@ const songList =
         ["BOSS // Death Metal"], //175
         ["N/a"], //180
         ["N/a"], //185
-        ["LOBBYM // Groove Prayer"] //190
+        ["LOBBYgm // Groove Prayer"] //190
     ];
